@@ -157,6 +157,7 @@ public class MenuProyectos extends javax.swing.JFrame {
         Men.setVisible(true);
         this.setVisible(false);
         System.out.println("Prueba repositorio1");
+        //AGREGANDO LINEAS POR QUE QUIERO Y PUEDO
         
     }//GEN-LAST:event_PLEActionPerformed
 
