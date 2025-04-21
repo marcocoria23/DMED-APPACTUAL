@@ -1,0 +1,107 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package mx.org.inegi.ExportaPlantillaSenap;
+
+import java.awt.FileDialog;
+import java.awt.Frame;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import mx.org.inegi.conexion.SENAP.ConOracle;
+
+/**
+ *
+ * @author ANDREA.HERNANDEZL
+ */
+public class ExportaPProceso {
+
+    private ConOracle conexion = new ConOracle();
+    private ResultSet resul;
+
+    public void exportaPProceso(String Entidad, String Periodo) throws SQLException {
+        conexion.Conectar(); // Conexión a la base de datos
+        String sql = "SELECT \n"
+                + "ENTIDADID,\n"
+                + "PROCESOID,\n"
+                + "CARPETAID,\n"
+                + "IMPUTADOID,\n"
+                + "IMPUTADODELITOID,\n"
+                + "PROCESOCAUSA,\n"
+                + "CATESTATUSCARPETAID,\n"
+                + "TO_CHAR(FECHAINICIO,'DD/MM/YYYY')FECHAINICIO,\n"
+                + "CONVERI_RESPUESTASGENERICAS(HUBOCELEBRACIONAUDIENCIAINICIAL)HUBOCELEBRACIONAUDIENCIAINICIAL,\n"
+                + "CONVERI_MOTIVOAUDIENCIAINICIAL(CATMOTIVOAUDIENCIAINICIALID)CATMOTIVOAUDIENCIAINICIALID,\n"
+                + "TO_CHAR(FECHAAUDIENCIAINICIAL,'DD/MM/YYYY')FECHAAUDIENCIAINICIAL,\n"
+                + "CONVERI_RESPUESTASGENERICAS(DERIVOMASC)DERIVOMASC,\n"
+                + "CONVERI_RESPUESTASGENERICAS(TIENESUSPENSIONCONDICIONAL)TIENESUSPENSIONCONDICIONAL,\n"
+                + "CONVERI_ESTATUSPROCESO(ULTIMOESTATUSPROCESOID)ULTIMOESTATUSPROCESOID,\n"
+                + "PROCESOID_FISCALIA,\n"
+                + "PERIODO\n"
+                + "FROM TR_SENAP_PROCESO"
+                + " WHERE (ENTIDADID='" + Entidad + "' and PERIODO='" + Periodo + "')";
+        resul = conexion.consultar(sql);
+
+        // Abrir diálogo para guardar archivo
+        FileDialog fileDialog = new FileDialog((Frame) null, "Selecciona dónde guardar el archivo CSV", FileDialog.SAVE);
+        fileDialog.setFile("PProceso.csv"); // Nombre del archivo
+        fileDialog.setVisible(true);
+
+        // Obtener ruta y nombre del archivo seleccionado
+        String fileName = fileDialog.getFile();
+        String directory = fileDialog.getDirectory();
+
+        if (fileName != null && directory != null) {
+            String csvFile = new File(directory, fileName).getAbsolutePath();
+
+            // Asegurarse de que el archivo tenga extensión .csv
+            if (!csvFile.toLowerCase().endsWith(".csv")) {
+                csvFile += ".csv";
+            }
+
+            try ( PrintWriter writer = new PrintWriter(new FileWriter(csvFile))) {
+                // Escribir encabezados
+                int columnCount = resul.getMetaData().getColumnCount();
+                for (int i = 1; i <= columnCount; i++) {
+                    writer.print(resul.getMetaData().getColumnName(i));
+                    if (i < columnCount) {
+                        writer.print(","); // Separador
+                    }
+                }
+                writer.println();
+
+                // Escribir filas
+                while (resul.next()) {
+                    for (int i = 1; i <= columnCount; i++) {
+                        writer.print(resul.getString(i));
+                        if (i < columnCount) {
+                            writer.print(","); // Separador
+                        }
+                    }
+                    writer.println();
+                }
+
+                System.out.println("Archivo CSV exportado con éxito: " + csvFile);
+                JOptionPane.showMessageDialog(null, "El archivo con nombre PProceso se ha exportado satisfactoriamente!");
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                if (resul != null) {
+                    try {
+                        resul.close();
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+                conexion.close();
+            }
+        } else {
+            System.out.println("Exportación cancelada por el usuario.");
+        }
+    }
+}
