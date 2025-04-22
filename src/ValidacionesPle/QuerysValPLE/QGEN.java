@@ -40,7 +40,7 @@ public ArrayList Legislatura(String ID_entidad){
           }
       conexion.close();
      } catch (SQLException ex) {
-            Logger.getLogger(QVIniciativas.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(QIniciativas.class.getName()).log(Level.SEVERE, null, ex);
         }
     return Array;
  }
@@ -59,7 +59,7 @@ public ArrayList Envios(String ID_entidad,String Legislatura){
           }
       conexion.close();
      } catch (SQLException ex) {
-            Logger.getLogger(QVIniciativas.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(QIniciativas.class.getName()).log(Level.SEVERE, null, ex);
         }
     return Array;
  }

@@ -30,7 +30,7 @@ import ValidacionesPle.QuerysValPLE.QComisiones_Legislativas;
 import ValidacionesPle.QuerysValPLE.QPersonas_legisladoras;
 import ValidacionesPle.QuerysValPLE.QPersonas_legisladoras_extension;
 import ValidacionesPle.QuerysValPLE.QPersonal_Apoyo;
-import ValidacionesPle.QuerysValPLE.QVIniciativas;
+import ValidacionesPle.QuerysValPLE.QIniciativas;
 import ValidacionesPle.QuerysValPLE.QIniciativas_Extension;
 import ValidacionesPle.QuerysValPLE.QIniciativas_Urgente_obvia;
 import ValidacionesPle.QuerysValPLE.QDeclaraciones_Procedencia;
@@ -315,7 +315,94 @@ public class ValPLE {
             conDat = conDat + coni;
             coni = 1;
         }
+        
+    ArrayResult = DG.anio_periodo(entidad, legislatura, envio);
+        if (ArrayResult.size() > 0) {
+            XSSFRow filaEE1 = hojadatos_generales.createRow(conEnc);//FILA
+            XSSFCell celdaE1 = filaEE1.createCell(0);//COLUMNA
+            celdaE1.setCellStyle(estiloCelda1);
+            celdaE1.setCellType(CellType.STRING);
+            String txtE1 = "ID";
+            XSSFRichTextString textoE1 = new XSSFRichTextString(txtE1);
+            celdaE1.setCellValue(textoE1);
 
+            XSSFCell celdaE6 = filaEE1.createCell(1);//COLUMNA
+            celdaE6.setCellStyle(estiloCelda1);
+            celdaE6.setCellType(CellType.STRING);
+            String txtE6 = "OBSERVACIONES";
+            XSSFRichTextString textoE6 = new XSSFRichTextString(txtE6);
+            celdaE6.setCellValue(textoE6);
+
+            for (int i = 0; i < ArrayResult.size(); i++) {
+                XSSFRow filaEE2 = hojadatos_generales.createRow(conDat + i);
+
+                XSSFCell celdaD1 = filaEE2.createCell(0);//COLUMNA
+                celdaD1.setCellStyle(estiloCeldabordes0);
+                celdaD1.setCellType(CellType.STRING);
+                //String txtD1 = Arrays.toString(ArrayResult.get(i));
+                String txtD1 = "No Aplica";
+                XSSFRichTextString textoD1 = new XSSFRichTextString(txtD1);
+                celdaD1.setCellValue(textoD1);
+
+                XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
+                celdaD2.setCellStyle(estiloCeldabordes0);
+                celdaD2.setCellType(CellType.STRING);
+                String txtD2 = "El campo ejercicio_constitucional_informacion_reportada (año) no corresponde al periodo reportado (fecha_inicio_informacion_reportada, fecha_termino_informacion_reportada )";
+                XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
+                celdaD2.setCellValue(textoD2);
+                coni++;
+            }
+            conEnc = conEnc + coni;
+            conDat = conDat + coni;
+            coni = 1;
+        }
+        
+        
+            ArrayResult = DG.fecha_periodo_repetida(entidad, legislatura, envio);
+        if (ArrayResult.size() > 0) {
+            XSSFRow filaEE1 = hojadatos_generales.createRow(conEnc);//FILA
+            XSSFCell celdaE1 = filaEE1.createCell(0);//COLUMNA
+            celdaE1.setCellStyle(estiloCelda1);
+            celdaE1.setCellType(CellType.STRING);
+            String txtE1 = "No. Envío";
+            XSSFRichTextString textoE1 = new XSSFRichTextString(txtE1);
+            celdaE1.setCellValue(textoE1);
+
+            XSSFCell celdaE6 = filaEE1.createCell(1);//COLUMNA
+            celdaE6.setCellStyle(estiloCelda1);
+            celdaE6.setCellType(CellType.STRING);
+            String txtE6 = "OBSERVACIONES";
+            XSSFRichTextString textoE6 = new XSSFRichTextString(txtE6);
+            celdaE6.setCellValue(textoE6);
+
+            for (int i = 0; i < ArrayResult.size(); i++) {
+                XSSFRow filaEE2 = hojadatos_generales.createRow(conDat + i);
+
+                XSSFCell celdaD1 = filaEE2.createCell(0);//COLUMNA
+                celdaD1.setCellStyle(estiloCeldabordes0);
+                celdaD1.setCellType(CellType.STRING);
+                String txtD1 = Arrays.toString(ArrayResult.get(i));
+                txtD1 = txtD1.replace("[", "").replace("]", "").replace(" 00:00:00.0", "");
+                String[] parts = txtD1.split(",");
+                String parts1 = parts[1].trim();
+                XSSFRichTextString textoD1 = new XSSFRichTextString(parts1);
+                celdaD1.setCellValue(textoD1);
+
+                XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
+                celdaD2.setCellStyle(estiloCeldabordes0);
+                celdaD2.setCellType(CellType.STRING);
+                String txtD2 = "Las fechas para este periodo legislativo ya fueron registradas en la base de datos en envío anterior. (fecha_inicio_informacion_reportada, fecha_termino_informacion_reportada )";
+                XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
+                celdaD2.setCellValue(textoD2);
+
+                coni++;
+            }
+            conEnc = conEnc + coni;
+            conDat = conDat + coni;
+            coni = 1;
+        }
+        
+        
         ArrayResult = DG.termino_funciones_legislatura(entidad, legislatura, envio);
         if (ArrayResult.size() > 0) {
             XSSFRow filaEE1 = hojadatos_generales.createRow(conEnc);//FILA
@@ -14164,7 +14251,7 @@ public class ValPLE {
         hojaIniciativas.addMergedRegion(new CellRangeAddress(0, 0, 0, 3));
         celda00.setCellValue(texto00);
         row00.setHeight((short) 600);
-        QVIniciativas InS = new QVIniciativas();
+        QIniciativas InS = new QIniciativas();
 
         ArrayResult = InS.cond_presentacion_iniciativa_periodo(entidad, legislatura, envio);
         if (ArrayResult.size() > 0) {
@@ -17632,7 +17719,7 @@ public class ValPLE {
                 XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                 celdaD2.setCellStyle(estiloCeldabordes0);
                 celdaD2.setCellType(CellType.STRING);
-                String txtD2 = "En caso de seleccionar la categoría \"Sí\" (1) en la columna C1_1D=1 and P1_1D_1 (cond_reconocimiento_iniciativa_preferente) de la tabla datos_generales y las categoría \"Sí\" en la columna cond_presentacion_iniciativa_periodo (P1_5_3) y \"Persona titular del Poder Ejecutivo\" en la columna tipo_promovente_iniciativa (P1_5_16).";
+                String txtD2 = "Debe capturar (Condición de iniciativa preferente)-BT en caso de seleccionar la categoría \"Sí\" (1) en la columna C1_1D=1 and P1_1D_1 (cond_reconocimiento_iniciativa_preferente) de la tabla datos_generales y las categoría \"Sí\" en la columna cond_presentacion_iniciativa_periodo (P1_5_3) y \"Persona titular del Poder Ejecutivo\" en la columna tipo_promovente_iniciativa (P1_5_16).";
                 XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                 celdaD2.setCellValue(textoD2);
 
@@ -17708,7 +17795,7 @@ public class ValPLE {
                 XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                 celdaD2.setCellStyle(estiloCeldabordes0);
                 celdaD2.setCellType(CellType.STRING);
-                String txtD2 = "En caso de seleccionar la categoría \"Sí\" en la columna cond_reconocimiento_iniciativa_preferente de la tabla datos_generales y las categoría \"Sí\" en la columna cond_modificacion_información_ingreso_periodo 5_7 y \"Persona titular del Poder Ejecutivo\" en la columna tipo_promovente_iniciativa (P1_5_16).";
+                String txtD2 = "Debe capturar (Condición de iniciativa preferente)-BT en caso de seleccionar la categoría \"Sí\" en la columna cond_reconocimiento_iniciativa_preferente de la tabla datos_generales y las categoría \"Sí\" en la columna cond_modificacion_información_ingreso_periodo 5_7 y \"Persona titular del Poder Ejecutivo\" en la columna tipo_promovente_iniciativa (P1_5_16).";
                 XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                 celdaD2.setCellValue(textoD2);
 

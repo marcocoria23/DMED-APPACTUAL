@@ -109,6 +109,58 @@ public ArrayList fecha_termino_informacion_reportada(String ID_entidad,String Le
     return Array;
  }
   
+// El año no corresponde al periodo reportado
+public ArrayList anio_periodo(String ID_entidad,String Legislatura,String Envio){
+     conexion.Conectar();
+      Array = new ArrayList();
+      sql="SELECT ID_ENTIDAD,  P1_1_3 AS INICIO_LEGISLATURA, P1_1_4 AS FIN_LEGISLATURA, P1_1_7 AS ANIO_REPORTADO, P1_1_8 AS INICIO_PERIODO, P1_1_9 AS FIN_PERIODO,\n" +
+        "SUBSTR(P1_1_3, INSTR(P1_1_3, '/', -1) + 1) AS ANIO_INICIO_LEGIS, SUBSTR(P1_1_8, INSTR(P1_1_8, '/', -1) + 1) AS ANIO_INICIO_PERIODO\n" +
+        "FROM  TR_PLE_MEDS1_1\n" +
+        "WHERE (((SUBSTR(P1_1_3, INSTR(P1_1_3, '/', -1) + 1) + P1_1_7 )<> SUBSTR(P1_1_9, INSTR(P1_1_9, '/', -1) + 1))  \n" +
+        "AND ((SUBSTR(P1_1_3, INSTR(P1_1_3, '/', -1) + 1) + (P1_1_7-1) )<> SUBSTR(P1_1_8, INSTR(P1_1_8, '/', -1) + 1)) )\n" +
+        "AND ID_ENTIDAD="+ID_entidad+" AND Legislatura="+Legislatura+" AND C1_1_ID='"+Envio+"' ";
+      System.out.println(sql);
+      resul=conexion.consultar(sql);
+      try {
+          while (resul.next()) {
+              Array.add(new String[]{
+                  resul.getString("ID_ENTIDAD"),
+                  resul.getString("ANIO_REPORTADO")
+                });
+          }
+      conexion.close();
+     } catch (SQLException ex) {
+            Logger.getLogger(QComisiones_Legislativas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    return Array;
+}
+
+
+//Las fechas para este periodo legislativo ya fueron registradas en la base de datos en envío anterior.
+public ArrayList fecha_periodo_repetida(String ID_entidad,String Legislatura,String Envio){
+     conexion.Conectar();
+      Array = new ArrayList();
+      sql="select ID_ENTIDAD,  P1_1_7 as año,P1_1_8 as inicio_periodo, P1_1_9 as fin_periodo,LEGISLATURA, C1_1_ID as envio \n" +
+        "from  TR_PLE_MEDS1_1 WHERE (ID_ENTIDAD, P1_1_8, P1_1_9) IN (\n" +
+        "SELECT ID_ENTIDAD,P1_1_8, P1_1_9 FROM TR_PLE_MEDS1_1 GROUP BY ID_ENTIDAD,  P1_1_8, P1_1_9 HAVING COUNT(*) > 1 )\n" +
+          "AND ID_ENTIDAD="+ID_entidad+"      ORDER BY  ID_ENTIDAD, P1_1_7, P1_1_8, P1_1_9";
+System.out.println(sql);
+      resul=conexion.consultar(sql);
+      try {
+          while (resul.next()) {
+              Array.add(new String[]{
+                  resul.getString("envio"),
+                  resul.getString("envio"),
+                  resul.getString("ID_ENTIDAD")
+                  
+                });
+          }
+      conexion.close();
+     } catch (SQLException ex) {
+            Logger.getLogger(QComisiones_Legislativas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    return Array;
+}
 
 //Cuando P1_1A_1(condicion_reporte)=X debe de capturar P1_1A_2(fecha_inicio_p) , P1_1A_3(fecha_termino_p) y P1_1A_4(sesiones_celebradas_p)
 public ArrayList condicion_reporteX(String ID_entidad,String Legislatura,String Envio){

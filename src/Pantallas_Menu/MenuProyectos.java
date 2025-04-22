@@ -159,6 +159,9 @@ public class MenuProyectos extends javax.swing.JFrame {
         System.out.println("Prueba repositorio1");
         //AGREGANDO LINEAS POR QUE QUIERO Y PUEDO
         //AGREGANDO ahora en la 161 porque el jefecito dijo y pos hay que obedecer
+        System.out.println("Pruebarepo2222");
+        
+
     }//GEN-LAST:event_PLEActionPerformed
 
     private void PSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PSActionPerformed

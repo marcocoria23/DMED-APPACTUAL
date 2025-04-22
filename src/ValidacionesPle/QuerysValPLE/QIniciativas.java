@@ -16,7 +16,7 @@ import mx.org.inegi.conexion.PLE.DaoConexion;
  *
  * @author ANTONIO.CORIA
  */
-public class QVIniciativas {
+public class QIniciativas {
 
     DaoConexion conexion = new DaoConexion();
     String sql, NMunicipio;
@@ -61,7 +61,7 @@ public class QVIniciativas {
             }
             conexion.close();
         } catch (SQLException ex) {
-            Logger.getLogger(QVIniciativas.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(QIniciativas.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return Array;
@@ -101,7 +101,7 @@ public class QVIniciativas {
             }
             conexion.close();
         } catch (SQLException ex) {
-            Logger.getLogger(QVIniciativas.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(QIniciativas.class.getName()).log(Level.SEVERE, null, ex);
         }
         return Array;
     }
@@ -128,7 +128,7 @@ public class QVIniciativas {
             }
             conexion.close();
         } catch (SQLException ex) {
-            Logger.getLogger(QVIniciativas.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(QIniciativas.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return Array;
@@ -155,7 +155,7 @@ public class QVIniciativas {
             }
             conexion.close();
         } catch (SQLException ex) {
-            Logger.getLogger(QVIniciativas.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(QIniciativas.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return Array;
@@ -1219,7 +1219,7 @@ public class QVIniciativas {
         return Array;
     }
 
-//En caso de seleccionar la categoría "Sí" (1) en la columna C1_1D=1 and P1_1D_1 (cond_reconocimiento_iniciativa_preferente) de la tabla datos_generales y las categoría "Sí" en la columna cond_presentacion_iniciativa_periodo (P1_5_3) y "Persona titular del Poder Ejecutivo" en la columna tipo_promovente_iniciativa (P1_5_16).
+//Debe capturar (Condición de iniciativa preferente)-BT En caso de seleccionar la categoría "Sí" (1) en la columna C1_1D=1 and P1_1D_1 (cond_reconocimiento_iniciativa_preferente) de la tabla datos_generales y las categoría "Sí" en la columna cond_presentacion_iniciativa_periodo (P1_5_3) y "Persona titular del Poder Ejecutivo" en la columna tipo_promovente_iniciativa (P1_5_16).
     public ArrayList DCcond_reconocimiento_iniciativa_preferente(String ID_entidad, String Legislatura, String Envio) {
         conexion.Conectar();
         Array = new ArrayList();
