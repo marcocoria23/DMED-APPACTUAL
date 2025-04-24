@@ -49,26 +49,6 @@ public ArrayList ID_comision_legislativa(String ID_entidad,String Legislatura,St
  }
 
 
-//Variables P1_2_1-A(ID_comision_legislativa) o P1_2_2-B(consecutivo_comision_legislativa) o P1_2_3-C(nombre_comision_legislativa) o P1_2_4-D(tipo_comision_legislativa) o P1_2_6-F(tema_1_comision_legislativa) o P1_2_12-L(cant_integrantes_comision_legislativa) o P1_2_13-M(cond_celebracion_reuniones_comision_legislativa) o P1_2_18-R(cant_iniciativas_turnadas_a_comision_legislativa) o P1_2_19-S(cant_dictamenes_emitidos_por_comision_legislativa) No deben ser NULL
-public ArrayList CAP_General(String ID_entidad,String Legislatura,String Envio){
-     conexion.Conectar();
-      Array = new ArrayList();
-      sql="select ID_ENTIDAD, ENTIDAD, C1_2_ID, P1_2_1 from TR_PLE_MEDS1_2 where (P1_2_1 IS  NULL OR P1_2_2 IS  NULL OR P1_2_3 IS  NULL OR P1_2_4 IS  NULL OR P1_2_6 IS  NULL OR P1_2_12 IS  NULL OR P1_2_13 IS NULL OR P1_2_18 IS NULL OR P1_2_19 IS NULL)   AND ID_ENTIDAD="+ID_entidad+" AND Legislatura="+Legislatura+" AND C1_2_ID='"+Envio+"' ";
-      System.out.println(sql);
-      resul=conexion.consultar(sql);
-      try {
-          while (resul.next()) {
-              Array.add(new String[]{
-                  resul.getString("ID_ENTIDAD"),
-                  resul.getString("P1_2_1")
-                });
-          }
-      conexion.close();
-     } catch (SQLException ex) {
-            Logger.getLogger(QComisiones_Legislativas.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    return Array;
- }
 
 //Se debe capturar P1_2_5-E(otro_tipo_comision_legislativa_especifique) debido a que en el campo P1_2_4-D(tipo_comision_legislativa) se seleccióno  "Otro tipo (especifique)"- '4' 
 public ArrayList CAP_otro_tipo_comision_legislativa_especifique(String ID_entidad,String Legislatura,String Envio){
