@@ -11257,7 +11257,7 @@ public class ValPLE {
                 XSSFCell celdaD1 = filaEE2.createCell(0);//COLUMNA
                 celdaD1.setCellStyle(estiloCeldabordes0);
                 celdaD1.setCellType(CellType.STRING);            
-                String txtD1 = "";          
+                String txtD1 = "Personas legisladoras con estatus=activo ";          
                 XSSFRichTextString textoD1 = new XSSFRichTextString(txtD1);
                 celdaD1.setCellValue(textoD1);
 
@@ -18633,7 +18633,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_83(entidad, legislatura, envio);
                 XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                 celdaD2.setCellStyle(estiloCeldabordes0);
                 celdaD2.setCellType(CellType.STRING);
-                String txtD2 = "// Se debe capturar P1_4_14-N(escolaridad_personal_apoyo) ya que es un campo obligatorio y debe contener información.";
+                String txtD2 = "Se debe capturar P1_4_14-N(escolaridad_personal_apoyo) ya que es un campo obligatorio y debe contener información.";
                 XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                 celdaD2.setCellValue(textoD2);
 

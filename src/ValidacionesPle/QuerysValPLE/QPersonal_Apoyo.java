@@ -1140,7 +1140,7 @@ public ArrayList PL_NOTNULL_P1_4_14(String ID_entidad,String Legislatura,String 
 public ArrayList PL_NOTNULL_P1_4_15(String ID_entidad,String Legislatura,String Envio){
      conexion.Conectar();
       Array = new ArrayList();
-      sql="SELECT ID_ENTIDAD, C1_4_ID, LEGISLATURA, P1_4_1, P1_4_15 FROM TR_PLE_MEDS1_4 WHERE P1_4_15 IS NULL AND ID_ENTIDAD = '" + ID_entidad + "' AND Legislatura = '" + Legislatura + "' AND C1_2_ID = '" + Envio +"'";
+      sql="SELECT ID_ENTIDAD, C1_4_ID, LEGISLATURA, P1_4_1, P1_4_15 FROM TR_PLE_MEDS1_4 WHERE P1_4_15 IS NULL AND ID_ENTIDAD = '" + ID_entidad + "' AND Legislatura = '" + Legislatura + "' AND C1_4_ID = '" + Envio +"'";
       System.out.println(sql);
       resul=conexion.consultar(sql);
       try {
@@ -1160,7 +1160,7 @@ public ArrayList PL_NOTNULL_P1_4_15(String ID_entidad,String Legislatura,String 
 public ArrayList PL_NOTNULL_P1_4_19(String ID_entidad,String Legislatura,String Envio){
      conexion.Conectar();
       Array = new ArrayList();
-      sql="SELECT ID_ENTIDAD, C1_4_ID, LEGISLATURA, P1_4_1, P1_4_19 FROM TR_PLE_MEDS1_4 WHERE P1_4_19 IS NULL AND ID_ENTIDAD = '" + ID_entidad + "' AND Legislatura = '" + Legislatura + "' AND C1_2_ID = '" + Envio +"'";
+      sql="SELECT ID_ENTIDAD, C1_4_ID, LEGISLATURA, P1_4_1, P1_4_19 FROM TR_PLE_MEDS1_4 WHERE P1_4_19 IS NULL AND ID_ENTIDAD = '" + ID_entidad + "' AND Legislatura = '" + Legislatura + "' AND C1_4_ID = '" + Envio +"'";
       System.out.println(sql);
       resul=conexion.consultar(sql);
       try {
@@ -1180,7 +1180,7 @@ public ArrayList PL_NOTNULL_P1_4_19(String ID_entidad,String Legislatura,String 
 public ArrayList PL_NOTNULL_P1_4_23(String ID_entidad,String Legislatura,String Envio){
      conexion.Conectar();
       Array = new ArrayList();
-      sql="SELECT ID_ENTIDAD, C1_4_ID, LEGISLATURA, P1_4_1, P1_4_23 FROM TR_PLE_MEDS1_4 WHERE P1_4_23 IS NULL AND ID_ENTIDAD = '" + ID_entidad + "' AND Legislatura = '" + Legislatura + "' AND C1_2_ID = '" + Envio +"'";
+      sql="SELECT ID_ENTIDAD, C1_4_ID, LEGISLATURA, P1_4_1, P1_4_23 FROM TR_PLE_MEDS1_4 WHERE P1_4_23 IS NULL AND ID_ENTIDAD = '" + ID_entidad + "' AND Legislatura = '" + Legislatura + "' AND C1_4_ID = '" + Envio +"'";
       System.out.println(sql);
       resul=conexion.consultar(sql);
       try {
@@ -1200,7 +1200,7 @@ public ArrayList PL_NOTNULL_P1_4_23(String ID_entidad,String Legislatura,String 
 public ArrayList PL_NOTNULL_P1_4_25(String ID_entidad,String Legislatura,String Envio){
      conexion.Conectar();
       Array = new ArrayList();
-      sql="SELECT ID_ENTIDAD, C1_4_ID, LEGISLATURA, P1_4_1, P1_4_25 FROM TR_PLE_MEDS1_4 WHERE P1_4_25 IS NULL AND ID_ENTIDAD = '" + ID_entidad + "' AND Legislatura = '" + Legislatura + "' AND C1_2_ID = '" + Envio +"'";
+      sql="SELECT ID_ENTIDAD, C1_4_ID, LEGISLATURA, P1_4_1, P1_4_25 FROM TR_PLE_MEDS1_4 WHERE P1_4_25 IS NULL AND ID_ENTIDAD = '" + ID_entidad + "' AND Legislatura = '" + Legislatura + "' AND C1_4_ID = '" + Envio +"'";
       System.out.println(sql);
       resul=conexion.consultar(sql);
       try {
@@ -1220,7 +1220,7 @@ public ArrayList PL_NOTNULL_P1_4_25(String ID_entidad,String Legislatura,String 
 public ArrayList PL_NOTNULL_P1_4_29(String ID_entidad,String Legislatura,String Envio){
      conexion.Conectar();
       Array = new ArrayList();
-      sql="SELECT ID_ENTIDAD, C1_4_ID, LEGISLATURA, P1_4_1, P1_4_29 FROM TR_PLE_MEDS1_4 WHERE P1_4_29 IS NULL AND ID_ENTIDAD = '" + ID_entidad + "' AND Legislatura = '" + Legislatura + "' AND C1_2_ID = '" + Envio +"'";
+      sql="SELECT ID_ENTIDAD, C1_4_ID, LEGISLATURA, P1_4_1, P1_4_29 FROM TR_PLE_MEDS1_4 WHERE P1_4_29 IS NULL AND ID_ENTIDAD = '" + ID_entidad + "' AND Legislatura = '" + Legislatura + "' AND C1_4_ID = '" + Envio +"'";
       System.out.println(sql);
       resul=conexion.consultar(sql);
       try {
@@ -1240,7 +1240,7 @@ public ArrayList PL_NOTNULL_P1_4_29(String ID_entidad,String Legislatura,String 
 public ArrayList PL_NOTNULL_P1_4_34(String ID_entidad,String Legislatura,String Envio){
      conexion.Conectar();
       Array = new ArrayList();
-      sql="SELECT ID_ENTIDAD, C1_4_ID, LEGISLATURA, P1_4_1, P1_4_34 FROM TR_PLE_MEDS1_4 WHERE P1_4_34 IS NULL AND ID_ENTIDAD = '" + ID_entidad + "' AND Legislatura = '" + Legislatura + "' AND C1_2_ID = '" + Envio +"'";
+      sql="SELECT ID_ENTIDAD, C1_4_ID, LEGISLATURA, P1_4_1, P1_4_34 FROM TR_PLE_MEDS1_4 WHERE P1_4_34 IS NULL AND ID_ENTIDAD = '" + ID_entidad + "' AND Legislatura = '" + Legislatura + "' AND C1_4_ID = '" + Envio +"'";
       System.out.println(sql);
       resul=conexion.consultar(sql);
       try {

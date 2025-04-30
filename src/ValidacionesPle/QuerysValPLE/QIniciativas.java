@@ -17,7 +17,7 @@ import mx.org.inegi.conexion.PLE.DaoConexion;
  * @author ANTONIO.CORIA
  */
 public class QIniciativas {
-
+ 
     DaoConexion conexion = new DaoConexion();
     String sql, NMunicipio;
     ArrayList<String[]> Array;

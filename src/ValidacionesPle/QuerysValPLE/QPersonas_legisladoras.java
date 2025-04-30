@@ -3171,22 +3171,22 @@ public ArrayList total_legisladores_desglose(String ID_entidad,String Legislatur
 "    SELECT TR3.ENTIDAD, TR3.LEGISLATURA, TR3.C1_3_ID AS ENVIO, COUNT(*) AS NUMERO_LEGISLADORES_ACTIVO\n" +
 "    FROM TR_PLE_MEDS1_3 TR3\n" +
 "    WHERE TR3.P1_3_10 = '1'\n" +
-                 " and (TR3.ID_ENTIDAD="+ID_entidad+" AND TR3.Legislatura="+Legislatura+" AND TR3.C1_1_ID='"+Envio+"')" +
+                 " and (TR3.ID_ENTIDAD="+ID_entidad+" AND TR3.Legislatura="+Legislatura+" AND TR3.C1_3_ID='"+Envio+"')" +
 "    GROUP BY TR3.ENTIDAD, TR3.LEGISLATURA, TR3.C1_3_ID )\n" +
 "SELECT COALESCE(S.ENTIDAD, C.ENTIDAD) AS ENTIDAD, COALESCE(S.LEGISLATURA, C.LEGISLATURA) AS LEGISLATURA,\n" +
 "    COALESCE(S.ENVIO, C.ENVIO) AS ENVIO, S.GENERAL_SUMA, C.NUMERO_LEGISLADORES_ACTIVO\n" +
 "FROM SumaTabla S\n" +
 "FULL OUTER JOIN ConteoTabla C ON S.ENTIDAD = C.ENTIDAD AND S.LEGISLATURA = C.LEGISLATURA AND S.ENVIO = C.ENVIO\n" +
 "WHERE S.GENERAL_SUMA IS NULL OR C.NUMERO_LEGISLADORES_ACTIVO IS NULL OR S.GENERAL_SUMA <> C.NUMERO_LEGISLADORES_ACTIVO\n" +
-"ORDER BY ENTIDAD, LEGISLATURA, ENVIO; ";
+"ORDER BY ENTIDAD, LEGISLATURA, ENVIO";
               
      System.out.println(sql);
       resul=conexion.consultar(sql);
       try {
           while (resul.next()) {
               Array.add(new String[]{
-                  resul.getString("ID_ENTIDAD"),
-                  resul.getString("ID_LEGIS")
+                  resul.getString("ENTIDAD"),
+                  resul.getString("GENERAL_SUMA")
                 });
           }
       conexion.close();
