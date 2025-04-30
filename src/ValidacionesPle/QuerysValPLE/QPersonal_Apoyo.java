@@ -956,4 +956,306 @@ public ArrayList NDCnombre_comision_legislativa_personal_apoyo(String ID_entidad
     return Array;
  }
 
+// Se debe capturar P1_4_1-A(ID_personal_apoyo) ya que es un campo obligatorio y debe contener información.
+public ArrayList PL_NOTNULL_P1_4_1(String ID_entidad,String Legislatura,String Envio){
+     conexion.Conectar();
+      Array = new ArrayList();
+      sql="SELECT ID_ENTIDAD, C1_4_ID, LEGISLATURA, P1_4_1, P1_4_1 FROM TR_PLE_MEDS1_4 WHERE P1_4_1 IS NULL AND ID_ENTIDAD = '" + ID_entidad + "' AND Legislatura = '" + Legislatura + "' AND C1_4_ID = '" + Envio +"'";
+      System.out.println(sql);
+      resul=conexion.consultar(sql);
+      try {
+          while (resul.next()) {
+              Array.add(new String[]{
+                  resul.getString("ID_ENTIDAD"),
+                  resul.getString("P1_4_1")
+                });
+          }
+      conexion.close();
+     } catch (SQLException ex) {
+            Logger.getLogger(QComisiones_Legislativas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    return Array;
+ }                                    
+// Se debe capturar P1_4_2-B(nombre_1_personal_apoyo) ya que es un campo obligatorio y debe contener información.
+public ArrayList PL_NOTNULL_P1_4_2(String ID_entidad,String Legislatura,String Envio){
+     conexion.Conectar();
+      Array = new ArrayList();
+      sql="SELECT ID_ENTIDAD, C1_4_ID, LEGISLATURA, P1_4_1, P1_4_2 FROM TR_PLE_MEDS1_4 WHERE P1_4_2 IS NULL AND ID_ENTIDAD = '" + ID_entidad + "' AND Legislatura = '" + Legislatura + "' AND C1_4_ID = '" + Envio +"'";
+      System.out.println(sql);
+      resul=conexion.consultar(sql);
+      try {
+          while (resul.next()) {
+              Array.add(new String[]{
+                  resul.getString("ID_ENTIDAD"),
+                  resul.getString("P1_4_1")
+                });
+          }
+      conexion.close();
+     } catch (SQLException ex) {
+            Logger.getLogger(QComisiones_Legislativas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    return Array;
+ }                                    
+// Se debe capturar P1_4_5-E(apellido_1_personal_apoyo) ya que es un campo obligatorio y debe contener información.
+public ArrayList PL_NOTNULL_P1_5(String ID_entidad,String Legislatura,String Envio){
+     conexion.Conectar();
+      Array = new ArrayList();
+      sql="SELECT ID_ENTIDAD, C1_4_ID, LEGISLATURA, P1_4_1, P1_4_5 FROM TR_PLE_MEDS1_4 WHERE P1_4_5 IS NULL AND ID_ENTIDAD = '" + ID_entidad + "' AND Legislatura = '" + Legislatura + "' AND C1_4_ID = '" + Envio +"'";
+      System.out.println(sql);
+      resul=conexion.consultar(sql);
+      try {
+          while (resul.next()) {
+              Array.add(new String[]{
+                  resul.getString("ID_ENTIDAD"),
+                  resul.getString("P1_4_1")
+                });
+          }
+      conexion.close();
+     } catch (SQLException ex) {
+            Logger.getLogger(QComisiones_Legislativas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    return Array;
+ }                                    
+// Se debe capturar P1_4_8-H(fecha_nacimiento_personal_apoyo) ya que es un campo obligatorio y debe contener información.
+public ArrayList PL_NOTNULL_P1_4_8(String ID_entidad,String Legislatura,String Envio){
+     conexion.Conectar();
+      Array = new ArrayList();
+      sql="SELECT ID_ENTIDAD, C1_4_ID, LEGISLATURA, P1_4_1, P1_4_8 FROM TR_PLE_MEDS1_4 WHERE P1_4_8 IS NULL AND ID_ENTIDAD = '" + ID_entidad + "' AND Legislatura = '" + Legislatura + "' AND C1_4_ID = '" + Envio +"'";
+      System.out.println(sql);
+      resul=conexion.consultar(sql);
+      try {
+          while (resul.next()) {
+              Array.add(new String[]{
+                  resul.getString("ID_ENTIDAD"),
+                  resul.getString("P1_4_1")
+                });
+          }
+      conexion.close();
+     } catch (SQLException ex) {
+            Logger.getLogger(QComisiones_Legislativas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    return Array;
+ }                                    
+// Se debe capturar P1_4_9-I(sexo_personal_apoyo) ya que es un campo obligatorio y debe contener información.
+public ArrayList PL_NOTNULL_P1_4_9(String ID_entidad,String Legislatura,String Envio){
+     conexion.Conectar();
+      Array = new ArrayList();
+      sql="SELECT ID_ENTIDAD, C1_4_ID, LEGISLATURA, P1_4_1, P1_4_9 FROM TR_PLE_MEDS1_4 WHERE P1_4_9 IS NULL AND ID_ENTIDAD = '" + ID_entidad + "' AND Legislatura = '" + Legislatura + "' AND C1_4_ID = '" + Envio +"'";
+      System.out.println(sql);
+      resul=conexion.consultar(sql);
+      try {
+          while (resul.next()) {
+              Array.add(new String[]{
+                  resul.getString("ID_ENTIDAD"),
+                  resul.getString("P1_4_1")
+                });
+          }
+      conexion.close();
+     } catch (SQLException ex) {
+            Logger.getLogger(QComisiones_Legislativas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    return Array;
+ }                                    
+// Se debe capturar P1_4_10-J(regimen_contratacion_personal_apoyo) ya que es un campo obligatorio y debe contener información.
+public ArrayList PL_NOTNULL_P1_4_10(String ID_entidad,String Legislatura,String Envio){
+     conexion.Conectar();
+      Array = new ArrayList();
+      sql="SELECT ID_ENTIDAD, C1_4_ID, LEGISLATURA, P1_4_1, P1_4_10 FROM TR_PLE_MEDS1_4 WHERE P1_4_10 IS NULL AND ID_ENTIDAD = '" + ID_entidad + "' AND Legislatura = '" + Legislatura + "' AND C1_4_ID = '" + Envio +"'";
+      System.out.println(sql);
+      resul=conexion.consultar(sql);
+      try {
+          while (resul.next()) {
+              Array.add(new String[]{
+                  resul.getString("ID_ENTIDAD"),
+                  resul.getString("P1_4_1")
+                });
+          }
+      conexion.close();
+     } catch (SQLException ex) {
+            Logger.getLogger(QComisiones_Legislativas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    return Array;
+ }                                  
+// Se debe capturar P1_4_12-L(institucion_seguridad_social_personal_apoyo) ya que es un campo obligatorio y debe contener información.
+public ArrayList PL_NOTNULL_P1_4_12(String ID_entidad,String Legislatura,String Envio){
+     conexion.Conectar();
+      Array = new ArrayList();
+      sql="SELECT ID_ENTIDAD, C1_4_ID, LEGISLATURA, P1_4_1, P1_4_12 FROM TR_PLE_MEDS1_4 WHERE P1_4_12 IS NULL AND ID_ENTIDAD = '" + ID_entidad + "' AND Legislatura = '" + Legislatura + "' AND C1_4_ID = '" + Envio +"'";
+      System.out.println(sql);
+      resul=conexion.consultar(sql);
+      try {
+          while (resul.next()) {
+              Array.add(new String[]{
+                  resul.getString("ID_ENTIDAD"),
+                  resul.getString("P1_4_1")
+                });
+          }
+      conexion.close();
+     } catch (SQLException ex) {
+            Logger.getLogger(QComisiones_Legislativas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    return Array;
+ }                                  
+// Se debe capturar P1_4_13-M(ingreso_mensual_personal_apoyo) ya que es un campo obligatorio y debe contener información.
+public ArrayList PL_NOTNULL_P1_4_13(String ID_entidad,String Legislatura,String Envio){
+     conexion.Conectar();
+      Array = new ArrayList();
+      sql="SELECT ID_ENTIDAD, C1_4_ID, LEGISLATURA, P1_4_1, P1_4_13 FROM TR_PLE_MEDS1_4 WHERE P1_4_13 IS NULL AND ID_ENTIDAD = '" + ID_entidad + "' AND Legislatura = '" + Legislatura + "' AND C1_4_ID = '" + Envio +"'";
+      System.out.println(sql);
+      resul=conexion.consultar(sql);
+      try {
+          while (resul.next()) {
+              Array.add(new String[]{
+                  resul.getString("ID_ENTIDAD"),
+                  resul.getString("P1_4_1")
+                });
+          }
+      conexion.close();
+     } catch (SQLException ex) {
+            Logger.getLogger(QComisiones_Legislativas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    return Array;
+ }                                  
+// Se debe capturar P1_4_14-N(escolaridad_personal_apoyo) ya que es un campo obligatorio y debe contener información.
+public ArrayList PL_NOTNULL_P1_4_14(String ID_entidad,String Legislatura,String Envio){
+     conexion.Conectar();
+      Array = new ArrayList();
+      sql="SELECT ID_ENTIDAD, C1_4_ID, LEGISLATURA, P1_4_1, P1_4_14 FROM TR_PLE_MEDS1_4 WHERE P1_4_14 IS NULL AND ID_ENTIDAD = '" + ID_entidad + "' AND Legislatura = '" + Legislatura + "' AND C1_4_ID = '" + Envio +"'";
+      System.out.println(sql);
+      resul=conexion.consultar(sql);
+      try {
+          while (resul.next()) {
+              Array.add(new String[]{
+                  resul.getString("ID_ENTIDAD"),
+                  resul.getString("P1_4_1")
+                });
+          }
+      conexion.close();
+     } catch (SQLException ex) {
+            Logger.getLogger(QComisiones_Legislativas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    return Array;
+ }                                  
+// Se debe capturar P1_4_15-O(estatus_escolaridad_personal_apoyo) ya que es un campo obligatorio y debe contener información.
+public ArrayList PL_NOTNULL_P1_4_15(String ID_entidad,String Legislatura,String Envio){
+     conexion.Conectar();
+      Array = new ArrayList();
+      sql="SELECT ID_ENTIDAD, C1_4_ID, LEGISLATURA, P1_4_1, P1_4_15 FROM TR_PLE_MEDS1_4 WHERE P1_4_15 IS NULL AND ID_ENTIDAD = '" + ID_entidad + "' AND Legislatura = '" + Legislatura + "' AND C1_2_ID = '" + Envio +"'";
+      System.out.println(sql);
+      resul=conexion.consultar(sql);
+      try {
+          while (resul.next()) {
+              Array.add(new String[]{
+                  resul.getString("ID_ENTIDAD"),
+                  resul.getString("P1_4_1")
+                });
+          }
+      conexion.close();
+     } catch (SQLException ex) {
+            Logger.getLogger(QComisiones_Legislativas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    return Array;
+ }                                  
+// Se debe capturar P1_4_19-S(cond_lengua_ind_personal_apoyo) ya que es un campo obligatorio y debe contener información.
+public ArrayList PL_NOTNULL_P1_4_19(String ID_entidad,String Legislatura,String Envio){
+     conexion.Conectar();
+      Array = new ArrayList();
+      sql="SELECT ID_ENTIDAD, C1_4_ID, LEGISLATURA, P1_4_1, P1_4_19 FROM TR_PLE_MEDS1_4 WHERE P1_4_19 IS NULL AND ID_ENTIDAD = '" + ID_entidad + "' AND Legislatura = '" + Legislatura + "' AND C1_2_ID = '" + Envio +"'";
+      System.out.println(sql);
+      resul=conexion.consultar(sql);
+      try {
+          while (resul.next()) {
+              Array.add(new String[]{
+                  resul.getString("ID_ENTIDAD"),
+                  resul.getString("P1_4_1")
+                });
+          }
+      conexion.close();
+     } catch (SQLException ex) {
+            Logger.getLogger(QComisiones_Legislativas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    return Array;
+ }                                  
+// Se debe capturar P1_4_23-W(cond_pueblo_ind_personal_apoyo) ya que es un campo obligatorio y debe contener información.
+public ArrayList PL_NOTNULL_P1_4_23(String ID_entidad,String Legislatura,String Envio){
+     conexion.Conectar();
+      Array = new ArrayList();
+      sql="SELECT ID_ENTIDAD, C1_4_ID, LEGISLATURA, P1_4_1, P1_4_23 FROM TR_PLE_MEDS1_4 WHERE P1_4_23 IS NULL AND ID_ENTIDAD = '" + ID_entidad + "' AND Legislatura = '" + Legislatura + "' AND C1_2_ID = '" + Envio +"'";
+      System.out.println(sql);
+      resul=conexion.consultar(sql);
+      try {
+          while (resul.next()) {
+              Array.add(new String[]{
+                  resul.getString("ID_ENTIDAD"),
+                  resul.getString("P1_4_1")
+                });
+          }
+      conexion.close();
+     } catch (SQLException ex) {
+            Logger.getLogger(QComisiones_Legislativas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    return Array;
+ }                                  
+// Se debe capturar P1_4_25-Y(cond_discapacidad_personal_apoyo) ya que es un campo obligatorio y debe contener información.
+public ArrayList PL_NOTNULL_P1_4_25(String ID_entidad,String Legislatura,String Envio){
+     conexion.Conectar();
+      Array = new ArrayList();
+      sql="SELECT ID_ENTIDAD, C1_4_ID, LEGISLATURA, P1_4_1, P1_4_25 FROM TR_PLE_MEDS1_4 WHERE P1_4_25 IS NULL AND ID_ENTIDAD = '" + ID_entidad + "' AND Legislatura = '" + Legislatura + "' AND C1_2_ID = '" + Envio +"'";
+      System.out.println(sql);
+      resul=conexion.consultar(sql);
+      try {
+          while (resul.next()) {
+              Array.add(new String[]{
+                  resul.getString("ID_ENTIDAD"),
+                  resul.getString("P1_4_1")
+                });
+          }
+      conexion.close();
+     } catch (SQLException ex) {
+            Logger.getLogger(QComisiones_Legislativas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    return Array;
+ }                                  
+// Se debe capturar P1_4_29-AC(tipo_adscripcion_personal_apoyo) ya que es un campo obligatorio y debe contener información.
+public ArrayList PL_NOTNULL_P1_4_29(String ID_entidad,String Legislatura,String Envio){
+     conexion.Conectar();
+      Array = new ArrayList();
+      sql="SELECT ID_ENTIDAD, C1_4_ID, LEGISLATURA, P1_4_1, P1_4_29 FROM TR_PLE_MEDS1_4 WHERE P1_4_29 IS NULL AND ID_ENTIDAD = '" + ID_entidad + "' AND Legislatura = '" + Legislatura + "' AND C1_2_ID = '" + Envio +"'";
+      System.out.println(sql);
+      resul=conexion.consultar(sql);
+      try {
+          while (resul.next()) {
+              Array.add(new String[]{
+                  resul.getString("ID_ENTIDAD"),
+                  resul.getString("P1_4_1")
+                });
+          }
+      conexion.close();
+     } catch (SQLException ex) {
+            Logger.getLogger(QComisiones_Legislativas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    return Array;
+ }                                  
+// Se debe capturar P1_4_34-AH(cond_secretario_tecnico_comision_legislativa_personal_apoyo) ya que es un campo obligatorio y debe contener información.
+public ArrayList PL_NOTNULL_P1_4_34(String ID_entidad,String Legislatura,String Envio){
+     conexion.Conectar();
+      Array = new ArrayList();
+      sql="SELECT ID_ENTIDAD, C1_4_ID, LEGISLATURA, P1_4_1, P1_4_34 FROM TR_PLE_MEDS1_4 WHERE P1_4_34 IS NULL AND ID_ENTIDAD = '" + ID_entidad + "' AND Legislatura = '" + Legislatura + "' AND C1_2_ID = '" + Envio +"'";
+      System.out.println(sql);
+      resul=conexion.consultar(sql);
+      try {
+          while (resul.next()) {
+              Array.add(new String[]{
+                  resul.getString("ID_ENTIDAD"),
+                  resul.getString("P1_4_1")
+                });
+          }
+      conexion.close();
+     } catch (SQLException ex) {
+            Logger.getLogger(QComisiones_Legislativas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    return Array;
+ }                                  
+
+
 }
