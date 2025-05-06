@@ -1269,6 +1269,7 @@ public class QIniciativas {
         }
         return Array;
     }
+    
 
 //No debe seleccionar una categoria en P1_5_73-BU(cond_adhesion_iniciativa) debido a P1_5_7 (cond_modificacion_informacion_ingreso_periodo) se selecciono la categoria "No" (2).
     public ArrayList cond_adhesion_iniciativa(String ID_entidad, String Legislatura, String Envio) {
@@ -2060,5 +2061,91 @@ public class QIniciativas {
         }
         return Array;
     }
+    // Se debe completar el campo cond_presentacion_iniciativa_periodo (C) en caso de seleccionar la categoría "Sí" en la columna cond_presentacion_iniciativa_legislatura_actual (B).
+public ArrayList  P1_5_3_null(String ID_entidad, String Legislatura, String Envio) {
+        conexion.Conectar();
+        Array = new ArrayList();
+        sql = "SELECT entidad,C1_5_ID,legislatura, P1_5_1, P1_5_2,P1_5_3 FROM TR_PLE_MEDS1_5\n" +
+                "where P1_5_3 is null and P1_5_2 =1"
+                + " AND (ID_ENTIDAD = '" + ID_entidad + "' AND Legislatura = '" + Legislatura + "' AND C1_5_ID = '" + Envio +"')";
+        System.out.println(sql);
+        resul = conexion.consultar(sql);
+        try {
+            while (resul.next()) {
+                Array.add(new String[]{
+                    resul.getString("ID_ENTIDAD"),
+                    resul.getString("P1_5_1")
+                });
+            }
+            conexion.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(QComisiones_Legislativas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return Array;
+    }
+
+// Es necesario capturar P1_5_1-A(ID_iniciativa) debido a que es un campo obligatorio y tiene que contener información.
+public ArrayList INI_NOTNULL_P1_5_1(String ID_entidad, String Legislatura, String Envio) {
+        conexion.Conectar();
+        Array = new ArrayList();
+        sql = "SELECT ID_ENTIDAD, C1_5_ID, LEGISLATURA, P1_5_1, P1_5_1 FROM TR_PLE_MEDS1_5 WHERE P1_5_1 IS NULL AND ID_ENTIDAD = '" + ID_entidad + "' AND Legislatura = '" + Legislatura + "' AND C1_5_ID = '" + Envio +"'";
+        System.out.println(sql);
+        resul = conexion.consultar(sql);
+        try {
+            while (resul.next()) {
+                Array.add(new String[]{
+                    resul.getString("ID_ENTIDAD"),
+                    resul.getString("P1_5_1")
+                });
+            }
+            conexion.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(QComisiones_Legislativas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return Array;
+    }
+
+// Es necesario capturar P1_5_2-B(cond_presentacion_iniciativa_legislatura_actual) debido a que es un campo obligatorio y tiene que contener información.
+public ArrayList INI_NOTNULL_P1_5_2 (String ID_entidad, String Legislatura, String Envio) {
+        conexion.Conectar();
+        Array = new ArrayList();
+        sql = "SELECT ID_ENTIDAD, C1_5_ID, LEGISLATURA, P1_5_1, P1_5_2 FROM TR_PLE_MEDS1_5 WHERE P1_5_2 IS NULL AND ID_ENTIDAD = '" + ID_entidad + "' AND Legislatura = '" + Legislatura + "' AND C1_5_ID = '" + Envio +"'";
+        System.out.println(sql);
+        resul = conexion.consultar(sql);
+        try {
+            while (resul.next()) {
+                Array.add(new String[]{
+                    resul.getString("ID_ENTIDAD"),
+                    resul.getString("P1_5_1")
+                });
+            }
+            conexion.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(QComisiones_Legislativas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return Array;
+    }
+
+// Es necesario capturar P1_5_5-E(turno_iniciativa) debido a que es un campo obligatorio y tiene que contener información.
+public ArrayList INI_NOTNULL_P1_5_5(String ID_entidad, String Legislatura, String Envio) {
+        conexion.Conectar();
+        Array = new ArrayList();
+        sql = "SELECT ID_ENTIDAD, C1_5_ID, LEGISLATURA, P1_5_1, P1_5_5 FROM TR_PLE_MEDS1_5 WHERE P1_5_5 IS NULL AND ID_ENTIDAD = '" + ID_entidad + "' AND Legislatura = '" + Legislatura + "' AND C1_5_ID = '" + Envio +"'";
+        System.out.println(sql);
+        resul = conexion.consultar(sql);
+        try {
+            while (resul.next()) {
+                Array.add(new String[]{
+                    resul.getString("ID_ENTIDAD"),
+                    resul.getString("P1_5_1")
+                });
+            }
+            conexion.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(QComisiones_Legislativas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return Array;
+    }
+
 
 }
