@@ -248,7 +248,28 @@ public class QIniciativas {
         }
         return Array;
     }
-
+// se debe de capturar el campo P1_5_8-H(estatus_iniciativa) 
+    public ArrayList estatus_iniciativa_NN(String ID_entidad, String Legislatura, String Envio) {
+        conexion.Conectar();
+        Array = new ArrayList();
+        sql = "select  ID_ENTIDAD, ENTIDAD, C1_5_ID, P1_5_1,P1_5_6, P1_5_8 from TR_PLE_MEDS1_5 where ( (P1_5_6<>2  OR P1_5_6 IS NULL) and  P1_5_8 is null )"
+                + " AND ID_ENTIDAD=" + ID_entidad + " AND Legislatura=" + Legislatura + " AND C1_5_ID='" + Envio + "'";
+        System.out.println(sql);
+        resul = conexion.consultar(sql);
+        try {
+            while (resul.next()) {
+                Array.add(new String[]{
+                    resul.getString("ID_ENTIDAD"),
+                    resul.getString("P1_5_1")
+                });
+            }
+            conexion.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(QComisiones_Legislativas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return Array;
+    }
+    
 //Se debe de capturar el campo  P1_5_8-H(estatus_iniciativa) debido a que se capturo diferente de "No" en la columna cond_actualizacion_estatus_iniciativa_periodo (P1_5_6).
     public ArrayList DCestatus_iniciativa(String ID_entidad, String Legislatura, String Envio) {
         conexion.Conectar();
