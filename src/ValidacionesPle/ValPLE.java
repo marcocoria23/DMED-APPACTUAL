@@ -25574,7 +25574,8 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_83(entidad, legislatura, envio);
             coni = 1;
         }
 
-        if (Integer.valueOf(envio) != Integer.valueOf(envio_anterior)) {
+     //   if (Integer.valueOf(envio) != Integer.valueOf(envio_anterior)) {
+        if (!Double.valueOf(envio).equals(Double.valueOf(envio_anterior))) {
             ArrayResult = InS.Iniciativas_EstatusAprobado(entidad, legislatura, envio, envio_anterior);
             if (ArrayResult.size() > 0) {
                 XSSFRow filaEE1 = hojaIniciativas.createRow(conEnc);//FILA
