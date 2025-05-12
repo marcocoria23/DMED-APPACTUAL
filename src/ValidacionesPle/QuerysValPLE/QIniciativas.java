@@ -28,7 +28,8 @@ public class QIniciativas {
         Array = new ArrayList();
         sql = "";
         //IF ENVIO ACTUAL ES MAYOR A ENVIO ANTERIOR
-        if (Integer.valueOf(envio) > Integer.valueOf(envio_anterior)) {
+        
+       if (Double.valueOf(envio) > Double.valueOf(envio_anterior)) {
             sql = "SELECT * FROM(\n"
                     + "SELECT COUNT(P1_5_1) AS CONTEO,P1_5_1 as ID_ACTUAL,ID_ENTIDAD FROM( \n"
                     + "SELECT ID_ENTIDAD,C1_5_ID,P1_5_1,P1_5_8 FROM TR_PLE_MEDS1_5\n"
@@ -39,7 +40,7 @@ public class QIniciativas {
                     + "GROUP BY ID_ENTIDAD,P1_5_1) WHERE CONTEO>1";
         }
 
-        if (Integer.valueOf(envio) < Integer.valueOf(envio_anterior)) {
+        if (Double.valueOf(envio) < Double.valueOf(envio_anterior)) {
             sql = "SELECT * FROM(\n"
                     + "SELECT COUNT(P1_5_1) AS CONTEO,ID_ENTIDAD,P1_5_1 as ID_ACTUAL FROM( \n"
                     + "SELECT ID_ENTIDAD,C1_5_ID,P1_5_1,P1_5_8 FROM TR_PLE_MEDS1_5\n"
