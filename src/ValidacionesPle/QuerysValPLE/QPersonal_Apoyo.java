@@ -22,6 +22,38 @@ String sql;
 ArrayList<String[]> Array;
 ResultSet resul;
 
+// 
+public ArrayList Estructura_ID(String ID_entidad,String Legislatura,String Envio){
+     conexion.Conectar();
+      Array = new ArrayList();
+      sql="WITH ESTRUCTURA_id AS (\n" +
+"  SELECT ID_ENTIDAD,C1_4_ID AS envio,LEGISLATURA,P1_4_1 AS ID_Actual,REPLACE( TRIM(\n" +
+"    (CASE WHEN LENGTH(P1_4_2) >= 2 AND P1_4_3 IS NULL THEN SUBSTR(P1_4_2, 1, 2)\n" +
+"      WHEN P1_4_3 IS NOT NULL AND P1_4_4 IS NULL THEN SUBSTR(P1_4_2, 1, 1) || SUBSTR(P1_4_3, 1, 1)\n" +
+"      WHEN P1_4_3 IS NOT NULL AND P1_4_4 IS NOT NULL THEN SUBSTR(P1_4_2, 1, 1) || SUBSTR(P1_4_3, 1, 1) ELSE '' END) ||\n" +
+"    (CASE WHEN P1_4_6 IS NULL THEN SUBSTR(P1_4_5, 1, 2)\n" +
+"       WHEN P1_4_6 IS NOT NULL AND P1_4_7 IS NULL THEN SUBSTR(P1_4_5, 1, 1) || SUBSTR(P1_4_6, 1, 1)\n" +
+"       WHEN P1_4_6 IS NOT NULL AND P1_4_7 IS NOT NULL THEN SUBSTR(P1_4_5, 1, 1) || SUBSTR(P1_4_6, 1, 1) ELSE ''  END) || SUBSTR(P1_4_8, -4) ||\n" +
+"    (CASE WHEN P1_4_9 = 1 THEN 'H' WHEN P1_4_9 = 2 THEN 'M' WHEN P1_4_9 = 3 THEN 'N' ELSE '' END)), ' ','' ) AS ID_CORRECTO  FROM TR_PLE_MEDS1_4 )\n" +
+"SELECT ID_ENTIDAD, envio, LEGISLATURA, ID_Actual, ID_CORRECTO FROM ESTRUCTURA_id \n" +
+"WHERE ID_Actual <> ID_CORRECTO"
+              + " AND (ID_ENTIDAD="+ID_entidad+" AND Legislatura="+Legislatura+" AND ENVIO='"+Envio+"')";
+      System.out.println(sql);
+      resul=conexion.consultar(sql);
+      try {
+          while (resul.next()) {
+              Array.add(new String[]{
+                  resul.getString("ID_ENTIDAD"),
+                  resul.getString("ID_ACTUAL")
+                });
+          }
+      conexion.close();
+     } catch (SQLException ex) {
+            Logger.getLogger(QComisiones_Legislativas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    return Array;
+ }
+
 //No se debe capturar el campo P1_4_3-C((nombre_2_personal_apoyo) cuando P1_4_2-B(nombre_1_personal_apoyo) viene vacio
 public ArrayList nombre_2_personal_apoyo(String ID_entidad,String Legislatura,String Envio){
      conexion.Conectar();

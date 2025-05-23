@@ -23,6 +23,31 @@ public class QIniciativas {
     ArrayList<String[]> Array;
     ResultSet resul;
 
+    public ArrayList Estructura_ID(String ID_entidad, String Legislatura, String envio) {
+        conexion.Conectar();
+        Array = new ArrayList();
+        sql = "WITH ESTRUCTURA_ID AS ( SELECT C1_5_ID, TO_ROMAN(legislatura) AS LEGIS_ROMAN,legislatura, ENTIDAD, P1_5_1,\n" +
+                " 'IN_' || TO_ROMAN(legislatura) || '_' || ENTIDAD || '_' || P1_5_5 AS ID_ESTRUCTURA_Correcta,P1_5_5 AS TURNO_LEGISLATURA  FROM TR_PLE_MEDS1_5)\n" +
+                "SELECT  C1_5_ID AS ENVIO,legislatura, LEGIS_ROMAN,ENTIDAD,TURNO_LEGISLATURA, ID_ESTRUCTURA_Correcta, P1_5_1 AS ID_actual FROM ESTRUCTURA_ID\n" +
+                "WHERE P1_5_1 <> ID_ESTRUCTURA_Correcta"+
+                " AND (ENTIDAD=" + ID_entidad + " AND Legislatura=" + Legislatura + " AND C1_5_ID='" + envio + "')";;
+        System.out.println(sql);
+        resul = conexion.consultar(sql);
+        try {
+            while (resul.next()) {
+                Array.add(new String[]{
+                    resul.getString("ID_ACTUAL"),
+                    resul.getString("ENTIDAD")
+                });
+            }
+            conexion.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(QIniciativas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return Array;
+    }
+    
     public ArrayList Iniciativas_EstatusAprobado(String ID_entidad, String Legislatura, String envio, String envio_anterior) {
         conexion.Conectar();
         Array = new ArrayList();
@@ -110,6 +135,7 @@ public class QIniciativas {
     public ArrayList Iniciativas_Duplicadas(String ID_entidad, String Legislatura, String envio, String envio_anterior) {
         conexion.Conectar();
         Array = new ArrayList();
+        if (!envio_anterior.equals(envio)) {
         sql = "select * from(  \n"
                 + "select count(ID_ACTUAL) as conteo, ID_ACTUAL, ESTATUS_ACTUAL, ID_ENTIDAD1 from( \n"
                 + "select ID_ENTIDAD AS ID_ENTIDAD1, ENTIDAD AS ENTIDAD1, C1_5_ID AS C1_5_ID1, p1_5_1 AS ID_ACTUAL, p1_5_8 AS ESTATUS_ACTUAL\n"
@@ -126,23 +152,26 @@ public class QIniciativas {
                     resul.getString("ID_ACTUAL"),
                     resul.getString("ID_ENTIDAD1")
                 });
-            }
+            } 
             conexion.close();
         } catch (SQLException ex) {
             Logger.getLogger(QIniciativas.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+}
         return Array;
     }
 
     public ArrayList Iniciativas_Duplicada_presentaPeriodo(String ID_entidad, String Legislatura, String envio, String envio_anterior) {
         conexion.Conectar();
         Array = new ArrayList();
-        sql = "select count(*) as CONTEO, P1_5_1 AS ID_INICIATIVA, P1_5_3 AS COND_PRESENTACION_INICIATIVA_PERIODO, ID_ENTIDAD\n"
-                + "FROM TR_PLE_MEDS1_5\n"
-                + "where P1_5_3 =1 and entidad='" + ID_entidad + "'\n"
-                + "group by P1_5_1,P1_5_3,ID_ENTIDAD\n"
-                + "having count(*) > 1";
+        sql = "SELECT TR.P1_5_1 AS ID_INICIATIVA,    PRESENTO_INICIATIVA_PERIODO.DESCRIPCION AS COND_PRESENTACION_INICIATIVA_PERIODO,\n" +
+"TC_ESTATUS.DESCRIPCION AS estatus, TR.ID_ENTIDAD, TR.C1_5_ID AS ENVIO \n" +
+"FROM TR_PLE_MEDS1_5 TR\n" +
+"INNER JOIN TC_PREG_SALTO PRESENTO_INICIATIVA_PERIODO ON TR.P1_5_3 = PRESENTO_INICIATIVA_PERIODO.id\n" +
+"FULL JOIN TC_ESTATUS_INICIATIVA TC_ESTATUS ON TR.P1_5_8 = TC_ESTATUS.id\n" +
+"WHERE (TR.P1_5_3 = 1 AND (TR.P1_5_1, TR.P1_5_8) IN ( SELECT P1_5_1, P1_5_8 FROM TR_PLE_MEDS1_5 WHERE P1_5_3 = 1 GROUP BY P1_5_1, P1_5_8 HAVING COUNT(*) > 1  ))\n" +
+"AND TR.ID_ENTIDAD='" + ID_entidad + "'\n" +
+"ORDER BY ID_INICIATIVA, TR.P1_5_8 ";
         System.out.println(sql);
         resul = conexion.consultar(sql);
         try {
@@ -2169,5 +2198,33 @@ public ArrayList INI_NOTNULL_P1_5_5(String ID_entidad, String Legislatura, Strin
         return Array;
     }
 
+
+//Los campos tipo_primer_dictamen (CP)  y  sentido_resolucion_primer_dictamen (CR) deben contener información pues se seleccionó alguna de las siguientes categorías en la columna estatus_iniciativa (H) : "5.Dictamen", "6.Desechada o improcedente" o "7.Aprobada o procedente"
+public ArrayList Dictamen_sentido_resolucion(String ID_entidad, String Legislatura, String Envio) {
+        conexion.Conectar();
+        Array = new ArrayList();
+        sql = "select TR.ID_ENTIDAD,C1_5_ID AS ENVIO, TR.P1_5_1 as ID_INICIATIVA, TC_ESTATUS.DESCRIPCION AS ESTATUS_INICIATIVA, TC_DICTAMEN.DESCRIPCION  AS tipo_primer_dictamen, SENTIDO_DICTAMEN.descripcion as sentido_dictamen\n" +
+            "from TR_PLE_MEDS1_5 TR\n" +
+            "full JOIN TC_TIPO_DICTAMEN TC_DICTAMEN on tr.P1_5_94= TC_DICTAMEN.id \n" +
+            "full JOIN TC_ESTATUS_INICIATIVA TC_ESTATUS on tr.P1_5_8= TC_ESTATUS.id \n" +
+            "full JOIN  TC_SENTIDO_RESOLUCION_DICTAMEN SENTIDO_DICTAMEN ON tr.P1_5_96 = SENTIDO_DICTAMEN.id\n" +
+            "WHERE tr.P1_5_8  in (5,6,7) \n" +
+            "AND ( ( tr.P1_5_94 IS  NULL) or  ( tr.P1_5_96 IS  NULL) )\n" +
+            "AND TR.ID_ENTIDAD = '" + ID_entidad + "' AND TR.Legislatura = '" + Legislatura + "' AND TR.C1_5_ID = '" + Envio +"'";
+        System.out.println(sql);
+        resul = conexion.consultar(sql);
+        try {
+            while (resul.next()) {
+                Array.add(new String[]{
+                    resul.getString("ID_ENTIDAD"),
+                    resul.getString("ID_INICIATIVA")
+                });
+            }
+            conexion.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(QComisiones_Legislativas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return Array;
+    }
 
 }

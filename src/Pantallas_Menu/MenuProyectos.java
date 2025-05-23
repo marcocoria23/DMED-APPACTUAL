@@ -156,10 +156,6 @@ public class MenuProyectos extends javax.swing.JFrame {
         Menu Men=new Menu();
         Men.setVisible(true);
         this.setVisible(false);
-        System.out.println("Prueba repositorio1");
-        //AGREGANDO LINEAS POR QUE QUIERO Y PUEDO
-        //AGREGANDO ahora en la 161 porque el jefecito dijo y pos hay que obedecer
-        System.out.println("Pruebarepo2222");
         
 
     }//GEN-LAST:event_PLEActionPerformed

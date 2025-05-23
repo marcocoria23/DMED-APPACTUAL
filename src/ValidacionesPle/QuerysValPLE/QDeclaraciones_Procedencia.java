@@ -22,6 +22,32 @@ String sql;
 ArrayList<String[]> Array;
 ResultSet resul;
 
+//Estructura de ID incorrecta, no coincide con la información registrada en los campos de la tabla. Favor de revisar estructura correcta: DP_LEGISLATURA_ENTIDAD_TURNO"
+public ArrayList ID_Estructura(String ID_entidad,String Legislatura,String Envio){
+     conexion.Conectar();
+      Array = new ArrayList();
+      sql="WITH ESTRUCTURA_ID AS (\n" +
+"    SELECT C1_8_ID, TO_ROMAN(legislatura) AS LEGIS_ROMAN,legislatura, ENTIDAD, P1_8_1,\n" +
+"        'DP_' || TO_ROMAN(legislatura) || '_' || ENTIDAD || '_' || P1_8_5 AS ID_ESTRUCTURA_Correcta,P1_8_5 AS TURNO\n" +
+"    FROM TR_PLE_MEDS1_8)\n" +
+"SELECT  C1_8_ID AS ENVIO,legislatura, LEGIS_ROMAN,ENTIDAD,TURNO, ID_ESTRUCTURA_Correcta, P1_8_1 AS ID_actual\n" +
+"FROM ESTRUCTURA_ID WHERE P1_8_1 <> ID_ESTRUCTURA_Correcta and (ENTIDAD="+ID_entidad+" AND Legislatura="+Legislatura+" AND C1_8_ID='"+Envio+"')";
+      System.out.println(sql);
+      resul=conexion.consultar(sql);
+      try {
+          while (resul.next()) {
+              Array.add(new String[]{
+                  resul.getString("ID_ENTIDAD"),
+                  resul.getString("ID_actual")
+                });
+          }
+      conexion.close();
+     } catch (SQLException ex) {
+            Logger.getLogger(QComparecencias.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    return Array;
+ }
+
 
 //No debe seleccionar una categoria en P1_8_3-C(cond_presentacion_denuncia_declaracion_procedencia_periodo) debido a que en P1_8_2-B(cond_presentacion_denuncia_declaracion_procedencia_legislatura_actual) se selecciono "No" (2)
 public ArrayList NScond_presentacion_denuncia(String ID_entidad,String Legislatura,String Envio){

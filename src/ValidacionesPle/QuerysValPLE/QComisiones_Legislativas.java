@@ -48,7 +48,37 @@ public ArrayList ID_comision_legislativa(String ID_entidad,String Legislatura,St
     return Array;
  }
 
-
+//Estructura de ID incorrecta, no coincide con la información registrada en los campos de la tabla. Favor de revisar estructura correcta: COM_TIPOCOMISION_ENTIDAD_CONSECUTIVO"
+public ArrayList Estructura_ID(String ID_entidad,String Legislatura,String Envio){
+     conexion.Conectar();
+      Array = new ArrayList();
+      sql="WITH ESTRUCTURA_ID AS (\n" +
+"    SELECT C1_2_ID, legislatura, ENTIDAD, P1_2_1, P1_2_2 AS consecutivo_com, TC_TIPO.DESCRIPCION AS TIPO_COM,\n" +
+"    CASE P1_2_4\n" +
+"    WHEN 1 THEN 'COM_ORD_' || ENTIDAD || '_' || P1_2_2\n" +
+"    WHEN 2 THEN 'COM_ESP_' || ENTIDAD || '_' || P1_2_2\n" +
+"    WHEN 3 THEN 'COM_EXT_' || ENTIDAD || '_' || P1_2_2\n" +
+"    WHEN 4 THEN 'COM_OTR_' || ENTIDAD || '_' || P1_2_2\n" +
+"    ELSE NULL  END AS ID_ESTRUCTURA_Correcta\n" +
+"    FROM TR_PLE_MEDS1_2 TR full JOIN TC_TIPO_COMISION_PLE TC_TIPO on tr.P1_2_4= TC_TIPO.id )\n" +
+"SELECT C1_2_ID AS ENVIO, legislatura, TIPO_COM, ENTIDAD, consecutivo_com, ID_ESTRUCTURA_Correcta, P1_2_1 AS ID_actual\n" +
+"FROM ESTRUCTURA_ID WHERE P1_2_1 <> ID_ESTRUCTURA_Correcta "+
+              "AND (ENTIDAD="+ID_entidad+" AND Legislatura="+Legislatura+" AND C1_2_ID='"+Envio+"') ";
+      System.out.println(sql);
+      resul=conexion.consultar(sql);
+      try {
+          while (resul.next()) {
+              Array.add(new String[]{
+                  resul.getString("ENTIDAD"),
+                  resul.getString("ID_actual")
+                });
+          }
+      conexion.close();
+     } catch (SQLException ex) {
+            Logger.getLogger(QComisiones_Legislativas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    return Array;
+ }
 
 //Se debe capturar P1_2_5-E(otro_tipo_comision_legislativa_especifique) debido a que en el campo P1_2_4-D(tipo_comision_legislativa) se seleccióno  "Otro tipo (especifique)"- '4' 
 public ArrayList CAP_otro_tipo_comision_legislativa_especifique(String ID_entidad,String Legislatura,String Envio){

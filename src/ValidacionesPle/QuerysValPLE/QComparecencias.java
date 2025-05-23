@@ -22,6 +22,35 @@ String sql;
 ArrayList<String[]> Array;
 ResultSet resul; 
 
+
+//Estructura de ID incorrecta, no coincide con la información registrada en los campos de la tabla. Favor de revisar estructura correcta: CMP_LEGISLATURA_ENTIDAD_TURNO"
+public ArrayList ID_Estructura(String ID_entidad,String Legislatura,String Envio){
+     conexion.Conectar();
+      Array = new ArrayList();
+      sql="WITH ESTRUCTURA_ID AS (\n" +
+"    SELECT C1_9_ID, TO_ROMAN(legislatura) AS LEGIS_ROMAN,legislatura, ENTIDAD, P1_9_1,\n" +
+"        'CMP_' || TO_ROMAN(legislatura) || '_' || ENTIDAD || '_' || P1_9_2 AS ID_ESTRUCTURA_Correcta,P1_9_2 AS TURNO\n" +
+"    FROM TR_PLE_MEDS1_9)\n" +
+"SELECT  C1_9_ID AS ENVIO,legislatura, LEGIS_ROMAN,ENTIDAD,TURNO, ID_ESTRUCTURA_Correcta, P1_9_1 AS ID_actual\n" +
+"FROM ESTRUCTURA_ID\n" +
+"WHERE P1_9_1 <> ID_ESTRUCTURA_Correcta and ENTIDAD="+ID_entidad+" AND Legislatura="+Legislatura+" AND C1_9_ID='"+Envio+"'";
+      System.out.println(sql);
+      resul=conexion.consultar(sql);
+      try {
+          while (resul.next()) {
+              Array.add(new String[]{
+                  resul.getString("ID_ENTIDAD"),
+                  resul.getString("P1_9_1")
+                });
+          }
+      conexion.close();
+     } catch (SQLException ex) {
+            Logger.getLogger(QComparecencias.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    return Array;
+ }
+
+
 //No se puede repetir el P1_9_1-A(ID_comparecencia)
 public ArrayList ID_comparecencia(String ID_entidad,String Legislatura,String Envio){
      conexion.Conectar();

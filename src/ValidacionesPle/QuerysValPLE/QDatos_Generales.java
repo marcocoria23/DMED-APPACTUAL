@@ -143,7 +143,7 @@ public ArrayList fecha_periodo_repetida(String ID_entidad,String Legislatura,Str
       sql="select ID_ENTIDAD,  P1_1_7 as año,P1_1_8 as inicio_periodo, P1_1_9 as fin_periodo,LEGISLATURA, C1_1_ID as envio \n" +
         "from  TR_PLE_MEDS1_1 WHERE (ID_ENTIDAD, P1_1_8, P1_1_9) IN (\n" +
         "SELECT ID_ENTIDAD,P1_1_8, P1_1_9 FROM TR_PLE_MEDS1_1 GROUP BY ID_ENTIDAD,  P1_1_8, P1_1_9 HAVING COUNT(*) > 1 )\n" +
-          "AND ID_ENTIDAD="+ID_entidad+"      ORDER BY  ID_ENTIDAD, P1_1_7, P1_1_8, P1_1_9";
+          "AND ID_ENTIDAD="+ID_entidad+"  AND Legislatura="+Legislatura+"    ORDER BY  ID_ENTIDAD, P1_1_7, P1_1_8, P1_1_9";
 System.out.println(sql);
       resul=conexion.consultar(sql);
       try {

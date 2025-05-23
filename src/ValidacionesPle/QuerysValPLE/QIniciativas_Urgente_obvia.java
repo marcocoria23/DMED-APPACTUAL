@@ -22,6 +22,31 @@ String sql;
 ArrayList<String[]> Array;
 ResultSet resul;
 
+public ArrayList ID_estructura(String ID_entidad,String Legislatura,String Envio){
+     conexion.Conectar();
+      Array = new ArrayList();
+      sql="WITH ESTRUCTURA_ID AS (\n" +
+"    SELECT C1_6_ID, TO_ROMAN(legislatura) AS LEGIS_ROMAN,legislatura, ENTIDAD, P1_6_1,\n" +
+"        'IN_UO_' || TO_ROMAN(legislatura) || '_' || ENTIDAD || '_' || P1_6_2 AS ID_ESTRUCTURA_Correcta,P1_6_2 AS TURNO\n" +
+"    FROM TR_PLE_MEDS1_6)\n" +
+"SELECT  C1_6_ID AS ENVIO,legislatura, LEGIS_ROMAN,ENTIDAD,TURNO, ID_ESTRUCTURA_Correcta, P1_6_1 AS ID_actual\n" +
+"FROM ESTRUCTURA_ID\n" +
+"WHERE P1_6_1 <> ID_ESTRUCTURA_Correcta and (ENTIDAD="+ID_entidad+" AND Legislatura="+Legislatura+" AND C1_6_ID='"+Envio+"')";
+      System.out.println(sql);
+      resul=conexion.consultar(sql);
+      try {
+          while (resul.next()) {
+              Array.add(new String[]{
+                  resul.getString("ENTIDAD"),
+                  resul.getString("ID_actual")
+                });
+          }
+      conexion.close();
+     } catch (SQLException ex) {
+            Logger.getLogger(QComparecencias.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    return Array;
+ }
 //Debe ser igual o menor a la fecha registrada en la columna P1_1_9(fecha_termino_informacion_reportada) de la tabla datos_generales.
 public ArrayList fecha_termino_informacion_reportada(String ID_entidad,String Legislatura,String Envio){
      conexion.Conectar();

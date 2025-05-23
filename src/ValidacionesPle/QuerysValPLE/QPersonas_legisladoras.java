@@ -43,6 +43,39 @@ public ArrayList PL_NOTNULL_P1_3_1(String ID_entidad,String Legislatura,String E
     return Array;
  }
 
+//Estructura de ID incorrecta, no coincide con la información registrada en los campos de datos personales del legislador
+public ArrayList estructura_ID(String ID_entidad,String Legislatura,String Envio){
+     conexion.Conectar();
+      Array = new ArrayList();
+      sql="WITH ESTRUCTURA_id AS (\n" +
+"  SELECT ID_ENTIDAD,C1_3_ID AS envio,LEGISLATURA,P1_3_1 AS ID_Actual,REPLACE( TRIM(\n" +
+"    (CASE WHEN LENGTH(P1_3_2) >= 2 AND P1_3_3 IS NULL THEN SUBSTR(P1_3_2, 1, 2)\n" +
+"      WHEN P1_3_3 IS NOT NULL AND P1_3_4 IS NULL THEN SUBSTR(P1_3_2, 1, 1) || SUBSTR(P1_3_3, 1, 1)\n" +
+"      WHEN P1_3_3 IS NOT NULL AND P1_3_4 IS NOT NULL THEN SUBSTR(P1_3_2, 1, 1) || SUBSTR(P1_3_3, 1, 1) ELSE '' END) ||\n" +
+"    (CASE WHEN P1_3_6 IS NULL THEN SUBSTR(P1_3_5, 1, 2)\n" +
+"       WHEN P1_3_6 IS NOT NULL AND P1_3_7 IS NULL THEN SUBSTR(P1_3_5, 1, 1) || SUBSTR(P1_3_6, 1, 1)\n" +
+"       WHEN P1_3_6 IS NOT NULL AND P1_3_7 IS NOT NULL THEN SUBSTR(P1_3_5, 1, 1) || SUBSTR(P1_3_6, 1, 1) ELSE ''  END) || SUBSTR(P1_3_8, -4) ||\n" +
+"    (CASE WHEN P1_3_9 = 1 THEN 'H' WHEN P1_3_9 = 2 THEN 'M' WHEN P1_3_9 = 3 THEN 'N' ELSE '' END)), ' ','' ) AS ID_CORRECTO  FROM TR_PLE_MEDS1_3 )\n" +
+"SELECT ID_ENTIDAD, envio, LEGISLATURA, ID_Actual, ID_CORRECTO FROM ESTRUCTURA_id \n" +
+"WHERE ID_Actual <> ID_CORRECTO\n" +
+" AND (ID_ENTIDAD="+ID_entidad+" AND  Legislatura="+Legislatura+" AND  envio='"+Envio+"')";
+              
+     System.out.println(sql);
+      resul=conexion.consultar(sql);
+      try {
+          while (resul.next()) {
+              Array.add(new String[]{
+                  resul.getString("ID_ENTIDAD"),
+                  resul.getString("ID_Actual")
+                });
+          }
+      conexion.close();
+     } catch (SQLException ex) {
+            Logger.getLogger(QComisiones_Legislativas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    return Array;
+ }
+
 // Se debe capturar P1_3_2-C(nombre_1_persona_legisladora) debido a que no puede venir vacío.
 public ArrayList PL_NOTNULL_P1_3_2(String ID_entidad,String Legislatura,String Envio){
      conexion.Conectar();
@@ -3195,4 +3228,7 @@ public ArrayList total_legisladores_desglose(String ID_entidad,String Legislatur
         }
     return Array;
  }
+
+
+
 }
