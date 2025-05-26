@@ -32,7 +32,7 @@ public ArrayList ID_Estructura(String ID_entidad,String Legislatura,String Envio
 "    FROM TR_PLE_MEDS1_7)\n" +
 "SELECT  C1_7_ID AS ENVIO,legislatura, LEGIS_ROMAN,ENTIDAD,TURNO, ID_ESTRUCTURA_Correcta, P1_7_1 AS ID_actual\n" +
 "FROM ESTRUCTURA_ID\n" +
-"WHERE P1_7_1 <> ID_ESTRUCTURA_Correcta"
+"WHERE P1_7_1 <> ID_ESTRUCTURA_Correcta "
               + "and (ENTIDAD="+ID_entidad+" AND Legislatura="+Legislatura+" AND C1_7_ID='"+Envio+"')";
       System.out.println(sql);
       resul=conexion.consultar(sql);
@@ -785,26 +785,7 @@ public ArrayList NIDnombre_1_persona_servidora_publica_juicio_politico(String ID
     return Array;
  }
 
-//Debe introducir un dato en P1_7_19-S(nombre_2_persona_servidora_publica_juicio_politico) debido a P1_7_18-R(nombre_1_persona_servidora_publica_juicio_politico) se introdujo un dato
-public ArrayList IDnombre_2_persona_servidora_publica_juicio_politico(String ID_entidad,String Legislatura,String Envio){
-     conexion.Conectar();
-      Array = new ArrayList();
-      sql="select ID_ENTIDAD, ENTIDAD, C1_7_ID, P1_7_1, P1_7_18, P1_7_19 from tr_ple_meds1_7 where P1_7_18 is not null and P1_7_19 is null and (ID_ENTIDAD="+ID_entidad+" AND Legislatura="+Legislatura+" AND C1_7_ID='"+Envio+"')";
-      System.out.println(sql);
-      resul=conexion.consultar(sql);
-      try {
-          while (resul.next()) {
-              Array.add(new String[]{
-                  resul.getString("ID_ENTIDAD"),
-                  resul.getString("P1_7_1")
-                });
-          }
-      conexion.close();
-     } catch (SQLException ex) {
-            Logger.getLogger(QComparecencias.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    return Array;
- }
+
 
 //No debe introducir un dato en P1_7_19-S(nombre_2_persona_servidora_publica_juicio_politico) debido a P1_7_18-R(nombre_1_persona_servidora_publica_juicio_politico) no se introdujo un dato
 public ArrayList NIDnombre_2_persona_servidora_publica_juicio_politico(String ID_entidad,String Legislatura,String Envio){
@@ -827,27 +808,6 @@ public ArrayList NIDnombre_2_persona_servidora_publica_juicio_politico(String ID
     return Array;
  }
 
-
-//Debe introducir un dato en P1_7_20-T(nombre_3_persona_servidora_publica_juicio_politico) debido a  P1_7_19-S(nombre_2_persona_servidora_publica_juicio_politico) se introdujo un dato
-public ArrayList DInombre_3_persona_servidora_publica_juicio_politico(String ID_entidad,String Legislatura,String Envio){
-     conexion.Conectar();
-      Array = new ArrayList();
-      sql="select ID_ENTIDAD, ENTIDAD, C1_7_ID, P1_7_1, P1_7_19, P1_7_20 from tr_ple_meds1_7 where P1_7_19 is not null and P1_7_20 is null and (ID_ENTIDAD="+ID_entidad+" AND Legislatura="+Legislatura+" AND C1_7_ID='"+Envio+"')";
-      System.out.println(sql);
-      resul=conexion.consultar(sql);
-      try {
-          while (resul.next()) {
-              Array.add(new String[]{
-                  resul.getString("ID_ENTIDAD"),
-                  resul.getString("P1_7_1")
-                });
-          }
-      conexion.close();
-     } catch (SQLException ex) {
-            Logger.getLogger(QComparecencias.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    return Array;
- }
 
 
 //No debe introducir un dato en P1_7_20-T(nombre_3_persona_servidora_publica_juicio_politico) debido a  P1_7_19-S(nombre_2_persona_servidora_publica_juicio_politico) no se introdujo un dato
@@ -914,26 +874,7 @@ public ArrayList NIapellido_1_persona_servidora_publica_juicio_politico(String I
     return Array;
  }
 
-//Debe introducir un dato en P1_7_22-V(apellido_2_persona_servidora_publica_juicio_politico) debido a P1_7_21-U(apellido_1_persona_servidora_publica_juicio_politico) se introdujo un dato
-public ArrayList DIapellido_2_persona_servidora_publica_juicio_politico(String ID_entidad,String Legislatura,String Envio){
-     conexion.Conectar();
-      Array = new ArrayList();
-      sql="select ID_ENTIDAD, ENTIDAD, C1_7_ID, P1_7_1, P1_7_21, P1_7_22 from tr_ple_meds1_7 where P1_7_21 is not null and P1_7_22 is null and (ID_ENTIDAD="+ID_entidad+" AND Legislatura="+Legislatura+" AND C1_7_ID='"+Envio+"')";
-      System.out.println(sql);
-      resul=conexion.consultar(sql);
-      try {
-          while (resul.next()) {
-              Array.add(new String[]{
-                  resul.getString("ID_ENTIDAD"),
-                  resul.getString("P1_7_1")
-                });
-          }
-      conexion.close();
-     } catch (SQLException ex) {
-            Logger.getLogger(QComparecencias.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    return Array;
- }
+
 
 //No debe introducir un dato en P1_7_22-V(apellido_2_persona_servidora_publica_juicio_politico) debido a P1_7_21-U(apellido_1_persona_servidora_publica_juicio_politico) no se introdujo un dato
 public ArrayList NDIapellido_2_persona_servidora_publica_juicio_politico(String ID_entidad,String Legislatura,String Envio){
@@ -956,26 +897,7 @@ public ArrayList NDIapellido_2_persona_servidora_publica_juicio_politico(String 
     return Array;
  }
 
-//Debe introducir un dato en P1_7_23-W(apellido_3_persona_servidora_publica_juicio_politico) debido a P1_7_22-V(apellido_2_persona_servidora_publica_juicio_politico) se introdujo un dato
-public ArrayList DIapellido_3_persona_servidora_publica_juicio_politico(String ID_entidad,String Legislatura,String Envio){
-     conexion.Conectar();
-      Array = new ArrayList();
-      sql="select ID_ENTIDAD, ENTIDAD, C1_7_ID, P1_7_1, P1_7_22, P1_7_23 from tr_ple_meds1_7 where P1_7_22 is not null and P1_7_23 is null and (ID_ENTIDAD="+ID_entidad+" AND Legislatura="+Legislatura+" AND C1_7_ID='"+Envio+"')";
-      System.out.println(sql);
-      resul=conexion.consultar(sql);
-      try {
-          while (resul.next()) {
-              Array.add(new String[]{
-                  resul.getString("ID_ENTIDAD"),
-                  resul.getString("P1_7_1")
-                });
-          }
-      conexion.close();
-     } catch (SQLException ex) {
-            Logger.getLogger(QComparecencias.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    return Array;
- }
+
 
 //No debe introducir un dato en P1_7_23-W(apellido_3_persona_servidora_publica_juicio_politico) debido a P1_7_22-V(apellido_2_persona_servidora_publica_juicio_politico) no se introdujo un dato.
 public ArrayList NDIapellido_3_persona_servidora_publica_juicio_politico(String ID_entidad,String Legislatura,String Envio){
@@ -1468,26 +1390,7 @@ public ArrayList NDIperjuicio_a_los_intereses_publicos_fundamentales_y_de_su_bue
     return Array;
  }
 
-//Debe seleccionar una categoría en P1_7_35-AI(perjuicio_a_los_intereses_publicos_fundamentales_y_de_su_buen_despacho_2) debido a P1_7_34-AH(perjuicio_a_los_intereses_publicos_fundamentales_y_de_su_buen_despacho_1) se selecciono alguna categoría
-public ArrayList DIperjuicio_a_los_intereses_publicos_fundamentales_y_de_su_buen_despacho_2(String ID_entidad,String Legislatura,String Envio){
-     conexion.Conectar();
-      Array = new ArrayList();
-      sql="select ID_ENTIDAD, ENTIDAD, C1_7_ID, P1_7_1, P1_7_34, P1_7_35 from tr_ple_meds1_7 where P1_7_34 is not null and P1_7_35 is null and (ID_ENTIDAD="+ID_entidad+" AND Legislatura="+Legislatura+" AND C1_7_ID='"+Envio+"')";
-      System.out.println(sql);
-      resul=conexion.consultar(sql);
-      try {
-          while (resul.next()) {
-              Array.add(new String[]{
-                  resul.getString("ID_ENTIDAD"),
-                  resul.getString("P1_7_1")
-                });
-          }
-      conexion.close();
-     } catch (SQLException ex) {
-            Logger.getLogger(QComparecencias.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    return Array;
- }
+
 
 //No debe seleccionar una categoría en P1_7_35-AI(perjuicio_a_los_intereses_publicos_fundamentales_y_de_su_buen_despacho_2) debido a P1_7_34-AH(perjuicio_a_los_intereses_publicos_fundamentales_y_de_su_buen_despacho_1) no se selecciona alguna categoría
 public ArrayList NDIperjuicio_a_los_intereses_publicos_fundamentales_y_de_su_buen_despacho_2(String ID_entidad,String Legislatura,String Envio){
@@ -1510,26 +1413,7 @@ public ArrayList NDIperjuicio_a_los_intereses_publicos_fundamentales_y_de_su_bue
     return Array;
  }
 
-//Debe seleccionar una categoría en P1_7_36-AJ(perjuicio_a_los_intereses_publicos_fundamentales_y_de_su_buen_despacho_3) debido a P1_7_35-AI(perjuicio_a_los_intereses_publicos_fundamentales_y_de_su_buen_despacho_2) se selecciono alguna categoría.
-public ArrayList DIperjuicio_a_los_intereses_publicos_fundamentales_y_de_su_buen_despacho_3(String ID_entidad,String Legislatura,String Envio){
-     conexion.Conectar();
-      Array = new ArrayList();
-      sql="select ID_ENTIDAD, ENTIDAD, C1_7_ID, P1_7_1, P1_7_35, P1_7_36 from tr_ple_meds1_7 where P1_7_35 is not null and P1_7_36 is null and (ID_ENTIDAD="+ID_entidad+" AND Legislatura="+Legislatura+" AND C1_7_ID='"+Envio+"')";
-      System.out.println(sql);
-      resul=conexion.consultar(sql);
-      try {
-          while (resul.next()) {
-              Array.add(new String[]{
-                  resul.getString("ID_ENTIDAD"),
-                  resul.getString("P1_7_1")
-                });
-          }
-      conexion.close();
-     } catch (SQLException ex) {
-            Logger.getLogger(QComparecencias.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    return Array;
- }
+
 
 //No debe seleccionar una categoría en P1_7_36-AJ(perjuicio_a_los_intereses_publicos_fundamentales_y_de_su_buen_despacho_3) debido a P1_7_35-AI(perjuicio_a_los_intereses_publicos_fundamentales_y_de_su_buen_despacho_2) no se selecciona alguna categoría
 public ArrayList NDIperjuicio_a_los_intereses_publicos_fundamentales_y_de_su_buen_despacho_3(String ID_entidad,String Legislatura,String Envio){

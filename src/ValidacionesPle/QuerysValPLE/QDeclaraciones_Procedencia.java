@@ -706,26 +706,7 @@ public ArrayList NSapellido_1_persona_servidora_publica_declaracion_procedencia(
  }
 
 
-// Debe introducir un dato en P1_8_22-V(apellido_2_persona_servidora_publica_declaracion_procedencia) debido a P1_8_21-U(apellido_1_persona_servidora_publica_declaracion_procedencia) se introducio un dato
-public ArrayList DSapellido_2_persona_servidora_publica_declaracion_procedencia(String ID_entidad,String Legislatura,String Envio){
-     conexion.Conectar();
-      Array = new ArrayList();
-      sql="select ID_ENTIDAD, ENTIDAD, C1_8_ID, P1_8_1, P1_8_21, P1_8_22 from tr_ple_meds1_8 where P1_8_21 is not null and P1_8_22 is null and (ID_ENTIDAD="+ID_entidad+" AND Legislatura="+Legislatura+" AND C1_8_ID='"+Envio+"')";
-      System.out.println(sql);
-      resul=conexion.consultar(sql);
-      try {
-          while (resul.next()) {
-              Array.add(new String[]{
-                  resul.getString("ID_ENTIDAD"),
-                  resul.getString("P1_8_1")
-                });
-          }
-      conexion.close();
-     } catch (SQLException ex) {
-            Logger.getLogger(QComparecencias.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    return Array;
- }
+
 
 // No debe introducir un dato en P1_8_22-V(apellido_2_persona_servidora_publica_declaracion_procedencia) debido a P1_8_21-U(apellido_1_persona_servidora_publica_declaracion_procedencia) no se introducio un dato.
 public ArrayList NSapellido_2_persona_servidora_publica_declaracion_procedencia(String ID_entidad,String Legislatura,String Envio){
@@ -749,26 +730,7 @@ public ArrayList NSapellido_2_persona_servidora_publica_declaracion_procedencia(
  }
 
 
-// Debe introducir un dato en P1_8_23-W(apellido_3_persona_servidora_publica_declaracion_procedencia) debido a P1_8_22-V(apellido_2_persona_servidora_publica_declaracion_procedencia) se introducio un dato
-public ArrayList CSapellido_3_persona_servidora_publica_declaracion_procedencia(String ID_entidad,String Legislatura,String Envio){
-     conexion.Conectar();
-      Array = new ArrayList();
-      sql="select ID_ENTIDAD, ENTIDAD, C1_8_ID, P1_8_1, P1_8_22, P1_8_23 from tr_ple_meds1_8 where P1_8_22 is not null and P1_8_23 is null and (ID_ENTIDAD="+ID_entidad+" AND Legislatura="+Legislatura+" AND C1_8_ID='"+Envio+"')";
-      System.out.println(sql);
-      resul=conexion.consultar(sql);
-      try {
-          while (resul.next()) {
-              Array.add(new String[]{
-                  resul.getString("ID_ENTIDAD"),
-                  resul.getString("P1_8_1")
-                });
-          }
-      conexion.close();
-     } catch (SQLException ex) {
-            Logger.getLogger(QComparecencias.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    return Array;
- }
+
 
 
 // No debe introducir un dato en P1_8_23-W(apellido_3_persona_servidora_publica_declaracion_procedencia) debido a P1_8_22-V(apellido_2_persona_servidora_publica_declaracion_procedencia) no se introducio un dato

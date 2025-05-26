@@ -3097,45 +3097,7 @@ public ArrayList Comision_legislativa(String ID_entidad,String Legislatura,Strin
     return Array;
  }
 
-//El total de personas legisladoras con estatus (K)='Activo'  de la pestaña Personas_Legisladoras no coincide con la suma de los campos distritos_uninominales y diputaciones_plurinominales de la pestaña datos_generales.
-public ArrayList Legisladores_activos(String ID_entidad,String Legislatura,String Envio){
-     conexion.Conectar();
-      Array = new ArrayList();
-      sql="WITH SumaTabla AS (\n" +
-"    SELECT  TR1.ENTIDAD, TR1.LEGISLATURA, TR1.C1_1_ID AS ENVIO,SUM(TR1.P1_1_5 + TR1.P1_1_6) AS GENERAL_SUMA\n" +
-"    FROM TR_PLE_MEDS1_1 TR1\n" +
-"    where   TR1.ENTIDAD='"+ID_entidad+"'and TR1.LEGISLATURA="+Legislatura+" and TR1.C1_1_ID='"+Envio+"'\n" +
-"    GROUP BY TR1.ENTIDAD,TR1.LEGISLATURA,TR1.C1_1_ID),\n" +
-"ConteoTabla AS ( SELECT TR3.ENTIDAD,TR3.LEGISLATURA,TR3.C1_3_ID AS ENVIO,COUNT(*) AS NUMERO_LEGISLADORES_ACTIVO\n" +
-"    FROM TR_PLE_MEDS1_3 TR3\n" +
-"    WHERE TR3.P1_3_10 = '1'\n" +
-"    and ( TR3.ENTIDAD='"+ID_entidad+"' and TR3.LEGISLATURA="+Legislatura+" and TR3.C1_3_ID='"+Envio+"')\n" +
-"    GROUP BY TR3.ENTIDAD, TR3.LEGISLATURA, TR3.C1_3_ID)\n" +
-"SELECT\n" +
-"    COALESCE(S.ENTIDAD, C.ENTIDAD) AS ENTIDAD,\n" +
-"    COALESCE(S.LEGISLATURA, C.LEGISLATURA) AS LEGISLATURA,\n" +
-"    COALESCE(S.ENVIO, C.ENVIO) AS ENVIO,S.GENERAL_SUMA,C.NUMERO_LEGISLADORES_ACTIVO\n" +
-"FROM SumaTabla S\n" +
-"FULL OUTER JOIN ConteoTabla C ON S.ENTIDAD = C.ENTIDAD AND S.LEGISLATURA = C.LEGISLATURA AND S.ENVIO = C.ENVIO\n" +
-"WHERE S.GENERAL_SUMA IS NULL OR C.NUMERO_LEGISLADORES_ACTIVO IS NULL OR S.GENERAL_SUMA <> C.NUMERO_LEGISLADORES_ACTIVO\n" +
-"\n" +
-"ORDER BY ENTIDAD,LEGISLATURA,ENVIO";
-      System.out.println(sql);
-      resul=conexion.consultar(sql);
-      try {
-          while (resul.next()) {
-              Array.add(new String[]{
-                  resul.getString("ID_ENTIDAD"),
-                  resul.getString("GENERAL_SUMA"),
-                        resul.getString("NUMERO_LEGISLADORES_ACTIVO")
-                });
-          }
-      conexion.close();
-     } catch (SQLException ex) {
-            Logger.getLogger(QComisiones_Legislativas.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    return Array;
- }
+
 
 //La Persona legisladora propietaria y el suplente se encuentran ambos con estatus activo  <estatus_persona_legisladora(K) k = Activo>.
 public ArrayList suplente_propietario_activos(String ID_entidad,String Legislatura,String Envio){

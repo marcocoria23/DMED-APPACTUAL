@@ -136,21 +136,27 @@ public class QIniciativas {
         conexion.Conectar();
         Array = new ArrayList();
         if (!envio_anterior.equals(envio)) {
-        sql = "select * from(  \n"
-                + "select count(ID_ACTUAL) as conteo, ID_ACTUAL, ESTATUS_ACTUAL, ID_ENTIDAD1 from( \n"
-                + "select ID_ENTIDAD AS ID_ENTIDAD1, ENTIDAD AS ENTIDAD1, C1_5_ID AS C1_5_ID1, p1_5_1 AS ID_ACTUAL, p1_5_8 AS ESTATUS_ACTUAL\n"
-                + "from TR_PLE_MEDS1_5 WHERE ID_ENTIDAD='" + ID_entidad + "' AND C1_5_ID='" + envio + "'--parametro actual\n"
-                + "UNION ALL\n"
-                + " select ID_ENTIDAD AS ID_ENTIDAD2, ENTIDAD AS ENTIDAD2, C1_5_ID AS C1_5_ID2, p1_5_1 AS ID_ANTERIOR, p1_5_8 AS ESTATUS_ANTERIOR\n"
-                + "from TR_PLE_MEDS1_5 WHERE ID_ENTIDAD='" + ID_entidad + "' AND C1_5_ID='" + envio_anterior + "') --parametro anterior\n"
-                + "group by ID_ENTIDAD1, ENTIDAD1, ID_ACTUAL, ESTATUS_ACTUAL) where conteo>1 ";
+        sql = "select * from(  \n" +
+"select count(ID_ACTUAL) as conteo, ID_ACTUAL,presenta_periodo, ESTATUS_ACTUAL, ID_ENTIDAD from( \n" +
+"select ID_ENTIDAD AS ID_ENTIDAD, C1_5_ID AS C1_5_ID1, p1_5_1 AS ID_ACTUAL, PRESENTO_INICIATIVA_PERIODO.descripcion as presenta_periodo,TC_ESTATUS.descripcion AS ESTATUS_ACTUAL\n" +
+"FROM TR_PLE_MEDS1_5 TR\n" +
+"INNER JOIN TC_PREG_SALTO PRESENTO_INICIATIVA_PERIODO ON TR.P1_5_3 = PRESENTO_INICIATIVA_PERIODO.id\n" +
+"FULL JOIN TC_ESTATUS_INICIATIVA TC_ESTATUS ON TR.P1_5_8 = TC_ESTATUS.id\n" +
+"WHERE ID_ENTIDAD=" + ID_entidad + " AND C1_5_ID='" + envio + "'--parametro actual\n" +
+"UNION ALL\n" +
+"select ID_ENTIDAD AS ID_ENTIDAD, C1_5_ID AS C1_5_ID1, p1_5_1 AS ID_ACTUAL, PRESENTO_INICIATIVA_PERIODO.descripcion as presenta_periodo,TC_ESTATUS.descripcion AS ESTATUS_ACTUAL\n" +
+"FROM TR_PLE_MEDS1_5 TR\n" +
+"INNER JOIN TC_PREG_SALTO PRESENTO_INICIATIVA_PERIODO ON TR.P1_5_3 = PRESENTO_INICIATIVA_PERIODO.id\n" +
+"FULL JOIN TC_ESTATUS_INICIATIVA TC_ESTATUS ON TR.P1_5_8 = TC_ESTATUS.id\n" +
+"WHERE ID_ENTIDAD=" + ID_entidad + " AND C1_5_ID='" + envio_anterior + "') --parametro anterior\n" +
+"group by ID_ENTIDAD, ID_ACTUAL,presenta_periodo, ESTATUS_ACTUAL) where conteo>1 ";
         System.out.println(sql);
         resul = conexion.consultar(sql);
         try {
             while (resul.next()) {
                 Array.add(new String[]{
-                    resul.getString("ID_ACTUAL"),
-                    resul.getString("ID_ENTIDAD1")
+                    resul.getString("ID_ENTIDAD"),
+                    resul.getString("ID_ACTUAL")
                 });
             } 
             conexion.close();
@@ -161,35 +167,7 @@ public class QIniciativas {
         return Array;
     }
 
-    public ArrayList Iniciativas_Duplicada_presentaPeriodo(String ID_entidad, String Legislatura, String envio, String envio_anterior) {
-        conexion.Conectar();
-        Array = new ArrayList();
-        sql = "SELECT TR.P1_5_1 AS ID_INICIATIVA,    PRESENTO_INICIATIVA_PERIODO.DESCRIPCION AS COND_PRESENTACION_INICIATIVA_PERIODO,\n" +
-"TC_ESTATUS.DESCRIPCION AS estatus, TR.ID_ENTIDAD, TR.C1_5_ID AS ENVIO \n" +
-"FROM TR_PLE_MEDS1_5 TR\n" +
-"INNER JOIN TC_PREG_SALTO PRESENTO_INICIATIVA_PERIODO ON TR.P1_5_3 = PRESENTO_INICIATIVA_PERIODO.id\n" +
-"FULL JOIN TC_ESTATUS_INICIATIVA TC_ESTATUS ON TR.P1_5_8 = TC_ESTATUS.id\n" +
-"WHERE (TR.P1_5_3 = 1 AND (TR.P1_5_1, TR.P1_5_8) IN ( SELECT P1_5_1, P1_5_8 FROM TR_PLE_MEDS1_5 WHERE P1_5_3 = 1 GROUP BY P1_5_1, P1_5_8 HAVING COUNT(*) > 1  ))\n" +
-"AND TR.ID_ENTIDAD='" + ID_entidad + "'\n" +
-"ORDER BY ID_INICIATIVA, TR.P1_5_8 ";
-        System.out.println(sql);
-        resul = conexion.consultar(sql);
-        try {
-            while (resul.next()) {
-                Array.add(new String[]{
-                    //resul.getString("CONTEO"),
-                    resul.getString("ID_INICIATIVA"),
-                   // resul.getString("COND_PRESENTACION_INICIATIVA_PERIODO"),
-                    resul.getString("ID_ENTIDAD")
-                });
-            }
-            conexion.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(QIniciativas.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        return Array;
-    }
+    
 
 //El campo P1_5_3-C(cond_presentacion_iniciativa_periodo) no se debe de capturar debido a que en la columna cond_presentacion_iniciativa_legislatura_actual (P1_5_2) se selecciono la opcion "NO" '2'
     public ArrayList cond_presentacion_iniciativa_periodo(String ID_entidad, String Legislatura, String Envio) {
@@ -257,6 +235,30 @@ public class QIniciativas {
         return Array;
     }
 
+    
+    //Las iniciativas no tienen en ningún envío la condición de haber sido presentadas en el periodo reportado (C) cond_presentacion_iniciativa_periodo='Sí'
+    public ArrayList cond_presentacion_iniciativa_periodo_si(String ID_entidad, String Legislatura, String Envio) {
+        conexion.Conectar();
+        Array = new ArrayList();
+        sql = "SELECT DISTINCT ID_ENTIDAD, P1_5_1, legislatura FROM TR_PLE_MEDS1_5_\n" +
+"WHERE (P1_5_1 NOT IN (SELECT P1_5_1 FROM TR_PLE_MEDS1_5_ WHERE ID_ENTIDAD= "+ ID_entidad + " AND P1_5_3=1) )\n" +
+"and  ID_ENTIDAD=" + ID_entidad+ " AND Legislatura=" + Legislatura ;
+        System.out.println(sql);
+        resul = conexion.consultar(sql);
+        try {
+            while (resul.next()) {
+                Array.add(new String[]{
+                    resul.getString("ID_ENTIDAD"),
+                    resul.getString("P1_5_1")
+                });
+            }
+            conexion.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(QComisiones_Legislativas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return Array;
+    }
+    
 //No se debe de capturar el campo P1_5_8-H(estatus_iniciativa) debido a que se capturo "No" en la columna cond_actualizacion_estatus_iniciativa_periodo (P1_5_6).
     public ArrayList NDCestatus_iniciativa(String ID_entidad, String Legislatura, String Envio) {
         conexion.Conectar();

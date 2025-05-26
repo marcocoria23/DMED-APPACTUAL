@@ -258,26 +258,7 @@ public ArrayList NCAPcomision_legislativa_2(String ID_entidad,String Legislatura
 
 
 
-//Se debe capturar informacion en P1_9_10-J(ID_comision_legislativa_2_comparecencia) y P1_9_11-K(nombre_comision_legislativa_2_comparecencia) ya que en P1_9_8-H(ID_comision_legislativa_1_comparecencia) y P1_9_9-I(nombre_comision_legislativa_1_comparecencia) se selecciono alguna de las categorias
-public ArrayList CAPcomision_legislativa_2(String ID_entidad,String Legislatura,String Envio){
-     conexion.Conectar();
-      Array = new ArrayList();
-      sql="select ID_ENTIDAD, ENTIDAD, C1_9_ID, P1_9_1, P1_9_8, P1_9_9, P1_9_10 from tr_ple_meds1_9  where (P1_9_8 is not null and P1_9_9 is not null)  and P1_9_10 is null AND ( ID_ENTIDAD="+ID_entidad+" AND Legislatura="+Legislatura+" AND C1_9_ID='"+Envio+"')";
-      System.out.println(sql);
-      resul=conexion.consultar(sql);
-      try {
-          while (resul.next()) {
-              Array.add(new String[]{
-                  resul.getString("ID_ENTIDAD"),
-                  resul.getString("P1_9_1")
-                });
-          }
-      conexion.close();
-     } catch (SQLException ex) {
-            Logger.getLogger(QComparecencias.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    return Array;
- }
+
 
 
 //No debe repetir el ID_comision_legislativa_comparecencia
@@ -285,28 +266,6 @@ public ArrayList NRcomision_legislativa_2(String ID_entidad,String Legislatura,S
      conexion.Conectar();
       Array = new ArrayList();
       sql="select ID_ENTIDAD, ENTIDAD, C1_9_ID, P1_9_1, P1_9_8, P1_9_10, P1_9_12 from tr_ple_meds1_9  where P1_9_8 = P1_9_10 OR P1_9_8 = P1_9_12 OR P1_9_10 = P1_9_12 AND ( ID_ENTIDAD="+ID_entidad+" AND Legislatura="+Legislatura+" AND C1_9_ID='"+Envio+"')";
-      System.out.println(sql);
-      resul=conexion.consultar(sql);
-      try {
-          while (resul.next()) {
-              Array.add(new String[]{
-                  resul.getString("ID_ENTIDAD"),
-                  resul.getString("P1_9_1")
-                });
-          }
-      conexion.close();
-     } catch (SQLException ex) {
-            Logger.getLogger(QComparecencias.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    return Array;
- }
-
-
-//Se debe capturar informacion P1_9_10-J(ID_comision_legislativa_2_comparecencia) debido a que P1_9_11-K(nombre_comision_legislativa_2_comparecencia) se selecciono una categoria
-public ArrayList Categoria(String ID_entidad,String Legislatura,String Envio){
-     conexion.Conectar();
-      Array = new ArrayList();
-      sql="select ID_ENTIDAD, ENTIDAD, C1_9_ID, P1_9_1, P1_9_10, P1_9_11 from tr_ple_meds1_9 where P1_9_11 is not null and P1_9_10 is null AND ( ID_ENTIDAD="+ID_entidad+" AND Legislatura="+Legislatura+" AND C1_9_ID='"+Envio+"')";
       System.out.println(sql);
       resul=conexion.consultar(sql);
       try {
@@ -369,26 +328,7 @@ public ArrayList NCAPcomision_legislativa_3(String ID_entidad,String Legislatura
  }
 
 
-//Se debe seleccionar P1_9_12-L(ID_comision_legislativa_3_comparecencia) y  P1_9_13-M(nombre_comision_legislativa_3_comparecencia) debido a  P1_9_11-K(nombre_comision_legislativa_2_comparecencia) se selecciono una categoria
-public ArrayList CAPcomision_legislativa_3(String ID_entidad,String Legislatura,String Envio){
-     conexion.Conectar();
-      Array = new ArrayList();
-      sql="select ID_ENTIDAD, ENTIDAD, C1_9_ID, P1_9_1, P1_9_10, P1_9_11, P1_9_12, P1_9_13 from tr_ple_meds1_9 where (P1_9_10 is not null and P1_9_11 is not null) and P1_9_12 is null AND ( ID_ENTIDAD="+ID_entidad+" AND Legislatura="+Legislatura+" AND C1_9_ID='"+Envio+"')";
-      System.out.println(sql);
-      resul=conexion.consultar(sql);
-      try {
-          while (resul.next()) {
-              Array.add(new String[]{
-                  resul.getString("ID_ENTIDAD"),
-                  resul.getString("P1_9_1")
-                });
-          }
-      conexion.close();
-     } catch (SQLException ex) {
-            Logger.getLogger(QComparecencias.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    return Array;
- }
+
 
 //No se debe repetir el ID_comision_legislativa_comparecencia
 public ArrayList REPcomision_legislativa_3(String ID_entidad,String Legislatura,String Envio){
@@ -412,27 +352,6 @@ public ArrayList REPcomision_legislativa_3(String ID_entidad,String Legislatura,
  }
 
 
-
-//Se debe capturar informacion P1_9_12-L(ID_comision_legislativa_3_comparecencia) debido a que P1_9_13-M(nombre_comision_legislativa_3_comparecencia) se selecciono una categoria   
-public ArrayList CAPREPcomision_legislativa_3(String ID_entidad,String Legislatura,String Envio){
-     conexion.Conectar();
-      Array = new ArrayList();
-      sql="select ID_ENTIDAD, ENTIDAD, C1_9_ID, P1_9_1, P1_9_12, P1_9_13 from tr_ple_meds1_9 where P1_9_13 is not null and P1_9_12 is null AND ( ID_ENTIDAD="+ID_entidad+" AND Legislatura="+Legislatura+" AND C1_9_ID='"+Envio+"')";
-      System.out.println(sql);
-      resul=conexion.consultar(sql);
-      try {
-          while (resul.next()) {
-              Array.add(new String[]{
-                  resul.getString("ID_ENTIDAD"),
-                  resul.getString("P1_9_1")
-                });
-          }
-      conexion.close();
-     } catch (SQLException ex) {
-            Logger.getLogger(QComparecencias.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    return Array;
- }
 
 
 
