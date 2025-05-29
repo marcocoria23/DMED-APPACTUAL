@@ -41,8 +41,34 @@ public class QIniciativas {
         try {
             while (resul.next()) {
                 Array.add(new String[]{
-                    resul.getString("ID_ACTUAL"),
-                    resul.getString("ENTIDAD")
+                    resul.getString("ENTIDAD"),
+                    resul.getString("ID_ACTUAL")
+                });
+            }
+            conexion.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(QIniciativas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return Array;
+    }
+    //La estructura del ID no coincide con el numero_legislatura_presentacion_iniciativa (D), ya que se indica en cond_presentacion_iniciativa_legislatura_actual(B) que se presentó la iniciativa en una legislatura anterior
+
+     public ArrayList Estructura_ID_legislatura_anterior(String ID_entidad, String Legislatura, String envio) {
+        conexion.Conectar();
+        Array = new ArrayList();
+        sql = "SELECT C1_5_ID, legislatura, ENTIDAD, TO_ROMAN(p1_5_4) AS LEGIS_presentacion, P1_5_1 AS ID_actual,\n" +
+"    'IN_' || TO_ROMAN(p1_5_4) || '_' || ENTIDAD || '_' || P1_5_5 AS ID_ESTRUCTURA_Correcta, p1_5_2 AS presento_en_legislatura_actual\n" +
+"FROM TR_PLE_MEDS1_5 \n" +
+"WHERE  (p1_5_2 = 2 AND ('IN_' || TO_ROMAN(p1_5_4) || '_' || ENTIDAD || '_' || P1_5_5) <> P1_5_1) "+
+                " AND (ENTIDAD=" + ID_entidad + " AND Legislatura=" + Legislatura + " AND C1_5_ID='" + envio + "')";
+        System.out.println(sql);
+        resul = conexion.consultar(sql);
+        try {
+            while (resul.next()) {
+                Array.add(new String[]{
+                    resul.getString("ENTIDAD"),
+                    resul.getString("ID_ACTUAL")
                 });
             }
             conexion.close();
@@ -86,8 +112,8 @@ public class QIniciativas {
         try {
             while (resul.next()) {
                 Array.add(new String[]{
-                    resul.getString("ID_ACTUAL"),
-                    resul.getString("ID_ENTIDAD")
+                    resul.getString("ID_ENTIDAD"),
+                    resul.getString("ID_ACTUAL")
                 });
             }
             conexion.close();
@@ -218,6 +244,8 @@ public class QIniciativas {
         return Array;
     }
 
+
+    
 //No Se deben de capturar los campos P1_5_4-D(numero_legislatura_presentacion_iniciativa), P1_5_6-F(cond_actualizacion_estatus_iniciativa_periodo),  P1_5_7-G(cond_modificacion_informacion_ingreso_periodo) debido a que se selecciono una opcion diferente a "No" en la columna cond_presentacion_iniciativa_legislatura_actual (P1_5_2).
     public ArrayList NDCnumero_legislatura_presentacion_iniciativa(String ID_entidad, String Legislatura, String Envio) {
         conexion.Conectar();
@@ -482,7 +510,34 @@ public class QIniciativas {
         }
         return Array;
     }
-
+//El nombre de la iniciativa (L) no coincide con el nombre reportado en envíos anteriores
+    public ArrayList Nombre_iniciativa(String ID_entidad, String Legislatura, String Envio) {
+        conexion.Conectar();
+        Array = new ArrayList();
+        sql = "SELECT t1.p1_5_1 AS ID_Legislatura, MIN(t1.C1_5_ID) AS C1_5_ID, MIN(t1.legislatura) AS legislatura,\n" +
+        " MIN(t1.ENTIDAD) AS ENTIDAD, MIN(TRIM(UPPER(t1.p1_5_12))) AS nombre_INICIATIVA, COUNT(*) AS total_envios\n" +
+        "  FROM TR_PLE_MEDS1_5 t1\n" +
+        "  WHERE EXISTS ( SELECT 1 FROM TR_PLE_MEDS1_5 t2 WHERE t1.p1_5_1 = t2.p1_5_1 AND NLSSORT(TRIM(UPPER(t1.p1_5_12)), 'NLS_SORT=BINARY_AI') <> NLSSORT(TRIM(UPPER(t2.p1_5_12)), 'NLS_SORT=BINARY_AI'))\n" +
+        "    AND t1.ENTIDAD =" + ID_entidad + " AND t1.p1_5_1 IN ( SELECT DISTINCT p1_5_1 FROM TR_PLE_MEDS1_5 WHERE C1_5_ID ='" + Envio + "' AND ENTIDAD =" + ID_entidad + " )\n" +
+        "    GROUP BY t1.p1_5_1" ;
+      
+                
+        System.out.println(sql);
+        resul = conexion.consultar(sql);
+        try {
+            while (resul.next()) {
+                Array.add(new String[]{
+                    resul.getString("ENTIDAD"),
+                    resul.getString("ID_Legislatura")
+                });
+            }
+            conexion.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(QComisiones_Legislativas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return Array;
+    }
+    
 //no se pueden capturar los campos P1_5_11-K(fecha_ingreso_iniciativa_oficialia_partes),P1_5_12-L(nombre_iniciativa),P1_5_13-M(fecha_sesion_presentacion_iniciativa),P1_5_14-N(tipo_iniciativa),P1_5_16-P(tipo_promovente_iniciativa),P1_5_73-BU(cond_adhesion_iniciativa)  debido a que en la columna cond_modificacion_informacion_ingreso_periodo (P1_5_7) se capturo NO '2'
     public ArrayList fecha_ingreso_iniciativa_oficialia_partes(String ID_entidad, String Legislatura, String Envio) {
         conexion.Conectar();
