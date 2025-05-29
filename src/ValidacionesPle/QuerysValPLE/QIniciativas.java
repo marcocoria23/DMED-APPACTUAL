@@ -26,10 +26,15 @@ public class QIniciativas {
     public ArrayList Estructura_ID(String ID_entidad, String Legislatura, String envio) {
         conexion.Conectar();
         Array = new ArrayList();
-        sql = "WITH ESTRUCTURA_ID AS ( SELECT C1_5_ID, TO_ROMAN(legislatura) AS LEGIS_ROMAN,legislatura, ENTIDAD, P1_5_1,\n" +
-                " 'IN_' || TO_ROMAN(legislatura) || '_' || ENTIDAD || '_' || P1_5_5 AS ID_ESTRUCTURA_Correcta,P1_5_5 AS TURNO_LEGISLATURA  FROM TR_PLE_MEDS1_5)\n" +
-                "SELECT  C1_5_ID AS ENVIO,legislatura, LEGIS_ROMAN,ENTIDAD,TURNO_LEGISLATURA, ID_ESTRUCTURA_Correcta, P1_5_1 AS ID_actual FROM ESTRUCTURA_ID\n" +
-                "WHERE P1_5_1 <> ID_ESTRUCTURA_Correcta"+
+        sql = "WITH ESTRUCTURA_ID AS (\n" +
+" SELECT tr.C1_5_ID, TO_ROMAN(tr.legislatura) AS LEGIS_ROMAN, tr.legislatura,\n" +
+" tr.ENTIDAD, tr.P1_5_1, tr_1.estatus AS estatus,\n" +
+" 'IN_' || TO_ROMAN(tr.legislatura) || '_' || tr.ENTIDAD || '_' || tr.P1_5_5 AS ID_ESTRUCTURA_Correcta,\n" +
+" tr.P1_5_5 AS TURNO_LEGISLATURA\n" +
+" FROM TR_PLE_MEDS1_5 tr FULL JOIN TR_PLE_MEDS1_1_ tr_1 ON tr_1.ID_ENTIDAD = tr.id_entidad AND tr_1.LEGISLATURA = tr.LEGISLATURA AND tr_1.C1_1_ID = tr.C1_5_ID)\n" +
+"SELECT C1_5_ID AS ENVIO, legislatura, LEGIS_ROMAN, ENTIDAD, TURNO_LEGISLATURA, ID_ESTRUCTURA_Correcta, P1_5_1 AS ID_actual, estatus\n" +
+"FROM ESTRUCTURA_ID\n" +
+"WHERE ( SUBSTR(P1_5_1, INSTR(P1_5_1, '_', 1, 2) + 1)  <> SUBSTR(ID_ESTRUCTURA_Correcta, INSTR(ID_ESTRUCTURA_Correcta, '_', 1, 2) + 1)     )"+
                 " AND (ENTIDAD=" + ID_entidad + " AND Legislatura=" + Legislatura + " AND C1_5_ID='" + envio + "')";;
         System.out.println(sql);
         resul = conexion.consultar(sql);
@@ -2106,6 +2111,38 @@ public class QIniciativas {
                 Array.add(new String[]{
                     resul.getString("ID_ENTIDAD"),
                     resul.getString("P1_5_1")
+                });
+            }
+            conexion.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(QComisiones_Legislativas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return Array;
+    }
+    
+    //ID_Iniciativa (A) no tiene en su estructura el número romano correspondiente a la legislatura reportada , en el campo cond_presentacion_iniciativa_legislatura_actual (B) se indica que Sí se presentó la iniciativa en la legislatura acutal.
+
+    public ArrayList ID_LEGISLATURA(String ID_entidad, String Legislatura, String Envio) {
+        conexion.Conectar();
+        Array = new ArrayList();
+        sql = "WITH ESTRUCTURA_ID AS (\n" +
+            " SELECT tr.C1_5_ID, TO_ROMAN(tr.legislatura) AS LEGIS_ROMAN, tr.legislatura, tr.ENTIDAD, tr.P1_5_1, tr_1.estatus AS estatus,\n" +
+            "        'IN_' || TO_ROMAN(tr.legislatura) || '_' || tr.ENTIDAD || '_' || tr.P1_5_5 AS ID_ESTRUCTURA_Correcta,\n" +
+            "        tr.p1_5_2 AS presento_en_legislatura_actual, tr.P1_5_5 AS TURNO_LEGISLATURA\n" +
+            "    FROM TR_PLE_MEDS1_5 tr\n" +
+               "    FULL JOIN TR_PLE_MEDS1_1_ tr_1 ON tr_1.ID_ENTIDAD = tr.id_entidad AND tr_1.LEGISLATURA = tr.LEGISLATURA AND tr_1.C1_1_ID = tr.C1_5_ID)\n" +
+               "SELECT C1_5_ID AS ENVIO, legislatura, LEGIS_ROMAN, ENTIDAD, TURNO_LEGISLATURA,\n" +
+            "    ID_ESTRUCTURA_Correcta, P1_5_1 AS ID_actual, estatus, presento_en_legislatura_actual\n" +
+            "FROM ESTRUCTURA_ID WHERE  (ENTIDAD=" + ID_entidad + " AND LEGISLATURA=" + Legislatura + "  AND C1_5_ID='" + Envio + "')AND\n" +
+            "P1_5_1 <> ID_ESTRUCTURA_Correcta  AND presento_en_legislatura_actual = 1\n" +
+            "    AND SUBSTR(P1_5_1, INSTR(P1_5_1, '_') + 1, INSTR(P1_5_1, '_', 1, 2) - INSTR(P1_5_1, '_') - 1) <> LEGIS_ROMAN";
+        System.out.println(sql);
+        resul = conexion.consultar(sql);
+        try {
+            while (resul.next()) {
+                Array.add(new String[]{
+                    resul.getString("ENTIDAD"),
+                    resul.getString("ID_ACTUAL")
                 });
             }
             conexion.close();

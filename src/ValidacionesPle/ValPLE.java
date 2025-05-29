@@ -22787,7 +22787,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_83(entidad, legislatura, envio);
             coni = 1;
         }
 
-        ArrayResult = InS.NDCtipo_organo_constitucional_autonomo(entidad, legislatura, envio);
+        ArrayResult = InS.ID_LEGISLATURA(entidad, legislatura, envio);
         if (ArrayResult.size() > 0) {
             XSSFRow filaEE1 = hojaIniciativas.createRow(conEnc);//FILA
             XSSFCell celdaE1 = filaEE1.createCell(0);//COLUMNA
@@ -22835,7 +22835,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_83(entidad, legislatura, envio);
                 XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                 celdaD2.setCellStyle(estiloCeldabordes0);
                 celdaD2.setCellType(CellType.STRING);
-                String txtD2 = "No debe seleccionar una categoria en P1_5_69-BQ(tipo_organo_constitucional_autonomo) debido a P1_5_16 (tipo_promovente_iniciativa) se selecciono una categoria diferente a \"Órgano constitucional autónomo\" (10).";
+                String txtD2 = "ID_Iniciativa (A) no tiene en su estructura el número romano correspondiente a la legislatura reportada , en el campo cond_presentacion_iniciativa_legislatura_actual (B) se indica que Sí se presentó la iniciativa en la legislatura acutal.";
                 XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                 celdaD2.setCellValue(textoD2);
 
@@ -22939,6 +22939,83 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_83(entidad, legislatura, envio);
             coni = 1;
         }
 
+        ArrayResult = InS.DCotro_tipo_organo_constitucional_autonomo_especifique(entidad, legislatura, envio);
+        if (ArrayResult.size() > 0) {
+            XSSFRow filaEE1 = hojaIniciativas.createRow(conEnc);//FILA
+            XSSFCell celdaE1 = filaEE1.createCell(0);//COLUMNA
+            celdaE1.setCellStyle(estiloCelda1);
+            celdaE1.setCellType(CellType.STRING);
+            String txtE1 = "ID_iniciativa";
+            XSSFRichTextString textoE1 = new XSSFRichTextString(txtE1);
+            celdaE1.setCellValue(textoE1);
+
+            XSSFCell celdaE6 = filaEE1.createCell(1);//COLUMNA
+            celdaE6.setCellStyle(estiloCelda1);
+            celdaE6.setCellType(CellType.STRING);
+            String txtE6 = "OBSERVACIONES";
+            XSSFRichTextString textoE6 = new XSSFRichTextString(txtE6);
+            celdaE6.setCellValue(textoE6);
+
+            XSSFCell celdaE7 = filaEE1.createCell(2);//COLUMNA
+            celdaE7.setCellStyle(estiloCelda1);
+            celdaE7.setCellType(CellType.STRING);
+            String txtE7 = "ID_ENTIDAD";
+            XSSFRichTextString textoE7 = new XSSFRichTextString(txtE7);
+            celdaE7.setCellValue(textoE7);
+
+            XSSFCell celdaE8 = filaEE1.createCell(3);//COLUMNA
+            celdaE8.setCellStyle(estiloCelda1);
+            celdaE8.setCellType(CellType.STRING);
+            String txtE8 = "JUSTIFICACION";
+            XSSFRichTextString textoE8 = new XSSFRichTextString(txtE8);
+            celdaE8.setCellValue(textoE8);
+
+            for (int i = 0; i < ArrayResult.size(); i++) {
+                XSSFRow filaEE2 = hojaIniciativas.createRow(conDat + i);
+
+                XSSFCell celdaD1 = filaEE2.createCell(0);//COLUMNA
+                celdaD1.setCellStyle(estiloCeldabordes0);
+                celdaD1.setCellType(CellType.STRING);
+                //String txtD1 = Arrays.toString(ArrayResult.get(i));
+                String txtD1 = Arrays.toString(ArrayResult.get(i));
+                txtD1 = txtD1.replace("[", "").replace("]", "").replace(" 00:00:00.0", "");
+                String[] parts = txtD1.split(",");
+                String parts1 = parts[1].trim();
+                XSSFRichTextString textoD1 = new XSSFRichTextString(parts1);
+                celdaD1.setCellValue(textoD1);
+
+                XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
+                celdaD2.setCellStyle(estiloCeldabordes0);
+                celdaD2.setCellType(CellType.STRING);
+                String txtD2 = "Debe especificar el dato en P1_5_70-BR(otro_tipo_organo_constitucional_autonomo_especifique) debido a P1_5_69 (tipo_organo_constitucional_autonomo) se selecciono la categoria \"Otro órgano constitucional autónomo (específique)\"  (7).";
+                XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
+                celdaD2.setCellValue(textoD2);
+
+                XSSFCell celdaD3 = filaEE2.createCell(2);//COLUMNA
+                celdaD3.setCellStyle(estiloCeldabordes0);
+                celdaD3.setCellType(CellType.STRING);
+                String txtD3 = Arrays.toString(ArrayResult.get(i));
+                txtD3 = txtD3.replace("[", "").replace("]", "").replace(" 00:00:00.0", "");
+                String[] parts3 = txtD3.split(",");
+                String parts4 = parts3[0].trim();
+                XSSFRichTextString textoD3 = new XSSFRichTextString(parts4);
+                celdaD3.setCellValue(textoD3);
+
+                XSSFCell celdaD4 = filaEE2.createCell(3);//COLUMNA
+                celdaD4.setCellStyle(estiloCeldabordes0);
+                celdaD4.setCellType(CellType.STRING);
+                String txtD4 = "";
+                XSSFRichTextString textoD4 = new XSSFRichTextString(txtD4);
+                celdaD4.setCellValue(textoD4);
+
+                coni++;
+            }
+            conEnc = conEnc + coni;
+            conDat = conDat + coni;
+            coni = 1;
+        }
+
+        
         ArrayResult = InS.NDCotro_tipo_organo_constitucional_autonomo_especifique(entidad, legislatura, envio);
         if (ArrayResult.size() > 0) {
             XSSFRow filaEE1 = hojaIniciativas.createRow(conEnc);//FILA
