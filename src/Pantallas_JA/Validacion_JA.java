@@ -4,7 +4,12 @@
  */
 package Pantallas_JA;
 
+import Validaciones_JA.Exporta_validaciones;
 import java.awt.Color;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -111,6 +116,20 @@ public class Validacion_JA extends javax.swing.JFrame {
 
     private void BValidarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BValidarActionPerformed
         // TODO add your handling code here:
+          new Thread(() -> {
+                Exporta_validaciones Val = new Exporta_validaciones();
+                try {
+                  
+                    Val.ValidacionJA();
+                  
+                } catch (IOException ex) {
+                    Logger.getLogger(Validacion_JA.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (SQLException ex) {
+                  Logger.getLogger(Validacion_JA.class.getName()).log(Level.SEVERE, null, ex);
+              }
+        }).start();
+
+        
     }//GEN-LAST:event_BValidarActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
