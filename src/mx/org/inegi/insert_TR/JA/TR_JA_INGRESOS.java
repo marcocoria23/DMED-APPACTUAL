@@ -33,7 +33,8 @@ import static Pantallas_JA.IntegraJA_TR.directorio;
  * @author ANDREA.HERNANDEZL
  */
 public class TR_JA_INGRESOS {
-    public static int CFilas2 =0;
+
+    public static int CFilas2 = 0;
 
     public void TR_JA_INGRESOS() throws Exception {
 
@@ -45,7 +46,7 @@ public class TR_JA_INGRESOS {
         ArrayDescriptor descriptor;
         int CFilas = 0;
         Conver_Utf8 conUTF8 = new Conver_Utf8();
-        String NuevaRuta = directorio+"Ingresos.csv";
+        String NuevaRuta = directorio + "Ingresos.csv";
         conUTF8.Convertir_utf8_EBaseDatos(NuevaRuta);
         NuevaRuta = NuevaRuta.replace(".csv", "UTF8.csv");
         System.out.println("Leyendo: " + NuevaRuta);
@@ -58,8 +59,8 @@ public class TR_JA_INGRESOS {
                     int numeroColumnas = 0;
                     CSVRecord firstRecord = csvParser.iterator().next();
                     numeroColumnas = firstRecord.size();
-                    System.out.println("Número de columnas: " + numeroColumnas+"---->if (numeroColumnas <= 43) continúa...");
-                    if (numeroColumnas <= 43) { // Cambiar el valor según el número de columnas esperado
+                    System.out.println("Número de columnas: " + numeroColumnas + "---->if (numeroColumnas <= 43) continúa...");
+                    if (numeroColumnas <= 44) { // Cambiar el valor según el número de columnas esperado
                         for (CSVRecord record : csvParser) {
                             if (record.get(0).isEmpty()) {
                                 break; // Ignorar registros vacíos
@@ -77,38 +78,39 @@ public class TR_JA_INGRESOS {
                             c.SetSUBTOTAL_DEMANDAS(record.get(8));
                             c.SetDEMANDAS_ESCRITO(record.get(9));
                             c.SetDEMANDAS_COMPARECENCIA(record.get(10));
-                            c.SetTOTAL_ASUNTOS_ADMIT_MATERIA(record.get(11));
+                            c.SetTOTAL_ASUNTOS_ADMIT_MAT(record.get(11));
                             c.SetSUBTOTAL_ASUNTOS_TERRENOS(record.get(12));
                             c.SetCONTROVER_TERR_NUCLEOS(record.get(13));
                             c.SetCONTROVER_TERR_PROPIETARIOS(record.get(14));
                             c.SetCONTROVER_TERR_SOCIEDAD(record.get(15));
-                            c.SetSUBTOTAL_ASUNTOS_RESTIT(record.get(16));
-                            c.SetRESTIT_ACTOS_AUTORIDAD(record.get(17));
-                            c.SetRESTIT_ACTOS_PARTICULAR(record.get(18));
-                            c.SetRECON_REG_COMUNAL(record.get(19));
-                            c.SetNULIDADES_CONTRA_RESOL(record.get(20));
-                            c.SetCONFLICTOS_TENENCIA(record.get(21));
-                            c.SetSUBTOTAL_ASUNTOS_MA(record.get(22));
-                            c.SetCONTROVER_MA_ENTRE_SI(record.get(23));
-                            c.SetCONTROVER_MA_ORGANOS(record.get(24));
-                            c.SetSUCESION_DERECHOS(record.get(25));
-                            c.SetSUBTOTAL_ASUNTOS_JN(record.get(26));
-                            c.SetJN_PROMOVIDOS(record.get(27));
-                            c.SetJN_CONTRAVIE(record.get(28));
-                            c.SetOMISIONES_PROCUR_PERJUICIO(record.get(29));
-                            c.SetASUNTOS_JV(record.get(30));
-                            c.SetCONTROVERSIAS_APROVECHAMIENTO(record.get(31));
-                            c.SetREVERSION(record.get(32));
-                            c.SetSUBTOTAL_ASUNTOS_EJECUCION(record.get(33));
-                            c.SetEJECUCION_CONVENIOS(record.get(34));
-                            c.SetEJECUCION_LAUDOS(record.get(35));
-                            c.SetRRT(record.get(36));
-                            c.SetPRIVACION(record.get(37));
-                            c.SetINCONFORM(record.get(38));
-                            c.SetASUNTOS_LEGIS(record.get(39));
-                            c.SetOTROS_ASUNTOS(record.get(40));
-                            c.SetTOTAL_DEMANDAS_NO_INTERPUESTAS(record.get(41));
-                            c.SetCOMENTARIOS(record.get(42));
+                            c.SetCONTROVER_TERR_POB_EJIDAL(record.get(16));
+                            c.SetSUBTOTAL_ASUNTOS_RESTIT(record.get(17));
+                            c.SetRESTIT_ACTOS_AUTORIDAD(record.get(18));
+                            c.SetRESTIT_ACTOS_PARTICULAR(record.get(19));
+                            c.SetRECON_REG_COMUNAL(record.get(20));
+                            c.SetNULIDADES_CONTRA_RESOL(record.get(21));
+                            c.SetCONFLICTOS_TENENCIA(record.get(22));
+                            c.SetSUBTOTAL_ASUNTOS_MA(record.get(23));
+                            c.SetCONTROVER_MA_ENTRE_SI(record.get(24));
+                            c.SetCONTROVER_MA_ORGANOS(record.get(25));
+                            c.SetSUCESION_DERECHOS(record.get(26));
+                            c.SetSUBTOTAL_ASUNTOS_JN(record.get(27));
+                            c.SetJN_PROMOVIDOS(record.get(28));
+                            c.SetJN_CONTRAVIE(record.get(29));
+                            c.SetOMISIONES_PROCUR_PERJUICIO(record.get(30));
+                            c.SetASUNTOS_JV(record.get(31));
+                            c.SetCONTROVERSIAS_APROVECHA(record.get(32));
+                            c.SetREVERSION(record.get(33));
+                            c.SetSUBTOTAL_ASUNTOS_EJECUCION(record.get(34));
+                            c.SetEJECUCION_CONVENIOS(record.get(35));
+                            c.SetEJECUCION_LAUDOS(record.get(36));
+                            c.SetRRT_INGRE(record.get(37));
+                            c.SetPRIVACION(record.get(38));
+                            c.SetINCONFORM(record.get(39));
+                            c.SetASUNTOS_LEGIS(record.get(40));
+                            c.SetOTROS_ASUNTOS(record.get(41));
+                            c.SetTOTAL_DEMANDAS_NO_INTER(record.get(42));
+                            c.SetCOMENTARIOS(record.get(43));
                             ad.add(c);
                             CFilas++;
                         }
@@ -129,7 +131,7 @@ public class TR_JA_INGRESOS {
                             st.registerOutParameter(1, OracleTypes.INTEGER);
                             st.setArray(2, array_to_pass);
                             st.execute();
-                            System.out.println("Se ejecutó paquete integrador Ingresos, filas: "+CFilas+" \n");
+                            System.out.println("Se ejecutó paquete integrador Ingresos, filas: " + CFilas + " \n");
                         } else {
                             JOptionPane.showMessageDialog(null, "Pestaña Ingresos sin registros");
                         }

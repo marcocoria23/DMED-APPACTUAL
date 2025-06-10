@@ -17,24 +17,26 @@ import java.sql.SQLOutput;
 public class BeanTR_JA_TRAMITE extends Bean implements SQLData {
 
     private String SQLTypeName;
-    private String NOMBRE_ORGANO_JURI;
+    private String NOMBRE_ORGANO_JURIS;
     private String CLAVE_ORGANO;
     private String PERIODO;
     private String TOTAL_ASUNTOS_PEND;
     private String ASUNTOS_PEND_PREV;
     private String ASUNTOS_PEND_TERM;
     private String ASUNTOS_PEND_ADMI;
-    private String TOTAL_ASUNTOS_INSTRUCCION;
+    private String TOTAL_ASUNTOS_INSTRUC;
     private String ASUNTOS_JA;
     private String ASUNTOS_JV;
     private String TOTAL_ASUNTOS_MATERIA;
     private String SUBTOTAL_ASUNTOS_CONTROV;
     private String CONTROV_NUCLEOS_MENOS20;
     private String CONTROV_PROPIE_MENOS20;
-    private String CONTROV_SOCIEDADES_MENOS20;
+    private String CONTROV_SOC_MENOS20;
+    private String CONTROV_POB_EJIDAL_MENOS20;
     private String CONTROV_NUCLEOS_MAS20;
     private String CONTROV_PROPIE_MAS20;
-    private String CONTROV_SOCIEDADES_MAS20;
+    private String CONTROV_SOC_MAS20;
+    private String CONTROV_POB_EJIDAL_MAS20;
     private String SUBTOTAL_ASUNTOS_RESTIT;
     private String RESTIT_AUTORID_MENOS20;
     private String RESTIT_PARTIC_MENOS20;
@@ -49,7 +51,7 @@ public class BeanTR_JA_TRAMITE extends Bean implements SQLData {
     private String SUBTOTAL_TENENCIA;
     private String TENENCIA_MENOS20;
     private String TENENCIA_MAS20;
-    private String SUBTOTAL_ASUNTOS_CONTROV_MA;
+    private String SUBTOTAL_ASUNTOS_CONT_MA;
     private String CONTROV_MA_EJID_MENOS20;
     private String CONTROV_MA_NUCLEO_MENOS20;
     private String CONTROV_MA_EJID_MASS20;
@@ -75,7 +77,7 @@ public class BeanTR_JA_TRAMITE extends Bean implements SQLData {
     private String REVERSION_MENOS20;
     private String REVERSION_MAS20;
     private String SUBTOTAL_EJECUCION;
-    private String EJECUCION_CONVENIOS_MENOS20;
+    private String EJECUCION_CONV_MENOS20;
     private String EJECUCION_LAUDOS_MENOS20;
     private String EJECUCION_CONVENIOS_MAS20;
     private String EJECUCION_LAUDOS_MAS20;
@@ -95,14 +97,17 @@ public class BeanTR_JA_TRAMITE extends Bean implements SQLData {
     private String OTROS_ASUNTOS_MENOS20;
     private String OTROS_ASUNTOS_MAS20;
     private String TOTAL_ASUNTOS;
+    private String JUICIO_AGRARIO;
+    private String JURIS_VOLUNTARIA;
+    private String TOTAL_ASUNTOS_TRAMITE;
     private String COMENTARIOS;
 
-    public String GetNOMBRE_ORGANO_JURI() {
-        return NOMBRE_ORGANO_JURI;
+    public String GetNOMBRE_ORGANO_JURIS() {
+        return NOMBRE_ORGANO_JURIS;
     }
 
-    public void SetNOMBRE_ORGANO_JURI(String NOMBRE_ORGANO_JURI) {
-        this.NOMBRE_ORGANO_JURI = NOMBRE_ORGANO_JURI;
+    public void SetNOMBRE_ORGANO_JURIS(String NOMBRE_ORGANO_JURIS) {
+        this.NOMBRE_ORGANO_JURIS = NOMBRE_ORGANO_JURIS;
     }
 
     public String GetCLAVE_ORGANO() {
@@ -153,12 +158,12 @@ public class BeanTR_JA_TRAMITE extends Bean implements SQLData {
         this.ASUNTOS_PEND_ADMI = ASUNTOS_PEND_ADMI;
     }
 
-    public String GetTOTAL_ASUNTOS_INSTRUCCION() {
-        return TOTAL_ASUNTOS_INSTRUCCION;
+    public String GetTOTAL_ASUNTOS_INSTRUC() {
+        return TOTAL_ASUNTOS_INSTRUC;
     }
 
-    public void SetTOTAL_ASUNTOS_INSTRUCCION(String TOTAL_ASUNTOS_INSTRUCCION) {
-        this.TOTAL_ASUNTOS_INSTRUCCION = TOTAL_ASUNTOS_INSTRUCCION;
+    public void SetTOTAL_ASUNTOS_INSTRUC(String TOTAL_ASUNTOS_INSTRUC) {
+        this.TOTAL_ASUNTOS_INSTRUC = TOTAL_ASUNTOS_INSTRUC;
     }
 
     public String GetASUNTOS_JA() {
@@ -209,12 +214,20 @@ public class BeanTR_JA_TRAMITE extends Bean implements SQLData {
         this.CONTROV_PROPIE_MENOS20 = CONTROV_PROPIE_MENOS20;
     }
 
-    public String GetCONTROV_SOCIEDADES_MENOS20() {
-        return CONTROV_SOCIEDADES_MENOS20;
+    public String GetCONTROV_SOC_MENOS20() {
+        return CONTROV_SOC_MENOS20;
     }
 
-    public void SetCONTROV_SOCIEDADES_MENOS20(String CONTROV_SOCIEDADES_MENOS20) {
-        this.CONTROV_SOCIEDADES_MENOS20 = CONTROV_SOCIEDADES_MENOS20;
+    public void SetCONTROV_SOC_MENOS20(String CONTROV_SOC_MENOS20) {
+        this.CONTROV_SOC_MENOS20 = CONTROV_SOC_MENOS20;
+    }
+
+    public String GetCONTROV_POB_EJIDAL_MENOS20() {
+        return CONTROV_POB_EJIDAL_MENOS20;
+    }
+
+    public void SetCONTROV_POB_EJIDAL_MENOS20(String CONTROV_POB_EJIDAL_MENOS20) {
+        this.CONTROV_POB_EJIDAL_MENOS20 = CONTROV_POB_EJIDAL_MENOS20;
     }
 
     public String GetCONTROV_NUCLEOS_MAS20() {
@@ -233,12 +246,20 @@ public class BeanTR_JA_TRAMITE extends Bean implements SQLData {
         this.CONTROV_PROPIE_MAS20 = CONTROV_PROPIE_MAS20;
     }
 
-    public String GetCONTROV_SOCIEDADES_MAS20() {
-        return CONTROV_SOCIEDADES_MAS20;
+    public String GetCONTROV_SOC_MAS20() {
+        return CONTROV_SOC_MAS20;
     }
 
-    public void SetCONTROV_SOCIEDADES_MAS20(String CONTROV_SOCIEDADES_MAS20) {
-        this.CONTROV_SOCIEDADES_MAS20 = CONTROV_SOCIEDADES_MAS20;
+    public void SetCONTROV_SOC_MAS20(String CONTROV_SOC_MAS20) {
+        this.CONTROV_SOC_MAS20 = CONTROV_SOC_MAS20;
+    }
+
+    public String GetCONTROV_POB_EJIDAL_MAS20() {
+        return CONTROV_POB_EJIDAL_MAS20;
+    }
+
+    public void SetCONTROV_POB_EJIDAL_MAS20(String CONTROV_POB_EJIDAL_MAS20) {
+        this.CONTROV_POB_EJIDAL_MAS20 = CONTROV_POB_EJIDAL_MAS20;
     }
 
     public String GetSUBTOTAL_ASUNTOS_RESTIT() {
@@ -353,12 +374,12 @@ public class BeanTR_JA_TRAMITE extends Bean implements SQLData {
         this.TENENCIA_MAS20 = TENENCIA_MAS20;
     }
 
-    public String GetSUBTOTAL_ASUNTOS_CONTROV_MA() {
-        return SUBTOTAL_ASUNTOS_CONTROV_MA;
+    public String GetSUBTOTAL_ASUNTOS_CONT_MA() {
+        return SUBTOTAL_ASUNTOS_CONT_MA;
     }
 
-    public void SetSUBTOTAL_ASUNTOS_CONTROV_MA(String SUBTOTAL_ASUNTOS_CONTROV_MA) {
-        this.SUBTOTAL_ASUNTOS_CONTROV_MA = SUBTOTAL_ASUNTOS_CONTROV_MA;
+    public void SetSUBTOTAL_ASUNTOS_CONT_MA(String SUBTOTAL_ASUNTOS_CONT_MA) {
+        this.SUBTOTAL_ASUNTOS_CONT_MA = SUBTOTAL_ASUNTOS_CONT_MA;
     }
 
     public String GetCONTROV_MA_EJID_MENOS20() {
@@ -561,12 +582,12 @@ public class BeanTR_JA_TRAMITE extends Bean implements SQLData {
         this.SUBTOTAL_EJECUCION = SUBTOTAL_EJECUCION;
     }
 
-    public String GetEJECUCION_CONVENIOS_MENOS20() {
-        return EJECUCION_CONVENIOS_MENOS20;
+    public String GetEJECUCION_CONV_MENOS20() {
+        return EJECUCION_CONV_MENOS20;
     }
 
-    public void SetEJECUCION_CONVENIOS_MENOS20(String EJECUCION_CONVENIOS_MENOS20) {
-        this.EJECUCION_CONVENIOS_MENOS20 = EJECUCION_CONVENIOS_MENOS20;
+    public void SetEJECUCION_CONV_MENOS20(String EJECUCION_CONV_MENOS20) {
+        this.EJECUCION_CONV_MENOS20 = EJECUCION_CONV_MENOS20;
     }
 
     public String GetEJECUCION_LAUDOS_MENOS20() {
@@ -721,6 +742,30 @@ public class BeanTR_JA_TRAMITE extends Bean implements SQLData {
         this.TOTAL_ASUNTOS = TOTAL_ASUNTOS;
     }
 
+    public String GetJUICIO_AGRARIO() {
+        return JUICIO_AGRARIO;
+    }
+
+    public void SetJUICIO_AGRARIO(String JUICIO_AGRARIO) {
+        this.JUICIO_AGRARIO = JUICIO_AGRARIO;
+    }
+
+    public String GetJURIS_VOLUNTARIA() {
+        return JURIS_VOLUNTARIA;
+    }
+
+    public void SetJURIS_VOLUNTARIA(String JURIS_VOLUNTARIA) {
+        this.JURIS_VOLUNTARIA = JURIS_VOLUNTARIA;
+    }
+
+    public String GetTOTAL_ASUNTOS_TRAMITE() {
+        return TOTAL_ASUNTOS_TRAMITE;
+    }
+
+    public void SetTOTAL_ASUNTOS_TRAMITE(String TOTAL_ASUNTOS_TRAMITE) {
+        this.TOTAL_ASUNTOS_TRAMITE = TOTAL_ASUNTOS_TRAMITE;
+    }
+
     public String GetCOMENTARIOS() {
         return COMENTARIOS;
     }
@@ -753,24 +798,26 @@ public class BeanTR_JA_TRAMITE extends Bean implements SQLData {
     @Override
     public Object[] toArray() {
         Object[] array = {
-            GetNOMBRE_ORGANO_JURI(),
+            GetNOMBRE_ORGANO_JURIS(),
             GetCLAVE_ORGANO(),
             GetPERIODO(),
             GetTOTAL_ASUNTOS_PEND(),
             GetASUNTOS_PEND_PREV(),
             GetASUNTOS_PEND_TERM(),
             GetASUNTOS_PEND_ADMI(),
-            GetTOTAL_ASUNTOS_INSTRUCCION(),
+            GetTOTAL_ASUNTOS_INSTRUC(),
             GetASUNTOS_JA(),
             GetASUNTOS_JV(),
             GetTOTAL_ASUNTOS_MATERIA(),
             GetSUBTOTAL_ASUNTOS_CONTROV(),
             GetCONTROV_NUCLEOS_MENOS20(),
             GetCONTROV_PROPIE_MENOS20(),
-            GetCONTROV_SOCIEDADES_MENOS20(),
+            GetCONTROV_SOC_MENOS20(),
+            GetCONTROV_POB_EJIDAL_MENOS20(),
             GetCONTROV_NUCLEOS_MAS20(),
             GetCONTROV_PROPIE_MAS20(),
-            GetCONTROV_SOCIEDADES_MAS20(),
+            GetCONTROV_SOC_MAS20(),
+            GetCONTROV_POB_EJIDAL_MAS20(),
             GetSUBTOTAL_ASUNTOS_RESTIT(),
             GetRESTIT_AUTORID_MENOS20(),
             GetRESTIT_PARTIC_MENOS20(),
@@ -785,7 +832,7 @@ public class BeanTR_JA_TRAMITE extends Bean implements SQLData {
             GetSUBTOTAL_TENENCIA(),
             GetTENENCIA_MENOS20(),
             GetTENENCIA_MAS20(),
-            GetSUBTOTAL_ASUNTOS_CONTROV_MA(),
+            GetSUBTOTAL_ASUNTOS_CONT_MA(),
             GetCONTROV_MA_EJID_MENOS20(),
             GetCONTROV_MA_NUCLEO_MENOS20(),
             GetCONTROV_MA_EJID_MASS20(),
@@ -811,7 +858,7 @@ public class BeanTR_JA_TRAMITE extends Bean implements SQLData {
             GetREVERSION_MENOS20(),
             GetREVERSION_MAS20(),
             GetSUBTOTAL_EJECUCION(),
-            GetEJECUCION_CONVENIOS_MENOS20(),
+            GetEJECUCION_CONV_MENOS20(),
             GetEJECUCION_LAUDOS_MENOS20(),
             GetEJECUCION_CONVENIOS_MAS20(),
             GetEJECUCION_LAUDOS_MAS20(),
@@ -831,6 +878,9 @@ public class BeanTR_JA_TRAMITE extends Bean implements SQLData {
             GetOTROS_ASUNTOS_MENOS20(),
             GetOTROS_ASUNTOS_MAS20(),
             GetTOTAL_ASUNTOS(),
+            GetJUICIO_AGRARIO(),
+            GetJURIS_VOLUNTARIA(),
+            GetTOTAL_ASUNTOS_TRAMITE(),
             GetCOMENTARIOS()
         };
         return array;

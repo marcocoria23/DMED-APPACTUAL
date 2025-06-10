@@ -28,11 +28,12 @@ public class BeanTR_JA_INGRESOS extends Bean implements SQLData {
     private String SUBTOTAL_DEMANDAS;
     private String DEMANDAS_ESCRITO;
     private String DEMANDAS_COMPARECENCIA;
-    private String TOTAL_ASUNTOS_ADMIT_MATERIA;
+    private String TOTAL_ASUNTOS_ADMIT_MAT;
     private String SUBTOTAL_ASUNTOS_TERRENOS;
     private String CONTROVER_TERR_NUCLEOS;
     private String CONTROVER_TERR_PROPIETARIOS;
     private String CONTROVER_TERR_SOCIEDAD;
+    private String CONTROVER_TERR_POB_EJIDAL;
     private String SUBTOTAL_ASUNTOS_RESTIT;
     private String RESTIT_ACTOS_AUTORIDAD;
     private String RESTIT_ACTOS_PARTICULAR;
@@ -48,17 +49,17 @@ public class BeanTR_JA_INGRESOS extends Bean implements SQLData {
     private String JN_CONTRAVIE;
     private String OMISIONES_PROCUR_PERJUICIO;
     private String ASUNTOS_JV;
-    private String CONTROVERSIAS_APROVECHAMIENTO;
+    private String CONTROVERSIAS_APROVECHA;
     private String REVERSION;
     private String SUBTOTAL_ASUNTOS_EJECUCION;
     private String EJECUCION_CONVENIOS;
     private String EJECUCION_LAUDOS;
-    private String RRT;
+    private String RRT_INGRE;
     private String PRIVACION;
     private String INCONFORM;
     private String ASUNTOS_LEGIS;
     private String OTROS_ASUNTOS;
-    private String TOTAL_DEMANDAS_NO_INTERPUESTAS;
+    private String TOTAL_DEMANDAS_NO_INTER;
     private String COMENTARIOS;
 
     public String GetNOMBRE_ORGANO_JURIS() {
@@ -149,12 +150,12 @@ public class BeanTR_JA_INGRESOS extends Bean implements SQLData {
         this.DEMANDAS_COMPARECENCIA = DEMANDAS_COMPARECENCIA;
     }
 
-    public String GetTOTAL_ASUNTOS_ADMIT_MATERIA() {
-        return TOTAL_ASUNTOS_ADMIT_MATERIA;
+    public String GetTOTAL_ASUNTOS_ADMIT_MAT() {
+        return TOTAL_ASUNTOS_ADMIT_MAT;
     }
 
-    public void SetTOTAL_ASUNTOS_ADMIT_MATERIA(String TOTAL_ASUNTOS_ADMIT_MATERIA) {
-        this.TOTAL_ASUNTOS_ADMIT_MATERIA = TOTAL_ASUNTOS_ADMIT_MATERIA;
+    public void SetTOTAL_ASUNTOS_ADMIT_MAT(String TOTAL_ASUNTOS_ADMIT_MAT) {
+        this.TOTAL_ASUNTOS_ADMIT_MAT = TOTAL_ASUNTOS_ADMIT_MAT;
     }
 
     public String GetSUBTOTAL_ASUNTOS_TERRENOS() {
@@ -187,6 +188,14 @@ public class BeanTR_JA_INGRESOS extends Bean implements SQLData {
 
     public void SetCONTROVER_TERR_SOCIEDAD(String CONTROVER_TERR_SOCIEDAD) {
         this.CONTROVER_TERR_SOCIEDAD = CONTROVER_TERR_SOCIEDAD;
+    }
+
+    public String GetCONTROVER_TERR_POB_EJIDAL() {
+        return CONTROVER_TERR_POB_EJIDAL;
+    }
+
+    public void SetCONTROVER_TERR_POB_EJIDAL(String CONTROVER_TERR_POB_EJIDAL) {
+        this.CONTROVER_TERR_POB_EJIDAL = CONTROVER_TERR_POB_EJIDAL;
     }
 
     public String GetSUBTOTAL_ASUNTOS_RESTIT() {
@@ -309,12 +318,12 @@ public class BeanTR_JA_INGRESOS extends Bean implements SQLData {
         this.ASUNTOS_JV = ASUNTOS_JV;
     }
 
-    public String GetCONTROVERSIAS_APROVECHAMIENTO() {
-        return CONTROVERSIAS_APROVECHAMIENTO;
+    public String GetCONTROVERSIAS_APROVECHA() {
+        return CONTROVERSIAS_APROVECHA;
     }
 
-    public void SetCONTROVERSIAS_APROVECHAMIENTO(String CONTROVERSIAS_APROVECHAMIENTO) {
-        this.CONTROVERSIAS_APROVECHAMIENTO = CONTROVERSIAS_APROVECHAMIENTO;
+    public void SetCONTROVERSIAS_APROVECHA(String CONTROVERSIAS_APROVECHA) {
+        this.CONTROVERSIAS_APROVECHA = CONTROVERSIAS_APROVECHA;
     }
 
     public String GetREVERSION() {
@@ -349,12 +358,12 @@ public class BeanTR_JA_INGRESOS extends Bean implements SQLData {
         this.EJECUCION_LAUDOS = EJECUCION_LAUDOS;
     }
 
-    public String GetRRT() {
-        return RRT;
+    public String GetRRT_INGRE() {
+        return RRT_INGRE;
     }
 
-    public void SetRRT(String RRT) {
-        this.RRT = RRT;
+    public void SetRRT_INGRE(String RRT_INGRE) {
+        this.RRT_INGRE = RRT_INGRE;
     }
 
     public String GetPRIVACION() {
@@ -389,12 +398,12 @@ public class BeanTR_JA_INGRESOS extends Bean implements SQLData {
         this.OTROS_ASUNTOS = OTROS_ASUNTOS;
     }
 
-    public String GetTOTAL_DEMANDAS_NO_INTERPUESTAS() {
-        return TOTAL_DEMANDAS_NO_INTERPUESTAS;
+    public String GetTOTAL_DEMANDAS_NO_INTER() {
+        return TOTAL_DEMANDAS_NO_INTER;
     }
 
-    public void SetTOTAL_DEMANDAS_NO_INTERPUESTAS(String TOTAL_DEMANDAS_NO_INTERPUESTAS) {
-        this.TOTAL_DEMANDAS_NO_INTERPUESTAS = TOTAL_DEMANDAS_NO_INTERPUESTAS;
+    public void SetTOTAL_DEMANDAS_NO_INTER(String TOTAL_DEMANDAS_NO_INTER) {
+        this.TOTAL_DEMANDAS_NO_INTER = TOTAL_DEMANDAS_NO_INTER;
     }
 
     public String GetCOMENTARIOS() {
@@ -440,11 +449,12 @@ public class BeanTR_JA_INGRESOS extends Bean implements SQLData {
             GetSUBTOTAL_DEMANDAS(),
             GetDEMANDAS_ESCRITO(),
             GetDEMANDAS_COMPARECENCIA(),
-            GetTOTAL_ASUNTOS_ADMIT_MATERIA(),
+            GetTOTAL_ASUNTOS_ADMIT_MAT(),
             GetSUBTOTAL_ASUNTOS_TERRENOS(),
             GetCONTROVER_TERR_NUCLEOS(),
             GetCONTROVER_TERR_PROPIETARIOS(),
             GetCONTROVER_TERR_SOCIEDAD(),
+            GetCONTROVER_TERR_POB_EJIDAL(),
             GetSUBTOTAL_ASUNTOS_RESTIT(),
             GetRESTIT_ACTOS_AUTORIDAD(),
             GetRESTIT_ACTOS_PARTICULAR(),
@@ -460,17 +470,17 @@ public class BeanTR_JA_INGRESOS extends Bean implements SQLData {
             GetJN_CONTRAVIE(),
             GetOMISIONES_PROCUR_PERJUICIO(),
             GetASUNTOS_JV(),
-            GetCONTROVERSIAS_APROVECHAMIENTO(),
+            GetCONTROVERSIAS_APROVECHA(),
             GetREVERSION(),
             GetSUBTOTAL_ASUNTOS_EJECUCION(),
             GetEJECUCION_CONVENIOS(),
             GetEJECUCION_LAUDOS(),
-            GetRRT(),
+            GetRRT_INGRE(),
             GetPRIVACION(),
             GetINCONFORM(),
             GetASUNTOS_LEGIS(),
             GetOTROS_ASUNTOS(),
-            GetTOTAL_DEMANDAS_NO_INTERPUESTAS(),
+            GetTOTAL_DEMANDAS_NO_INTER(),
             GetCOMENTARIOS()
         };
         return array;

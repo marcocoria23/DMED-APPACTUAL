@@ -33,7 +33,8 @@ import static Pantallas_JA.IntegraJA_TR.directorio;
  * @author ANDREA.HERNANDEZL
  */
 public class TR_JA_TRAMITE {
-    public static int CFilas2 =0;
+
+    public static int CFilas2 = 0;
 
     public void TR_JA_TRAMITE() throws Exception {
 
@@ -45,7 +46,7 @@ public class TR_JA_TRAMITE {
         ArrayDescriptor descriptor;
         int CFilas = 0;
         Conver_Utf8 conUTF8 = new Conver_Utf8();
-        String NuevaRuta = directorio+"Trámite.csv";
+        String NuevaRuta = directorio + "Trámite.csv";
         conUTF8.Convertir_utf8_EBaseDatos(NuevaRuta);
         NuevaRuta = NuevaRuta.replace(".csv", "UTF8.csv");
         System.out.println("Leyendo " + NuevaRuta);
@@ -59,98 +60,103 @@ public class TR_JA_TRAMITE {
                     int numeroColumnas = 0;
                     CSVRecord firstRecord = csvParser.iterator().next();
                     numeroColumnas = firstRecord.size();
-                    System.out.println("Número de columnas: " + numeroColumnas+"---->if (numeroColumnas <= 79) continúa...");
+                    System.out.println("Número de columnas: " + numeroColumnas + "---->if (numeroColumnas <= 79) continúa...");
 
-                    if (numeroColumnas <= 79) { // Cambiar el valor según el número de columnas esperado
+                    if (numeroColumnas <= 84) { // Cambiar el valor según el número de columnas esperado
                         for (CSVRecord record : csvParser) {
                             if (record.get(0).isEmpty()) {
                                 break; // Ignorar registros vacíos
                             }
 
                             BeanTR_JA_TRAMITE c = new BeanTR_JA_TRAMITE();
-                            c.SetNOMBRE_ORGANO_JURI(record.get(0));
+                            c.SetNOMBRE_ORGANO_JURIS(record.get(0));
                             c.SetCLAVE_ORGANO(record.get(1));
                             c.SetPERIODO(record.get(2));
                             c.SetTOTAL_ASUNTOS_PEND(record.get(3));
                             c.SetASUNTOS_PEND_PREV(record.get(4));
                             c.SetASUNTOS_PEND_TERM(record.get(5));
                             c.SetASUNTOS_PEND_ADMI(record.get(6));
-                            c.SetTOTAL_ASUNTOS_INSTRUCCION(record.get(7));
+                            c.SetTOTAL_ASUNTOS_INSTRUC(record.get(7));
                             c.SetASUNTOS_JA(record.get(8));
                             c.SetASUNTOS_JV(record.get(9));
                             c.SetTOTAL_ASUNTOS_MATERIA(record.get(10));
                             c.SetSUBTOTAL_ASUNTOS_CONTROV(record.get(11));
                             c.SetCONTROV_NUCLEOS_MENOS20(record.get(12));
                             c.SetCONTROV_PROPIE_MENOS20(record.get(13));
-                            c.SetCONTROV_SOCIEDADES_MENOS20(record.get(14));
-                            c.SetCONTROV_NUCLEOS_MAS20(record.get(15));
-                            c.SetCONTROV_PROPIE_MAS20(record.get(16));
-                            c.SetCONTROV_SOCIEDADES_MAS20(record.get(17));
-                            c.SetSUBTOTAL_ASUNTOS_RESTIT(record.get(18));
-                            c.SetRESTIT_AUTORID_MENOS20(record.get(19));
-                            c.SetRESTIT_PARTIC_MENOS20(record.get(20));
-                            c.SetRESTIT_AUTORID_MAS20(record.get(21));
-                            c.SetRESTIT_PARTIC_MAS20(record.get(22));
-                            c.SetSUBTOTAL_RECON(record.get(23));
-                            c.SetRECON_MENOS20(record.get(24));
-                            c.SetRECON_MAS20(record.get(25));
-                            c.SetSUBTOTAL_NULIDADES(record.get(26));
-                            c.SetNULIDADES_MENOS20(record.get(27));
-                            c.SetNULIDADES_MAS20(record.get(28));
-                            c.SetSUBTOTAL_TENENCIA(record.get(29));
-                            c.SetTENENCIA_MENOS20(record.get(30));
-                            c.SetTENENCIA_MAS20(record.get(31));
-                            c.SetSUBTOTAL_ASUNTOS_CONTROV_MA(record.get(32));
-                            c.SetCONTROV_MA_EJID_MENOS20(record.get(33));
-                            c.SetCONTROV_MA_NUCLEO_MENOS20(record.get(34));
-                            c.SetCONTROV_MA_EJID_MASS20(record.get(35));
-                            c.SetCONTROV_MA_NUCLEO_MASS20(record.get(36));
-                            c.SetSUBTOTAL_ASUNTOS_DERECHOS(record.get(37));
-                            c.SetDERECHOS_MENOS20(record.get(38));
-                            c.SetDERECHOS_MAS20(record.get(39));
-                            c.SetSUBTOTAL_JN(record.get(40));
-                            c.SetJN_PROMOVIDOS_MENOS20(record.get(41));
-                            c.SetJN_ACTOS_MENOS20(record.get(42));
-                            c.SetJN_PROMOVIDOS_MAS20(record.get(43));
-                            c.SetJN_ACTOS_MAS20(record.get(44));
-                            c.SetSUBTOTAL_OMISIONES(record.get(45));
-                            c.SetOMISIONES_MENOS20(record.get(46));
-                            c.SetOMISIONES_MAS20(record.get(47));
-                            c.SetSUBTOTAL_ASUNTOS_JV(record.get(48));
-                            c.SetJV_MENOS20(record.get(49));
-                            c.SetJV_MAS20(record.get(50));
-                            c.SetSUBTOTAL_CONTROV_TERR(record.get(51));
-                            c.SetCONTROV_TERR_MENOS20(record.get(52));
-                            c.SetCONTROV_TERR_MAS20(record.get(53));
-                            c.SetSUBTOTAL_REVERSION(record.get(54));
-                            c.SetREVERSION_MENOS20(record.get(55));
-                            c.SetREVERSION_MAS20(record.get(56));
-                            c.SetSUBTOTAL_EJECUCION(record.get(57));
-                            c.SetEJECUCION_CONVENIOS_MENOS20(record.get(58));
-                            c.SetEJECUCION_LAUDOS_MENOS20(record.get(59));
-                            c.SetEJECUCION_CONVENIOS_MAS20(record.get(60));
-                            c.SetEJECUCION_LAUDOS_MAS20(record.get(61));
-                            c.SetSUBTOTAL_ASUNTOS_RRT(record.get(62));
-                            c.SetRRT_MENOS20(record.get(63));
-                            c.SetRRT_MAS20(record.get(64));
-                            c.SetSUBTOTAL_ASUNTOS_DA(record.get(65));
-                            c.SetDA_MENOS20(record.get(66));
-                            c.SetDA_MAS20(record.get(67));
-                            c.SetSUBTOTAL_ASUNTOS_INCONFOR(record.get(68));
-                            c.SetINCONFOR_MENOS20(record.get(69));
-                            c.SetINCONFOR_MAS20(record.get(70));
-                            c.SetSUBTOTAL_ASUNTOS_LA(record.get(71));
-                            c.SetLA_MENOS20(record.get(72));
-                            c.SetLA_MAS20(record.get(73));
-                            c.SetSUBTOTAL_OTROS_ASUNTOS(record.get(74));
-                            c.SetOTROS_ASUNTOS_MENOS20(record.get(75));
-                            c.SetOTROS_ASUNTOS_MAS20(record.get(76));
-                            c.SetTOTAL_ASUNTOS(record.get(77));
-                            c.SetCOMENTARIOS(record.get(78));
+                            c.SetCONTROV_SOC_MENOS20(record.get(14));
+                            c.SetCONTROV_POB_EJIDAL_MENOS20(record.get(15));
+                            c.SetCONTROV_NUCLEOS_MAS20(record.get(16));
+                            c.SetCONTROV_PROPIE_MAS20(record.get(17));
+                            c.SetCONTROV_SOC_MAS20(record.get(18));
+                            c.SetCONTROV_POB_EJIDAL_MAS20(record.get(19));
+                            c.SetSUBTOTAL_ASUNTOS_RESTIT(record.get(20));
+                            c.SetRESTIT_AUTORID_MENOS20(record.get(21));
+                            c.SetRESTIT_PARTIC_MENOS20(record.get(22));
+                            c.SetRESTIT_AUTORID_MAS20(record.get(23));
+                            c.SetRESTIT_PARTIC_MAS20(record.get(24));
+                            c.SetSUBTOTAL_RECON(record.get(25));
+                            c.SetRECON_MENOS20(record.get(26));
+                            c.SetRECON_MAS20(record.get(27));
+                            c.SetSUBTOTAL_NULIDADES(record.get(28));
+                            c.SetNULIDADES_MENOS20(record.get(29));
+                            c.SetNULIDADES_MAS20(record.get(30));
+                            c.SetSUBTOTAL_TENENCIA(record.get(31));
+                            c.SetTENENCIA_MENOS20(record.get(32));
+                            c.SetTENENCIA_MAS20(record.get(33));
+                            c.SetSUBTOTAL_ASUNTOS_CONT_MA(record.get(34));
+                            c.SetCONTROV_MA_EJID_MENOS20(record.get(35));
+                            c.SetCONTROV_MA_NUCLEO_MENOS20(record.get(36));
+                            c.SetCONTROV_MA_EJID_MASS20(record.get(37));
+                            c.SetCONTROV_MA_NUCLEO_MASS20(record.get(38));
+                            c.SetSUBTOTAL_ASUNTOS_DERECHOS(record.get(39));
+                            c.SetDERECHOS_MENOS20(record.get(40));
+                            c.SetDERECHOS_MAS20(record.get(41));
+                            c.SetSUBTOTAL_JN(record.get(42));
+                            c.SetJN_PROMOVIDOS_MENOS20(record.get(43));
+                            c.SetJN_ACTOS_MENOS20(record.get(44));
+                            c.SetJN_PROMOVIDOS_MAS20(record.get(45));
+                            c.SetJN_ACTOS_MAS20(record.get(46));
+                            c.SetSUBTOTAL_OMISIONES(record.get(47));
+                            c.SetOMISIONES_MENOS20(record.get(48));
+                            c.SetOMISIONES_MAS20(record.get(49));
+                            c.SetSUBTOTAL_ASUNTOS_JV(record.get(50));
+                            c.SetJV_MENOS20(record.get(51));
+                            c.SetJV_MAS20(record.get(52));
+                            c.SetSUBTOTAL_CONTROV_TERR(record.get(53));
+                            c.SetCONTROV_TERR_MENOS20(record.get(54));
+                            c.SetCONTROV_TERR_MAS20(record.get(55));
+                            c.SetSUBTOTAL_REVERSION(record.get(56));
+                            c.SetREVERSION_MENOS20(record.get(57));
+                            c.SetREVERSION_MAS20(record.get(58));
+                            c.SetSUBTOTAL_EJECUCION(record.get(59));
+                            c.SetEJECUCION_CONV_MENOS20(record.get(60));
+                            c.SetEJECUCION_LAUDOS_MENOS20(record.get(61));
+                            c.SetEJECUCION_CONVENIOS_MAS20(record.get(62));
+                            c.SetEJECUCION_LAUDOS_MAS20(record.get(63));
+                            c.SetSUBTOTAL_ASUNTOS_RRT(record.get(64));
+                            c.SetRRT_MENOS20(record.get(65));
+                            c.SetRRT_MAS20(record.get(66));
+                            c.SetSUBTOTAL_ASUNTOS_DA(record.get(67));
+                            c.SetDA_MENOS20(record.get(68));
+                            c.SetDA_MAS20(record.get(69));
+                            c.SetSUBTOTAL_ASUNTOS_INCONFOR(record.get(70));
+                            c.SetINCONFOR_MENOS20(record.get(71));
+                            c.SetINCONFOR_MAS20(record.get(72));
+                            c.SetSUBTOTAL_ASUNTOS_LA(record.get(73));
+                            c.SetLA_MENOS20(record.get(74));
+                            c.SetLA_MAS20(record.get(75));
+                            c.SetSUBTOTAL_OTROS_ASUNTOS(record.get(76));
+                            c.SetOTROS_ASUNTOS_MENOS20(record.get(77));
+                            c.SetOTROS_ASUNTOS_MAS20(record.get(78));
+                            c.SetTOTAL_ASUNTOS(record.get(79));
+                            c.SetJUICIO_AGRARIO(record.get(80));
+                            c.SetJURIS_VOLUNTARIA(record.get(81));
+                            c.SetTOTAL_ASUNTOS_TRAMITE(record.get(82));
+                            c.SetCOMENTARIOS(record.get(83));
                             ad.add(c);
                             CFilas++;
                         }
-                        
+
                         CFilas2 = CFilas;
                         if (CFilas > 0) {
                             con = OracleDAOFactoryJA.creaConexion();
@@ -168,7 +174,7 @@ public class TR_JA_TRAMITE {
                             st.registerOutParameter(1, OracleTypes.INTEGER);
                             st.setArray(2, array_to_pass);
                             st.execute();
-                            System.out.println("Se ejecutó paquete integrador Trámite, filas: "+CFilas+" \n");
+                            System.out.println("Se ejecutó paquete integrador Trámite, filas: " + CFilas + " \n");
                         } else {
                             JOptionPane.showMessageDialog(null, "Pestaña Trámite sin registros");
                         }
