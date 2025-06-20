@@ -901,7 +901,7 @@ public class QIniciativas {
         Array = new ArrayList();
         sql = "select ID_ENTIDAD, ENTIDAD, C1_5_ID, P1_5_1, P1_5_57, P1_5_58\n"
                 + "from tr_ple_meds1_5\n"
-                + "where P1_5_57 <> ID_ENTIDAD || 88\n"
+                + "where P1_5_57 <> " + ID_entidad + " || 88\n"
                 + "and  P1_5_58 is not null "
                 + " AND ID_ENTIDAD=" + ID_entidad + " AND Legislatura=" + Legislatura + " AND C1_5_ID='" + Envio + "'";
         System.out.println(sql);
@@ -920,6 +920,29 @@ public class QIniciativas {
         return Array;
     }
 
+    //Debe especificar al menos dos grupos parlamentarios  P1_5_59-BF(varios_grupos_parlamentarios_especifique_2) debido a que en P1_5_57 (grupo_parlamentario) se seleccionó "Varios" (88).
+    public ArrayList varios_grupos_sin_especifique_2(String ID_entidad, String Legislatura, String Envio) {
+        conexion.Conectar();
+        Array = new ArrayList();
+        sql = "select ID_ENTIDAD,P1_5_1 as ID_INICIATIVA , P1_5_57 as grupo_parlamentario,P1_5_58 as grupo_esp1,P1_5_59 as grupo_esp2 ,P1_5_60 as grupo_esp3, LEGISLATURA,C1_5_ID AS ENVIO\n" +
+        "from TR_PLE_MEDS1_5 where (P1_5_57 = " + ID_entidad + " || 88 AND P1_5_59 IS NULL )"
+                + " AND ID_ENTIDAD=" + ID_entidad + " AND Legislatura=" + Legislatura + " AND C1_5_ID='" + Envio + "'";
+        System.out.println(sql);
+        resul = conexion.consultar(sql);
+        try {
+            while (resul.next()) {
+                Array.add(new String[]{
+                    resul.getString("ID_ENTIDAD"),
+                    resul.getString("ID_INICIATIVA")
+                });
+            }
+            conexion.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(QComisiones_Legislativas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return Array;
+    }
+    
 //No puede seleccionar la categoría "Varios" en las columnas P1_5_58-BF(varios_grupos_parlamentarios_especifique_1) , P1_5_59-BG(varios_grupos_parlamentarios_especifique_2),P1_5_60-BH(varios_grupos_parlamentarios_especifique_3)
     public ArrayList NDCvarios_grupos_parlamentarios_especifique_1(String ID_entidad, String Legislatura, String Envio) {
         conexion.Conectar();
