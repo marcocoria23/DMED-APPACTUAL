@@ -128,7 +128,7 @@ public ArrayList REP_tema_comision_legislativa(String ID_entidad,String Legislat
      conexion.Conectar();
       Array = new ArrayList();
       sql="select ID_ENTIDAD, ENTIDAD, C1_2_ID, P1_2_1,P1_2_6, P1_2_7, P1_2_8, P1_2_9\n" +
-"from TR_PLE_MEDS1_2 where P1_2_6=P1_2_7 OR P1_2_6=P1_2_8 OR P1_2_6=P1_2_9 OR P1_2_7=P1_2_8 OR P1_2_7=P1_2_9 OR P1_2_8=P1_2_9 AND ID_ENTIDAD="+ID_entidad+" AND Legislatura="+Legislatura+" AND C1_2_ID='"+Envio+"' ";
+"from TR_PLE_MEDS1_2 where (P1_2_6=P1_2_7 OR P1_2_6=P1_2_8 OR P1_2_6=P1_2_9 OR P1_2_7=P1_2_8 OR P1_2_7=P1_2_9 OR P1_2_8=P1_2_9) AND ID_ENTIDAD="+ID_entidad+" AND Legislatura="+Legislatura+" AND C1_2_ID='"+Envio+"' ";
       System.out.println(sql);
       resul=conexion.consultar(sql);
       try {
