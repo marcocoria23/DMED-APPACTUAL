@@ -1383,13 +1383,14 @@ public class QIniciativas {
     public ArrayList cond_reconocimiento_iniciativa_preferente(String ID_entidad, String Legislatura, String Envio) {
         conexion.Conectar();
         Array = new ArrayList();
-        sql = "select  c.ID_ENTIDAD, c.ENTIDAD, c.C1_5_ID, c.P1_5_1, c.P1_5_7, c.P1_5_16, c.P1_5_72, ud.C1_1D\n"
-                + "from TR_PLE_MEDS1_5 c \n"
-                + "left join TR_PLE_MEDS1_1D ud \n"
-                + "on ud.ID_ENTIDAD=c.ID_ENTIDAD \n"
-                + "and ud.C1_1D_ID=c.C1_5_ID\n"
-                + "where ud.C1_1D=1 and P1_5_7=1 and P1_5_16=1 and P1_5_72 is null "
-                + " AND c.ID_ENTIDAD=" + ID_entidad + " AND c.Legislatura=" + Legislatura + " AND C1_5_ID='" + Envio + "'";
+        sql = "select  c.ID_ENTIDAD, c.ENTIDAD, c.C1_5_ID, c.P1_5_1, c.P1_5_7 as cond_modificacion_informacion_ingreso_periodo,\n" +
+"tc.descripcion as tipo_promovente_iniciativa, c.P1_5_72 as cond_iniciativa_preferente, ud.P1_1D_1 as cond_reconocimiento_iniciativa_preferente_GENERALES\n" +
+"from TR_PLE_MEDS1_5 c \n" +
+"left join TR_PLE_MEDS1_1D ud on ud.ID_ENTIDAD=c.ID_ENTIDAD and ud.C1_1D_ID=c.C1_5_ID\n" +
+"inner join TC_TIPO_PROMOVENTE tc on c.P1_5_16=tc.ID\n" +
+"where (ud.C1_1D=1 AND P1_1D_1='1')\n" +
+"and P1_5_7=1 and P1_5_16=1 and P1_5_72 is null  "
+                + " AND( c.ID_ENTIDAD=" + ID_entidad + " AND c.Legislatura=" + Legislatura + " AND C1_5_ID='" + Envio + "')";
         System.out.println(sql);
         resul = conexion.consultar(sql);
         try {

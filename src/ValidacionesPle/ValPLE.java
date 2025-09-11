@@ -23749,7 +23749,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_83(entidad, legislatura, envio);
                 XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                 celdaD2.setCellStyle(estiloCeldabordes0);
                 celdaD2.setCellType(CellType.STRING);
-                String txtD2 = "Debe capturar (Condición de iniciativa preferente)-BT en caso de seleccionar la categoría \"Sí\" en la columna cond_reconocimiento_iniciativa_preferente de la tabla datos_generales y las categoría \"Sí\" en la columna cond_modificacion_información_ingreso_periodo 5_7 y \"Persona titular del Poder Ejecutivo\" en la columna tipo_promovente_iniciativa (P1_5_16).";
+                String txtD2 = "Debe capturar (Condición de iniciativa preferente)-BT en caso de seleccionar la categoría \"Sí\" en la columna cond_reconocimiento_iniciativa_preferente de la tabla datos_generales y las categoría \"Sí\" en la columna cond_modificacion_informacion_ingreso_periodo (G) de la tabla iniciativas y \"Persona titular del Poder Ejecutivo\" en la columna tipo_promovente_iniciativa (P).";
                 XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                 celdaD2.setCellValue(textoD2);
 
