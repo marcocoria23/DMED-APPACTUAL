@@ -1379,7 +1379,7 @@ public class QIniciativas {
         return Array;
     }
 
-//En caso de seleccionar la categoría "Sí" en la columna cond_reconocimiento_iniciativa_preferente de la tabla datos_generales y las categoría "Sí" en la columna cond_modificacion_información_ingreso_periodo 5_7 y "Persona titular del Poder Ejecutivo" en la columna tipo_promovente_iniciativa (P1_5_16).
+//Debe capturar (Condición de iniciativa preferente)-BT en caso de seleccionar la categoría "Sí" en la columna cond_reconocimiento_iniciativa_preferente de la tabla datos_generales y las categoría "Sí" en la columna cond_modificacion_informacion_ingreso_periodo (G) de la tabla iniciativas y "Persona titular del Poder Ejecutivo" en la columna tipo_promovente_iniciativa (P).
     public ArrayList cond_reconocimiento_iniciativa_preferente(String ID_entidad, String Legislatura, String Envio) {
         conexion.Conectar();
         Array = new ArrayList();
@@ -1389,7 +1389,7 @@ public class QIniciativas {
 "left join TR_PLE_MEDS1_1D ud on ud.ID_ENTIDAD=c.ID_ENTIDAD and ud.C1_1D_ID=c.C1_5_ID\n" +
 "inner join TC_TIPO_PROMOVENTE tc on c.P1_5_16=tc.ID\n" +
 "where (ud.C1_1D=1 AND P1_1D_1='1')\n" +
-"and P1_5_7=1 and P1_5_16=1 and P1_5_72 is null  "
+"and P1_5_7=1 and P1_5_16=1 and P1_5_72 is null"
                 + " AND( c.ID_ENTIDAD=" + ID_entidad + " AND c.Legislatura=" + Legislatura + " AND C1_5_ID='" + Envio + "')";
         System.out.println(sql);
         resul = conexion.consultar(sql);
