@@ -26903,7 +26903,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_83(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "Debe ser igual o menor a la fecha registrada en la columna P1_1_9(fecha_termino_informacion_reportada) de la tabla datos_generales.";
+                    String txtD2 = "La fecha en la columna P1_6_6 -F (fecha_sesion_presentacion_iniciativa_urgente_obvia) debe ser igual o menor a la fecha registrada en la columna P1_1_9(fecha_termino_informacion_reportada) de la tabla datos_generales.";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -26979,7 +26979,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_83(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "Debe ser igual o mayor a la fecha registrada en la columna P1_6_4-D(fecha_ingreso_iniciativa_urgente_obvia_oficialia_partes).";
+                    String txtD2 = "La fecha en la columna P1_6_6 -F (fecha_sesion_presentacion_iniciativa_urgente_obvia) debe ser igual o mayor a la fecha registrada en la columna P1_6_4-D(fecha_ingreso_iniciativa_urgente_obvia_oficialia_partes).";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
