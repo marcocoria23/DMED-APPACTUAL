@@ -417,7 +417,7 @@ public class QIniciativas {
         return Array;
     }
 
-      //La sección 'personas_legisladoras_promoventes_iniciativa'(el p1_5_17-Q a p1_5_56-BD ) debe estar vacía puesto que se  seleccionó una opcipón diferente a 'Personas legisladoras' en el campo p1_5_16-P(tipo_promovente_iniciativa)
+      //El ID de persona legisladora está repetido dentro de la sección 'personas_legisladoras_promoventes_iniciativa'(el p1_5_17-Q a p1_5_56-BD ) 
       public ArrayList PERSONA_LEGIS_REPETIDA(String ID_entidad, String Legislatura, String envio) {
         conexion.Conectar();
         Array = new ArrayList();
@@ -472,8 +472,8 @@ public class QIniciativas {
         try {
             while (resul.next()) {
                 Array.add(new String[]{
-                    resul.getString("ID_ENTIDAD"),
-                    resul.getString("ID_ACTUAL")
+                    resul.getString("ENTIDAD"),
+                    resul.getString("ID_Legislatura")
                 });
             } 
             conexion.close();
