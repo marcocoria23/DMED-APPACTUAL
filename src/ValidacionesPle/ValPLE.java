@@ -20634,7 +20634,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_83(entidad, legislatura, envio);
                 XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                 celdaD2.setCellStyle(estiloCeldabordes0);
                 celdaD2.setCellType(CellType.STRING);
-                String txtD2 = "La sección 'personas_legisladoras_promoventes_iniciativa'(el p1_5_17-Q a p1_5_56-BD ) debe estar vacía puesto que se  seleccionó una opcipón diferente a 'Personas legisladoras' en el campo p1_5_16-P(tipo_promovente_iniciativa)";
+                String txtD2 = "La sección 'personas_legisladoras_promoventes_iniciativa'(el p1_5_17-Q a p1_5_56-BD ) debe estar vacía puesto que se  seleccionó una opción diferente a 'Personas legisladoras' en el campo p1_5_16-P(tipo_promovente_iniciativa)";
                 XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                 celdaD2.setCellValue(textoD2);
 
