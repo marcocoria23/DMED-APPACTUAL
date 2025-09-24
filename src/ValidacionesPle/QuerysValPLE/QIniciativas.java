@@ -197,9 +197,292 @@ public class QIniciativas {
 }
         return Array;
     }
+//Los campos p1_5_17-Q (ID_persona_legisladora_1) y p1_5_17-R (nombre_persona_legisladora_1) deben contner información debido a que se seleccióno: 'Personas legisladoras' en el campo p1_5_17-P(tipo_promovente_iniciativa)"
+      public ArrayList TIPO_PROMOVENTE_PERSONA_LEGIS(String ID_entidad, String Legislatura, String envio) {
+        conexion.Conectar();
+        Array = new ArrayList();
+        sql = "SELECT p1_5_1 AS ID_ACTUAL,\n" +
+"       C1_5_ID AS envio,\n" +
+"       legislatura,\n" +
+"       ENTIDAD,\n" +
+"       TC.DESCRIPCION AS TIPO_PROMOVENTE,\n" +
+"       p1_5_17 AS ID_LEGISLADOR,\n" +
+"    p1_5_18 AS NOMBRE_LEGISLADOR\n" +
+"FROM TR_PLE_MEDS1_5 TR\n" +
+"inner join TC_TIPO_PROMOVENTE TC ON TC.ID= TR.p1_5_16\n" +
+"WHERE  TR.p1_5_16=3 AND (p1_5_17 IS NULL OR p1_5_18 IS NULL) AND (TR.ID_ENTIDAD=" + ID_entidad + " AND TR.C1_5_ID='" + envio + "')";
+        System.out.println(sql);
+        resul = conexion.consultar(sql);
+        try {
+            while (resul.next()) {
+                Array.add(new String[]{
+                    resul.getString("ENTIDAD"),
+                    resul.getString("ID_ACTUAL")
+                });
+            } 
+            conexion.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(QIniciativas.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
-    
+        return Array;
+    }
+      
+      //Falta completar Nombre o ID de persona legisladora en sección personas_legisladoras_promoventes_iniciativa ( Columnas de la Q a la BD)
+      public ArrayList FALTA_PERSONA_LEGIS(String ID_entidad, String Legislatura, String envio) {
+        conexion.Conectar();
+        Array = new ArrayList();
+        sql = "SELECT \n" +
+"    p1_5_1 AS ID_ACTUAL,       \n" +
+"    C1_5_ID AS envio,       \n" +
+"    legislatura,       \n" +
+"    ENTIDAD,       \n" +
+"    TC.DESCRIPCION AS TIPO_PROMOVENTE\n" +
+"FROM TR_PLE_MEDS1_5 TR\n" +
+"INNER JOIN TC_TIPO_PROMOVENTE TC ON TC.ID = TR.p1_5_16\n" +
+"WHERE TR.p1_5_16 = 3\n" +
+"  AND (\n" +
+"        (p1_5_19 IS NULL AND p1_5_20 IS NOT NULL) OR (p1_5_19 IS NOT NULL AND p1_5_20 IS NULL) OR\n" +
+"        (p1_5_21 IS NULL AND p1_5_22 IS NOT NULL) OR (p1_5_21 IS NOT NULL AND p1_5_22 IS NULL) OR\n" +
+"        (p1_5_23 IS NULL AND p1_5_24 IS NOT NULL) OR (p1_5_23 IS NOT NULL AND p1_5_24 IS NULL) OR\n" +
+"        (p1_5_25 IS NULL AND p1_5_26 IS NOT NULL) OR (p1_5_25 IS NOT NULL AND p1_5_26 IS NULL) OR\n" +
+"        (p1_5_27 IS NULL AND p1_5_28 IS NOT NULL) OR (p1_5_27 IS NOT NULL AND p1_5_28 IS NULL) OR\n" +
+"        (p1_5_29 IS NULL AND p1_5_30 IS NOT NULL) OR (p1_5_29 IS NOT NULL AND p1_5_30 IS NULL) OR\n" +
+"        (p1_5_31 IS NULL AND p1_5_32 IS NOT NULL) OR (p1_5_31 IS NOT NULL AND p1_5_32 IS NULL) OR\n" +
+"        (p1_5_33 IS NULL AND p1_5_34 IS NOT NULL) OR (p1_5_33 IS NOT NULL AND p1_5_34 IS NULL) OR\n" +
+"        (p1_5_35 IS NULL AND p1_5_36 IS NOT NULL) OR (p1_5_35 IS NOT NULL AND p1_5_36 IS NULL) OR\n" +
+"        (p1_5_37 IS NULL AND p1_5_38 IS NOT NULL) OR (p1_5_37 IS NOT NULL AND p1_5_38 IS NULL) OR\n" +
+"        (p1_5_39 IS NULL AND p1_5_40 IS NOT NULL) OR (p1_5_39 IS NOT NULL AND p1_5_40 IS NULL) OR\n" +
+"        (p1_5_41 IS NULL AND p1_5_42 IS NOT NULL) OR (p1_5_41 IS NOT NULL AND p1_5_42 IS NULL) OR\n" +
+"        (p1_5_43 IS NULL AND p1_5_44 IS NOT NULL) OR (p1_5_43 IS NOT NULL AND p1_5_44 IS NULL) OR\n" +
+"        (p1_5_45 IS NULL AND p1_5_46 IS NOT NULL) OR (p1_5_45 IS NOT NULL AND p1_5_46 IS NULL) OR\n" +
+"        (p1_5_47 IS NULL AND p1_5_48 IS NOT NULL) OR (p1_5_47 IS NOT NULL AND p1_5_48 IS NULL) OR\n" +
+"        (p1_5_49 IS NULL AND p1_5_50 IS NOT NULL) OR (p1_5_49 IS NOT NULL AND p1_5_50 IS NULL) OR\n" +
+"        (p1_5_51 IS NULL AND p1_5_52 IS NOT NULL) OR (p1_5_51 IS NOT NULL AND p1_5_52 IS NULL) OR\n" +
+"        (p1_5_53 IS NULL AND p1_5_54 IS NOT NULL) OR (p1_5_53 IS NOT NULL AND p1_5_54 IS NULL) OR\n" +
+"        (p1_5_55 IS NULL AND p1_5_56 IS NOT NULL) OR (p1_5_55 IS NOT NULL AND p1_5_56 IS NULL))\n" +
+"     AND (TR.ID_ENTIDAD=" + ID_entidad + " AND TR.C1_5_ID='" + envio + "')";
+        System.out.println(sql);
+        resul = conexion.consultar(sql);
+        try {
+            while (resul.next()) {
+                Array.add(new String[]{
+                    resul.getString("ID_ENTIDAD"),
+                    resul.getString("ID_ACTUAL")
+                });
+            } 
+            conexion.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(QIniciativas.class.getName()).log(Level.SEVERE, null, ex);
+        }  return Array;
+    }
 
+         //El ID de la persona legisladora( Columnas de la Q a la BD) no se encuentra en registrado en la tabla 3.Personas Legisladoras
+      public ArrayList PERSONA_LEGIS_NI(String ID_entidad, String Legislatura, String envio) {
+        conexion.Conectar();
+        Array = new ArrayList();
+        sql = "SELECT \n" +
+"    tr.p1_5_1 AS ID_ACTUAL,\n" +
+"    tr.C1_5_ID AS envio,\n" +
+"    tr.legislatura,\n" +
+"    tr.ENTIDAD,\n" +
+"    RTRIM(\n" +
+"        NVL(\n" +
+"            CASE WHEN tr.p1_5_17 IS NOT NULL AND tr.p1_5_17 NOT IN (SELECT p1_3_1 FROM tR_PLE_MEDS1_3) \n" +
+"                THEN 'P1_5_17-Q:' || tr.p1_5_17 || ' ' ELSE '' END\n" +
+"            || CASE WHEN tr.p1_5_19 IS NOT NULL AND tr.p1_5_19 NOT IN (SELECT p1_3_1 FROM tR_PLE_MEDS1_3) \n" +
+"                THEN 'P1_5_19-S:' || tr.p1_5_19 || ' ' ELSE '' END\n" +
+"            || CASE WHEN tr.p1_5_21 IS NOT NULL AND tr.p1_5_21 NOT IN (SELECT p1_3_1 FROM tR_PLE_MEDS1_3) \n" +
+"                THEN 'P1_5_21-U:' || tr.p1_5_21 || ' ' ELSE '' END\n" +
+"            || CASE WHEN tr.p1_5_23 IS NOT NULL AND tr.p1_5_23 NOT IN (SELECT p1_3_1 FROM tR_PLE_MEDS1_3) \n" +
+"                THEN 'P1_5_23-W:' || tr.p1_5_23 || ' ' ELSE '' END\n" +
+"            || CASE WHEN tr.p1_5_25 IS NOT NULL AND tr.p1_5_25 NOT IN (SELECT p1_3_1 FROM tR_PLE_MEDS1_3) \n" +
+"                THEN 'P1_5_25-Y:' || tr.p1_5_25 || ' ' ELSE '' END\n" +
+"            || CASE WHEN tr.p1_5_27 IS NOT NULL AND tr.p1_5_27 NOT IN (SELECT p1_3_1 FROM tR_PLE_MEDS1_3) \n" +
+"                THEN 'P1_5_27-AA:' || tr.p1_5_27 || ' ' ELSE '' END\n" +
+"            || CASE WHEN tr.p1_5_29 IS NOT NULL AND tr.p1_5_29 NOT IN (SELECT p1_3_1 FROM tR_PLE_MEDS1_3) \n" +
+"                THEN 'P1_5_29-AC:' || tr.p1_5_29 || ' ' ELSE '' END\n" +
+"            || CASE WHEN tr.p1_5_31 IS NOT NULL AND tr.p1_5_31 NOT IN (SELECT p1_3_1 FROM tR_PLE_MEDS1_3) \n" +
+"                THEN 'P1_5_31-AE:' || tr.p1_5_31 || ' ' ELSE '' END\n" +
+"            || CASE WHEN tr.p1_5_33 IS NOT NULL AND tr.p1_5_33 NOT IN (SELECT p1_3_1 FROM tR_PLE_MEDS1_3) \n" +
+"                THEN 'P1_5_33-AG:' || tr.p1_5_33 || ' ' ELSE '' END\n" +
+"            || CASE WHEN tr.p1_5_35 IS NOT NULL AND tr.p1_5_35 NOT IN (SELECT p1_3_1 FROM tR_PLE_MEDS1_3) \n" +
+"                THEN 'P1_5_35-AI:' || tr.p1_5_35 || ' ' ELSE '' END\n" +
+"            || CASE WHEN tr.p1_5_37 IS NOT NULL AND tr.p1_5_37 NOT IN (SELECT p1_3_1 FROM tR_PLE_MEDS1_3) \n" +
+"                THEN 'P1_5_37-AK:' || tr.p1_5_37 || ' ' ELSE '' END\n" +
+"            || CASE WHEN tr.p1_5_39 IS NOT NULL AND tr.p1_5_39 NOT IN (SELECT p1_3_1 FROM tR_PLE_MEDS1_3) \n" +
+"                THEN 'P1_5_39-AM:' || tr.p1_5_39 || ' ' ELSE '' END\n" +
+"            || CASE WHEN tr.p1_5_41 IS NOT NULL AND tr.p1_5_41 NOT IN (SELECT p1_3_1 FROM tR_PLE_MEDS1_3) \n" +
+"                THEN 'P1_5_41-AO:' || tr.p1_5_41 || ' ' ELSE '' END\n" +
+"            || CASE WHEN tr.p1_5_43 IS NOT NULL AND tr.p1_5_43 NOT IN (SELECT p1_3_1 FROM tR_PLE_MEDS1_3) \n" +
+"                THEN 'P1_5_43-AQ:' || tr.p1_5_43 || ' ' ELSE '' END\n" +
+"            || CASE WHEN tr.p1_5_45 IS NOT NULL AND tr.p1_5_45 NOT IN (SELECT p1_3_1 FROM tR_PLE_MEDS1_3) \n" +
+"                THEN 'P1_5_45-AS:' || tr.p1_5_45 || ' ' ELSE '' END\n" +
+"            || CASE WHEN tr.p1_5_47 IS NOT NULL AND tr.p1_5_47 NOT IN (SELECT p1_3_1 FROM tR_PLE_MEDS1_3) \n" +
+"                THEN 'P1_5_47-AU:' || tr.p1_5_47 || ' ' ELSE '' END\n" +
+"            || CASE WHEN tr.p1_5_49 IS NOT NULL AND tr.p1_5_49 NOT IN (SELECT p1_3_1 FROM tR_PLE_MEDS1_3) \n" +
+"                THEN 'P1_5_49-AW:' || tr.p1_5_49 || ' ' ELSE '' END\n" +
+"            || CASE WHEN tr.p1_5_51 IS NOT NULL AND tr.p1_5_51 NOT IN (SELECT p1_3_1 FROM tR_PLE_MEDS1_3) \n" +
+"                THEN 'P1_5_51-AY:' || tr.p1_5_51 || ' ' ELSE '' END\n" +
+"            || CASE WHEN tr.p1_5_53 IS NOT NULL AND tr.p1_5_53 NOT IN (SELECT p1_3_1 FROM tR_PLE_MEDS1_3) \n" +
+"                THEN 'P1_5_53-BA:' || tr.p1_5_53 || ' ' ELSE '' END\n" +
+"            || CASE WHEN tr.p1_5_55 IS NOT NULL AND tr.p1_5_55 NOT IN (SELECT p1_3_1 FROM tR_PLE_MEDS1_3) \n" +
+"                THEN 'P1_5_55-BB:' || tr.p1_5_55 || ' ' ELSE '' END\n" +
+"        , '')\n" +
+"    , ', ') AS ni\n" +
+"FROM TR_PLE_MEDS1_5 tr\n" +
+"WHERE \n" +
+"    (\n" +
+"        tr.p1_5_17 NOT IN (SELECT p1_3_1 FROM tR_PLE_MEDS1_3)\n" +
+"        OR tr.p1_5_19 NOT IN (SELECT p1_3_1 FROM tR_PLE_MEDS1_3)\n" +
+"        OR tr.p1_5_21 NOT IN (SELECT p1_3_1 FROM tR_PLE_MEDS1_3)\n" +
+"        OR tr.p1_5_23 NOT IN (SELECT p1_3_1 FROM tR_PLE_MEDS1_3)\n" +
+"        OR tr.p1_5_25 NOT IN (SELECT p1_3_1 FROM tR_PLE_MEDS1_3)\n" +
+"        OR tr.p1_5_27 NOT IN (SELECT p1_3_1 FROM tR_PLE_MEDS1_3)\n" +
+"        OR tr.p1_5_29 NOT IN (SELECT p1_3_1 FROM tR_PLE_MEDS1_3)\n" +
+"        OR tr.p1_5_31 NOT IN (SELECT p1_3_1 FROM tR_PLE_MEDS1_3)\n" +
+"        OR tr.p1_5_33 NOT IN (SELECT p1_3_1 FROM tR_PLE_MEDS1_3)\n" +
+"        OR tr.p1_5_35 NOT IN (SELECT p1_3_1 FROM tR_PLE_MEDS1_3)\n" +
+"        OR tr.p1_5_37 NOT IN (SELECT p1_3_1 FROM tR_PLE_MEDS1_3)\n" +
+"        OR tr.p1_5_39 NOT IN (SELECT p1_3_1 FROM tR_PLE_MEDS1_3)\n" +
+"        OR tr.p1_5_41 NOT IN (SELECT p1_3_1 FROM tR_PLE_MEDS1_3)\n" +
+"        OR tr.p1_5_43 NOT IN (SELECT p1_3_1 FROM tR_PLE_MEDS1_3)\n" +
+"        OR tr.p1_5_45 NOT IN (SELECT p1_3_1 FROM tR_PLE_MEDS1_3)\n" +
+"        OR tr.p1_5_47 NOT IN (SELECT p1_3_1 FROM tR_PLE_MEDS1_3)\n" +
+"        OR tr.p1_5_49 NOT IN (SELECT p1_3_1 FROM tR_PLE_MEDS1_3)\n" +
+"        OR tr.p1_5_51 NOT IN (SELECT p1_3_1 FROM tR_PLE_MEDS1_3)\n" +
+"        OR tr.p1_5_53 NOT IN (SELECT p1_3_1 FROM tR_PLE_MEDS1_3)\n" +
+"        OR tr.p1_5_55 NOT IN (SELECT p1_3_1 FROM tR_PLE_MEDS1_3))\n" +
+"        AND (TR.ID_ENTIDAD=" + ID_entidad + " AND TR.C1_5_ID='" + envio + "')";
+        System.out.println(sql);
+        resul = conexion.consultar(sql);
+        try {
+            while (resul.next()) {
+                Array.add(new String[]{
+                    resul.getString("ENTIDAD"),
+                    resul.getString("ID_ACTUAL"),
+                    resul.getString("NI"),
+                });
+            } 
+            conexion.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(QIniciativas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return Array;
+    }
+      
+      //La sección 'personas_legisladoras_promoventes_iniciativa'(el p1_5_17-Q a p1_5_56-BD ) debe estar vacía puesto que se  seleccionó una opcipón diferente a 'Personas legisladoras' en el campo p1_5_16-P(tipo_promovente_iniciativa)
+      public ArrayList NOT_TIPO_PROMOVENTE_PERSONA_LEGIS(String ID_entidad, String Legislatura, String envio) {
+        conexion.Conectar();
+        Array = new ArrayList();
+        sql = "SELECT p1_5_1 AS ID_Legislatura, C1_5_ID AS envio, legislatura,ENTIDAD,\n" +
+"       TC.DESCRIPCION AS TIPO_PROMOVENTE, p1_5_17 AS ID_LEGISLADOR, p1_5_18 AS NOMBRE_LEGISLADOR\n" +
+"FROM TR_PLE_MEDS1_5 TR INNER JOIN TC_TIPO_PROMOVENTE TC ON TC.ID = TR.p1_5_16\n" +
+"WHERE TR.p1_5_16 <> 3 AND (\n" +
+"        TR.P1_5_17 IS NOT NULL or trim(TR.P1_5_17) <> '' OR TR.P1_5_18 IS NOT NULL or trim(TR.P1_5_18) <> '' OR\n" +
+"        TR.P1_5_19 IS NOT NULL or trim(TR.P1_5_19) <> '' OR TR.P1_5_20 IS NOT NULL or trim(TR.P1_5_20) <> '' OR\n" +
+"        TR.P1_5_21 IS NOT NULL or trim(TR.P1_5_21) <> '' OR TR.P1_5_22 IS NOT NULL or trim(TR.P1_5_22) <> '' OR\n" +
+"        TR.P1_5_23 IS NOT NULL or trim(TR.P1_5_23) <> '' OR TR.P1_5_24 IS NOT NULL or trim(TR.P1_5_24) <> '' OR\n" +
+"        TR.P1_5_25 IS NOT NULL or trim(TR.P1_5_25) <> '' OR TR.P1_5_26 IS NOT NULL or trim(TR.P1_5_26) <> '' OR\n" +
+"        TR.P1_5_27 IS NOT NULL or trim(TR.P1_5_27) <> '' OR TR.P1_5_28 IS NOT NULL or trim(TR.P1_5_28) <> '' OR\n" +
+"        TR.P1_5_29 IS NOT NULL or trim(TR.P1_5_29) <> '' OR TR.P1_5_30 IS NOT NULL or trim(TR.P1_5_30) <> '' OR\n" +
+"        TR.P1_5_31 IS NOT NULL or trim(TR.P1_5_31) <> '' OR TR.P1_5_32 IS NOT NULL or trim(TR.P1_5_32) <> '' OR\n" +
+"        TR.P1_5_33 IS NOT NULL or trim(TR.P1_5_33) <> '' OR TR.P1_5_34 IS NOT NULL or trim(TR.P1_5_34) <> '' OR\n" +
+"        TR.P1_5_35 IS NOT NULL or trim(TR.P1_5_35) <> '' OR TR.P1_5_36 IS NOT NULL or trim(TR.P1_5_36) <> '' OR\n" +
+"        TR.P1_5_37 IS NOT NULL or trim(TR.P1_5_37) <> '' OR TR.P1_5_38 IS NOT NULL or trim(TR.P1_5_38) <> '' OR\n" +
+"        TR.P1_5_39 IS NOT NULL or trim(TR.P1_5_39) <> '' OR TR.P1_5_40 IS NOT NULL or trim(TR.P1_5_40) <> '' OR\n" +
+"        TR.P1_5_41 IS NOT NULL or trim(TR.P1_5_41) <> '' OR TR.P1_5_42 IS NOT NULL or trim(TR.P1_5_42) <> '' OR\n" +
+"        TR.P1_5_43 IS NOT NULL or trim(TR.P1_5_43) <> '' OR TR.P1_5_44 IS NOT NULL or trim(TR.P1_5_44) <> '' OR\n" +
+"        TR.P1_5_45 IS NOT NULL or trim(TR.P1_5_45) <> '' OR TR.P1_5_46 IS NOT NULL or trim(TR.P1_5_46) <> '' OR\n" +
+"        TR.P1_5_47 IS NOT NULL or trim(TR.P1_5_47) <> '' OR TR.P1_5_48 IS NOT NULL or trim(TR.P1_5_48) <> '' OR\n" +
+"        TR.P1_5_49 IS NOT NULL or trim(TR.P1_5_49) <> '' OR TR.P1_5_50 IS NOT NULL or trim(TR.P1_5_50) <> '' OR\n" +
+"        TR.P1_5_51 IS NOT NULL or trim(TR.P1_5_51) <> '' OR TR.P1_5_52 IS NOT NULL or trim(TR.P1_5_52) <> '' OR\n" +
+"        TR.P1_5_53 IS NOT NULL or trim(TR.P1_5_53) <> '' OR TR.P1_5_54 IS NOT NULL or trim(TR.P1_5_54) <> '' OR\n" +
+"        TR.P1_5_55 IS NOT NULL or trim(TR.P1_5_55) <> '' OR TR.P1_5_56 IS NOT NULL or trim(TR.P1_5_56) <> '') AND (TR.ID_ENTIDAD=" + ID_entidad + " AND TR.C1_5_ID='" + envio + "')";
+        System.out.println(sql);
+        resul = conexion.consultar(sql);
+        try {
+            while (resul.next()) {
+                Array.add(new String[]{
+                    resul.getString("ID_ENTIDAD"),
+                    resul.getString("ID_ACTUAL")
+                });
+            } 
+            conexion.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(QIniciativas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return Array;
+    }
+
+      //La sección 'personas_legisladoras_promoventes_iniciativa'(el p1_5_17-Q a p1_5_56-BD ) debe estar vacía puesto que se  seleccionó una opcipón diferente a 'Personas legisladoras' en el campo p1_5_16-P(tipo_promovente_iniciativa)
+      public ArrayList PERSONA_LEGIS_REPETIDA(String ID_entidad, String Legislatura, String envio) {
+        conexion.Conectar();
+        Array = new ArrayList();
+        sql = "WITH Legisladores AS (\n" +
+"    SELECT C1_5_ID, p1_5_1 AS ID_Legislatura, legislatura, ENTIDAD, p1_5_16,\n" +
+"           p1_5_17 AS ID, p1_5_18 AS Nombre FROM TR_PLE_MEDS1_5\n" +
+"    UNION ALL SELECT C1_5_ID, p1_5_1, legislatura, ENTIDAD, p1_5_16, p1_5_19, p1_5_20 FROM TR_PLE_MEDS1_5\n" +
+"    UNION ALL SELECT C1_5_ID, p1_5_1, legislatura, ENTIDAD, p1_5_16, p1_5_21, p1_5_22 FROM TR_PLE_MEDS1_5\n" +
+"    UNION ALL SELECT C1_5_ID, p1_5_1, legislatura, ENTIDAD, p1_5_16, p1_5_23, p1_5_24 FROM TR_PLE_MEDS1_5\n" +
+"    UNION ALL SELECT C1_5_ID, p1_5_1, legislatura, ENTIDAD, p1_5_16, p1_5_25, p1_5_26 FROM TR_PLE_MEDS1_5\n" +
+"    UNION ALL SELECT C1_5_ID, p1_5_1, legislatura, ENTIDAD, p1_5_16, p1_5_27, p1_5_28 FROM TR_PLE_MEDS1_5\n" +
+"    UNION ALL SELECT C1_5_ID, p1_5_1, legislatura, ENTIDAD, p1_5_16, p1_5_29, p1_5_30 FROM TR_PLE_MEDS1_5\n" +
+"    UNION ALL SELECT C1_5_ID, p1_5_1, legislatura, ENTIDAD, p1_5_16, p1_5_31, p1_5_32 FROM TR_PLE_MEDS1_5\n" +
+"    UNION ALL SELECT C1_5_ID, p1_5_1, legislatura, ENTIDAD, p1_5_16, p1_5_33, p1_5_34 FROM TR_PLE_MEDS1_5\n" +
+"    UNION ALL SELECT C1_5_ID, p1_5_1, legislatura, ENTIDAD, p1_5_16, p1_5_35, p1_5_36 FROM TR_PLE_MEDS1_5\n" +
+"    UNION ALL SELECT C1_5_ID, p1_5_1, legislatura, ENTIDAD, p1_5_16, p1_5_37, p1_5_38 FROM TR_PLE_MEDS1_5\n" +
+"    UNION ALL SELECT C1_5_ID, p1_5_1, legislatura, ENTIDAD, p1_5_16, p1_5_39, p1_5_40 FROM TR_PLE_MEDS1_5\n" +
+"    UNION ALL SELECT C1_5_ID, p1_5_1, legislatura, ENTIDAD, p1_5_16, p1_5_41, p1_5_42 FROM TR_PLE_MEDS1_5\n" +
+"    UNION ALL SELECT C1_5_ID, p1_5_1, legislatura, ENTIDAD, p1_5_16, p1_5_43, p1_5_44 FROM TR_PLE_MEDS1_5\n" +
+"    UNION ALL SELECT C1_5_ID, p1_5_1, legislatura, ENTIDAD, p1_5_16, p1_5_45, p1_5_46 FROM TR_PLE_MEDS1_5\n" +
+"    UNION ALL SELECT C1_5_ID, p1_5_1, legislatura, ENTIDAD, p1_5_16, p1_5_47, p1_5_48 FROM TR_PLE_MEDS1_5\n" +
+"    UNION ALL SELECT C1_5_ID, p1_5_1, legislatura, ENTIDAD, p1_5_16, p1_5_49, p1_5_50 FROM TR_PLE_MEDS1_5\n" +
+"    UNION ALL SELECT C1_5_ID, p1_5_1, legislatura, ENTIDAD, p1_5_16, p1_5_51, p1_5_52 FROM TR_PLE_MEDS1_5\n" +
+"    UNION ALL SELECT C1_5_ID, p1_5_1, legislatura, ENTIDAD, p1_5_16, p1_5_53, p1_5_54 FROM TR_PLE_MEDS1_5\n" +
+"    UNION ALL SELECT C1_5_ID, p1_5_1, legislatura, ENTIDAD, p1_5_16, p1_5_55, p1_5_56 FROM TR_PLE_MEDS1_5\n" +
+"),\n" +
+"Duplicados AS (\n" +
+"    SELECT C1_5_ID, ID_Legislatura, legislatura, ENTIDAD\n" +
+"    FROM Legisladores\n" +
+"    WHERE ID IS NOT NULL\n" +
+"    GROUP BY C1_5_ID, ID_Legislatura, legislatura, ENTIDAD, ID\n" +
+"    HAVING COUNT(ID) > 1\n" +
+"\n" +
+"    UNION\n" +
+"\n" +
+"    SELECT C1_5_ID, ID_Legislatura, legislatura, ENTIDAD\n" +
+"    FROM Legisladores WHERE Nombre IS NOT NULL\n" +
+"    GROUP BY C1_5_ID, ID_Legislatura, legislatura, ENTIDAD, Nombre\n" +
+"    HAVING COUNT(Nombre) > 1\n" +
+")\n" +
+"SELECT DISTINCT TR.p1_5_1 AS ID_Legislatura,\n" +
+"       TR.C1_5_ID AS envio, TR.legislatura,\n" +
+"       TR.ENTIDAD, TC.DESCRIPCION AS TIPO_PROMOVENTE,\n" +
+"       TR.p1_5_17 AS ID_LEGISLADOR, TR.p1_5_18 AS NOMBRE_LEGISLADOR\n" +
+"FROM TR_PLE_MEDS1_5 TR JOIN TC_TIPO_PROMOVENTE TC ON TC.ID = TR.p1_5_16\n" +
+"JOIN Duplicados D ON D.C1_5_ID = TR.C1_5_ID \n" +
+"                  AND D.ID_Legislatura = TR.p1_5_1\n" +
+"                  AND D.legislatura = TR.legislatura\n" +
+"                  AND D.ENTIDAD = TR.ENTIDAD AND (TR.ENTIDAD=" + ID_entidad + " AND TR.C1_5_ID='" + envio + "')";
+        System.out.println(sql);
+        resul = conexion.consultar(sql);
+        try {
+            while (resul.next()) {
+                Array.add(new String[]{
+                    resul.getString("ID_ENTIDAD"),
+                    resul.getString("ID_ACTUAL")
+                });
+            } 
+            conexion.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(QIniciativas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return Array;
+    }
 //El campo P1_5_3-C(cond_presentacion_iniciativa_periodo) no se debe de capturar debido a que en la columna cond_presentacion_iniciativa_legislatura_actual (P1_5_2) se selecciono la opcion "NO" '2'
     public ArrayList cond_presentacion_iniciativa_periodo(String ID_entidad, String Legislatura, String Envio) {
         conexion.Conectar();
