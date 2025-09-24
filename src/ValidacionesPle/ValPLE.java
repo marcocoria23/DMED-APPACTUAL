@@ -20557,7 +20557,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_83(entidad, legislatura, envio);
                 XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                 celdaD2.setCellStyle(estiloCeldabordes0);
                 celdaD2.setCellType(CellType.STRING);
-                String txtD2 = "Los campos p1_5_17-Q (ID_persona_legisladora_1) y p1_5_17-R (nombre_persona_legisladora_1) deben contener información debido a que se seleccióno: 'Personas legisladoras' en el campo p1_5_16-P(tipo_promovente_iniciativa)";
+                String txtD2 = "Los campos p1_5_17-Q (ID_persona_legisladora_1) y p1_5_17-R (nombre_persona_legisladora_1) deben contener información debido a que se seleccionó 'Personas legisladoras' en el campo p1_5_16-P(tipo_promovente_iniciativa)";
                 XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                 celdaD2.setCellValue(textoD2);
 
