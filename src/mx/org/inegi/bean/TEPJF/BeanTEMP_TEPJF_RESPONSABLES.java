@@ -15,90 +15,72 @@ import java.sql.SQLException;
 import java.sql.SQLInput;
 import java.sql.SQLOutput;
 
-public class BeanTEMP_TR_TEPJF_ACTORES extends Bean implements SQLData {
+public class BeanTEMP_TEPJF_RESPONSABLES extends Bean implements SQLData {
 
     private String SQLTypeName;
-    private String ID_TEMP_TEPJF_EXPEDIENTE;
-    private String ID_TEMP_TEPJF_ACTORES;
-    private String CLASE_ACTOR;
-    private String OTRO_CLASE_ACTOR;
-    private String SEXO;
-    private String COND_REPRES_ACTOR;
-    private String PART_POLITICO_NAC_ACTOR;
-    private String PART_POLITICO_LOCAL_ACTOR;
-    private String SALA_ACTOR;
+    private String ID_TEPJF_EXPEDIENTE;
+    private String ID_TEPJF_RESPONSABLES;
+    private String CLASE_RESPONSABLE;
+    private String OTRO_CLASE_RESPONSABLE;
+    private String PART_POLITICO_NAC_RESPONS;
+    private String PART_POLITICO_LOCAL_RESPONS;
+    private String SALA_RESPONSABLE;
     private String OBSERVACIONES;
 
-    public String GetID_TEMP_TEPJF_EXPEDIENTE() {
-        return ID_TEMP_TEPJF_EXPEDIENTE;
+    public String getID_TEPJF_EXPEDIENTE() {
+        return ID_TEPJF_EXPEDIENTE;
     }
 
-    public void SetID_TEMPT_EPJF_EXPEDIENTE(String ID_TEPJF_EXPEDIENTE) {
-        this.ID_TEMP_TEPJF_EXPEDIENTE = ID_TEPJF_EXPEDIENTE;
+    public void setID_TEPJF_EXPEDIENTE(String ID_TEPJF_EXPEDIENTE) {
+        this.ID_TEPJF_EXPEDIENTE = ID_TEPJF_EXPEDIENTE;
     }
 
-    public String GetID_TEMP_TEPJF_ACTORES() {
-        return ID_TEMP_TEPJF_ACTORES;
+    public String getID_TEPJF_RESPONSABLES() {
+        return ID_TEPJF_RESPONSABLES;
     }
 
-    public void SetID_TEMP_TEPJF_ACTORES(String ID_TEPJF_ACTORES) {
-        this.ID_TEMP_TEPJF_ACTORES = ID_TEPJF_ACTORES;
+    public void setID_TEPJF_RESPONSABLES(String ID_TEPJF_RESPONSABLES) {
+        this.ID_TEPJF_RESPONSABLES = ID_TEPJF_RESPONSABLES;
     }
 
-    public String GetCLASE_ACTOR() {
-        return CLASE_ACTOR;
+    public String GetCLASE_RESPONSABLE() {
+        return CLASE_RESPONSABLE;
     }
 
-    public void SetCLASE_ACTOR(String CLASE_ACTOR) {
-        this.CLASE_ACTOR = CLASE_ACTOR;
+    public void SetCLASE_RESPONSABLE(String CLASE_RESPONSABLE) {
+        this.CLASE_RESPONSABLE = CLASE_RESPONSABLE;
     }
 
-    public String GetOTRO_CLASE_ACTOR() {
-        return OTRO_CLASE_ACTOR;
+    public String GetOTRO_CLASE_RESPONSABLE() {
+        return OTRO_CLASE_RESPONSABLE;
     }
 
-    public void SetOTRO_CLASE_ACTOR(String OTRO_CLASE_ACTOR) {
-        this.OTRO_CLASE_ACTOR = OTRO_CLASE_ACTOR;
+    public void SetOTRO_CLASE_RESPONSABLE(String OTRO_CLASE_RESPONSABLE) {
+        this.OTRO_CLASE_RESPONSABLE = OTRO_CLASE_RESPONSABLE;
     }
 
-    public String GetSEXO() {
-        return SEXO;
+    public String GetPART_POLITICO_NAC_RESPONS() {
+        return PART_POLITICO_NAC_RESPONS;
     }
 
-    public void SetSEXO(String SEXO) {
-        this.SEXO = SEXO;
+    public void SetPART_POLITICO_NAC_RESPONS(String PART_POLITICO_NAC_RESPONS) {
+        this.PART_POLITICO_NAC_RESPONS = PART_POLITICO_NAC_RESPONS;
     }
 
-    public String GetCOND_REPRES_ACTOR() {
-        return COND_REPRES_ACTOR;
+    public String GetPART_POLITICO_LOCAL_RESPONS() {
+        return PART_POLITICO_LOCAL_RESPONS;
     }
 
-    public void SetCOND_REPRES_ACTOR(String COND_REPRES_ACTOR) {
-        this.COND_REPRES_ACTOR = COND_REPRES_ACTOR;
+    public void SetPART_POLITICO_LOCAL_RESPONS(String PART_POLITICO_LOCAL_RESPONS) {
+        this.PART_POLITICO_LOCAL_RESPONS = PART_POLITICO_LOCAL_RESPONS;
     }
 
-    public String GetPART_POLITICO_NAC_ACTOR() {
-        return PART_POLITICO_NAC_ACTOR;
+    public String GetSALA_RESPONSABLE() {
+        return SALA_RESPONSABLE;
     }
 
-    public void SetPART_POLITICO_NAC_ACTOR(String PART_POLITICO_NAC_ACTOR) {
-        this.PART_POLITICO_NAC_ACTOR = PART_POLITICO_NAC_ACTOR;
-    }
-
-    public String GetPART_POLITICO_LOCAL_ACTOR() {
-        return PART_POLITICO_LOCAL_ACTOR;
-    }
-
-    public void SetPART_POLITICO_LOCAL_ACTOR(String PART_POLITICO_LOCAL_ACTOR) {
-        this.PART_POLITICO_LOCAL_ACTOR = PART_POLITICO_LOCAL_ACTOR;
-    }
-
-    public String GetSALA_ACTOR() {
-        return SALA_ACTOR;
-    }
-
-    public void SetSALA_ACTOR(String SALA_ACTOR) {
-        this.SALA_ACTOR = SALA_ACTOR;
+    public void SetSALA_RESPONSABLE(String SALA_RESPONSABLE) {
+        this.SALA_RESPONSABLE = SALA_RESPONSABLE;
     }
 
     public String GetOBSERVACIONES() {
@@ -133,15 +115,13 @@ public class BeanTEMP_TR_TEPJF_ACTORES extends Bean implements SQLData {
     @Override
     public Object[] toArray() {
         Object[] array = {
-            GetID_TEMP_TEPJF_EXPEDIENTE(),
-            GetID_TEMP_TEPJF_ACTORES(),
-            GetCLASE_ACTOR(),
-            GetOTRO_CLASE_ACTOR(),
-            GetSEXO(),
-            GetCOND_REPRES_ACTOR(),
-            GetPART_POLITICO_NAC_ACTOR(),
-            GetPART_POLITICO_LOCAL_ACTOR(),
-            GetSALA_ACTOR(),
+            getID_TEPJF_EXPEDIENTE(),
+            getID_TEPJF_RESPONSABLES(),
+            GetCLASE_RESPONSABLE(),
+            GetOTRO_CLASE_RESPONSABLE(),
+            GetPART_POLITICO_NAC_RESPONS(),
+            GetPART_POLITICO_LOCAL_RESPONS(),
+            GetSALA_RESPONSABLE(),
             GetOBSERVACIONES()
         };
         return array;

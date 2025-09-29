@@ -17,7 +17,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
-import mx.org.inegi.bean.TEPJF.BeanTEMP_TR_TEPJF_EXPEDIENTE;
+import mx.org.inegi.bean.TEPJF.BeanTEMP_TEPJF_EXPEDIENTE;
 import mx.org.inegi.conexion.TEPJF.DaoConexionTEPJF;
 import mx.org.inegi.conexion.TEPJF.OracleDAOFactoryTEPJF;
 import oracle.jdbc.OracleTypes;
@@ -33,7 +33,7 @@ import org.apache.commons.csv.CSVRecord;
  *
  * @author ANTONIO.CORIA
  */
-public class temp_tr_tepjf_expediente {
+public class temp_tepjf_expediente {
 
     public static String impErro = "", RutaT = "",NuevaRuta="";
     public static int TotalRegistros = 0;
@@ -70,14 +70,14 @@ public class temp_tr_tepjf_expediente {
                     CSVRecord firstRecord = csvParser.iterator().next();
                     numeroColumnas = firstRecord.size();
                     System.out.println("numcol" + numeroColumnas);
-                    if (numeroColumnas == 55) {
+                    if (numeroColumnas == 60) {
                         System.out.println("+hellooou+" + numeroColumnas);
-                        ArrayList<BeanTEMP_TR_TEPJF_EXPEDIENTE> ad = new ArrayList<>();
+                        ArrayList<BeanTEMP_TEPJF_EXPEDIENTE> ad = new ArrayList<>();
                         for (CSVRecord record : csvParser) {
                             System.out.println("llenado de csv");
                             TotalRegistros++;
-                            BeanTEMP_TR_TEPJF_EXPEDIENTE c = new BeanTEMP_TR_TEPJF_EXPEDIENTE();
-                            c.SetID_TEMP_TEPJF_EXPEDIENTE(record.get(0));
+                            BeanTEMP_TEPJF_EXPEDIENTE c = new BeanTEMP_TEPJF_EXPEDIENTE();
+                            c.setID_TEPJF_EXPEDIENTE(record.get(0));
                             c.SetID_EXP_ACUMULADO(record.get(1));
                             c.SetPERIODO(record.get(2));
                             c.SetID_SALA(record.get(3));
@@ -89,14 +89,14 @@ public class temp_tr_tepjf_expediente {
                             c.SetID_AMBITO_ASUNTO(record.get(9));
                             c.SetID_AGEE(record.get(10));
                             c.SetDES_AGEE(record.get(11));
-                            c.SetID_AGEE_FUERA_CIRC(record.get(12));
-                            c.SetDES_AGEE_FUERA_CIRC(record.get(13));
-                            c.SetID_AGEE_FEDERAL(record.get(14));
-                            c.SetDES_AGEE_FEDERAL(record.get(15));
-                            c.SetID_AGEM(record.get(16));
-                            c.SetDES_AGEM(record.get(17));
-                            c.SetID_AGEM_FUERA_CIRC(record.get(18));
-                            c.SetDES_AGEM_FUERA_CIRC(record.get(19));
+                            c.SetID_AGEM(record.get(12));
+                            c.SetDES_AGEM(record.get(13));
+                            c.SetID_AGEE_FUERA_CIRC(record.get(14));
+                            c.SetDES_AGEE_FUERA_CIRC(record.get(15));
+                            c.SetID_AGEM_FUERA_CIRC(record.get(16));
+                            c.SetDES_AGEM_FUERA_CIRC(record.get(17));
+                            c.SetID_AGEE_FEDERAL(record.get(18));
+                            c.SetDES_AGEE_FEDERAL(record.get(19));
                             c.SetID_AGEM_FEDERAL(record.get(20));
                             c.SetDES_AGEM_FEDERAL(record.get(21));
                             c.SetID_MEDIO_IMPUGNACION(record.get(22));
@@ -123,22 +123,27 @@ public class temp_tr_tepjf_expediente {
                             c.SetTEMA5_IMPUGNACION_N2(record.get(43));
                             c.SetTEMA5_IMPUGNACION_N3(record.get(44));
                             c.SetTEMA5_IMPUGNACION_N4(record.get(45));
-                            c.SetOTRO_TEMA1(record.get(46));
-                            c.SetOTRO_TEMA2(record.get(47));
-                            c.SetOTRO_TEMA3(record.get(48));
-                            c.SetOTRO_TEMA4(record.get(49));
-                            c.SetOTRO_TEMA5(record.get(50));
-                            c.SetCANT_ACTORES(record.get(51));
-                            c.SetCANT_RESPONSABLES(record.get(52));
-                            c.SetCANT_TERCEROS_INTERESADOS(record.get(53));
-                            c.SetOBSERVACIONES(record.get(54));
+                            c.setTEMA6_IMPUGNACION_N1(record.get(46));
+                            c.setTEMA6_IMPUGNACION_N2(record.get(47));
+                            c.setTEMA6_IMPUGNACION_N3(record.get(48));
+                            c.setTEMA6_IMPUGNACION_N4(record.get(49));
+                            c.SetOTRO_TEMA1(record.get(50));
+                            c.SetOTRO_TEMA2(record.get(51));
+                            c.SetOTRO_TEMA3(record.get(52));
+                            c.SetOTRO_TEMA4(record.get(53));
+                            c.SetOTRO_TEMA5(record.get(54));
+                            c.setOTRO_TEMA6(record.get(55));
+                            c.SetCANT_ACTORES(record.get(56));
+                            c.SetCANT_RESPONSABLES(record.get(57));
+                            c.SetCANT_TERCEROS_INTERESADOS(record.get(58));
+                            c.SetOBSERVACIONES(record.get(59));
                             ad.add(c);
                         }
 
                         System.out.println("entro 1");
                         if (TotalRegistros > 0) {
                             con = OracleDAOFactoryTEPJF.creaConexion();
-                            sd = StructDescriptor.createDescriptor("OBJ_TEMP_TR_TEPJF_EXPEDIENTE", con);
+                            sd = StructDescriptor.createDescriptor("OBJ_TEPJF_EXPEDIENTE", con);
                             structs = new STRUCT[ad.size()];
                             System.out.println("entro 2");
                             System.out.println("tamaño " + ad.size());
@@ -148,11 +153,11 @@ public class temp_tr_tepjf_expediente {
                             }
 
                             System.out.println("entro 3");
-                            descriptor = ArrayDescriptor.createDescriptor("ARR_OBJ_TEMP_TR_TEPJF_EXPEDIENTE", con);
+                            descriptor = ArrayDescriptor.createDescriptor("ARR_OBJ_TMP_TEPJF_EXPEDIENTE", con);
                             System.out.println("entro 4");
                             array_to_pass = new ARRAY(descriptor, con, structs);
                             System.out.println("entro 5");
-                            st = con.prepareCall("{? = call(PKG_INTEGRADORXLSM.TEMP_TR_TEPJF_EXPEDIENTE(?))}");
+                            st = con.prepareCall("{? = call(PKG_INTEGRADORXLSM.TEMP_TEPJF_EXPEDIENTE(?))}");
                             System.out.println("entro 6");
                             st.registerOutParameter(1, OracleTypes.INTEGER);
                             System.out.println("entro 7");

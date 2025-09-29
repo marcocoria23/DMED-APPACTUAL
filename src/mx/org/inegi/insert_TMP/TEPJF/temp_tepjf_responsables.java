@@ -17,7 +17,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
-import mx.org.inegi.bean.TEPJF.BeanTEMP_TR_TEPJF_RESPONSABLES;
+import mx.org.inegi.bean.TEPJF.BeanTEMP_TEPJF_RESPONSABLES;
 import mx.org.inegi.conexion.TEPJF.DaoConexionTEPJF;
 import mx.org.inegi.conexion.TEPJF.OracleDAOFactoryTEPJF;
 import oracle.jdbc.OracleTypes;
@@ -33,7 +33,7 @@ import org.apache.commons.csv.CSVRecord;
  *
  * @author ANTONIO.CORIA
  */
-public class temp_tr_tepjf_responsables {
+public class temp_tepjf_responsables {
 
     public static String impErro = "", RutaT = "", NuevaRuta = "";
     public static int TotalRegistros = 0;
@@ -69,13 +69,13 @@ public class temp_tr_tepjf_responsables {
                     System.out.println("numcol" + numeroColumnas);
                     if (numeroColumnas == 8) {
                         System.out.println("+hellooou+" + numeroColumnas);
-                        ArrayList<BeanTEMP_TR_TEPJF_RESPONSABLES> ad = new ArrayList<>();
+                        ArrayList<BeanTEMP_TEPJF_RESPONSABLES> ad = new ArrayList<>();
                         for (CSVRecord record : csvParser) {
                             System.out.println("llenado de csv");
                             TotalRegistros++;
-                            BeanTEMP_TR_TEPJF_RESPONSABLES c = new BeanTEMP_TR_TEPJF_RESPONSABLES();
-                            c.SetID_TEMP_TEPJF_EXPEDIENTE(record.get(0));
-                            c.SetID_TEMP_TEPJF_RESPONSABLES(record.get(1));
+                            BeanTEMP_TEPJF_RESPONSABLES c = new BeanTEMP_TEPJF_RESPONSABLES();
+                            c.setID_TEPJF_EXPEDIENTE(record.get(0));
+                            c.setID_TEPJF_RESPONSABLES(record.get(1));
                             c.SetCLASE_RESPONSABLE(record.get(2));
                             c.SetOTRO_CLASE_RESPONSABLE(record.get(3));
                             c.SetPART_POLITICO_NAC_RESPONS(record.get(4));
@@ -89,7 +89,7 @@ public class temp_tr_tepjf_responsables {
                         System.out.println("entro 1");
                         if (TotalRegistros > 0) {
                             con = OracleDAOFactoryTEPJF.creaConexion();
-                            sd = StructDescriptor.createDescriptor("OBJ_TEMP_TR_TEPJF_RESPONSABLES", con);
+                            sd = StructDescriptor.createDescriptor("OBJ_TEMP_TEPJF_RESPONSABLES", con);
                             structs = new STRUCT[ad.size()];
                             System.out.println("entro 2");
                             System.out.println("tamaño " + ad.size());
@@ -99,11 +99,11 @@ public class temp_tr_tepjf_responsables {
                             }
 
                             System.out.println("entro 3");
-                            descriptor = ArrayDescriptor.createDescriptor("ARR_OBJ_TEMP_TR_TEPJF_RESPONSABLES", con);
+                            descriptor = ArrayDescriptor.createDescriptor("ARR_OBJ_TEMP_TEPJF_RESPONSABLES", con);
                             System.out.println("entro 4");
                             array_to_pass = new ARRAY(descriptor, con, structs);
                             System.out.println("entro 5");
-                            st = con.prepareCall("{? = call(PKG_INTEGRADORXLSM.TEMP_TR_TEPJF_RESPONSABLES(?))}");
+                            st = con.prepareCall("{? = call(PKG_INTEGRADORXLSM.TEMP_TEPJF_RESPONSABLES(?))}");
                             System.out.println("entro 6");
                             st.registerOutParameter(1, OracleTypes.INTEGER);
                             System.out.println("entro 7");

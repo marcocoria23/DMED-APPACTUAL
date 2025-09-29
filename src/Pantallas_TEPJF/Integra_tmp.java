@@ -11,10 +11,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import mx.org.inegi.Procedure.TEPJF.EliminaTMP;
-import mx.org.inegi.insert_TMP.TEPJF.temp_tr_tepjf_actores;
-import mx.org.inegi.insert_TMP.TEPJF.temp_tr_tepjf_expediente;
-import mx.org.inegi.insert_TMP.TEPJF.temp_tr_tepjf_resoluciones;
-import mx.org.inegi.insert_TMP.TEPJF.temp_tr_tepjf_responsables;
+import mx.org.inegi.insert_TMP.TEPJF.temp_tepjf_actores;
+import mx.org.inegi.insert_TMP.TEPJF.temp_tepjf_expediente;
+import mx.org.inegi.insert_TMP.TEPJF.temp_tepjf_resoluciones;
+import mx.org.inegi.insert_TMP.TEPJF.temp_tepjf_responsables;
 
 /**
  *
@@ -271,10 +271,10 @@ public class Integra_tmp extends javax.swing.JFrame {
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
         // TODO add your handling code here:
         EliminaTMP EliminaTMP = new EliminaTMP();
-        temp_tr_tepjf_expediente InEXP = new temp_tr_tepjf_expediente();
-        temp_tr_tepjf_actores InACT = new temp_tr_tepjf_actores();
-        temp_tr_tepjf_responsables InARES = new temp_tr_tepjf_responsables();
-        temp_tr_tepjf_resoluciones InRESOL = new temp_tr_tepjf_resoluciones();
+        temp_tepjf_expediente InEXP = new temp_tepjf_expediente();
+        temp_tepjf_actores InACT = new temp_tepjf_actores();
+        temp_tepjf_responsables InARES = new temp_tepjf_responsables();
+        temp_tepjf_resoluciones InRESOL = new temp_tepjf_resoluciones();
 
         new Thread(() -> {
 
@@ -282,22 +282,22 @@ public class Integra_tmp extends javax.swing.JFrame {
                 System.out.println("+++" + directorio + "EXPEDIENTES.csv");
                 Desabilita();
                 EliminaTMP.EliminaTMP();
-                LIns.setText("Ins..TEMP_TR_TEPJF_EXPEDIENTES");
+                LIns.setText("Ins..TEMP_TEPJF_EXPEDIENTES");
                 Progress.setValue(25);
                 RutaArchivo.setText(directorio + "EXPEDIENTES.csv");
                 InEXP.IN_EXPEDIENTE(directorio + "EXPEDIENTES.csv");
                 
-                LIns.setText("Ins..TEMP_TR_TEPJF_ACTORES");
+                LIns.setText("Ins..TEMP_TEPJF_ACTORES");
                 Progress.setValue(50);
                 RutaArchivo.setText(directorio + "ACTORES.csv");
                 InACT.IN_ACTORES(directorio + "ACTORES.csv");
                 
-                LIns.setText("Ins..TEMP_TR_TEPJF_RESPONSABLES");
+                LIns.setText("Ins..TEMP_TEPJF_RESPONSABLES");
                 Progress.setValue(75);
                 RutaArchivo.setText(directorio + "RESPONSABLES.csv");
                 InARES.IN_RESPONSABLES(directorio + "RESPONSABLES.csv");
                 
-                LIns.setText("Ins..TEMP_TR_TEPJF_RESOLUCIONES");
+                LIns.setText("Ins..TEMP_TEPJF_RESOLUCIONES");
                 Progress.setValue(100);
                 RutaArchivo.setText(directorio + "RESOLUCIONES.csv");
                 InRESOL.IN_RESOLUCIONES(directorio + "RESOLUCIONES.csv");

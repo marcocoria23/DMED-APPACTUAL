@@ -15,41 +15,43 @@ import java.sql.SQLException;
 import java.sql.SQLInput;
 import java.sql.SQLOutput;
 
-public class BeanTEMP_TR_TEPJF_RESOLUCIONES extends Bean implements SQLData {
+public class BeanTEMP_TEPJF_RESOLUCIONES extends Bean implements SQLData {
 
     private String SQLTypeName;
-    private String ID_TEMP_TEPJF_EXPEDIENTE;
-    private String ID_TEMP_TEPJF_RESOLUCIONES;
-    private String FECHA_RESOL;
-    private String TP_SESION;
-    private String TP_RESOLUCION;
-    private String OTRO_TP_RESOLUCION;
-    private String TP_RESOLUCION_F;
-    private String SENTIDO_RESOLUCION_F;
-    private String OTRO_SENTIDO_RESOLUCION_F;
-    private String SENTIDO_RESOLUCION_NF;
-    private String OTRO_SENTIDO_RESOLUCION_NF;
-    private String DURACION_PROCESO;
-    private String COND_IMPUGN;
-    private String FECHA_ACUERDO_CUMPL;
-    private String OBSERVACIONES;
+    private String ID_TEPJF_EXPEDIENTE;
+private String ID_TEPJF_RESOLUCIONES;
+private String FECHA_RESOL;
+private String TP_SESION;
+private String TP_RESOLUCION;
+private String OTRO_TP_RESOLUCION;
+private String TP_RESOLUCION_F;
+private String SENTIDO_RESOLUCION_F;
+private String OTRO_SENTIDO_RESOLUCION_F;
+private String SENTIDO_RESOLUCION_NF;
+private String OTRO_SENTIDO_RESOLUCION_NF;
+private String DURACION_PROCESO;
+private String COND_IMPUGN;
+private String FECHA_ACUERDO_CUMPL;
+private String OBSERVACIONES;
 
-    public String GetID_TEMP_TEPJF_EXPEDIENTE() {
-        return ID_TEMP_TEPJF_EXPEDIENTE;
+    public String GetID_TEPJF_EXPEDIENTE() {
+        return ID_TEPJF_EXPEDIENTE;
     }
 
-    public void SetID_TEMP_TEPJF_EXPEDIENTE(String ID_TEPJF_EXPEDIENTE) {
-        this.ID_TEMP_TEPJF_EXPEDIENTE = ID_TEPJF_EXPEDIENTE;
+    public void SetID_TEPJF_EXPEDIENTE(String ID_TEPJF_EXPEDIENTE) {
+        this.ID_TEPJF_EXPEDIENTE = ID_TEPJF_EXPEDIENTE;
     }
 
-    public String GetID_TEMP_TEPJF_RESOLUCIONES() {
-        return ID_TEMP_TEPJF_RESOLUCIONES;
+    public String GetID_TEPJF_RESOLUCIONES() {
+        return ID_TEPJF_RESOLUCIONES;
     }
 
-    public void SetID_TEMP_TEPJF_RESOLUCIONES(String ID_TEPJF_RESOLUCIONES) {
-        this.ID_TEMP_TEPJF_RESOLUCIONES = ID_TEPJF_RESOLUCIONES;
+    public void SetID_TEPJF_RESOLUCIONES(String ID_TEPJF_RESOLUCIONES) {
+        this.ID_TEPJF_RESOLUCIONES = ID_TEPJF_RESOLUCIONES;
     }
 
+
+ 
     public String GetFECHA_RESOL() {
         return FECHA_RESOL;
     }
@@ -178,8 +180,8 @@ public class BeanTEMP_TR_TEPJF_RESOLUCIONES extends Bean implements SQLData {
     @Override
     public Object[] toArray() {
         Object[] array = {
-            GetID_TEMP_TEPJF_EXPEDIENTE(),
-            GetID_TEMP_TEPJF_RESOLUCIONES(),
+            GetID_TEPJF_EXPEDIENTE(),
+            GetID_TEPJF_RESOLUCIONES(),
             GetFECHA_RESOL(),
             GetTP_SESION(),
             GetTP_RESOLUCION(),
