@@ -44,7 +44,7 @@ public class Valida_Resoluciones {
       try {
           while (resul.next()) {
               Array.add(new String[]{
-                  resul.getString("ID_TEPJF_EXPEDIENTE"),
+                  resul.getString("ID_TEPJF_RESOLUCIONES"),
                    resul.getString("ID_unico")
                   
                 });

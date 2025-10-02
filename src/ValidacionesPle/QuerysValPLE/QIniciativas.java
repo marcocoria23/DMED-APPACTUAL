@@ -267,7 +267,7 @@ public class QIniciativas {
         try {
             while (resul.next()) {
                 Array.add(new String[]{
-                    resul.getString("ID_ENTIDAD"),
+                    resul.getString("ENTIDAD"),
                     resul.getString("ID_ACTUAL")
                 });
             } 
@@ -2628,4 +2628,68 @@ public ArrayList Dictamen_sentido_resolucion(String ID_entidad, String Legislatu
         return Array;
     }
 
+
+
+//Se indica que la iniciativa no fue presentada en la legislatura actual; sin embargo, la fecha de ingreso en oficialía de partes se encuentra dentro del periodo correspondiente a la legislatura vigente.
+    public ArrayList fecha_iniciativa_legislatura_actual(String ID_entidad, String Legislatura, String Envio) {
+        conexion.Conectar();
+        Array = new ArrayList();
+        sql = "SELECT \n" +
+"    t1.entidad, t1.C1_1_ID as envio,\n" +
+"    t5.P1_5_1 AS id_iniciativa,\n" +
+"    TO_DATE(t1.P1_1_8,'DD/MM/YYYY') AS fecha_inicio_informacion_reportada,\n" +
+"    TO_DATE(t1.P1_1_9,'DD/MM/YYYY') AS fecha_termino_informacion_reportada,\n" +
+"    TO_DATE(t5.P1_5_11,'DD/MM/YYYY') AS fecha_ingreso_iniciativa_oficialia_partes,\n" +
+"    t5.P1_5_2 AS cond_presentacion_iniciativa_legislatura_actual\n" +
+"FROM TR_PLE_MEDS1_5 t5\n" +
+"INNER JOIN TR_PLE_MEDS1_1 t1 ON t1.ID_ENTIDAD = t5.ID_ENTIDAD\n" +
+"   AND t5.C1_5_ID = t1.C1_1_ID AND t1.LEGISLATURA = t5.LEGISLATURA\n" +
+"WHERE t5.P1_5_2 = 2  AND TO_DATE(t5.P1_5_11,'DD/MM/YYYY') \n" +
+"      BETWEEN TO_DATE(t1.P1_1_8,'DD/MM/YYYY') AND TO_DATE(t1.P1_1_9,'DD/MM/YYYY')\n" 
+                + " AND t1.ID_ENTIDAD=" + ID_entidad + " AND t1.Legislatura=" + Legislatura + " AND t5.C1_5_ID='" + Envio + "'";
+        System.out.println(sql);
+        resul = conexion.consultar(sql);
+        try {
+            while (resul.next()) {
+                Array.add(new String[]{
+                    resul.getString("ID_ENTIDAD"),
+                    resul.getString("id_iniciativa")
+                });
+            }
+            conexion.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(QComisiones_Legislativas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return Array;
+    }
+
+//Se indica que la iniciativa no fue presentada en la legislatura actual; sin embargo, la fecha de ingreso en oficialía de partes se encuentra dentro del periodo correspondiente a la legislatura vigente.
+    public ArrayList fecha_iniciativa_periodo_actual(String ID_entidad, String Legislatura, String Envio) {
+        conexion.Conectar();
+        Array = new ArrayList();
+        sql = "SELECT t1.entidad, t1.C1_1A_ID as envio, t5.P1_5_1 AS id_iniciativa, \n" +
+"TO_DATE(t1.P1_1A_2,'DD/MM/YYYY') AS fecha_inicio_Periodo, \n" +
+"TO_DATE(t1.P1_1A_3,'DD/MM/YYYY') AS fecha_termino_periodo, \n" +
+"TO_DATE(t5.P1_5_11,'DD/MM/YYYY') AS fecha_ingreso_iniciativa_oficialia_partes,\n" +
+"t5.P1_5_3 AS cond_presentacion_periodo_actual \n" +
+"FROM TR_PLE_MEDS1_5 t5 \n" +
+"INNER JOIN TR_PLE_MEDS1_1A t1 ON t1.ID_ENTIDAD = t5.ID_ENTIDAD AND t5.C1_5_ID = t1.C1_1A_ID AND t1.LEGISLATURA = t5.LEGISLATURA \n" +
+"WHERE t5.P1_5_3 = 2 AND TO_DATE(t5.P1_5_11,'DD/MM/YYYY') BETWEEN TO_DATE(t1.P1_1A_2,'DD/MM/YYYY') AND TO_DATE(t1.P1_1A_3,'DD/MM/YYYY')\n" 
+                + " AND t1.ID_ENTIDAD=" + ID_entidad + " AND t1.Legislatura=" + Legislatura + " AND t5.C1_5_ID='" + Envio + "'";
+        System.out.println(sql);
+        resul = conexion.consultar(sql);
+        try {
+            while (resul.next()) {
+                Array.add(new String[]{
+                    resul.getString("ENTIDAD"),
+                    resul.getString("id_iniciativa")
+                });
+            }
+            conexion.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(QComisiones_Legislativas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return Array;
+    }
+    
 }

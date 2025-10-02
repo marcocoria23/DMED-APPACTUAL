@@ -229,7 +229,10 @@ public class Valida_Expedientes {
      public ArrayList FECHA_ING_ARCHIVO_FECHA_INGRESO(){
      conexion.Conectar();
       Array = new ArrayList();
-      sql="select ID_TEPJF_EXPEDIENTE,OBSERVACIONES from TR_TEPJF_EXPEDIENTE WHERE TO_DATE(FECHA_ING_ARCHIVO) < TO_DATE(FECHA_INGRESO)";
+      sql="select ID_TEPJF_EXPEDIENTE,FECHA_ING_ARCHIVO,FECHA_INGRESO,observaciones\n" +
+"from TR_TEPJF_EXPEDIENTE \n" +
+"WHERE TO_DATE(FECHA_ING_ARCHIVO) < TO_DATE(FECHA_INGRESO) and\n" +
+"(FECHA_ING_ARCHIVO <> '09/09/1899' and  FECHA_INGRESO <> '09/09/1899')";
       System.out.println(sql);
       resul=conexion.consultar(sql);
       try {
