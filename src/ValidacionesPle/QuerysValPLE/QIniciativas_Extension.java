@@ -142,14 +142,15 @@ public ArrayList PERSONA_ESPACIO_DISPONIBLE(String ID_entidad,String Legislatura
 " INI.P1_5_35  is null OR INI.P1_5_37  is null OR INI.P1_5_39  is null OR INI.P1_5_41  is null \n" +
 " OR INI.P1_5_43  is null OR INI.P1_5_45  is null OR INI.P1_5_47  is null OR INI.P1_5_49  is null OR \n" +
 " INI.P1_5_51  is null OR INI.P1_5_53  is null OR INI.P1_5_55  is null"
- +" AND (COMP_EXT.ID_ENTIDAD="+ID_entidad+" AND INI_EXT.Legislatura="+Legislatura+" AND INI_EXT.C1_5A_ID='"+Envio+"')";
+ +" AND (INI_EXT.ID_ENTIDAD="+ID_entidad+" AND INI_EXT.Legislatura="+Legislatura+" AND INI_EXT.C1_5A_ID='"+Envio+"')";
       System.out.println(sql);
       resul=conexion.consultar(sql);
       try {
           while (resul.next()) {
               Array.add(new String[]{
                   resul.getString("Numero_iniciativa_extension"),
-                  resul.getString("ID_Iniciativa_extension")
+                  resul.getString("ID_Iniciativa_extension"),
+                  resul.getString("ID_ENTIDAD")
                 });
           }
       conexion.close();
