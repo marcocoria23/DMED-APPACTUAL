@@ -103,7 +103,7 @@ public ArrayList PERSONA_REPETIDA(String ID_entidad,String Legislatura,String En
 " OR INI.P1_5_27=P1_5A_2 OR INI.P1_5_29=P1_5A_2 OR INI.P1_5_31=P1_5A_2 OR INI.P1_5_33=P1_5A_2 OR \n" +
 " INI.P1_5_35=P1_5A_2 OR INI.P1_5_37=P1_5A_2 OR INI.P1_5_39=P1_5A_2 OR INI.P1_5_41=P1_5A_2 \n" +
 " OR INI.P1_5_43=P1_5A_2 OR INI.P1_5_45=P1_5A_2 OR INI.P1_5_47=P1_5A_2 OR INI.P1_5_49=P1_5A_2 OR \n" +
-" INI.P1_5_51=P1_5A_2 OR INI.P1_5_53=P1_5A_2 OR INI.P1_5_55=P1_5A_2 AND (INI_EXT.ID_ENTIDAD="+ID_entidad+" AND INI_EXT..Legislatura="+Legislatura+" AND INI_EXT..C1_3A_ID='"+Envio+"')";
+" INI.P1_5_51=P1_5A_2 OR INI.P1_5_53=P1_5A_2 OR INI.P1_5_55=P1_5A_2 AND (INI_EXT.ID_ENTIDAD="+ID_entidad+" AND INI_EXT.Legislatura="+Legislatura+" AND INI_EXT.C1_5A_ID='"+Envio+"')";
       System.out.println(sql);
       resul=conexion.consultar(sql);
       try {
