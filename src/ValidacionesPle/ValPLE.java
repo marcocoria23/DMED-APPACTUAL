@@ -27088,7 +27088,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_83(entidad, legislatura, envio);
                 coni = 1;
             }
 
-            ArrayResult = ini_ext.ID_INICIATIVA(entidad, legislatura, envio);
+            ArrayResult = ini_ext.ID_PERSONA_LEGISLADORA(entidad, legislatura, envio);
             if (ArrayResult.size() > 0) {
                 XSSFRow filaEE1 = hojaIniciativas_extension.createRow(conEnc);//FILA
                 XSSFCell celdaE1 = filaEE1.createCell(0);//COLUMNA
