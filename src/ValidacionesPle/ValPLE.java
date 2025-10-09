@@ -23694,12 +23694,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_83(entidad, legislatura, envio);
                 XSSFCell celdaD4 = filaEE2.createCell(3);//COLUMNA
                 celdaD4.setCellStyle(estiloCeldabordes0);
                 celdaD4.setCellType(CellType.STRING);
-                String txtD4 = "SELECT t1.p1_5_1 AS ID_Legislatura, MIN(t1.C1_5_ID) AS C1_5_ID, MIN(t1.legislatura) AS legislatura,\n" +
-        " MIN(t1.ENTIDAD) AS ENTIDAD, MIN(TRIM(UPPER(t1.p1_5_12))) AS nombre_INICIATIVA, COUNT(*) AS total_envios\n" +
-        "  FROM TR_PLE_MEDS1_5 t1\n" +
-        "  WHERE EXISTS ( SELECT 1 FROM TR_PLE_MEDS1_5 t2 WHERE t1.p1_5_1 = t2.p1_5_1 AND NLSSORT(TRIM(UPPER(t1.p1_5_12)), 'NLS_SORT=BINARY_AI') <> NLSSORT(TRIM(UPPER(t2.p1_5_12)), 'NLS_SORT=BINARY_AI'))\n" +
-        "    AND t1.ENTIDAD =" + entidad + " AND t1.p1_5_1 IN ( SELECT DISTINCT p1_5_1 FROM TR_PLE_MEDS1_5 WHERE C1_5_ID ='" + envio + "' AND ENTIDAD =" + entidad + " )\n" +
-        "    GROUP BY t1.p1_5_1" ;
+                String txtD4 = "" ;
                 XSSFRichTextString textoD4 = new XSSFRichTextString(txtD4);
                 celdaD4.setCellValue(textoD4);
 
