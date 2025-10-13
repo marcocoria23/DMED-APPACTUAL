@@ -31,9 +31,9 @@ public class Menu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        Label_TEPJF = new javax.swing.JLabel();
+        MenuBar_TEPJF = new javax.swing.JMenuBar();
+        Menu_TEPJF = new javax.swing.JMenu();
         Menu_integrarTMP = new javax.swing.JMenuItem();
         Menu_integrarTR = new javax.swing.JMenuItem();
         Menu_validar = new javax.swing.JMenuItem();
@@ -47,12 +47,12 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/MenuTEPJF.png"))); // NOI18N
+        Label_TEPJF.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/MenuTEPJF.png"))); // NOI18N
 
-        jMenuBar1.setBackground(new java.awt.Color(255, 255, 255));
+        MenuBar_TEPJF.setBackground(new java.awt.Color(255, 255, 255));
 
-        jMenu1.setText("Menu");
-        jMenu1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        Menu_TEPJF.setText("Menu");
+        Menu_TEPJF.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         Menu_integrarTMP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/download.png"))); // NOI18N
         Menu_integrarTMP.setText("Integrar TMP");
@@ -61,7 +61,7 @@ public class Menu extends javax.swing.JFrame {
                 Menu_integrarTMPActionPerformed(evt);
             }
         });
-        jMenu1.add(Menu_integrarTMP);
+        Menu_TEPJF.add(Menu_integrarTMP);
 
         Menu_integrarTR.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Insertar.png"))); // NOI18N
         Menu_integrarTR.setText("Integrar TR");
@@ -70,7 +70,7 @@ public class Menu extends javax.swing.JFrame {
                 Menu_integrarTRActionPerformed(evt);
             }
         });
-        jMenu1.add(Menu_integrarTR);
+        Menu_TEPJF.add(Menu_integrarTR);
 
         Menu_validar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Valida.png"))); // NOI18N
         Menu_validar.setText("Validar");
@@ -79,7 +79,7 @@ public class Menu extends javax.swing.JFrame {
                 Menu_validarActionPerformed(evt);
             }
         });
-        jMenu1.add(Menu_validar);
+        Menu_TEPJF.add(Menu_validar);
 
         Menu_crearEstructura.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/CREATE_TEPJF.png"))); // NOI18N
         Menu_crearEstructura.setText("Crear estructura validada");
@@ -88,7 +88,7 @@ public class Menu extends javax.swing.JFrame {
                 Menu_crearEstructuraActionPerformed(evt);
             }
         });
-        jMenu1.add(Menu_crearEstructura);
+        Menu_TEPJF.add(Menu_crearEstructura);
 
         Menu_Elimina.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/delete.png"))); // NOI18N
         Menu_Elimina.setText("Eliminar estructura de BD");
@@ -97,21 +97,21 @@ public class Menu extends javax.swing.JFrame {
                 Menu_EliminaActionPerformed(evt);
             }
         });
-        jMenu1.add(Menu_Elimina);
+        Menu_TEPJF.add(Menu_Elimina);
 
-        jMenuBar1.add(jMenu1);
+        MenuBar_TEPJF.add(Menu_TEPJF);
 
-        setJMenuBar(jMenuBar1);
+        setJMenuBar(MenuBar_TEPJF);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 696, Short.MAX_VALUE)
+            .addComponent(Label_TEPJF, javax.swing.GroupLayout.DEFAULT_SIZE, 696, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 397, Short.MAX_VALUE)
+            .addComponent(Label_TEPJF, javax.swing.GroupLayout.DEFAULT_SIZE, 397, Short.MAX_VALUE)
         );
 
         pack();
@@ -197,13 +197,13 @@ public class Menu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Label_TEPJF;
+    private javax.swing.JMenuBar MenuBar_TEPJF;
     private javax.swing.JMenuItem Menu_Elimina;
+    private javax.swing.JMenu Menu_TEPJF;
     private javax.swing.JMenuItem Menu_crearEstructura;
     private javax.swing.JMenuItem Menu_integrarTMP;
     private javax.swing.JMenuItem Menu_integrarTR;
     private javax.swing.JMenuItem Menu_validar;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenuBar jMenuBar1;
     // End of variables declaration//GEN-END:variables
 }

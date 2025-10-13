@@ -38,75 +38,75 @@ public class MenuProyectos extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel3 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jToggleButton1 = new javax.swing.JToggleButton();
+        btn_SENAP = new javax.swing.JButton();
+        BTN_JA = new javax.swing.JToggleButton();
         jLabel1 = new javax.swing.JLabel();
-        PS = new javax.swing.JButton();
-        PS2 = new javax.swing.JButton();
-        PLE = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
+        BTN_PS = new javax.swing.JButton();
+        BTN_TEPJF = new javax.swing.JButton();
+        BTN_PLE = new javax.swing.JButton();
+        LABEL_MENUPRINCIPAL = new javax.swing.JLabel();
         PS3 = new javax.swing.JButton();
         PS4 = new javax.swing.JButton();
         jToggleButton2 = new javax.swing.JToggleButton();
 
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Senap.png"))); // NOI18N
-        jButton1.setText("SENAP");
-        jButton1.setToolTipText("Sistema Estadistico Nacional de Procuracion de Justicia");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btn_SENAP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Senap.png"))); // NOI18N
+        btn_SENAP.setText("SENAP");
+        btn_SENAP.setToolTipText("Sistema Estadistico Nacional de Procuracion de Justicia");
+        btn_SENAP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btn_SENAPActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 320, 230, 120));
+        jPanel3.add(btn_SENAP, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 320, 230, 120));
 
-        jToggleButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/JALogo.png"))); // NOI18N
-        jToggleButton1.setText("JA");
-        jToggleButton1.setToolTipText("Justicia Agraria");
-        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+        BTN_JA.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/JALogo.png"))); // NOI18N
+        BTN_JA.setText("JA");
+        BTN_JA.setToolTipText("Justicia Agraria");
+        BTN_JA.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton1ActionPerformed(evt);
+                BTN_JAActionPerformed(evt);
             }
         });
-        jPanel3.add(jToggleButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 320, 190, 120));
+        jPanel3.add(BTN_JA, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 320, 190, 120));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 3, 24)); // NOI18N
         jLabel1.setText("Modulos DMED");
         jPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 70, 200, -1));
 
-        PS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/PSF.png"))); // NOI18N
-        PS.setText("PSF Y CPF");
-        PS.setToolTipText("Programas Sociales Federal y Contrataciones Publicas Federal");
-        PS.addActionListener(new java.awt.event.ActionListener() {
+        BTN_PS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/PSF.png"))); // NOI18N
+        BTN_PS.setText("PSF Y CPF");
+        BTN_PS.setToolTipText("Programas Sociales Federal y Contrataciones Publicas Federal");
+        BTN_PS.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PSActionPerformed(evt);
+                BTN_PSActionPerformed(evt);
             }
         });
-        jPanel3.add(PS, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 160, 230, 130));
+        jPanel3.add(BTN_PS, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 160, 230, 130));
 
-        PS2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/TEPJF.png"))); // NOI18N
-        PS2.setText("TEPJF");
-        PS2.setToolTipText("Tribunal Electoral Poder Judicial de la Federacion");
-        PS2.addActionListener(new java.awt.event.ActionListener() {
+        BTN_TEPJF.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/TEPJF.png"))); // NOI18N
+        BTN_TEPJF.setText("TEPJF");
+        BTN_TEPJF.setToolTipText("Tribunal Electoral Poder Judicial de la Federacion");
+        BTN_TEPJF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PS2ActionPerformed(evt);
+                BTN_TEPJFActionPerformed(evt);
             }
         });
-        jPanel3.add(PS2, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 160, 190, 126));
+        jPanel3.add(BTN_TEPJF, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 160, 190, 126));
 
-        PLE.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/PLE.png"))); // NOI18N
-        PLE.setText("PLE");
-        PLE.setToolTipText("Poderes Legislativos Estatal");
-        PLE.addActionListener(new java.awt.event.ActionListener() {
+        BTN_PLE.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/PLE.png"))); // NOI18N
+        BTN_PLE.setText("PLE");
+        BTN_PLE.setToolTipText("Poderes Legislativos Estatal");
+        BTN_PLE.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PLEActionPerformed(evt);
+                BTN_PLEActionPerformed(evt);
             }
         });
-        jPanel3.add(PLE, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, -1, 130));
+        jPanel3.add(BTN_PLE, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, -1, 130));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/FondoMenu2.png"))); // NOI18N
-        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 850, 520));
+        LABEL_MENUPRINCIPAL.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/FondoMenu2.png"))); // NOI18N
+        jPanel3.add(LABEL_MENUPRINCIPAL, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 850, 520));
 
         PS3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/CPF.png"))); // NOI18N
         PS3.setText("CPF");
@@ -151,29 +151,29 @@ public class MenuProyectos extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void PLEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PLEActionPerformed
+    private void BTN_PLEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_PLEActionPerformed
         // TODO add your handling code here:
         Menu Men=new Menu();
         Men.setVisible(true);
         this.setVisible(false);
         
 
-    }//GEN-LAST:event_PLEActionPerformed
+    }//GEN-LAST:event_BTN_PLEActionPerformed
 
-    private void PSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PSActionPerformed
+    private void BTN_PSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_PSActionPerformed
         // TODO add your handling code here:
         Pantallas_PSF.MenuPSF men=new Pantallas_PSF.MenuPSF();
         men.setVisible(true);
         this.setVisible(false);
         
-    }//GEN-LAST:event_PSActionPerformed
+    }//GEN-LAST:event_BTN_PSActionPerformed
 
-    private void PS2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PS2ActionPerformed
+    private void BTN_TEPJFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_TEPJFActionPerformed
         // TODO add your handling code here:
         Pantallas_TEPJF.Menu TE=new Pantallas_TEPJF.Menu();
         TE.setVisible(true);
         this.setVisible(false);
-    }//GEN-LAST:event_PS2ActionPerformed
+    }//GEN-LAST:event_BTN_TEPJFActionPerformed
 
     private void PS3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PS3ActionPerformed
         // TODO add your handling code here:
@@ -183,20 +183,20 @@ public class MenuProyectos extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_PS4ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btn_SENAPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SENAPActionPerformed
         // TODO add your handling code here:
         Inicio In=new Inicio();
         In.setVisible(true);
         this.setVisible(false);
  
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btn_SENAPActionPerformed
 
-    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+    private void BTN_JAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_JAActionPerformed
         // TODO add your handling code here:
         Pantallas_JA.Menu_JA JA = new Pantallas_JA.Menu_JA();
         JA.setVisible(true);
         this.setVisible(false);
-    }//GEN-LAST:event_jToggleButton1ActionPerformed
+    }//GEN-LAST:event_BTN_JAActionPerformed
 
     /**
      * @param args the command line arguments
@@ -234,16 +234,16 @@ public class MenuProyectos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton PLE;
-    private javax.swing.JButton PS;
-    private javax.swing.JButton PS2;
+    private javax.swing.JToggleButton BTN_JA;
+    private javax.swing.JButton BTN_PLE;
+    private javax.swing.JButton BTN_PS;
+    private javax.swing.JButton BTN_TEPJF;
+    private javax.swing.JLabel LABEL_MENUPRINCIPAL;
     private javax.swing.JButton PS3;
     private javax.swing.JButton PS4;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btn_SENAP;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JToggleButton jToggleButton2;
     // End of variables declaration//GEN-END:variables
 }
