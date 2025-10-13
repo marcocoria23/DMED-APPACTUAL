@@ -1212,7 +1212,7 @@ public class Valida_Expedientes {
      public ArrayList Otro_Tema1(){
      conexion.Conectar();
       Array = new ArrayList();
-      sql="select ID_TEPJF_EXPEDIENTE,OBSERVACIONES from TR_TEPJF_EXPEDIENTE WHERE TEMA1_IMPUGNACION_N1 NOT IN  (52) AND Otro_Tema1 IS NOT NULL";
+      sql="select ID_TEPJF_EXPEDIENTE,OBSERVACIONES from TR_TEPJF_EXPEDIENTE WHERE TEMA1_IMPUGNACION_N1 NOT IN  (53) AND Otro_Tema1 IS NOT NULL";
       System.out.println(sql);
       resul=conexion.consultar(sql);
       try {
@@ -1233,7 +1233,7 @@ public class Valida_Expedientes {
      public ArrayList Otro_Tema1_CAP(){
      conexion.Conectar();
       Array = new ArrayList();
-      sql="select ID_TEPJF_EXPEDIENTE,OBSERVACIONES from TR_TEPJF_EXPEDIENTE WHERE TEMA1_IMPUGNACION_N1  IN  (52) AND Otro_Tema1 IS  NULL";
+      sql="select ID_TEPJF_EXPEDIENTE,OBSERVACIONES from TR_TEPJF_EXPEDIENTE WHERE TEMA1_IMPUGNACION_N1  IN  (53) AND Otro_Tema1 IS  NULL";
       System.out.println(sql);
       resul=conexion.consultar(sql);
       try {
@@ -1256,7 +1256,7 @@ public class Valida_Expedientes {
      public ArrayList Otro_Tema2(){
      conexion.Conectar();
       Array = new ArrayList();
-      sql="select ID_TEPJF_EXPEDIENTE,OBSERVACIONES from TR_TEPJF_EXPEDIENTE WHERE TEMA2_IMPUGNACION_N1 NOT IN  (52) AND Otro_Tema2 IS NOT NULL";
+      sql="select ID_TEPJF_EXPEDIENTE,OBSERVACIONES from TR_TEPJF_EXPEDIENTE WHERE TEMA2_IMPUGNACION_N1 NOT IN  (53) AND Otro_Tema2 IS NOT NULL";
       System.out.println(sql);
       resul=conexion.consultar(sql);
       try {
@@ -1277,7 +1277,7 @@ public class Valida_Expedientes {
      public ArrayList Otro_Tema2_CAP(){
      conexion.Conectar();
       Array = new ArrayList();
-      sql="select ID_TEPJF_EXPEDIENTE,OBSERVACIONES from TR_TEPJF_EXPEDIENTE WHERE TEMA2_IMPUGNACION_N1  IN  (52) AND Otro_Tema2 IS  NULL";
+      sql="select ID_TEPJF_EXPEDIENTE,OBSERVACIONES from TR_TEPJF_EXPEDIENTE WHERE TEMA2_IMPUGNACION_N1  IN  (53) AND Otro_Tema2 IS  NULL";
       System.out.println(sql);
       resul=conexion.consultar(sql);
       try {
@@ -1298,7 +1298,7 @@ public class Valida_Expedientes {
      public ArrayList Otro_Tema3(){
      conexion.Conectar();
       Array = new ArrayList();
-      sql="select ID_TEPJF_EXPEDIENTE,OBSERVACIONES from TR_TEPJF_EXPEDIENTE WHERE TEMA3_IMPUGNACION_N1 NOT IN  (52) AND Otro_Tema3 IS NOT NULL";
+      sql="select ID_TEPJF_EXPEDIENTE,OBSERVACIONES from TR_TEPJF_EXPEDIENTE WHERE TEMA3_IMPUGNACION_N1 NOT IN  (53) AND Otro_Tema3 IS NOT NULL";
       System.out.println(sql);
       resul=conexion.consultar(sql);
       try {
@@ -1319,7 +1319,7 @@ public class Valida_Expedientes {
      public ArrayList Otro_Tema3_CAP(){
      conexion.Conectar();
       Array = new ArrayList();
-      sql="select ID_TEPJF_EXPEDIENTE,OBSERVACIONES from TR_TEPJF_EXPEDIENTE WHERE TEMA3_IMPUGNACION_N1  IN  (52) AND Otro_Tema3 IS  NULL";
+      sql="select ID_TEPJF_EXPEDIENTE,OBSERVACIONES from TR_TEPJF_EXPEDIENTE WHERE TEMA3_IMPUGNACION_N1  IN  (53) AND Otro_Tema3 IS  NULL";
       System.out.println(sql);
       resul=conexion.consultar(sql);
       try {
@@ -1340,7 +1340,7 @@ public class Valida_Expedientes {
      public ArrayList Otro_Tema4(){
      conexion.Conectar();
       Array = new ArrayList();
-      sql="select ID_TEPJF_EXPEDIENTE,OBSERVACIONES from TR_TEPJF_EXPEDIENTE WHERE TEMA4_IMPUGNACION_N1 NOT IN  (52) AND Otro_Tema4 IS NOT NULL";
+      sql="select ID_TEPJF_EXPEDIENTE,OBSERVACIONES from TR_TEPJF_EXPEDIENTE WHERE TEMA4_IMPUGNACION_N1 NOT IN  (53) AND Otro_Tema4 IS NOT NULL";
       System.out.println(sql);
       resul=conexion.consultar(sql);
       try {
@@ -1361,7 +1361,7 @@ public class Valida_Expedientes {
      public ArrayList Otro_Tema4_CAP(){
      conexion.Conectar();
       Array = new ArrayList();
-      sql="select ID_TEPJF_EXPEDIENTE,OBSERVACIONES from TR_TEPJF_EXPEDIENTE WHERE TEMA4_IMPUGNACION_N1  IN  (52) AND Otro_Tema4 IS  NULL";
+      sql="select ID_TEPJF_EXPEDIENTE,OBSERVACIONES from TR_TEPJF_EXPEDIENTE WHERE TEMA4_IMPUGNACION_N1  IN  (53) AND Otro_Tema4 IS  NULL";
       System.out.println(sql);
       resul=conexion.consultar(sql);
       try {
@@ -1383,7 +1383,7 @@ public class Valida_Expedientes {
      public ArrayList Otro_Tema5(){
      conexion.Conectar();
       Array = new ArrayList();
-      sql="select ID_TEPJF_EXPEDIENTE,OBSERVACIONES from TR_TEPJF_EXPEDIENTE WHERE TEMA5_IMPUGNACION_N1 NOT IN  (52) AND Otro_Tema5 IS NOT NULL";
+      sql="select ID_TEPJF_EXPEDIENTE,OBSERVACIONES from TR_TEPJF_EXPEDIENTE WHERE TEMA5_IMPUGNACION_N1 NOT IN  (53) AND Otro_Tema5 IS NOT NULL";
       System.out.println(sql);
       resul=conexion.consultar(sql);
       try {
@@ -1405,7 +1405,7 @@ public class Valida_Expedientes {
      public ArrayList Otro_Tema5_CAP(){
      conexion.Conectar();
       Array = new ArrayList();
-      sql="select ID_TEPJF_EXPEDIENTE,OBSERVACIONES from TR_TEPJF_EXPEDIENTE WHERE TEMA5_IMPUGNACION_N1  IN  (52) AND Otro_Tema5 IS  NULL";
+      sql="select ID_TEPJF_EXPEDIENTE,OBSERVACIONES from TR_TEPJF_EXPEDIENTE WHERE TEMA5_IMPUGNACION_N1  IN  (53) AND Otro_Tema5 IS  NULL";
       System.out.println(sql);
       resul=conexion.consultar(sql);
       try {

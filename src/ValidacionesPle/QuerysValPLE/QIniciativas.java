@@ -800,9 +800,10 @@ public class QIniciativas {
         sql = "SELECT t1.p1_5_1 AS ID_Legislatura, MIN(t1.C1_5_ID) AS C1_5_ID, MIN(t1.legislatura) AS legislatura,\n" +
         " MIN(t1.ENTIDAD) AS ENTIDAD, MIN(TRIM(UPPER(t1.p1_5_12))) AS nombre_INICIATIVA, COUNT(*) AS total_envios\n" +
         "  FROM TR_PLE_MEDS1_5 t1\n" +
-        "  WHERE EXISTS ( SELECT 1 FROM TR_PLE_MEDS1_5 t2 WHERE t1.p1_5_1 = t2.p1_5_1 AND NLSSORT(TRIM(UPPER(t1.p1_5_12)), 'NLS_SORT=BINARY_AI') <> NLSSORT(TRIM(UPPER(t2.p1_5_12)), 'NLS_SORT=BINARY_AI'))\n" +
-        "    AND t1.ENTIDAD =" + ID_entidad + " AND t1.p1_5_1 IN ( SELECT DISTINCT p1_5_1 FROM TR_PLE_MEDS1_5 WHERE C1_5_ID ='" + Envio + "' AND ENTIDAD =" + ID_entidad + " )\n" +
-        "    GROUP BY t1.p1_5_1" ;
+        "  WHERE EXISTS ( SELECT 1 FROM TR_PLE_MEDS1_5 t2 WHERE t1.p1_5_1 = t2.p1_5_1  AND LEGISLATURA= "+ Legislatura +" AND NLSSORT(TRIM(UPPER(t1.p1_5_12)), 'NLS_SORT=BINARY_AI') <> NLSSORT(TRIM(UPPER(t2.p1_5_12)), 'NLS_SORT=BINARY_AI'))\n" +
+        "    AND t1.ENTIDAD =" + ID_entidad + " AND t1.p1_5_1 IN ( SELECT DISTINCT p1_5_1 FROM TR_PLE_MEDS1_5 WHERE C1_5_ID ='" + Envio + "' AND ENTIDAD =" + ID_entidad + " AND LEGISLATURA= "+ Legislatura +")\n" +
+        "    AND t1.LEGISLATURA =" + Legislatura +
+        " GROUP BY t1.p1_5_1" ;
       
                 
         System.out.println(sql);
