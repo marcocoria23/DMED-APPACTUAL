@@ -376,7 +376,7 @@ public class QIniciativas {
       public ArrayList NOT_TIPO_PROMOVENTE_PERSONA_LEGIS(String ID_entidad, String Legislatura, String envio) {
         conexion.Conectar();
         Array = new ArrayList();
-        sql = "SELECT p1_5_1 AS ID_Legislatura, C1_5_ID AS envio, legislatura,ENTIDAD,\n" +
+        sql = "SELECT p1_5_1 AS ID_Legislatura, C1_5_ID AS envio, legislatura,ID_ENTIDAD,\n" +
 "       TC.DESCRIPCION AS TIPO_PROMOVENTE, p1_5_17 AS ID_LEGISLADOR, p1_5_18 AS NOMBRE_LEGISLADOR\n" +
 "FROM TR_PLE_MEDS1_5 TR INNER JOIN TC_TIPO_PROMOVENTE TC ON TC.ID = TR.p1_5_16\n" +
 "WHERE TR.p1_5_16 <> 3 AND (\n" +
@@ -406,7 +406,7 @@ public class QIniciativas {
             while (resul.next()) {
                 Array.add(new String[]{
                     resul.getString("ID_ENTIDAD"),
-                    resul.getString("ID_ACTUAL")
+                    resul.getString("ID_Legislatura")
                 });
             } 
             conexion.close();
