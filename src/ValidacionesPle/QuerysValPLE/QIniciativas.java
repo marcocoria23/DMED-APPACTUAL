@@ -185,9 +185,9 @@ public class QIniciativas {
         resul = conexion.consultar(sql);
         try {
             while (resul.next()) {
-                Array.add(new String[]{
-                    resul.getString("ID_ENTIDAD"),
-                    resul.getString("ID_ACTUAL")
+                Array.add(new String[]{             
+                    resul.getString("ID_ACTUAL"),
+                    resul.getString("ID_ENTIDAD")
                 });
             } 
             conexion.close();

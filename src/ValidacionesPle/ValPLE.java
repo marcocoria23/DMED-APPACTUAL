@@ -16824,7 +16824,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_83(entidad, legislatura, envio);
                 XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                 celdaD2.setCellStyle(estiloCeldabordes0);
                 celdaD2.setCellType(CellType.STRING);
-                String txtD2 = "No se debe de capturar P1_4_28-AB(tipo_discapacidad_3_personal_apoyo) debido a que la columna P1_4_25-Y(cond_discapacidad_personal_apoyo) es diferente de SI '1'";
+                String txtD2 = "No se deben de capturar los campos tipo_discapacidad_personal_apoyo(P1_4_26 a P1_4_28, Z-AB) debido a que la columna P1_4_25-Y(cond_discapacidad_personal_apoyo) es diferente de '1.SI'";
                 XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                 celdaD2.setCellValue(textoD2);
 

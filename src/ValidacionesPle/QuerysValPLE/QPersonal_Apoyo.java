@@ -592,11 +592,11 @@ public ArrayList DCtipo_discapacidad_1_personal_apoyo(String ID_entidad,String L
     return Array;
  }  
 
-//No se debe de capturar P1_4_28-AB(tipo_discapacidad_3_personal_apoyo) debido a que la columna P1_4_25-Y(cond_discapacidad_personal_apoyo) es diferente de SI '1'
+//No se deben de capturar los campos tipo_discapacidad_personal_apoyo(P1_4_26 a P1_4_28, Z-AB) debido a que la columna P1_4_25-Y(cond_discapacidad_personal_apoyo) es diferente de '1.SI'
 public ArrayList NDCtipo_discapacidad_1_personal_apoyo(String ID_entidad,String Legislatura,String Envio){
      conexion.Conectar();
       Array = new ArrayList();
-      sql="select ID_ENTIDAD, ENTIDAD, C1_4_ID, P1_4_1,P1_4_20,P1_4_26,P1_4_25 from TR_PLE_MEDS1_4 where P1_4_26<>1  and P1_4_25 is  NOT null"
+      sql="select ID_ENTIDAD, ENTIDAD, C1_4_ID, P1_4_1,P1_4_25,P1_4_26,P1_4_27,P1_4_28 from TR_PLE_MEDS1_4 where P1_4_25<>1  and (P1_4_28 is  NOT null or P1_4_27 is not null or P1_4_26 is not null )"
               + " AND ID_ENTIDAD="+ID_entidad+" AND Legislatura="+Legislatura+" AND C1_4_ID='"+Envio+"'";
       System.out.println(sql);
       resul=conexion.consultar(sql);
