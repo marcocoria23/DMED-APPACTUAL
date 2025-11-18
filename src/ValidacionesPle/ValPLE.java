@@ -238,21 +238,21 @@ public class ValPLE {
         hojaComparecencias_extension.setColumnWidth(4, 20000);
 
         progressBar.setValue(1);
-/*
+
        Despliega_Datos_Generales(libro, hojadatos_generales, estiloCelda0, estiloCelda1, estiloCeldabordes0, Pvalida.entidad, Pvalida.legislatura, Pvalida.envio, progressBar);
        Despliega_Comisiones_legislativas(libro, hojaComision, estiloCelda0, estiloCelda1, estiloCeldabordes0, Pvalida.entidad, Pvalida.legislatura, Pvalida.envio, progressBar);
       Despliega_Personas_Legisladoras(libro, hojaPersonas_legiladoras, estiloCelda0, estiloCelda1, estiloCeldabordes0, Pvalida.entidad, Pvalida.legislatura, Pvalida.envio, progressBar);
        Despliega_Personas_Legisladoras_NN(libro, hojaPersonas_legiladoras, estiloCelda0, estiloCelda1, estiloCeldabordes0, Pvalida.entidad, Pvalida.legislatura, Pvalida.envio, progressBar);   
        Despliega_Personas_legisladoras_extension(libro, hojaPersonas_legisladoras_extension, estiloCelda0, estiloCelda1, estiloCeldabordes0, Pvalida.entidad, Pvalida.legislatura, Pvalida.envio, progressBar);
-      */ Despliega_Personal_apoyo(libro, hojaPersonal_apoyo, estiloCelda0, estiloCelda1, estiloCeldabordes0, Pvalida.entidad, Pvalida.legislatura, Pvalida.envio, progressBar);
-      /* Despliega_Iniciativas(libro, hojaIniciativas, estiloCelda0, estiloCelda1, estiloCeldabordes0, Pvalida.entidad, Pvalida.legislatura, Pvalida.envio, Pvalida.envio_anterior, progressBar);
+       Despliega_Personal_apoyo(libro, hojaPersonal_apoyo, estiloCelda0, estiloCelda1, estiloCeldabordes0, Pvalida.entidad, Pvalida.legislatura, Pvalida.envio, progressBar);
+       Despliega_Iniciativas(libro, hojaIniciativas, estiloCelda0, estiloCelda1, estiloCeldabordes0, Pvalida.entidad, Pvalida.legislatura, Pvalida.envio, Pvalida.envio_anterior, progressBar);
        Despliega_Iniciativas_extension(libro, hojaIniciativas_extension, estiloCelda0, estiloCelda1, estiloCeldabordes0, Pvalida.entidad, Pvalida.legislatura, Pvalida.envio, progressBar);
         Despliega_Iniciativas_Urgente_Obvia(libro, hojaUrgente_obvia, estiloCelda0, estiloCelda1, estiloCeldabordes0, Pvalida.entidad, Pvalida.legislatura, Pvalida.envio, progressBar);
         Despliega_Juicios_Politicos(libro, hojaJuicios_politicos, estiloCelda0, estiloCelda1, estiloCeldabordes0, Pvalida.entidad, Pvalida.legislatura, Pvalida.envio, progressBar);
         Despliega_Declaraciones_Procedencia(libro, hojaDeclaraciones, estiloCelda0, estiloCelda1, estiloCeldabordes0, Pvalida.entidad, Pvalida.legislatura, Pvalida.envio, progressBar);
         Despliega_Comparecencias(libro, hojaComparecencias, estiloCelda0, estiloCelda1, estiloCeldabordes0, Pvalida.entidad, Pvalida.legislatura, Pvalida.envio, progressBar);
         Despliega_Comparecencias_extension(libro, hojaComparecencias_extension, estiloCelda0, estiloCelda1, estiloCeldabordes0, Pvalida.entidad, Pvalida.legislatura, Pvalida.envio, progressBar);
-      */ 
+       
         SaveFileTo(libro, progressBar, f, dtf);
 
     }
