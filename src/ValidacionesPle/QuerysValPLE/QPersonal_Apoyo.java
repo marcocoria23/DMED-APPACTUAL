@@ -54,6 +54,7 @@ public ArrayList Estructura_ID(String ID_entidad,String Legislatura,String Envio
     return Array;
  }
 
+
 //No se debe capturar el campo P1_4_3-C((nombre_2_personal_apoyo) cuando P1_4_2-B(nombre_1_personal_apoyo) viene vacio
 public ArrayList nombre_2_personal_apoyo(String ID_entidad,String Legislatura,String Envio){
      conexion.Conectar();
@@ -143,6 +144,26 @@ public ArrayList apellido_3_personal_apoyo(String ID_entidad,String Legislatura,
     return Array;
  }  
 
+//La celda H-P1_4_8 (fecha_nacimiento_personal_apoyo) no cumple con el formato de fecha requerido (DD/MM/AAAA)
+public ArrayList FORMATO_FECHA_P1_4_8(String ID_entidad,String Legislatura,String Envio){
+     conexion.Conectar();
+      Array = new ArrayList();
+      sql="SELECT ID_ENTIDAD, C1_4_ID AS ENVIO, P1_4_1, P1_4_8 FROM TR_PLE_MEDS1_4 WHERE (not REGEXP_LIKE(P1_4_8, '^[0-3][0-9]/[0-1][0-9]/[0-9]{4}$'))  AND ID_ENTIDAD = '" + ID_entidad + "' AND Legislatura = '" + Legislatura + "' AND C1_4_ID ='"+Envio+"'";
+      System.out.println(sql);
+      resul=conexion.consultar(sql);
+      try {
+          while (resul.next()) {
+              Array.add(new String[]{
+                  resul.getString("ID_ENTIDAD"),
+                  resul.getString("P1_4_1")
+                });
+          }
+      conexion.close();
+     } catch (SQLException ex) {
+            Logger.getLogger(QComisiones_Legislativas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    return Array;
+ }
 
 //Se debe capturar P1_4_11-K(otro_regimen_contratacion_personal_apoyo_especifique) ya que P1_4_10-J(regimen_contratacion_personal_apoyo) se selecciono la categoría "Otro régimen de contratación (especifique)" 5
 public ArrayList QComisiones_Legislativas(String ID_entidad,String Legislatura,String Envio){

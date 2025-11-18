@@ -21,6 +21,27 @@ public class QPersonas_legisladoras {
 String sql;
 ArrayList<String[]> Array;
 ResultSet resul; 
+
+//La celda I-P1_3_8 (fecha_nacimiento_persona_legisladora) no cumple con el formato de fecha requerido (DD/MM/AAAA)
+public ArrayList FORMATO_FECHA_P1_3_8(String ID_entidad,String Legislatura,String Envio){
+     conexion.Conectar();
+      Array = new ArrayList();
+      sql="SELECT ID_ENTIDAD, C1_3_ID AS ENVIO, P1_3_1, P1_3_8 FROM TR_PLE_MEDS1_3 WHERE (not REGEXP_LIKE(P1_3_8, '^[0-3][0-9]/[0-1][0-9]/[0-9]{4}$'))  AND ID_ENTIDAD = '" + ID_entidad + "' AND Legislatura = '" + Legislatura + "' AND C1_3_ID ='"+Envio+"'";
+      System.out.println(sql);
+      resul=conexion.consultar(sql);
+      try {
+          while (resul.next()) {
+              Array.add(new String[]{
+                  resul.getString("ID_ENTIDAD"),
+                  resul.getString("P1_3_1")
+                });
+          }
+      conexion.close();
+     } catch (SQLException ex) {
+            Logger.getLogger(QComisiones_Legislativas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    return Array;
+ }
 //--------------------NOT NULL---------------------------------------
 // Se debe capturar P1_3_1-B(ID_persona_legisladora) debido a que no puede venir vacío.
 public ArrayList PL_NOTNULL_P1_3_1(String ID_entidad,String Legislatura,String Envio){
@@ -76,6 +97,27 @@ public ArrayList estructura_ID(String ID_entidad,String Legislatura,String Envio
     return Array;
  }
 
+//La columna B-P1_3_1 (ID_persona_legisladora) no cumple con la estructura correcta (NOMBRE <a 4 letras> -AÑO <a 4 dígitos> -SEXO <1 letra>)
+public ArrayList estructura_CORRECTA_ID(String ID_entidad,String Legislatura,String Envio){
+     conexion.Conectar();
+      Array = new ArrayList();
+      sql=" SELECT ID_ENTIDAD, C1_3_ID, P1_3_1 as ID_Actual FROM TR_PLE_MEDS1_3 WHERE (NOT REGEXP_LIKE (P1_3_1, '^[A-Za-z]{4}[0-9]{4}[A-Za-z]$') ) AND (ID_ENTIDAD="+ID_entidad+" AND  Legislatura="+Legislatura+" AND  C1_3_ID='"+Envio+"')";
+              
+     System.out.println(sql);
+      resul=conexion.consultar(sql);
+      try {
+          while (resul.next()) {
+              Array.add(new String[]{
+                  resul.getString("ID_ENTIDAD"),
+                  resul.getString("ID_Actual")
+                });
+          }
+      conexion.close();
+     } catch (SQLException ex) {
+            Logger.getLogger(QComisiones_Legislativas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    return Array;
+ }
 // Se debe capturar P1_3_2-C(nombre_1_persona_legisladora) debido a que no puede venir vacío.
 public ArrayList PL_NOTNULL_P1_3_2(String ID_entidad,String Legislatura,String Envio){
      conexion.Conectar();

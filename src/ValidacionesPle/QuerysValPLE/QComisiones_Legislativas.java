@@ -22,8 +22,6 @@ String sql;
 ArrayList<String[]> Array;
 ResultSet resul;   
 
-
-
 //No se puede repetir el P1_2_1-A(ID_comision_legislativa)
 public ArrayList ID_comision_legislativa(String ID_entidad,String Legislatura,String Envio){
      conexion.Conectar();
