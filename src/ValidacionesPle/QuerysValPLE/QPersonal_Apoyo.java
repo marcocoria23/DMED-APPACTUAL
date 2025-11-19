@@ -26,18 +26,43 @@ ResultSet resul;
 public ArrayList Estructura_ID(String ID_entidad,String Legislatura,String Envio){
      conexion.Conectar();
       Array = new ArrayList();
-      sql="WITH ESTRUCTURA_id AS (\n" +
-"  SELECT ID_ENTIDAD,C1_4_ID AS envio,LEGISLATURA,P1_4_1 AS ID_Actual,REPLACE( TRIM(\n" +
-"    (CASE WHEN LENGTH(P1_4_2) >= 2 AND P1_4_3 IS NULL THEN SUBSTR(P1_4_2, 1, 2)\n" +
-"      WHEN P1_4_3 IS NOT NULL AND P1_4_4 IS NULL THEN SUBSTR(P1_4_2, 1, 1) || SUBSTR(P1_4_3, 1, 1)\n" +
-"      WHEN P1_4_3 IS NOT NULL AND P1_4_4 IS NOT NULL THEN SUBSTR(P1_4_2, 1, 1) || SUBSTR(P1_4_3, 1, 1) ELSE '' END) ||\n" +
-"    (CASE WHEN P1_4_6 IS NULL THEN SUBSTR(P1_4_5, 1, 2)\n" +
-"       WHEN P1_4_6 IS NOT NULL AND P1_4_7 IS NULL THEN SUBSTR(P1_4_5, 1, 1) || SUBSTR(P1_4_6, 1, 1)\n" +
-"       WHEN P1_4_6 IS NOT NULL AND P1_4_7 IS NOT NULL THEN SUBSTR(P1_4_5, 1, 1) || SUBSTR(P1_4_6, 1, 1) ELSE ''  END) || SUBSTR(P1_4_8, -4) ||\n" +
-"    (CASE WHEN P1_4_9 = 1 THEN 'H' WHEN P1_4_9 = 2 THEN 'M' WHEN P1_4_9 = 3 THEN 'N' ELSE '' END)), ' ','' ) AS ID_CORRECTO  FROM TR_PLE_MEDS1_4 )\n" +
-"SELECT ID_ENTIDAD, envio, LEGISLATURA, ID_Actual, ID_CORRECTO FROM ESTRUCTURA_id \n" +
-"WHERE ID_Actual <> ID_CORRECTO"
-              + " AND (ID_ENTIDAD="+ID_entidad+" AND Legislatura="+Legislatura+" AND ENVIO='"+Envio+"')";
+      sql="WITH ESTRUCTURA_id AS ( SELECT ID_ENTIDAD, C1_4_ID AS envio, LEGISLATURA, P1_4_1 AS ID_Actual,\n" +
+"     REPLACE(TRIM((CASE \n" +
+"                WHEN LENGTH(P1_4_2) >= 2 AND P1_4_3 IS NULL THEN SUBSTR(P1_4_2, 1, 2)\n" +
+"                WHEN P1_4_3 IS NOT NULL AND P1_4_4 IS NULL THEN SUBSTR(P1_4_2, 1, 1) || SUBSTR(P1_4_3, 1, 1)\n" +
+"                WHEN P1_4_3 IS NOT NULL AND P1_4_4 IS NOT NULL THEN SUBSTR(P1_4_2, 1, 1) || SUBSTR(P1_4_3, 1, 1)\n" +
+"                ELSE '' END) ||\n" +
+"            (CASE \n" +
+"                WHEN P1_4_6 IS NULL THEN SUBSTR(P1_4_5, 1, 2)\n" +
+"                WHEN P1_4_6 IS NOT NULL AND P1_4_7 IS NULL THEN SUBSTR(P1_4_5, 1, 1) || SUBSTR(P1_4_6, 1, 1)\n" +
+"                WHEN P1_4_6 IS NOT NULL AND P1_4_7 IS NOT NULL THEN SUBSTR(P1_4_5, 1, 1) || SUBSTR(P1_4_6, 1, 1)\n" +
+"                ELSE ''   END) ||  SUBSTR(P1_4_8, -4) ||\n" +
+"            (CASE \n" +
+"                WHEN P1_4_9 = 1 THEN 'H' \n" +
+"                WHEN P1_4_9 = 2 THEN 'M' \n" +
+"                WHEN P1_4_9 = 3 THEN 'N' \n" +
+"                ELSE ''  END)), ' ', '') AS ID_CORRECTO\n" +
+"    FROM TR_PLE_MEDS1_4)\n" +
+"SELECT ID_ENTIDAD, envio, LEGISLATURA, ID_Actual, ID_CORRECTO FROM ESTRUCTURA_id WHERE ID_Actual <> ID_CORRECTO\n" +
+"UNION \n" +
+"SELECT ID_ENTIDAD, C1_4_ID AS envio, LEGISLATURA, P1_4_1 AS ID_Actual,  REPLACE(TRIM(\n" +
+"            (CASE \n" +
+"                WHEN LENGTH(P1_4_2) >= 2 AND P1_4_3 IS NULL THEN SUBSTR(P1_4_2, 1, 2)\n" +
+"                WHEN P1_4_3 IS NOT NULL AND P1_4_4 IS NULL THEN SUBSTR(P1_4_2, 1, 1) || SUBSTR(P1_4_3, 1, 1)\n" +
+"                WHEN P1_4_3 IS NOT NULL AND P1_4_4 IS NOT NULL THEN SUBSTR(P1_4_2, 1, 1) || SUBSTR(P1_4_3, 1, 1)\n" +
+"                ELSE '' \n" +
+"            END) ||(CASE \n" +
+"                WHEN P1_4_6 IS NULL THEN SUBSTR(P1_4_5, 1, 2)\n" +
+"                WHEN P1_4_6 IS NOT NULL AND P1_4_7 IS NULL THEN SUBSTR(P1_4_5, 1, 1) || SUBSTR(P1_4_6, 1, 1)\n" +
+"                WHEN P1_4_6 IS NOT NULL AND P1_4_7 IS NOT NULL THEN SUBSTR(P1_4_5, 1, 1) || SUBSTR(P1_4_6, 1, 1)\n" +
+"                ELSE ''   END) ||  SUBSTR(P1_4_8, -4) ||\n" +
+"            (CASE \n" +
+"                WHEN P1_4_9 = 1 THEN 'H' \n" +
+"                WHEN P1_4_9 = 2 THEN 'M' \n" +
+"                WHEN P1_4_9 = 3 THEN 'N' \n" +
+"                ELSE ''  END)), ' ', '') AS ID_CORRECTO\n" +
+"FROM TR_PLE_MEDS1_4 WHERE NOT REGEXP_LIKE(P1_4_1, '^[A-Za-z]{4}[0-9]{4}[A-Za-z]$')"
+              + " AND (ID_ENTIDAD="+ID_entidad+" AND Legislatura="+Legislatura+" AND C1_4_ID='"+Envio+"')";
       System.out.println(sql);
       resul=conexion.consultar(sql);
       try {

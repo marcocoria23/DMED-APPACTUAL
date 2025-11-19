@@ -1841,11 +1841,33 @@ public class QIniciativas {
         return Array;
     }
 
-//No debe especificar el dato en P1_5_85-CG(nombre_comision_legislativa_1_segundo_estudio) debido a P1_5_10(etapa_procesal_iniciativa) se selecciono una categoría diferente a "Segundo dictamen" (4).
+//Los campos P1_5_84-CF(id_comision_legislativa_1_segundo_estudio) y P1_5_85-CG(nombre_comision_legislativa_1_segundo_estudio) deben CONTENER información debido a que en el campo P1_5_10-J(etapa_procesal_iniciativa) se seleccionó: "2.Segundo estudio" o "4.Segundo dictamen" .
     public ArrayList nombre_comision_legislativa_1_segundo_estudio(String ID_entidad, String Legislatura, String Envio) {
         conexion.Conectar();
         Array = new ArrayList();
-        sql = "select ID_ENTIDAD, ENTIDAD, C1_5_ID, P1_5_1, P1_5_10, P1_5_84, P1_5_85 from tr_ple_meds1_5 where P1_5_10 = 4 and (P1_5_85 is not null and P1_5_84 is not null) "
+        sql = "select ID_ENTIDAD, ENTIDAD, C1_5_ID, P1_5_1, P1_5_10, P1_5_84, P1_5_85 from tr_ple_meds1_5 where P1_5_10 in( 4 ,  2 ) and (P1_5_85 is  null and P1_5_84 is  null)"
+                + " AND ID_ENTIDAD=" + ID_entidad + " AND Legislatura=" + Legislatura + " AND C1_5_ID='" + Envio + "'";
+        System.out.println(sql);
+        resul = conexion.consultar(sql);
+        try {
+            while (resul.next()) {
+                Array.add(new String[]{
+                    resul.getString("ID_ENTIDAD"),
+                    resul.getString("P1_5_1")
+                });
+            }
+            conexion.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(QComisiones_Legislativas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return Array;
+    }
+    
+    //Los campos P1_5_84-CF(id_comision_legislativa_1_segundo_estudio) y P1_5_85-CG(nombre_comision_legislativa_1_segundo_estudio) NO DEBEN CONTENER información debido a que en el campo P1_5_10-J(etapa_procesal_iniciativa) NO se seleccionó: "2.Segundo estudio" o "4.Segundo dictamen" .
+    public ArrayList notnombre_comision_legislativa_1_segundo_estudio(String ID_entidad, String Legislatura, String Envio) {
+        conexion.Conectar();
+        Array = new ArrayList();
+        sql = "select ID_ENTIDAD, ENTIDAD, C1_5_ID, P1_5_1, P1_5_10, P1_5_84, P1_5_85 from tr_ple_meds1_5 where P1_5_10 not in( 4 ,  2 ) and (P1_5_85 is not null and P1_5_84 is not null)"
                 + " AND ID_ENTIDAD=" + ID_entidad + " AND Legislatura=" + Legislatura + " AND C1_5_ID='" + Envio + "'";
         System.out.println(sql);
         resul = conexion.consultar(sql);

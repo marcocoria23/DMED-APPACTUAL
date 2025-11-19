@@ -69,17 +69,27 @@ public ArrayList estructura_ID(String ID_entidad,String Legislatura,String Envio
      conexion.Conectar();
       Array = new ArrayList();
       sql="WITH ESTRUCTURA_id AS (\n" +
-"  SELECT ID_ENTIDAD,C1_3_ID AS envio,LEGISLATURA,P1_3_1 AS ID_Actual,REPLACE( TRIM(\n" +
-"    (CASE WHEN LENGTH(P1_3_2) >= 2 AND P1_3_3 IS NULL THEN SUBSTR(P1_3_2, 1, 2)\n" +
-"      WHEN P1_3_3 IS NOT NULL AND P1_3_4 IS NULL THEN SUBSTR(P1_3_2, 1, 1) || SUBSTR(P1_3_3, 1, 1)\n" +
-"      WHEN P1_3_3 IS NOT NULL AND P1_3_4 IS NOT NULL THEN SUBSTR(P1_3_2, 1, 1) || SUBSTR(P1_3_3, 1, 1) ELSE '' END) ||\n" +
-"    (CASE WHEN P1_3_6 IS NULL THEN SUBSTR(P1_3_5, 1, 2)\n" +
-"       WHEN P1_3_6 IS NOT NULL AND P1_3_7 IS NULL THEN SUBSTR(P1_3_5, 1, 1) || SUBSTR(P1_3_6, 1, 1)\n" +
-"       WHEN P1_3_6 IS NOT NULL AND P1_3_7 IS NOT NULL THEN SUBSTR(P1_3_5, 1, 1) || SUBSTR(P1_3_6, 1, 1) ELSE ''  END) || SUBSTR(P1_3_8, -4) ||\n" +
-"    (CASE WHEN P1_3_9 = 1 THEN 'H' WHEN P1_3_9 = 2 THEN 'M' WHEN P1_3_9 = 3 THEN 'N' ELSE '' END)), ' ','' ) AS ID_CORRECTO  FROM TR_PLE_MEDS1_3 )\n" +
+" SELECT ID_ENTIDAD,C1_3_ID AS envio,LEGISLATURA,P1_3_1 AS ID_Actual,REPLACE( TRIM(\n" +
+"   (CASE WHEN LENGTH(P1_3_2) >= 2 AND P1_3_3 IS NULL THEN SUBSTR(P1_3_2, 1, 2)\n" +
+"     WHEN P1_3_3 IS NOT NULL AND P1_3_4 IS NULL THEN SUBSTR(P1_3_2, 1, 1) || SUBSTR(P1_3_3, 1, 1)\n" +
+"     WHEN P1_3_3 IS NOT NULL AND P1_3_4 IS NOT NULL THEN SUBSTR(P1_3_2, 1, 1) || SUBSTR(P1_3_3, 1, 1) ELSE '' END) ||\n" +
+"   (CASE WHEN P1_3_6 IS NULL THEN SUBSTR(P1_3_5, 1, 2)\n" +
+"      WHEN P1_3_6 IS NOT NULL AND P1_3_7 IS NULL THEN SUBSTR(P1_3_5, 1, 1) || SUBSTR(P1_3_6, 1, 1)\n" +
+"      WHEN P1_3_6 IS NOT NULL AND P1_3_7 IS NOT NULL THEN SUBSTR(P1_3_5, 1, 1) || SUBSTR(P1_3_6, 1, 1) ELSE ''  END) || SUBSTR(P1_3_8, -4) ||\n" +
+"   (CASE WHEN P1_3_9 = 1 THEN 'H' WHEN P1_3_9 = 2 THEN 'M' WHEN P1_3_9 = 3 THEN 'N' ELSE '' END)), ' ','' ) AS ID_CORRECTO  FROM TR_PLE_MEDS1_3 )\n" +
 "SELECT ID_ENTIDAD, envio, LEGISLATURA, ID_Actual, ID_CORRECTO FROM ESTRUCTURA_id \n" +
 "WHERE ID_Actual <> ID_CORRECTO\n" +
-" AND (ID_ENTIDAD="+ID_entidad+" AND  Legislatura="+Legislatura+" AND  envio='"+Envio+"')";
+"UNION \n" +
+"SELECT ID_ENTIDAD, C1_3_ID AS envio, LEGISLATURA, P1_3_1 AS ID_Actual, REPLACE( TRIM(\n" +
+"   (CASE WHEN LENGTH(P1_3_2) >= 2 AND P1_3_3 IS NULL THEN SUBSTR(P1_3_2, 1, 2)\n" +
+"     WHEN P1_3_3 IS NOT NULL AND P1_3_4 IS NULL THEN SUBSTR(P1_3_2, 1, 1) || SUBSTR(P1_3_3, 1, 1)\n" +
+"     WHEN P1_3_3 IS NOT NULL AND P1_3_4 IS NOT NULL THEN SUBSTR(P1_3_2, 1, 1) || SUBSTR(P1_3_3, 1, 1) ELSE '' END) ||\n" +
+"   (CASE WHEN P1_3_6 IS NULL THEN SUBSTR(P1_3_5, 1, 2)\n" +
+"      WHEN P1_3_6 IS NOT NULL AND P1_3_7 IS NULL THEN SUBSTR(P1_3_5, 1, 1) || SUBSTR(P1_3_6, 1, 1)\n" +
+"      WHEN P1_3_6 IS NOT NULL AND P1_3_7 IS NOT NULL THEN SUBSTR(P1_3_5, 1, 1) || SUBSTR(P1_3_6, 1, 1) ELSE ''  END) || SUBSTR(P1_3_8, -4) ||\n" +
+"   (CASE WHEN P1_3_9 = 1 THEN 'H' WHEN P1_3_9 = 2 THEN 'M' WHEN P1_3_9 = 3 THEN 'N' ELSE '' END)), ' ','' ) AS ID_CORRECTO \n" +
+"FROM TR_PLE_MEDS1_3 WHERE NOT REGEXP_LIKE(P1_3_1, '^[A-Za-z]{4}[0-9]{4}[A-Za-z]$')"+
+" AND (ID_ENTIDAD="+ID_entidad+" AND  Legislatura="+Legislatura+" AND  C1_3_ID='"+Envio+"')";
               
      System.out.println(sql);
       resul=conexion.consultar(sql);
@@ -97,27 +107,7 @@ public ArrayList estructura_ID(String ID_entidad,String Legislatura,String Envio
     return Array;
  }
 
-//La columna B-P1_3_1 (ID_persona_legisladora) no cumple con la estructura correcta (NOMBRE <a 4 letras> -AÑO <a 4 dígitos> -SEXO <1 letra>)
-public ArrayList estructura_CORRECTA_ID(String ID_entidad,String Legislatura,String Envio){
-     conexion.Conectar();
-      Array = new ArrayList();
-      sql=" SELECT ID_ENTIDAD, C1_3_ID, P1_3_1 as ID_Actual FROM TR_PLE_MEDS1_3 WHERE (NOT REGEXP_LIKE (P1_3_1, '^[A-Za-z]{4}[0-9]{4}[A-Za-z]$') ) AND (ID_ENTIDAD="+ID_entidad+" AND  Legislatura="+Legislatura+" AND  C1_3_ID='"+Envio+"')";
-              
-     System.out.println(sql);
-      resul=conexion.consultar(sql);
-      try {
-          while (resul.next()) {
-              Array.add(new String[]{
-                  resul.getString("ID_ENTIDAD"),
-                  resul.getString("ID_Actual")
-                });
-          }
-      conexion.close();
-     } catch (SQLException ex) {
-            Logger.getLogger(QComisiones_Legislativas.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    return Array;
- }
+
 // Se debe capturar P1_3_2-C(nombre_1_persona_legisladora) debido a que no puede venir vacío.
 public ArrayList PL_NOTNULL_P1_3_2(String ID_entidad,String Legislatura,String Envio){
      conexion.Conectar();
