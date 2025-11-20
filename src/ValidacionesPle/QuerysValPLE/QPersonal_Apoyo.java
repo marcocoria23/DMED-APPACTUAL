@@ -43,7 +43,7 @@ public ArrayList Estructura_ID(String ID_entidad,String Legislatura,String Envio
 "                WHEN P1_4_9 = 3 THEN 'N' \n" +
 "                ELSE ''  END)), ' ', '') AS ID_CORRECTO\n" +
 "    FROM TR_PLE_MEDS1_4)\n" +
-"SELECT ID_ENTIDAD, envio, LEGISLATURA, ID_Actual, ID_CORRECTO FROM ESTRUCTURA_id WHERE ID_Actual <> ID_CORRECTO\n" +
+"SELECT ID_ENTIDAD, envio, LEGISLATURA, ID_Actual, ID_CORRECTO FROM ESTRUCTURA_id WHERE ID_Actual <> ID_CORRECTO AND  (Legislatura="+Legislatura+" AND  envio='"+Envio+"')\n" +
 "UNION \n" +
 "SELECT ID_ENTIDAD, C1_4_ID AS envio, LEGISLATURA, P1_4_1 AS ID_Actual,  REPLACE(TRIM(\n" +
 "            (CASE \n" +
