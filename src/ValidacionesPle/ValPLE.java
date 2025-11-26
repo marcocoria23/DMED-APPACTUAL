@@ -3150,7 +3150,7 @@ public class ValPLE {
                 XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                 celdaD2.setCellStyle(estiloCeldabordes0);
                 celdaD2.setCellType(CellType.STRING);
-                String txtD2 = "Se debe de capturar el campo P1_2_16-P(cond_transmision_reuniones_celebradas_comision_legislativa ya que P1_2_13-M(cond_celebracion_reuniones_comision_legislativa) tiene el valor de SI (1)";
+                String txtD2 = "Es necesario capturar el campo P1_2_16-Q(cond_transmision_reuniones_celebradas_comision_legislativa), debido a que el campo P1_2_13-N (cond_celebracion_reuniones_comision_legislativa) contiene: '1. Sí'";
                 XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                 celdaD2.setCellValue(textoD2);
 
@@ -16910,7 +16910,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                 XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                 celdaD2.setCellStyle(estiloCeldabordes0);
                 celdaD2.setCellType(CellType.STRING);
-                String txtD2 = "No puede repetir el tipo de discapacidad seleccionado en la columna tipo_discapacidad_personal_apoyo";
+                String txtD2 = "No se puede repetir el tipo de discapacidad seleccionado en las columnas P1_4_26-Z (tipo_discapacidad_1_personal_apoyo), P1_4_27-AA (tipo_discapacidad_2_personal_apoyo) y P1_4_28-AB (tipo_discapacidad_3_personal_apoyo).";
                 XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                 celdaD2.setCellValue(textoD2);
 
@@ -20421,7 +20421,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                 XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                 celdaD2.setCellStyle(estiloCeldabordes0);
                 celdaD2.setCellType(CellType.STRING);
-                String txtD2 = "Se debe de capturar el campo P1_5_10-J(etapa_procesal_iniciativa) debido a que se selecciono  \"Estudio\"'2' o \"Dictamen\"'5' en la columna estatus_iniciativa  (P1_5_8).";
+                String txtD2 = "Se debe de capturar el campo P1_5_10-J(etapa_procesal_iniciativa) debido a que en el campo P1_5_8-H(estatus_iniciativa ) se seleccionó:  \"2.Estudio\" o \"5.Dictamen\".";
                 XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                 celdaD2.setCellValue(textoD2);
 
@@ -23307,7 +23307,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                 XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                 celdaD2.setCellStyle(estiloCeldabordes0);
                 celdaD2.setCellType(CellType.STRING);
-                String txtD2 = "Debe seleccionar una opción en el campo P1_5_69-BQ(tipo_organo_constitucional_autonomo) debido a que en el campo P1_5_16 P-(tipo_promovente_iniciativa) se seleccionó la opción: \"(10).Órgano constitucional autónomo\" ";
+                String txtD2 = "Debe seleccionar una opción en el campo P1_5_69-BQ(tipo_organo_constitucional_autonomo) debido a que en el campo P1_5_16-P(tipo_promovente_iniciativa) se seleccionó la opción: \"(10).Órgano constitucional autónomo\" ";
                 XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                 celdaD2.setCellValue(textoD2);
 
