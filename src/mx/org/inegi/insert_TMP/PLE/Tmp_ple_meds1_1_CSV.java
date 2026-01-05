@@ -131,6 +131,7 @@ public class Tmp_ple_meds1_1_CSV {
                              BeanTMP_PLE_MEDS1_1B c = new BeanTMP_PLE_MEDS1_1B();
                             c.SetID_ENTIDAD_TMP(Entidad);
                             c.SetENTIDAD(Entid);
+                            c.SetP1_1B_1(Entid);
                             
                             
                             }
