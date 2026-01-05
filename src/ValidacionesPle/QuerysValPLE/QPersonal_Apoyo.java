@@ -26,18 +26,43 @@ ResultSet resul;
 public ArrayList Estructura_ID(String ID_entidad,String Legislatura,String Envio){
      conexion.Conectar();
       Array = new ArrayList();
-      sql="WITH ESTRUCTURA_id AS (\n" +
-"  SELECT ID_ENTIDAD,C1_4_ID AS envio,LEGISLATURA,P1_4_1 AS ID_Actual,REPLACE( TRIM(\n" +
-"    (CASE WHEN LENGTH(P1_4_2) >= 2 AND P1_4_3 IS NULL THEN SUBSTR(P1_4_2, 1, 2)\n" +
-"      WHEN P1_4_3 IS NOT NULL AND P1_4_4 IS NULL THEN SUBSTR(P1_4_2, 1, 1) || SUBSTR(P1_4_3, 1, 1)\n" +
-"      WHEN P1_4_3 IS NOT NULL AND P1_4_4 IS NOT NULL THEN SUBSTR(P1_4_2, 1, 1) || SUBSTR(P1_4_3, 1, 1) ELSE '' END) ||\n" +
-"    (CASE WHEN P1_4_6 IS NULL THEN SUBSTR(P1_4_5, 1, 2)\n" +
-"       WHEN P1_4_6 IS NOT NULL AND P1_4_7 IS NULL THEN SUBSTR(P1_4_5, 1, 1) || SUBSTR(P1_4_6, 1, 1)\n" +
-"       WHEN P1_4_6 IS NOT NULL AND P1_4_7 IS NOT NULL THEN SUBSTR(P1_4_5, 1, 1) || SUBSTR(P1_4_6, 1, 1) ELSE ''  END) || SUBSTR(P1_4_8, -4) ||\n" +
-"    (CASE WHEN P1_4_9 = 1 THEN 'H' WHEN P1_4_9 = 2 THEN 'M' WHEN P1_4_9 = 3 THEN 'N' ELSE '' END)), ' ','' ) AS ID_CORRECTO  FROM TR_PLE_MEDS1_4 )\n" +
-"SELECT ID_ENTIDAD, envio, LEGISLATURA, ID_Actual, ID_CORRECTO FROM ESTRUCTURA_id \n" +
-"WHERE ID_Actual <> ID_CORRECTO"
-              + " AND (ID_ENTIDAD="+ID_entidad+" AND Legislatura="+Legislatura+" AND ENVIO='"+Envio+"')";
+      sql="WITH ESTRUCTURA_id AS ( SELECT ID_ENTIDAD, C1_4_ID AS envio, LEGISLATURA, P1_4_1 AS ID_Actual,\n" +
+"     REPLACE(TRIM((CASE \n" +
+"                WHEN LENGTH(P1_4_2) >= 2 AND P1_4_3 IS NULL THEN SUBSTR(P1_4_2, 1, 2)\n" +
+"                WHEN P1_4_3 IS NOT NULL AND P1_4_4 IS NULL THEN SUBSTR(P1_4_2, 1, 1) || SUBSTR(P1_4_3, 1, 1)\n" +
+"                WHEN P1_4_3 IS NOT NULL AND P1_4_4 IS NOT NULL THEN SUBSTR(P1_4_2, 1, 1) || SUBSTR(P1_4_3, 1, 1)\n" +
+"                ELSE '' END) ||\n" +
+"            (CASE \n" +
+"                WHEN P1_4_6 IS NULL THEN SUBSTR(P1_4_5, 1, 2)\n" +
+"                WHEN P1_4_6 IS NOT NULL AND P1_4_7 IS NULL THEN SUBSTR(P1_4_5, 1, 1) || SUBSTR(P1_4_6, 1, 1)\n" +
+"                WHEN P1_4_6 IS NOT NULL AND P1_4_7 IS NOT NULL THEN SUBSTR(P1_4_5, 1, 1) || SUBSTR(P1_4_6, 1, 1)\n" +
+"                ELSE ''   END) ||  SUBSTR(P1_4_8, -4) ||\n" +
+"            (CASE \n" +
+"                WHEN P1_4_9 = 1 THEN 'H' \n" +
+"                WHEN P1_4_9 = 2 THEN 'M' \n" +
+"                WHEN P1_4_9 = 3 THEN 'N' \n" +
+"                ELSE ''  END)), ' ', '') AS ID_CORRECTO\n" +
+"    FROM TR_PLE_MEDS1_4)\n" +
+"SELECT ID_ENTIDAD, envio, LEGISLATURA, ID_Actual, ID_CORRECTO FROM ESTRUCTURA_id WHERE ID_Actual <> ID_CORRECTO AND  (Legislatura="+Legislatura+" AND  envio='"+Envio+"')\n" +
+"UNION \n" +
+"SELECT ID_ENTIDAD, C1_4_ID AS envio, LEGISLATURA, P1_4_1 AS ID_Actual,  REPLACE(TRIM(\n" +
+"            (CASE \n" +
+"                WHEN LENGTH(P1_4_2) >= 2 AND P1_4_3 IS NULL THEN SUBSTR(P1_4_2, 1, 2)\n" +
+"                WHEN P1_4_3 IS NOT NULL AND P1_4_4 IS NULL THEN SUBSTR(P1_4_2, 1, 1) || SUBSTR(P1_4_3, 1, 1)\n" +
+"                WHEN P1_4_3 IS NOT NULL AND P1_4_4 IS NOT NULL THEN SUBSTR(P1_4_2, 1, 1) || SUBSTR(P1_4_3, 1, 1)\n" +
+"                ELSE '' \n" +
+"            END) ||(CASE \n" +
+"                WHEN P1_4_6 IS NULL THEN SUBSTR(P1_4_5, 1, 2)\n" +
+"                WHEN P1_4_6 IS NOT NULL AND P1_4_7 IS NULL THEN SUBSTR(P1_4_5, 1, 1) || SUBSTR(P1_4_6, 1, 1)\n" +
+"                WHEN P1_4_6 IS NOT NULL AND P1_4_7 IS NOT NULL THEN SUBSTR(P1_4_5, 1, 1) || SUBSTR(P1_4_6, 1, 1)\n" +
+"                ELSE ''   END) ||  SUBSTR(P1_4_8, -4) ||\n" +
+"            (CASE \n" +
+"                WHEN P1_4_9 = 1 THEN 'H' \n" +
+"                WHEN P1_4_9 = 2 THEN 'M' \n" +
+"                WHEN P1_4_9 = 3 THEN 'N' \n" +
+"                ELSE ''  END)), ' ', '') AS ID_CORRECTO\n" +
+"FROM TR_PLE_MEDS1_4 WHERE NOT REGEXP_LIKE(P1_4_1, '^[A-Za-z]{4}[0-9]{4}[A-Za-z]$')"
+              + " AND (ID_ENTIDAD="+ID_entidad+" AND Legislatura="+Legislatura+" AND C1_4_ID='"+Envio+"')";
       System.out.println(sql);
       resul=conexion.consultar(sql);
       try {
@@ -53,6 +78,7 @@ public ArrayList Estructura_ID(String ID_entidad,String Legislatura,String Envio
         }
     return Array;
  }
+
 
 //No se debe capturar el campo P1_4_3-C((nombre_2_personal_apoyo) cuando P1_4_2-B(nombre_1_personal_apoyo) viene vacio
 public ArrayList nombre_2_personal_apoyo(String ID_entidad,String Legislatura,String Envio){
@@ -143,6 +169,26 @@ public ArrayList apellido_3_personal_apoyo(String ID_entidad,String Legislatura,
     return Array;
  }  
 
+//La celda H-P1_4_8 (fecha_nacimiento_personal_apoyo) no cumple con el formato de fecha requerido (DD/MM/AAAA)
+public ArrayList FORMATO_FECHA_P1_4_8(String ID_entidad,String Legislatura,String Envio){
+     conexion.Conectar();
+      Array = new ArrayList();
+      sql="SELECT ID_ENTIDAD, C1_4_ID AS ENVIO, P1_4_1, P1_4_8 FROM TR_PLE_MEDS1_4 WHERE (not REGEXP_LIKE(P1_4_8, '^[0-3][0-9]/[0-1][0-9]/[0-9]{4}$'))  AND ID_ENTIDAD = '" + ID_entidad + "' AND Legislatura = '" + Legislatura + "' AND C1_4_ID ='"+Envio+"'";
+      System.out.println(sql);
+      resul=conexion.consultar(sql);
+      try {
+          while (resul.next()) {
+              Array.add(new String[]{
+                  resul.getString("ID_ENTIDAD"),
+                  resul.getString("P1_4_1")
+                });
+          }
+      conexion.close();
+     } catch (SQLException ex) {
+            Logger.getLogger(QComisiones_Legislativas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    return Array;
+ }
 
 //Se debe capturar P1_4_11-K(otro_regimen_contratacion_personal_apoyo_especifique) ya que P1_4_10-J(regimen_contratacion_personal_apoyo) se selecciono la categoría "Otro régimen de contratación (especifique)" 5
 public ArrayList QComisiones_Legislativas(String ID_entidad,String Legislatura,String Envio){
@@ -592,11 +638,11 @@ public ArrayList DCtipo_discapacidad_1_personal_apoyo(String ID_entidad,String L
     return Array;
  }  
 
-//No se debe de capturar P1_4_28-AB(tipo_discapacidad_3_personal_apoyo) debido a que la columna P1_4_25-Y(cond_discapacidad_personal_apoyo) es diferente de SI '1'
+//No se deben de capturar los campos tipo_discapacidad_personal_apoyo(P1_4_26 a P1_4_28, Z-AB) debido a que la columna P1_4_25-Y(cond_discapacidad_personal_apoyo) es diferente de '1.SI'
 public ArrayList NDCtipo_discapacidad_1_personal_apoyo(String ID_entidad,String Legislatura,String Envio){
      conexion.Conectar();
       Array = new ArrayList();
-      sql="select ID_ENTIDAD, ENTIDAD, C1_4_ID, P1_4_1,P1_4_20,P1_4_26,P1_4_25 from TR_PLE_MEDS1_4 where P1_4_26<>1  and P1_4_25 is  NOT null"
+      sql="select ID_ENTIDAD, ENTIDAD, C1_4_ID, P1_4_1,P1_4_25,P1_4_26,P1_4_27,P1_4_28 from TR_PLE_MEDS1_4 where P1_4_25<>1  and (P1_4_28 is  NOT null or P1_4_27 is not null or P1_4_26 is not null )"
               + " AND ID_ENTIDAD="+ID_entidad+" AND Legislatura="+Legislatura+" AND C1_4_ID='"+Envio+"'";
       System.out.println(sql);
       resul=conexion.consultar(sql);

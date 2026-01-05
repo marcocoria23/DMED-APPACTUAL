@@ -39,8 +39,8 @@ public ArrayList ID_Estructura(String ID_entidad,String Legislatura,String Envio
       try {
           while (resul.next()) {
               Array.add(new String[]{
-                  resul.getString("ID_ENTIDAD"),
-                  resul.getString("P1_7_1")
+                  resul.getString("ENTIDAD"),
+                  resul.getString("ID_actual")
                 });
           }
       conexion.close();

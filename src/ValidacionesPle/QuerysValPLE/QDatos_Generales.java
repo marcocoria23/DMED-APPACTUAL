@@ -43,7 +43,47 @@ public ArrayList T1_NOT_NULL(String ID_entidad,String Legislatura,String Envio){
         }
     return Array;
  }
+      //La celda F19-P1_1_3(inicio_funciones_legislatura) no cumple con el formato de fecha requerido (DD/MM/AAAA).
+    public ArrayList FORMATO_FECHA_P1_1_3(String ID_entidad,String Legislatura,String Envio){
+     conexion.Conectar();
+      Array = new ArrayList();
+      sql="SELECT ID_ENTIDAD, C1_1_ID AS ENVIO, P1_1_1, P1_1_3 FROM TR_PLE_MEDS1_1 WHERE (not REGEXP_LIKE(P1_1_3, '^[0-3][0-9]/[0-1][0-9]/[0-9]{4}$'))   AND ID_ENTIDAD="+ID_entidad+" AND Legislatura="+Legislatura+" AND C1_1_ID='"+Envio+"' ";
+      System.out.println(sql);
+      resul=conexion.consultar(sql);
+      try {
+          while (resul.next()) {
+              Array.add(new String[]{
+                  resul.getString("ID_ENTIDAD"),
+                  resul.getString("P1_1_1")
+                });
+          }
+      conexion.close();
+     } catch (SQLException ex) {
+            Logger.getLogger(QComisiones_Legislativas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    return Array;
+ }
     
+          //La celda L19-P1_1_4(termino_funciones_legislatura) no cumple con el formato de fecha requerido (DD/MM/AAAA).
+    public ArrayList FORMATO_FECHA_P1_1_4(String ID_entidad,String Legislatura,String Envio){
+     conexion.Conectar();
+      Array = new ArrayList();
+      sql="SELECT ID_ENTIDAD, C1_1_ID AS ENVIO, P1_1_1, P1_1_4 FROM TR_PLE_MEDS1_1 WHERE (not REGEXP_LIKE(P1_1_4, '^[0-3][0-9]/[0-1][0-9]/[0-9]{4}$')) AND ID_ENTIDAD="+ID_entidad+" AND Legislatura="+Legislatura+" AND C1_1_ID='"+Envio+"' ";
+      System.out.println(sql);
+      resul=conexion.consultar(sql);
+      try {
+          while (resul.next()) {
+              Array.add(new String[]{
+                  resul.getString("ID_ENTIDAD"),
+                  resul.getString("P1_1_1")
+                });
+          }
+      conexion.close();
+     } catch (SQLException ex) {
+            Logger.getLogger(QComisiones_Legislativas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    return Array;
+ }
     
   //P1_1_4(termino_funciones_legislatura)L19 no debe ser menor a P1_1_3(inicio_funciones_legislatura)F19
 public ArrayList termino_funciones_legislatura(String ID_entidad,String Legislatura,String Envio){
@@ -64,8 +104,8 @@ public ArrayList termino_funciones_legislatura(String ID_entidad,String Legislat
             Logger.getLogger(QComisiones_Legislativas.class.getName()).log(Level.SEVERE, null, ex);
         }
     return Array;
- }  
-  
+}  
+
 
 //P1_1_8(fecha_inicio_informacion_reportada)V23 no esta entre P1_1_3(inicio_funciones_legislatura)F19 y P1_1_4(termino_funciones_legislatura)L19
 public ArrayList fecha_inicio_informacion_reportada(String ID_entidad,String Legislatura,String Envio){

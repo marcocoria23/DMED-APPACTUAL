@@ -185,9 +185,9 @@ public class QIniciativas {
         resul = conexion.consultar(sql);
         try {
             while (resul.next()) {
-                Array.add(new String[]{
-                    resul.getString("ID_ENTIDAD"),
-                    resul.getString("ID_ACTUAL")
+                Array.add(new String[]{             
+                    resul.getString("ID_ACTUAL"),
+                    resul.getString("ID_ENTIDAD")
                 });
             } 
             conexion.close();
@@ -376,7 +376,7 @@ public class QIniciativas {
       public ArrayList NOT_TIPO_PROMOVENTE_PERSONA_LEGIS(String ID_entidad, String Legislatura, String envio) {
         conexion.Conectar();
         Array = new ArrayList();
-        sql = "SELECT p1_5_1 AS ID_Legislatura, C1_5_ID AS envio, legislatura,ENTIDAD,\n" +
+        sql = "SELECT p1_5_1 AS ID_Legislatura, C1_5_ID AS envio, legislatura,ID_ENTIDAD,\n" +
 "       TC.DESCRIPCION AS TIPO_PROMOVENTE, p1_5_17 AS ID_LEGISLADOR, p1_5_18 AS NOMBRE_LEGISLADOR\n" +
 "FROM TR_PLE_MEDS1_5 TR INNER JOIN TC_TIPO_PROMOVENTE TC ON TC.ID = TR.p1_5_16\n" +
 "WHERE TR.p1_5_16 <> 3 AND (\n" +
@@ -406,7 +406,7 @@ public class QIniciativas {
             while (resul.next()) {
                 Array.add(new String[]{
                     resul.getString("ID_ENTIDAD"),
-                    resul.getString("ID_ACTUAL")
+                    resul.getString("ID_Legislatura")
                 });
             } 
             conexion.close();
@@ -800,9 +800,10 @@ public class QIniciativas {
         sql = "SELECT t1.p1_5_1 AS ID_Legislatura, MIN(t1.C1_5_ID) AS C1_5_ID, MIN(t1.legislatura) AS legislatura,\n" +
         " MIN(t1.ENTIDAD) AS ENTIDAD, MIN(TRIM(UPPER(t1.p1_5_12))) AS nombre_INICIATIVA, COUNT(*) AS total_envios\n" +
         "  FROM TR_PLE_MEDS1_5 t1\n" +
-        "  WHERE EXISTS ( SELECT 1 FROM TR_PLE_MEDS1_5 t2 WHERE t1.p1_5_1 = t2.p1_5_1 AND NLSSORT(TRIM(UPPER(t1.p1_5_12)), 'NLS_SORT=BINARY_AI') <> NLSSORT(TRIM(UPPER(t2.p1_5_12)), 'NLS_SORT=BINARY_AI'))\n" +
-        "    AND t1.ENTIDAD =" + ID_entidad + " AND t1.p1_5_1 IN ( SELECT DISTINCT p1_5_1 FROM TR_PLE_MEDS1_5 WHERE C1_5_ID ='" + Envio + "' AND ENTIDAD =" + ID_entidad + " )\n" +
-        "    GROUP BY t1.p1_5_1" ;
+        "  WHERE EXISTS ( SELECT 1 FROM TR_PLE_MEDS1_5 t2 WHERE t1.p1_5_1 = t2.p1_5_1  AND LEGISLATURA= "+ Legislatura +" AND NLSSORT(TRIM(UPPER(t1.p1_5_12)), 'NLS_SORT=BINARY_AI') <> NLSSORT(TRIM(UPPER(t2.p1_5_12)), 'NLS_SORT=BINARY_AI'))\n" +
+        "    AND t1.ENTIDAD =" + ID_entidad + " AND t1.p1_5_1 IN ( SELECT DISTINCT p1_5_1 FROM TR_PLE_MEDS1_5 WHERE C1_5_ID ='" + Envio + "' AND ENTIDAD =" + ID_entidad + " AND LEGISLATURA= "+ Legislatura +")\n" +
+        "    AND t1.LEGISLATURA =" + Legislatura +
+        " GROUP BY t1.p1_5_1" ;
       
                 
         System.out.println(sql);
@@ -1840,11 +1841,33 @@ public class QIniciativas {
         return Array;
     }
 
-//No debe especificar el dato en P1_5_85-CG(nombre_comision_legislativa_1_segundo_estudio) debido a P1_5_10(etapa_procesal_iniciativa) se selecciono una categoría diferente a "Segundo dictamen" (4).
+//Los campos P1_5_84-CF(id_comision_legislativa_1_segundo_estudio) y P1_5_85-CG(nombre_comision_legislativa_1_segundo_estudio) deben CONTENER información debido a que en el campo P1_5_10-J(etapa_procesal_iniciativa) se seleccionó: "2.Segundo estudio" o "4.Segundo dictamen" .
     public ArrayList nombre_comision_legislativa_1_segundo_estudio(String ID_entidad, String Legislatura, String Envio) {
         conexion.Conectar();
         Array = new ArrayList();
-        sql = "select ID_ENTIDAD, ENTIDAD, C1_5_ID, P1_5_1, P1_5_10, P1_5_84, P1_5_85 from tr_ple_meds1_5 where P1_5_10 = 4 and (P1_5_85 is not null and P1_5_84 is not null) "
+        sql = "select ID_ENTIDAD, ENTIDAD, C1_5_ID, P1_5_1, P1_5_10, P1_5_84, P1_5_85 from tr_ple_meds1_5 where P1_5_10 in( 4 ,  2 ) and (P1_5_85 is  null and P1_5_84 is  null)"
+                + " AND ID_ENTIDAD=" + ID_entidad + " AND Legislatura=" + Legislatura + " AND C1_5_ID='" + Envio + "'";
+        System.out.println(sql);
+        resul = conexion.consultar(sql);
+        try {
+            while (resul.next()) {
+                Array.add(new String[]{
+                    resul.getString("ID_ENTIDAD"),
+                    resul.getString("P1_5_1")
+                });
+            }
+            conexion.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(QComisiones_Legislativas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return Array;
+    }
+    
+    //Los campos P1_5_84-CF(id_comision_legislativa_1_segundo_estudio) y P1_5_85-CG(nombre_comision_legislativa_1_segundo_estudio) NO DEBEN CONTENER información debido a que en el campo P1_5_10-J(etapa_procesal_iniciativa) NO se seleccionó: "2.Segundo estudio" o "4.Segundo dictamen" .
+    public ArrayList notnombre_comision_legislativa_1_segundo_estudio(String ID_entidad, String Legislatura, String Envio) {
+        conexion.Conectar();
+        Array = new ArrayList();
+        sql = "select ID_ENTIDAD, ENTIDAD, C1_5_ID, P1_5_1, P1_5_10, P1_5_84, P1_5_85 from tr_ple_meds1_5 where P1_5_10 not in( 4 ,  2 ) and (P1_5_85 is not null and P1_5_84 is not null)"
                 + " AND ID_ENTIDAD=" + ID_entidad + " AND Legislatura=" + Legislatura + " AND C1_5_ID='" + Envio + "'";
         System.out.println(sql);
         resul = conexion.consultar(sql);

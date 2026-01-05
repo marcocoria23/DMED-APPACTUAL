@@ -31,12 +31,12 @@ public class MenuPSF extends javax.swing.JFrame {
     private void initComponents() {
 
         jMenu1 = new javax.swing.JMenu();
-        jLabel1 = new javax.swing.JLabel();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu2 = new javax.swing.JMenu();
-        jMenu3 = new javax.swing.JMenu();
-        jMenu4 = new javax.swing.JMenu();
-        jMenu5 = new javax.swing.JMenu();
+        Label_PSF = new javax.swing.JLabel();
+        MenuBar_PSF = new javax.swing.JMenuBar();
+        Menu_PSF = new javax.swing.JMenu();
+        Menu_integraTMP = new javax.swing.JMenu();
+        Menu_integraTR = new javax.swing.JMenu();
+        Menu_Valida = new javax.swing.JMenu();
         CrearEBD = new javax.swing.JMenuItem();
 
         jMenu1.setText("jMenu1");
@@ -47,63 +47,62 @@ public class MenuPSF extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/MenuPSF.png"))); // NOI18N
+        Label_PSF.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/MenuPSF.png"))); // NOI18N
 
-        jMenu2.setText("Menu");
-        jMenu2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        Menu_PSF.setText("Menu");
+        Menu_PSF.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/InsertaBD.png"))); // NOI18N
-        jMenu3.setText("Integrar  Bd TMP");
-        jMenu3.addMouseListener(new java.awt.event.MouseAdapter() {
+        Menu_integraTMP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/InsertaBD.png"))); // NOI18N
+        Menu_integraTMP.setText("Integrar  Bd TMP");
+        Menu_integraTMP.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMenu3MouseClicked(evt);
+                Menu_integraTMPMouseClicked(evt);
             }
         });
-        jMenu2.add(jMenu3);
+        Menu_PSF.add(Menu_integraTMP);
 
-        jMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Insertar.png"))); // NOI18N
-        jMenu4.setText("Integrar Bd TR");
-        jMenu4.addMouseListener(new java.awt.event.MouseAdapter() {
+        Menu_integraTR.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Insertar.png"))); // NOI18N
+        Menu_integraTR.setText("Integrar Bd TR");
+        Menu_integraTR.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMenu4MouseClicked(evt);
+                Menu_integraTRMouseClicked(evt);
             }
         });
-        jMenu2.add(jMenu4);
+        Menu_PSF.add(Menu_integraTR);
 
-        jMenu5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/BValidar.png"))); // NOI18N
-        jMenu5.setText("Valida");
-        jMenu5.addMouseListener(new java.awt.event.MouseAdapter() {
+        Menu_Valida.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/BValidar.png"))); // NOI18N
+        Menu_Valida.setText("Valida");
+        Menu_Valida.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMenu5MouseClicked(evt);
+                Menu_ValidaMouseClicked(evt);
             }
         });
-        jMenu2.add(jMenu5);
+        Menu_PSF.add(Menu_Valida);
 
-        CrearEBD.setIcon(new javax.swing.ImageIcon("C:\\Users\\andrea.hernandezl\\Desktop\\AppMED_DEFINITIV2\\AppMED\\Imagenes\\CrearEBD.jpg")); // NOI18N
         CrearEBD.setText("Crear EBD");
         CrearEBD.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CrearEBDActionPerformed(evt);
             }
         });
-        jMenu2.add(CrearEBD);
+        Menu_PSF.add(CrearEBD);
 
-        jMenuBar1.add(jMenu2);
+        MenuBar_PSF.add(Menu_PSF);
 
-        setJMenuBar(jMenuBar1);
+        setJMenuBar(MenuBar_PSF);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Label_PSF, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1)
+                .addComponent(Label_PSF)
                 .addGap(0, 10, Short.MAX_VALUE))
         );
 
@@ -116,26 +115,26 @@ public class MenuPSF extends javax.swing.JFrame {
         Men.setVisible(true);
     }//GEN-LAST:event_formWindowClosing
 
-    private void jMenu3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu3MouseClicked
+    private void Menu_integraTMPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu_integraTMPMouseClicked
         // TODO add your handling code here:
         IntegraPSF_TMP in=new IntegraPSF_TMP();
         in.setVisible(true);
         this.setVisible(false);
-    }//GEN-LAST:event_jMenu3MouseClicked
+    }//GEN-LAST:event_Menu_integraTMPMouseClicked
 
-    private void jMenu4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu4MouseClicked
+    private void Menu_integraTRMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu_integraTRMouseClicked
         // TODO add your handling code here:
         IntegraPSF_TR IN=new IntegraPSF_TR();
         IN.setVisible(true);
         this.setVisible(false);
-    }//GEN-LAST:event_jMenu4MouseClicked
+    }//GEN-LAST:event_Menu_integraTRMouseClicked
 
-    private void jMenu5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu5MouseClicked
+    private void Menu_ValidaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu_ValidaMouseClicked
         // TODO add your handling code here:
         Valida val=new Valida();
         val.setVisible(true);
         this.setVisible(false);
-    }//GEN-LAST:event_jMenu5MouseClicked
+    }//GEN-LAST:event_Menu_ValidaMouseClicked
 
     private void CrearEBDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearEBDActionPerformed
         // TODO add your handling code here:
@@ -182,12 +181,12 @@ public class MenuPSF extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem CrearEBD;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel Label_PSF;
+    private javax.swing.JMenuBar MenuBar_PSF;
+    private javax.swing.JMenu Menu_PSF;
+    private javax.swing.JMenu Menu_Valida;
+    private javax.swing.JMenu Menu_integraTMP;
+    private javax.swing.JMenu Menu_integraTR;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenu jMenu5;
-    private javax.swing.JMenuBar jMenuBar1;
     // End of variables declaration//GEN-END:variables
 }
