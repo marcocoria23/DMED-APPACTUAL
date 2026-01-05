@@ -17,6 +17,7 @@ import mx.org.inegi.insert_TMP.PLE.Tmp_ple_meds1_1A;
 import mx.org.inegi.insert_TMP.PLE.Tmp_ple_meds1_1B;
 import mx.org.inegi.insert_TMP.PLE.Tmp_ple_meds1_1C;
 import mx.org.inegi.insert_TMP.PLE.Tmp_ple_meds1_1D;
+import mx.org.inegi.insert_TMP.PLE.Tmp_ple_meds1_1_CSV;
 import mx.org.inegi.insert_TMP.PLE.Tmp_ple_meds1_2;
 import mx.org.inegi.insert_TMP.PLE.Tmp_ple_meds1_3;
 import mx.org.inegi.insert_TMP.PLE.Tmp_ple_meds1_4;
@@ -399,8 +400,14 @@ public class Integrar_TMP extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (ButtonCsv.isSelected()){
             System.out.println("boton csv");
-            
-            if (Procedure.equals("ALL_TABLES"))
+            Tmp_ple_meds1_1_CSV meds1_1 =new Tmp_ple_meds1_1_CSV();
+            try {
+                Valores();
+                meds1_1.Meds1_1_CSV(RutaAr, Entidad, Envio, Legislatura, Estatus);
+            } catch (Exception ex) {
+                Logger.getLogger(Integrar_TMP.class.getName()).log(Level.SEVERE, null, ex);
+            }
+         /*   if (Procedure.equals("ALL_TABLES"))
              {
                 try {
                     EliminaTMP Elimina=new EliminaTMP();
@@ -408,7 +415,7 @@ public class Integrar_TMP extends javax.swing.JFrame {
                 } catch (SQLException ex) {
                     Logger.getLogger(Integrar_TMP.class.getName()).log(Level.SEVERE, null, ex);
                 }
-             }
+             }*/
             
         }
         else{
