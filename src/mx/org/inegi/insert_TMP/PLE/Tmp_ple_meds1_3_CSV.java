@@ -218,7 +218,7 @@ public class Tmp_ple_meds1_3_CSV {
                             BeanTMP_PLE_MEDS1_3 x = ad.get(i);
  
                             System.out.println("[" + i + "] "
-                                + "ENTIDAD=" + x.GetENTIDAD_TMP()
+                                + "ENTIDAD=" + x.GetID_ENTIDAD_TMP()
                                 + ", P1_3_1=" + x.GetP1_3_1()
                                 + ", P1_3_2=" + x.GetP1_3_2()
                                 + ", P1_3_3=" + x.GetP1_3_3()
