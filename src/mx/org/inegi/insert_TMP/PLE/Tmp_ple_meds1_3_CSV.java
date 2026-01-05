@@ -20,6 +20,7 @@ import mx.org.inegi.bean.PLE.BeanTMP_PLE_MEDS1_1;
 import mx.org.inegi.bean.PLE.BeanTMP_PLE_MEDS1_1A;
 import mx.org.inegi.bean.PLE.BeanTMP_PLE_MEDS1_3;
 import mx.org.inegi.conexion.PLE.DaoConexion;
+import mx.org.inegi.conexion.PLE.OracleDAOFactory;
 import mx.org.inegi.conexion.TEPJF.OracleDAOFactoryTEPJF;
 import oracle.jdbc.OracleTypes;
 import oracle.sql.ARRAY;
@@ -32,7 +33,7 @@ import org.apache.commons.csv.CSVRecord;
  
 /**
 *
-* @author ANA.MENDEZ
+* @author LAURA.MEDINAJ
 */
 public class Tmp_ple_meds1_3_CSV {
  
@@ -74,7 +75,7 @@ public class Tmp_ple_meds1_3_CSV {
                     CSVRecord firstRecord = csvParser.iterator().next();
                     numeroColumnas = firstRecord.size();
                     System.out.println("numcol" + numeroColumnas);
-                    if (numeroColumnas == 90) {
+                    if (numeroColumnas == 134) {
                         System.out.println("+número de columnas: " + numeroColumnas);
                         ArrayList<BeanTMP_PLE_MEDS1_3> ad = new ArrayList<>();
                         for (CSVRecord record : csvParser) {
@@ -342,11 +343,63 @@ public class Tmp_ple_meds1_3_CSV {
                         }
  
                     
- 
+
+                        if (TotalRegistros > 0) {
+                            con = OracleDAOFactory.creaConexion();
+                            sd = StructDescriptor.createDescriptor("OBJ_TMP_PLE_MEDS1_3", con);
+                            structs = new STRUCT[ad.size()];
+                            System.out.println("entro 2");
+                            System.out.println("tamaño " + ad.size());
+
+                            for (int i = 0; i < ad.size(); i++) {
+                                structs[i] = new STRUCT(sd, con, ad.get(i).toArray());
+                            }
+
+                            System.out.println("entro 3");
+                            descriptor = ArrayDescriptor.createDescriptor("ARR_OBJ_TMP_PLE_MEDS1_3", con);
+                            System.out.println("entro 4");
+                            array_to_pass = new ARRAY(descriptor, con, structs);
+                            System.out.println("entro 5");
+                            st = con.prepareCall("{? = call(PKG_INTEGRADORXLSM.TMP_PLE_MEDS1_3(?))}");
+                            System.out.println("entro 6");
+                            st.registerOutParameter(1, OracleTypes.INTEGER);
+                            System.out.println("entro 7");
+                            st.setArray(2, array_to_pass);
+                            System.out.println("entro 8");
+                            st.execute();
+                            System.out.println("entro 9");
+                           // JOptionPane.showMessageDialog(null, "Registros insertados TEMP_TR_TEPJF_ACTORES"
+                             //       + " Favor de revisar ventana -*Errores de insert*- Total registros en .CSV:" + TotalRegistros);
+
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Archivo .CSV sin Registros-Personas_Legisladoras");
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "El total de número de columnas en el archivo .CSV no coincide con la BD Oracle");
+                    }
+                } catch (IOException e) {
+                    System.out.println("++" + e);
+                } finally {
+                    try {
+                        array_to_pass = null;
+                        structs = null;
+                        descriptor = null;
+                        if (con != null) {
+                            System.out.println("Cerrar conexión");
+                           // JOptionPane.showMessageDialog(null, "CONEXION CERRADA!!-ACTORES");
+                            con.close();
+                            con = null;
+                        }
+                    } catch (SQLException ex) {
+                        throw new SQLException("[actualiza]: " + ex.getLocalizedMessage());
                     }
                 }
+            } else {
+                JOptionPane.showMessageDialog(null, "El archivo no está en formato UTF-8" + Ruta);
             }
- 
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Fallo al leer el archivo" + e);
+            e.printStackTrace();
         }
     }
 }
