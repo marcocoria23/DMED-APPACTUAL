@@ -216,7 +216,7 @@ public class Tmp_ple_meds1_3_CSV {
  
                         for (int i = 0; i < ad.size(); i++) {
                             BeanTMP_PLE_MEDS1_3 x = ad.get(i);
- 
+ /*
                             System.out.println("[" + i + "] "
                                     + "ENTIDAD=" + x.GetENTIDAD_TMP()
                                     + ", P1_1_1=" + x.GetP1_1_1()
@@ -229,24 +229,10 @@ public class Tmp_ple_meds1_3_CSV {
                                      + ", P1_1_8=" + x.GetP1_1_8()
                                      + ", P1_1_9=" + x.GetP1_1_9()
                                     + ", ESTATUS=" + x.GetESTATUS()
-                            );
+                            );*/
                         }
  
-                        System.out.println("===== CONTENIDO ad1 (BeanTMP_PLE_MEDS1_1A) =====");
-                        System.out.println("Total en ad1: " + ad1.size());
- 
-                        for (int i = 0; i < ad1.size(); i++) {
-                            BeanTMP_PLE_MEDS1_1A x = ad1.get(i);
- 
-                            System.out.println("[" + i + "] "
-                                    + "ENTIDAD=" + x.GetENTIDAD()
-                                    + ", C1_1A=" + x.GetC1_1A()
-                                    + ", P1_1A_1=" + x.GetP1_1A_1()
-                                    + ", P1_1A_2=" + x.GetP1_1A_2()
-                                    + ", P1_1A_3=" + x.GetP1_1A_3()
-                                    + ", P1_1A_4=" + x.GetP1_1A_4()
-                            );
-                        }
+                    
  
                     }
                 }
