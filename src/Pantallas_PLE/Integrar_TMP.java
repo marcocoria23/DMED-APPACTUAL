@@ -6,6 +6,7 @@
 package Pantallas_PLE;
 
 import java.awt.FileDialog;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -55,6 +56,8 @@ public class Integrar_TMP extends javax.swing.JFrame {
     private void initComponents() {
 
         jDialog1 = new javax.swing.JDialog();
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -78,6 +81,9 @@ public class Integrar_TMP extends javax.swing.JFrame {
         Ttabla = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         CEstatus = new javax.swing.JComboBox();
+        ButtonCsv = new javax.swing.JRadioButton();
+        ButtonXlsx = new javax.swing.JRadioButton();
+        jLabel8 = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
         jDialog1.getContentPane().setLayout(jDialog1Layout);
@@ -192,6 +198,24 @@ public class Integrar_TMP extends javax.swing.JFrame {
         CEstatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "En Revision", "Liberado" }));
         CEstatus.setEnabled(false);
 
+        buttonGroup1.add(ButtonCsv);
+        ButtonCsv.setLabel("CSV");
+        ButtonCsv.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonCsvActionPerformed(evt);
+            }
+        });
+
+        buttonGroup1.add(ButtonXlsx);
+        ButtonXlsx.setText("XLSX");
+        ButtonXlsx.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonXlsxActionPerformed(evt);
+            }
+        });
+
+        jLabel8.setText("Formato de Archivo:");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -213,17 +237,23 @@ public class Integrar_TMP extends javax.swing.JFrame {
                                 .addGap(62, 62, 62))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGap(0, 94, Short.MAX_VALUE)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addGap(61, 61, 61)
-                                        .addComponent(RutaArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, 396, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jLabel6)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(jPanel3Layout.createSequentialGroup()
                                         .addGap(6, 6, 6)
                                         .addComponent(jLabel7)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(CEstatus, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(CEstatus, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel8)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(ButtonCsv)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(ButtonXlsx))
+                                    .addComponent(jLabel3)
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addGap(61, 61, 61)
+                                        .addComponent(RutaArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, 396, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel6))
                                 .addGap(45, 45, 45))))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
@@ -284,7 +314,10 @@ public class Integrar_TMP extends javax.swing.JFrame {
                 .addGap(21, 21, 21)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CEstatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(CEstatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ButtonCsv)
+                    .addComponent(ButtonXlsx)
+                    .addComponent(jLabel8))
                 .addGap(36, 36, 36)
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -364,6 +397,24 @@ public class Integrar_TMP extends javax.swing.JFrame {
     
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        if (ButtonCsv.isSelected()){
+            System.out.println("boton csv");
+            
+            if (Procedure.equals("ALL_TABLES"))
+             {
+                try {
+                    EliminaTMP Elimina=new EliminaTMP();
+                    Elimina.EliminaTMP(Entidad, Envio, Legislatura);
+                } catch (SQLException ex) {
+                    Logger.getLogger(Integrar_TMP.class.getName()).log(Level.SEVERE, null, ex);
+                }
+             }
+            
+        }
+        else{
+            
+            System.out.println("boton xlsx");
+        
 
    new Thread(() -> {    
     Querys Q =new Querys();   
@@ -539,7 +590,7 @@ public class Integrar_TMP extends javax.swing.JFrame {
        JOptionPane.showMessageDialog(null, "Favor de seleccionar archivo");
      }).start();
         
-        
+        }
     
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -576,6 +627,14 @@ public class Integrar_TMP extends javax.swing.JFrame {
              RutaArchivo.setEnabled(false);
              Ttabla.setVisible(false);
     }//GEN-LAST:event_formWindowOpened
+
+    private void ButtonCsvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCsvActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ButtonCsvActionPerformed
+
+    private void ButtonXlsxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonXlsxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ButtonXlsxActionPerformed
   
     
     public void Valores(){
@@ -624,6 +683,8 @@ public class Integrar_TMP extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JRadioButton ButtonCsv;
+    private javax.swing.JRadioButton ButtonXlsx;
     private javax.swing.JComboBox CEntidad;
     private javax.swing.JComboBox CEstatus;
     private javax.swing.JComboBox Cproceso;
@@ -633,6 +694,8 @@ public class Integrar_TMP extends javax.swing.JFrame {
     private javax.swing.JTextField TEnvio;
     private javax.swing.JTextField TLegislatura;
     private javax.swing.JLabel Ttabla;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -644,6 +707,7 @@ public class Integrar_TMP extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
