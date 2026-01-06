@@ -17,7 +17,7 @@ import mx.org.inegi.insert_TMP.PLE.Tmp_ple_meds1_1A;
 import mx.org.inegi.insert_TMP.PLE.Tmp_ple_meds1_1B;
 import mx.org.inegi.insert_TMP.PLE.Tmp_ple_meds1_1C;
 import mx.org.inegi.insert_TMP.PLE.Tmp_ple_meds1_1D;
-import mx.org.inegi.insert_TMP.PLE.Tmp_ple_meds1_1_CSV;
+import mx.org.inegi.insert_TMP.PLE.Tmp_ple_meds1_3_CSV;
 import mx.org.inegi.insert_TMP.PLE.Tmp_ple_meds1_2;
 import mx.org.inegi.insert_TMP.PLE.Tmp_ple_meds1_3;
 import mx.org.inegi.insert_TMP.PLE.Tmp_ple_meds1_4;
@@ -176,7 +176,7 @@ public class Integrar_TMP extends javax.swing.JFrame {
         jButton3.setText("Insertar");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                Button_Insertar(evt);
             }
         });
 
@@ -396,14 +396,14 @@ public class Integrar_TMP extends javax.swing.JFrame {
   
     
     
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void Button_Insertar(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_Insertar
         // TODO add your handling code here:
         if (ButtonCsv.isSelected()){
-            System.out.println("boton csv");
-            Tmp_ple_meds1_1_CSV meds1_1 =new Tmp_ple_meds1_1_CSV();
+            System.out.println("botón csv");
+            Tmp_ple_meds1_3_CSV meds1_1 =new Tmp_ple_meds1_3_CSV();
             try {
                 Valores();
-                meds1_1.Meds1_1_CSV(RutaAr, Entidad, Envio, Legislatura, Estatus);
+                meds1_1.Meds1_3_CSV(RutaAr, Entidad, Envio, Legislatura, Estatus);
             } catch (Exception ex) {
                 Logger.getLogger(Integrar_TMP.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -599,7 +599,7 @@ public class Integrar_TMP extends javax.swing.JFrame {
         
         }
     
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_Button_Insertar
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:

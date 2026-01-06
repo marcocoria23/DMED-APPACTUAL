@@ -16,12 +16,9 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
-import mx.org.inegi.bean.PLE.BeanTMP_PLE_MEDS1_1;
-import mx.org.inegi.bean.PLE.BeanTMP_PLE_MEDS1_1A;
 import mx.org.inegi.bean.PLE.BeanTMP_PLE_MEDS1_3;
 import mx.org.inegi.conexion.PLE.DaoConexion;
 import mx.org.inegi.conexion.PLE.OracleDAOFactory;
-import mx.org.inegi.conexion.TEPJF.OracleDAOFactoryTEPJF;
 import oracle.jdbc.OracleTypes;
 import oracle.sql.ARRAY;
 import oracle.sql.ArrayDescriptor;
@@ -33,7 +30,7 @@ import org.apache.commons.csv.CSVRecord;
  
 /**
 *
-* @author LAURA.MEDINAJ
+* @author LAURA.MDINAJ
 */
 public class Tmp_ple_meds1_3_CSV {
  
@@ -74,13 +71,13 @@ public class Tmp_ple_meds1_3_CSV {
                     int periodos = 0;
                     CSVRecord firstRecord = csvParser.iterator().next();
                     numeroColumnas = firstRecord.size();
-                    System.out.println("numcol" + numeroColumnas);
+                    System.out.println("núm. de columnas: " + numeroColumnas);
                     if (numeroColumnas == 134) {
                         System.out.println("+número de columnas: " + numeroColumnas);
                         ArrayList<BeanTMP_PLE_MEDS1_3> ad = new ArrayList<>();
                         for (CSVRecord record : csvParser) {
                             fila++;
-                            if (fila == 9) {
+                            if (fila > 7) {
                                 System.out.println("llenado de csv");
                                 TotalRegistros++;
                                 BeanTMP_PLE_MEDS1_3 a = new BeanTMP_PLE_MEDS1_3();
@@ -342,40 +339,35 @@ public class Tmp_ple_meds1_3_CSV {
                             );
                         }
  
-                    
-
+                    System.out.println("entro get");
                         if (TotalRegistros > 0) {
                             con = OracleDAOFactory.creaConexion();
                             sd = StructDescriptor.createDescriptor("OBJ_TMP_PLE_MEDS1_3", con);
                             structs = new STRUCT[ad.size()];
-                            System.out.println("entro 2");
+                            System.out.println("Creo conexión");
                             System.out.println("tamaño " + ad.size());
-
                             for (int i = 0; i < ad.size(); i++) {
                                 structs[i] = new STRUCT(sd, con, ad.get(i).toArray());
                             }
-
-                            System.out.println("entro 3");
+                            System.out.println("llenar Structs");
                             descriptor = ArrayDescriptor.createDescriptor("ARR_OBJ_TMP_PLE_MEDS1_3", con);
-                            System.out.println("entro 4");
+                            System.out.println("crear descriptor");
                             array_to_pass = new ARRAY(descriptor, con, structs);
-                            System.out.println("entro 5");
+                            System.out.println("Crea array");
                             st = con.prepareCall("{? = call(PKG_INTEGRADORXLSM.TMP_PLE_MEDS1_3(?))}");
-                            System.out.println("entro 6");
+                            System.out.println("llama BD para integrar información");
                             st.registerOutParameter(1, OracleTypes.INTEGER);
-                            System.out.println("entro 7");
+                            System.out.println("parámetro de salida");
                             st.setArray(2, array_to_pass);
-                            System.out.println("entro 8");
+                            System.out.println("asigna un parámetro de entrada");
                             st.execute();
-                            System.out.println("entro 9");
-                           // JOptionPane.showMessageDialog(null, "Registros insertados TEMP_TR_TEPJF_ACTORES"
-                             //       + " Favor de revisar ventana -*Errores de insert*- Total registros en .CSV:" + TotalRegistros);
-
+                            System.out.println("ejecutar integración a BD");
+                          
                         } else {
-                            JOptionPane.showMessageDialog(null, "Archivo .CSV sin Registros-Personas_Legisladoras");
+                            JOptionPane.showMessageDialog(null, "Archivo .CSV sin Registros en Personas_Legisladoras");
                         }
                     } else {
-                        JOptionPane.showMessageDialog(null, "El total de número de columnas en el archivo .CSV no coincide con la BD Oracle");
+                        JOptionPane.showMessageDialog(null, "El total de número de columnas en el archivo .CSV no coincide con la bd Oracle");
                     }
                 } catch (IOException e) {
                     System.out.println("++" + e);
@@ -385,7 +377,7 @@ public class Tmp_ple_meds1_3_CSV {
                         structs = null;
                         descriptor = null;
                         if (con != null) {
-                            System.out.println("Cerrar conexión");
+                            System.out.println("cerrar conexión");
                            // JOptionPane.showMessageDialog(null, "CONEXION CERRADA!!-ACTORES");
                             con.close();
                             con = null;
