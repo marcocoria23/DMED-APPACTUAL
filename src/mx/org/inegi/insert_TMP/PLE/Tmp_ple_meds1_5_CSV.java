@@ -349,7 +349,7 @@ public class Tmp_ple_meds1_5_CSV {
                             System.out.println("ejecutar integración a BD");
                           
                         } else {
-                            JOptionPane.showMessageDialog(null, "Archivo .CSV sin Registros en Personas_Legisladoras");
+                            JOptionPane.showMessageDialog(null, "Archivo .CSV sin Registros en iniciativas");
                         }
                     } else {
                         JOptionPane.showMessageDialog(null, "El total de número de columnas en el archivo .CSV no coincide con la bd Oracle");
