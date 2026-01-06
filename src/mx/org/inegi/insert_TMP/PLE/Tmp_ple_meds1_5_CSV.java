@@ -200,7 +200,7 @@ public class Tmp_ple_meds1_5_CSV {
                             }
                         }
  
-                        System.out.println("===== CONTENIDO ad (BeanTMP_PLE_MEDS1_1) =====");
+                        System.out.println("===== CONTENIDO ad (BeanTMP_PLE_MEDS1_5) =====");
                         System.out.println("Total en ad: " + ad.size());
  
                         for (int i = 0; i < ad.size(); i++) {

@@ -17,7 +17,15 @@ import mx.org.inegi.insert_TMP.PLE.Tmp_ple_meds1_1A;
 import mx.org.inegi.insert_TMP.PLE.Tmp_ple_meds1_1B;
 import mx.org.inegi.insert_TMP.PLE.Tmp_ple_meds1_1C;
 import mx.org.inegi.insert_TMP.PLE.Tmp_ple_meds1_1D;
+import mx.org.inegi.insert_TMP.PLE.Tmp_ple_meds1_1_CSV;
+import mx.org.inegi.insert_TMP.PLE.Tmp_ple_meds1_2_CSV;
+import mx.org.inegi.insert_TMP.PLE.Tmp_ple_meds1_3_CSV;
+//import mx.org.inegi.insert_TMP.PLE.Tmp_ple_meds1_4_CSV;
+import mx.org.inegi.insert_TMP.PLE.Tmp_ple_meds1_5_CSV;
+//import mx.org.inegi.insert_TMP.PLE.Tmp_ple_meds1_6_CSV;
 import mx.org.inegi.insert_TMP.PLE.Tmp_ple_meds1_7_CSV;
+import mx.org.inegi.insert_TMP.PLE.Tmp_ple_meds1_8_CSV;
+import mx.org.inegi.insert_TMP.PLE.Tmp_ple_meds1_9_CSV;
 import mx.org.inegi.insert_TMP.PLE.Tmp_ple_meds1_2;
 import mx.org.inegi.insert_TMP.PLE.Tmp_ple_meds1_3;
 import mx.org.inegi.insert_TMP.PLE.Tmp_ple_meds1_4;
@@ -400,10 +408,10 @@ public class Integrar_TMP extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (ButtonCsv.isSelected()){
             System.out.println("botón csv");
-            Tmp_ple_meds1_7_CSV meds1_1 =new Tmp_ple_meds1_7_CSV();
+            Tmp_ple_meds1_9_CSV meds1_9 =new Tmp_ple_meds1_9_CSV();
             try {
                 Valores();
-                meds1_1.Meds1_7_CSV(RutaAr, Entidad, Envio, Legislatura, Estatus);
+                meds1_9.Meds1_9_CSV(RutaAr, Entidad, Envio, Legislatura, Estatus);
             } catch (Exception ex) {
                 Logger.getLogger(Integrar_TMP.class.getName()).log(Level.SEVERE, null, ex);
             }
