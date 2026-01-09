@@ -79,9 +79,8 @@ public class Tmp_ple_meds1_1_CSV {
                     int periodos = 0;
                     CSVRecord firstRecord = csvParser.iterator().next();
                     numeroColumnas = firstRecord.size();
-                    System.out.println("numcol" + numeroColumnas);
+                    System.out.println("núm de columnas esperado: 90, número de columnas real:" + numeroColumnas);
                     if (numeroColumnas == 90) {
-                        System.out.println("+hellooou+" + numeroColumnas);
                         ArrayList<BeanTMP_PLE_MEDS1_1> ad = new ArrayList<>();
                         ArrayList<BeanTMP_PLE_MEDS1_1A> ad1 = new ArrayList<>();
                         ArrayList<BeanTMP_PLE_MEDS1_1B> ad2 = new ArrayList<>();

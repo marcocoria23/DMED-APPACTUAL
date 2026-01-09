@@ -64,22 +64,21 @@ public class Tmp_ple_meds1_6_CSV {
             byte[] bytes = new byte[3];
             int bytesRead = inputStream.read(bytes);
             if (bytesRead >= 3 && bytes[0] == (byte) 0xEF && bytes[1] == (byte) 0xBB && bytes[2] == (byte) 0xBF) {
-                System.out.println("El archivo parece estar en UTF-8.");
+                System.out.println("El archivo 1_6 parece estar en UTF-8.");
                 try ( BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(NuevaRuta), StandardCharsets.UTF_8));  CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT)) {
                     int numeroColumnas = 0;
                     int fila = 0;
                     int periodos = 0;
                     CSVRecord firstRecord = csvParser.iterator().next();
                     numeroColumnas = firstRecord.size();
-                    System.out.println("numcol " + numeroColumnas);
+                    System.out.println("Núm de col esperado: Mayor a 0, número de col real:  " + numeroColumnas);
                     if (numeroColumnas > 0) {
-                        System.out.println("+hellooou+" + numeroColumnas);
                         ArrayList<BeanTMP_PLE_MEDS1_6 > ad = new ArrayList<>();
-
+                        System.out.println("llenado de csv");
                         for (CSVRecord record : csvParser) {
                             fila++;
                             if (fila > 7) {
-                                System.out.println("llenado de csv");
+                                
                                 TotalRegistros++;
 
                                 BeanTMP_PLE_MEDS1_6 a = new BeanTMP_PLE_MEDS1_6();
