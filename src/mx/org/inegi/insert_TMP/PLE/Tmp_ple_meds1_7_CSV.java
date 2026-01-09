@@ -73,7 +73,7 @@ public class Tmp_ple_meds1_7_CSV {
                     numeroColumnas = firstRecord.size();
                     System.out.println("núm. de columnas: " + numeroColumnas);
                     if (numeroColumnas == 55) {
-                        System.out.println("+número de columnas: " + numeroColumnas);
+                        System.out.println("número de columnas esperado: 55, recibido: " + numeroColumnas);
                         ArrayList<BeanTMP_PLE_MEDS1_7> ad = new ArrayList<>();
                         for (CSVRecord record : csvParser) {
                             fila++;
@@ -203,7 +203,7 @@ public class Tmp_ple_meds1_7_CSV {
                             JOptionPane.showMessageDialog(null, "Archivo .CSV sin Registros en Jucios Políticos");
                         }
                     } else {
-                        JOptionPane.showMessageDialog(null, "El total de número de columnas en el archivo .CSV no coincide con la bd Oracle");
+                        JOptionPane.showMessageDialog(null, "El total de número de columnas en el archivo “Juicios Políticos”.CSV no coincide con la bd Oracle");
                     }
                 } catch (IOException e) {
                     System.out.println("++" + e);
@@ -223,10 +223,10 @@ public class Tmp_ple_meds1_7_CSV {
                     }
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "El archivo no está en formato UTF-8" + Ruta);
+                JOptionPane.showMessageDialog(null, "El archivo de la pestaña “Juicios Políticos” no está en formato UTF-8." + Ruta);
             }
         } catch (IOException e) {
-            JOptionPane.showMessageDialog(null, "Fallo al leer el archivo" + e);
+            JOptionPane.showMessageDialog(null, "Fallo al leer el archivo “Juicios Políticos”" + e);
             e.printStackTrace();
         }
     }

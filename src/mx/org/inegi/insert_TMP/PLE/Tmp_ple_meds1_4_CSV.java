@@ -41,7 +41,7 @@ public class Tmp_ple_meds1_4_CSV {
     DaoConexion conexion = new DaoConexion();
     Conver_Utf8 conUTF8 = new Conver_Utf8();
 
-    public void Meds1_1_CSV(String Ruta, String Entidad, String Envio, String Legislatura, String Estatus) throws Exception {
+    public void Meds1_4_CSV(String Ruta, String Entidad, String Envio, String Legislatura, String Estatus) throws Exception {
         ArrayList<String[]> Array;
         Array = new ArrayList();
         ARRAY array_to_pass;
@@ -131,7 +131,7 @@ public class Tmp_ple_meds1_4_CSV {
                             }
                         }
 
-                        /*System.out.println("===== CONTENIDO ad (BeanTMP_PLE_MEDS1_4) =====");
+                        System.out.println("===== CONTENIDO ad (BeanTMP_PLE_MEDS1_4) =====");
                         System.out.println("Total en ad: " + ad.size());
 
                         for (int i = 0; i < ad.size(); i++) {
@@ -176,7 +176,7 @@ public class Tmp_ple_meds1_4_CSV {
                                     + ", P1_4_35=" + x.GetP1_4_35()
                                     + ", P1_4_36=" + x.GetP1_4_36()
                             );
-                        }*/
+                        }
 
                         System.out.println("entro 1");
                         if (TotalRegistros > 0) {
@@ -207,10 +207,10 @@ public class Tmp_ple_meds1_4_CSV {
                             //       + " Favor de revisar ventana -*Errores de insert*- Total registros en .CSV:" + TotalRegistros);
 
                         } else {
-                            JOptionPane.showMessageDialog(null, "Archivo .CSV sin Registros-Comisiones Legislativas");
+                            JOptionPane.showMessageDialog(null, "Archivo .CSV sin Registros en “Personal de apoyo”");
                         }
                     } else {
-                        JOptionPane.showMessageDialog(null, "El total de numero de columnas en el archivo .CSV no coincide con la bd Oracle");
+                        JOptionPane.showMessageDialog(null, "El total de numero de columnas en el archivo “Personal de apoyo”.CSV no coincide con la bd Oracle");
                     }
                 } catch (IOException e) {
                     System.out.println("++" + e);
@@ -230,10 +230,10 @@ public class Tmp_ple_meds1_4_CSV {
                     }
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "El archivo no esta en formato UTF-8" + Ruta);
+                JOptionPane.showMessageDialog(null, "El archivo de la pestaña “Personal de apoyo” no está en formato UTF-8." + Ruta);
             }
         } catch (IOException e) {
-            JOptionPane.showMessageDialog(null, "Fallo al leer el archivo" + e);
+            JOptionPane.showMessageDialog(null, "Fallo al leer el archivo “Personal de apoyo”" + e);
             e.printStackTrace();
         }
     }

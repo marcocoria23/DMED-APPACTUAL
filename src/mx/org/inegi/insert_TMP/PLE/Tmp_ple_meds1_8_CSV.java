@@ -195,7 +195,7 @@ public class Tmp_ple_meds1_8_CSV {
                             JOptionPane.showMessageDialog(null, "Archivo .CSV sin Registros en declaraciones_procedencias");
                         }
                     } else {
-                        JOptionPane.showMessageDialog(null, "El total de número de columnas en el archivo .CSV no coincide con la bd Oracle");
+                        JOptionPane.showMessageDialog(null, "El total de número de columnas en el archivo “Declaraciones Procedencias”.CSV no coincide con la bd Oracle");
                     }
                 } catch (IOException e) {
                     System.out.println("++" + e);
@@ -215,10 +215,10 @@ public class Tmp_ple_meds1_8_CSV {
                     }
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "El archivo no está en formato UTF-8" + Ruta);
+                JOptionPane.showMessageDialog(null, "El archivo de la pestaña “Declaraciones Procedencias” no está en formato UTF-8." + Ruta);
             }
         } catch (IOException e) {
-            JOptionPane.showMessageDialog(null, "Fallo al leer el archivo" + e);
+            JOptionPane.showMessageDialog(null, "Fallo al leer el archivo “Declaraciones Procedencias” " + e);
             e.printStackTrace();
         }
     }

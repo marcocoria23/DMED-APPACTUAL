@@ -23,7 +23,6 @@ import mx.org.inegi.bean.PLE.BeanTMP_PLE_MEDS1_1C;
 import mx.org.inegi.bean.PLE.BeanTMP_PLE_MEDS1_1D;
 import mx.org.inegi.conexion.PLE.DaoConexion;
 import mx.org.inegi.conexion.PLE.OracleDAOFactory;
-import mx.org.inegi.conexion.TEPJF.OracleDAOFactoryTEPJF;
 import oracle.jdbc.OracleTypes;
 import oracle.sql.ARRAY;
 import oracle.sql.ArrayDescriptor;
@@ -414,7 +413,7 @@ public class Tmp_ple_meds1_1_CSV {
                          
                         
                     } else {
-                        JOptionPane.showMessageDialog(null, "El total de numero de columnas en el archivo .CSV no coincide con la bd Oracle");
+                        JOptionPane.showMessageDialog(null, "El total de número de columnas en el archivo “Datos generales”.CSV no coincide con la bd Oracle");
                     }
                 } catch (IOException e) {
                     System.out.println("++" + e);
@@ -434,10 +433,10 @@ public class Tmp_ple_meds1_1_CSV {
                     }
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "El archivo no esta en formato UTF-8" + Ruta);
+                JOptionPane.showMessageDialog(null, "El archivo de la pestaña “Datos generales” no está en formato UTF-8." + Ruta);
             }
         } catch (IOException e) {
-            JOptionPane.showMessageDialog(null, "Fallo al leer el archivo" + e);
+            JOptionPane.showMessageDialog(null, "Fallo al leer el archivo “Datos generales”" + e);
             e.printStackTrace();
         }
     }

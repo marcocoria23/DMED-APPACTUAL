@@ -20,9 +20,9 @@ import mx.org.inegi.insert_TMP.PLE.Tmp_ple_meds1_1D;
 import mx.org.inegi.insert_TMP.PLE.Tmp_ple_meds1_1_CSV;
 import mx.org.inegi.insert_TMP.PLE.Tmp_ple_meds1_2_CSV;
 import mx.org.inegi.insert_TMP.PLE.Tmp_ple_meds1_3_CSV;
-//import mx.org.inegi.insert_TMP.PLE.Tmp_ple_meds1_4_CSV;
+import mx.org.inegi.insert_TMP.PLE.Tmp_ple_meds1_4_CSV;
 import mx.org.inegi.insert_TMP.PLE.Tmp_ple_meds1_5_CSV;
-//import mx.org.inegi.insert_TMP.PLE.Tmp_ple_meds1_6_CSV;
+import mx.org.inegi.insert_TMP.PLE.Tmp_ple_meds1_6_CSV;
 import mx.org.inegi.insert_TMP.PLE.Tmp_ple_meds1_7_CSV;
 import mx.org.inegi.insert_TMP.PLE.Tmp_ple_meds1_8_CSV;
 import mx.org.inegi.insert_TMP.PLE.Tmp_ple_meds1_9_CSV;
@@ -40,12 +40,10 @@ import mx.org.inegi.insert_TMP.PLE.Tmp_ple_meds1_9;
  * @author ANTONIO.CORIA
  */
 public class Integrar_TMP extends javax.swing.JFrame {
-    
-    public static String RutaAr="",Entidad="",Envio="",Legislatura="",Procedure="";
+
+    public static String RutaAr = "", Entidad = "", Envio = "", Legislatura = "", Procedure = "";
     public static boolean ventanaAbierta = false;
-    String Estatus="";
-            
-       
+    String Estatus = "", directorio = "";
 
     /**
      * Creates new form Integrar_TMP
@@ -67,32 +65,32 @@ public class Integrar_TMP extends javax.swing.JFrame {
         jDialog1 = new javax.swing.JDialog();
         buttonGroup1 = new javax.swing.ButtonGroup();
         buttonGroup2 = new javax.swing.ButtonGroup();
-        jPanel1 = new javax.swing.JPanel();
+        Panel_PLE_ENCABEZADO = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
+        Panel_PLE_insertarTMP = new javax.swing.JPanel();
         RutaArchivo = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        boton_ruta = new javax.swing.JButton();
+        Label_RutaArchivo = new javax.swing.JLabel();
+        botón_log_tabla = new javax.swing.JButton();
+        Boton_insertar = new javax.swing.JButton();
         CEntidad = new javax.swing.JComboBox();
-        jLabel4 = new javax.swing.JLabel();
-        ENVIO = new javax.swing.JLabel();
-        ENVIO1 = new javax.swing.JLabel();
+        Label_entidad = new javax.swing.JLabel();
+        Label_envio = new javax.swing.JLabel();
+        Label_Legislatura = new javax.swing.JLabel();
         TLegislatura = new javax.swing.JTextField();
         TEnvio = new javax.swing.JTextField();
-        jProgressBar1 = new javax.swing.JProgressBar();
-        jLabel5 = new javax.swing.JLabel();
-        Cproceso = new javax.swing.JComboBox();
-        jLabel6 = new javax.swing.JLabel();
-        Ttabla = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        ProgressBar_PLE_TMP = new javax.swing.JProgressBar();
+        Label_Progressline = new javax.swing.JLabel();
+        Combobox_proceso = new javax.swing.JComboBox();
+        Label_Procedure = new javax.swing.JLabel();
+        Progressline = new javax.swing.JLabel();
+        Label_Estatus = new javax.swing.JLabel();
         CEstatus = new javax.swing.JComboBox();
-        ButtonCsv = new javax.swing.JRadioButton();
+        RadioButtonCsv = new javax.swing.JRadioButton();
         ButtonXlsx = new javax.swing.JRadioButton();
-        jLabel8 = new javax.swing.JLabel();
+        Label_formatoarchivo = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
         jDialog1.getContentPane().setLayout(jDialog1Layout);
@@ -114,7 +112,7 @@ public class Integrar_TMP extends javax.swing.JFrame {
             }
         });
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        Panel_PLE_ENCABEZADO.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Logo CNG.png"))); // NOI18N
 
@@ -135,54 +133,54 @@ public class Integrar_TMP extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Cambria", 0, 18)); // NOI18N
         jLabel2.setText("Poderes Legislativos Estatales");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout Panel_PLE_ENCABEZADOLayout = new javax.swing.GroupLayout(Panel_PLE_ENCABEZADO);
+        Panel_PLE_ENCABEZADO.setLayout(Panel_PLE_ENCABEZADOLayout);
+        Panel_PLE_ENCABEZADOLayout.setHorizontalGroup(
+            Panel_PLE_ENCABEZADOLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_PLE_ENCABEZADOLayout.createSequentialGroup()
                 .addContainerGap(252, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        Panel_PLE_ENCABEZADOLayout.setVerticalGroup(
+            Panel_PLE_ENCABEZADOLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Panel_PLE_ENCABEZADOLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(Panel_PLE_ENCABEZADOLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(Panel_PLE_ENCABEZADOLayout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(17, 17, 17)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        Panel_PLE_insertarTMP.setBackground(new java.awt.Color(255, 255, 255));
 
-        jButton1.setText("....");
-        jButton1.setToolTipText("Seleccionar Archivo");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        boton_ruta.setText("....");
+        boton_ruta.setToolTipText("Seleccionar Archivo");
+        boton_ruta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                boton_rutaActionPerformed(evt);
             }
         });
 
-        jLabel3.setText("Ruta archivo:");
+        Label_RutaArchivo.setText("Ruta archivo:");
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/errorins.png"))); // NOI18N
-        jButton2.setToolTipText("Errores de Insert");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        botón_log_tabla.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/errorins.png"))); // NOI18N
+        botón_log_tabla.setToolTipText("Errores de Insert");
+        botón_log_tabla.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                botón_log_tablaActionPerformed(evt);
             }
         });
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/InsertaBD.png"))); // NOI18N
-        jButton3.setText("Insertar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        Boton_insertar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/InsertaBD.png"))); // NOI18N
+        Boton_insertar.setText("Insertar");
+        Boton_insertar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Button_Insertar(evt);
             }
@@ -190,28 +188,33 @@ public class Integrar_TMP extends javax.swing.JFrame {
 
         CEntidad.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32" }));
 
-        jLabel4.setText("Entidad:");
+        Label_entidad.setText("Entidad:");
 
-        ENVIO.setText("Envio:");
+        Label_envio.setText("Envio:");
 
-        ENVIO1.setText("Legislatura:");
+        Label_Legislatura.setText("Legislatura:");
 
-        jLabel5.setText("Progreso...");
+        Label_Progressline.setText("Progreso...");
 
-        Cproceso.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ALL_TABLES", "TMP_PLE_MEDS1_1", "TMP_PLE_MEDS1_1A", "TMP_PLE_MEDS1_1B", "TMP_PLE_MEDS1_1C", "TMP_PLE_MEDS1_1D", "TMP_PLE_MEDS1_2", "TMP_PLE_MEDS1_3", "TMP_PLE_MEDS1_4", "TMP_PLE_MEDS1_5", "TMP_PLE_MEDS1_6", "TMP_PLE_MEDS1_7", "TMP_PLE_MEDS1_8", "TMP_PLE_MEDS1_9" }));
+        Combobox_proceso.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ALL_TABLES", "TMP_PLE_MEDS1_1", "TMP_PLE_MEDS1_1A", "TMP_PLE_MEDS1_1B", "TMP_PLE_MEDS1_1C", "TMP_PLE_MEDS1_1D", "TMP_PLE_MEDS1_2", "TMP_PLE_MEDS1_3", "TMP_PLE_MEDS1_4", "TMP_PLE_MEDS1_5", "TMP_PLE_MEDS1_6", "TMP_PLE_MEDS1_7", "TMP_PLE_MEDS1_8", "TMP_PLE_MEDS1_9" }));
+        Combobox_proceso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Combobox_procesoActionPerformed(evt);
+            }
+        });
 
-        jLabel6.setText("Procedure:");
+        Label_Procedure.setText("Procedure:");
 
-        jLabel7.setText("Estatus:");
+        Label_Estatus.setText("Estatus:");
 
         CEstatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "En Revision", "Liberado" }));
         CEstatus.setEnabled(false);
 
-        buttonGroup1.add(ButtonCsv);
-        ButtonCsv.setLabel("CSV");
-        ButtonCsv.addActionListener(new java.awt.event.ActionListener() {
+        buttonGroup1.add(RadioButtonCsv);
+        RadioButtonCsv.setLabel("CSV");
+        RadioButtonCsv.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ButtonCsvActionPerformed(evt);
+                RadioButtonCsvActionPerformed(evt);
             }
         });
 
@@ -223,122 +226,122 @@ public class Integrar_TMP extends javax.swing.JFrame {
             }
         });
 
-        jLabel8.setText("Formato de Archivo:");
+        Label_formatoarchivo.setText("Formato de Archivo:");
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
+        javax.swing.GroupLayout Panel_PLE_insertarTMPLayout = new javax.swing.GroupLayout(Panel_PLE_insertarTMP);
+        Panel_PLE_insertarTMP.setLayout(Panel_PLE_insertarTMPLayout);
+        Panel_PLE_insertarTMPLayout.setHorizontalGroup(
+            Panel_PLE_insertarTMPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_PLE_insertarTMPLayout.createSequentialGroup()
+                .addGroup(Panel_PLE_insertarTMPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(Panel_PLE_insertarTMPLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton3))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(Boton_insertar))
+                    .addGroup(Panel_PLE_insertarTMPLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(Panel_PLE_insertarTMPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_PLE_insertarTMPLayout.createSequentialGroup()
+                                .addComponent(ProgressBar_PLE_TMP, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 31, Short.MAX_VALUE))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
+                            .addGroup(Panel_PLE_insertarTMPLayout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 438, Short.MAX_VALUE)
-                                .addComponent(jButton1)
+                                .addComponent(boton_ruta)
                                 .addGap(62, 62, 62))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
+                            .addGroup(Panel_PLE_insertarTMPLayout.createSequentialGroup()
                                 .addGap(0, 94, Short.MAX_VALUE)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGroup(Panel_PLE_insertarTMPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(Panel_PLE_insertarTMPLayout.createSequentialGroup()
                                         .addGap(6, 6, 6)
-                                        .addComponent(jLabel7)
+                                        .addComponent(Label_Estatus)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(CEstatus, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel8)
+                                        .addComponent(Label_formatoarchivo)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(ButtonCsv)
+                                        .addComponent(RadioButtonCsv)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(ButtonXlsx))
-                                    .addComponent(jLabel3)
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                    .addComponent(Label_RutaArchivo)
+                                    .addGroup(Panel_PLE_insertarTMPLayout.createSequentialGroup()
                                         .addGap(61, 61, 61)
                                         .addComponent(RutaArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, 396, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jLabel6))
+                                    .addComponent(Label_Procedure))
                                 .addGap(45, 45, 45))))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
+                    .addGroup(Panel_PLE_insertarTMPLayout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Label_Progressline, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Ttabla, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Progressline, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, Panel_PLE_insertarTMPLayout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel4)
+                        .addGroup(Panel_PLE_insertarTMPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(Panel_PLE_insertarTMPLayout.createSequentialGroup()
+                                .addComponent(Label_entidad)
                                 .addGap(15, 15, 15))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
+                            .addGroup(Panel_PLE_insertarTMPLayout.createSequentialGroup()
                                 .addComponent(CEntidad, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(Panel_PLE_insertarTMPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(Panel_PLE_insertarTMPLayout.createSequentialGroup()
                                 .addGap(6, 6, 6)
                                 .addComponent(TLegislatura))
-                            .addComponent(ENVIO1))
+                            .addComponent(Label_Legislatura))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(Panel_PLE_insertarTMPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(TEnvio, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(ENVIO))
+                            .addComponent(Label_envio))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(botón_log_tabla, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_PLE_insertarTMPLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(Cproceso, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Combobox_proceso, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(82, 82, 82))
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        Panel_PLE_insertarTMPLayout.setVerticalGroup(
+            Panel_PLE_insertarTMPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Panel_PLE_insertarTMPLayout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton2)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(ENVIO, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(Panel_PLE_insertarTMPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(botón_log_tabla)
+                    .addGroup(Panel_PLE_insertarTMPLayout.createSequentialGroup()
+                        .addComponent(Label_envio, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(TEnvio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(ENVIO1, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(Panel_PLE_insertarTMPLayout.createSequentialGroup()
+                        .addGroup(Panel_PLE_insertarTMPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Label_Legislatura, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Label_entidad, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(Panel_PLE_insertarTMPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(TLegislatura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(CEntidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(47, 47, 47)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Label_RutaArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(RutaArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
+                .addComponent(boton_ruta)
                 .addGap(21, 21, 21)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(Panel_PLE_insertarTMPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Label_Estatus, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(CEstatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ButtonCsv)
+                    .addComponent(RadioButtonCsv)
                     .addComponent(ButtonXlsx)
-                    .addComponent(jLabel8))
-                .addGap(36, 36, 36)
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Label_formatoarchivo))
+                .addGap(21, 21, 21)
+                .addComponent(Label_Procedure, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(Cproceso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Combobox_proceso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(50, 50, 50)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Boton_insertar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(13, 13, 13)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
-                    .addComponent(Ttabla, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(Panel_PLE_insertarTMPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Label_Progressline)
+                    .addComponent(Progressline, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(7, 7, 7)
-                .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ProgressBar_PLE_TMP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -346,270 +349,414 @@ public class Integrar_TMP extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(Panel_PLE_ENCABEZADO, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(Panel_PLE_insertarTMP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Panel_PLE_ENCABEZADO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(Panel_PLE_insertarTMP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void boton_rutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_rutaActionPerformed
         // TODO add your handling code here:
-      RutaArchivo.setText("");
-        String directorio="";
-        String nombreArchivo="";
-        FileDialog dialogoArchivo;
-        dialogoArchivo = new FileDialog(this, "ARCHIVOS RALAB",FileDialog.LOAD);
-        dialogoArchivo.setVisible(true);
-        if(dialogoArchivo.getFile()!=null){ /* Validar que se haya Seleccionado un Archivo*/
-             directorio = dialogoArchivo.getDirectory();
-             nombreArchivo =dialogoArchivo.getFile();
-             RutaArchivo.setText(directorio+nombreArchivo);
-              RutaAr=directorio+nombreArchivo;  
-        }     
-          
-        
-        
-        
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
+        RutaArchivo.setText("");
 
-  public void EnableFalse(){
-      TEnvio.setEnabled(false);
-         TLegislatura.setEnabled(false);
-         CEntidad.setEnabled(false);
-         jButton1.setEnabled(false);
-         jButton3.setEnabled(false);
-         jButton2.setEnabled(false);
-         Cproceso.setEnabled(false);
-  }
-  
-   public void EnableTrue(){
-      TEnvio.setEnabled(true);
-         TLegislatura.setEnabled(true);
-         CEntidad.setEnabled(true);
-         jButton1.setEnabled(true);
-         jButton3.setEnabled(true);
-         jButton2.setEnabled(true);
-         Cproceso.setEnabled(true);
-  }
-  
-  
-    
-    
+        String nombreArchivo = "";
+        FileDialog dialogoArchivo;
+        dialogoArchivo = new FileDialog(this, "ARCHIVOS PLE", FileDialog.LOAD);
+        dialogoArchivo.setVisible(true);
+        if (dialogoArchivo.getFile() != null) {
+            /* Validar que se haya Seleccionado un Archivo*/
+            directorio = dialogoArchivo.getDirectory();
+            nombreArchivo = dialogoArchivo.getFile();
+            RutaArchivo.setText(directorio + nombreArchivo);
+            RutaAr = directorio + nombreArchivo;
+        }
+
+
+    }//GEN-LAST:event_boton_rutaActionPerformed
+
+    public void EnableFalse() {
+        TEnvio.setEnabled(false);
+        TLegislatura.setEnabled(false);
+        CEntidad.setEnabled(false);
+        boton_ruta.setEnabled(false);
+        Boton_insertar.setEnabled(false);
+        botón_log_tabla.setEnabled(false);
+        Combobox_proceso.setEnabled(false);
+    }
+
+    public void EnableTrue() {
+        TEnvio.setEnabled(true);
+        TLegislatura.setEnabled(true);
+        CEntidad.setEnabled(true);
+        boton_ruta.setEnabled(true);
+        Boton_insertar.setEnabled(true);
+        botón_log_tabla.setEnabled(true);
+        Combobox_proceso.setEnabled(true);
+    }
+
+
     private void Button_Insertar(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_Insertar
-        // TODO add your handling code here:
-        if (ButtonCsv.isSelected()){
-            System.out.println("botón csv");
-            Tmp_ple_meds1_9_CSV meds1_9 =new Tmp_ple_meds1_9_CSV();
-            try {
-                Valores();
-                meds1_9.Meds1_9_CSV(RutaAr, Entidad, Envio, Legislatura, Estatus);
-            } catch (Exception ex) {
-                Logger.getLogger(Integrar_TMP.class.getName()).log(Level.SEVERE, null, ex);
-            }
-         /*   if (Procedure.equals("ALL_TABLES"))
-             {
+        Valores();//asigna valores a a entidad, legislatura y envío.
+        String TABLA_SELECCIONADA = Combobox_proceso.getSelectedItem().toString();
+        System.out.println("RUTA: " + RutaAr);
+
+        //Asegurar que se haya seleccionado formato de archivo
+        if (!RadioButtonCsv.isSelected() && !ButtonXlsx.isSelected()) {
+            //JOptionPane.showMessageDialog(null, "FAVOR DE SELECCIONAR EL FORMATO DEL ARCHIVO (CSV O XLSX).");
+            JOptionPane.showMessageDialog(
+                    null,
+                    "<html>FAVOR DE SELECCIONAR EL FORMATO DEL ARCHIVO (<b>CSV</b> O <b>XLSX</b>).</html>",
+                    "Formato requerido",
+                    JOptionPane.WARNING_MESSAGE
+            );
+            return;
+        }
+
+        // Validar ruta de archivo
+        if (RutaArchivo.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Favor de seleccionar archivo");
+            return;
+        }
+
+        // Validar envío y legislatura
+        if (Envio.isEmpty() || Legislatura.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Favor de capturar Envío y Legislatura");
+            return;
+        }
+
+        ///ELIMINA DATOS DE LA TABLA TEMPORAL
+        Querys Q = new Querys();
+        Estatus = Q.Estatus(Entidad, Legislatura, Envio);
+
+        if (Estatus.equals("Liberado")) {
+            JOptionPane.showMessageDialog(
+                    null,
+                    "La información se encuentra en estatus liberado\nEntidad: " + Entidad
+                    + " Leg: " + Legislatura + " Envío: " + Envio
+            );
+            return;
+        }
+
+        
+           
+
+            // ===== HILO =====
+            Thread thread = new Thread(() -> {
+
+                ProgressBar_PLE_TMP.setVisible(true);
+                Progressline.setVisible(true);
+                Label_Progressline.setVisible(true);
+                ProgressBar_PLE_TMP.setValue(0);
                 try {
-                    EliminaTMP Elimina=new EliminaTMP();
-                    Elimina.EliminaTMP(Entidad, Envio, Legislatura);
-                } catch (SQLException ex) {
+
+                    if (RadioButtonCsv.isSelected()) {
+                        System.out.println("botón csv");
+                        if (TABLA_SELECCIONADA.equals("ALL_TABLES")) {
+                             EliminaTMP Elimina = new EliminaTMP();
+                             Elimina.EliminaTMP(Entidad, Envio, Legislatura, "ALL_TABLES");
+                            Tmp_ple_meds1_1_CSV meds1_1 = new Tmp_ple_meds1_1_CSV();
+                            Tmp_ple_meds1_2_CSV meds1_2 = new Tmp_ple_meds1_2_CSV();
+                            Tmp_ple_meds1_3_CSV meds1_3 = new Tmp_ple_meds1_3_CSV();
+                            Tmp_ple_meds1_4_CSV meds1_4 = new Tmp_ple_meds1_4_CSV();
+                            Tmp_ple_meds1_5_CSV meds1_5 = new Tmp_ple_meds1_5_CSV();
+                            Tmp_ple_meds1_6_CSV meds1_6 = new Tmp_ple_meds1_6_CSV();
+                            Tmp_ple_meds1_7_CSV meds1_7 = new Tmp_ple_meds1_7_CSV();
+                            Tmp_ple_meds1_8_CSV meds1_8 = new Tmp_ple_meds1_8_CSV();
+                            Tmp_ple_meds1_9_CSV meds1_9 = new Tmp_ple_meds1_9_CSV();
+                            try {
+                                Progressline.setText("");
+                                ProgressBar_PLE_TMP.setValue(3);
+                                Progressline.setText("TMP_PLE_MEDS1_1");
+                                meds1_1.Meds1_1_CSV(directorio + "BD_datos_generales.csv", Entidad, Envio, Legislatura, Estatus);
+                                ProgressBar_PLE_TMP.setValue(34);
+                                Progressline.setText("TMP_PLE_MEDS1_2");
+                                meds1_2.Meds1_2_CSV(directorio + "BD_comisiones_legislativas.csv", Entidad, Envio, Legislatura, Estatus);
+                                ProgressBar_PLE_TMP.setValue(41);
+                                Progressline.setText("TMP_PLE_MEDS1_3");
+                                meds1_3.Meds1_3_CSV(directorio + "BD_personas_legisladoras.csv", Entidad, Envio, Legislatura, Estatus);
+                                ProgressBar_PLE_TMP.setValue(48);
+                                Progressline.setText("TMP_PLE_MEDS1_4");
+                                meds1_4.Meds1_4_CSV(directorio + "BD_personal_apoyo.csv", Entidad, Envio, Legislatura, Estatus);
+                                ProgressBar_PLE_TMP.setValue(56);
+                                Progressline.setText("TMP_PLE_MEDS1_5");
+                                meds1_5.Meds1_5_CSV(directorio + "BD_iniciativas.csv", Entidad, Envio, Legislatura, Estatus);
+                                Progressline.setText("TMP_PLE_MEDS1_6");
+                                ProgressBar_PLE_TMP.setValue(65);
+                                meds1_6.Meds1_6_CSV(directorio + "BD_iniciativas_urgente_obvia.csv", Entidad, Envio, Legislatura, Estatus);
+                                ProgressBar_PLE_TMP.setValue(72);
+                                Progressline.setText("TMP_PLE_MEDS1_7");
+                                meds1_7.Meds1_7_CSV(directorio + "BD_juicios_politicos.csv", Entidad, Envio, Legislatura, Estatus);
+                                ProgressBar_PLE_TMP.setValue(80);
+                                Progressline.setText("TMP_PLE_MEDS1_8");
+                                meds1_8.Meds1_8_CSV(directorio + "BD_declaraciones_procedencias.csv", Entidad, Envio, Legislatura, Estatus);
+                                ProgressBar_PLE_TMP.setValue(90);
+                                Progressline.setText("TMP_PLE_MEDS1_9");
+                                meds1_9.Meds1_9_CSV(directorio + "BD_comparecencias.csv", Entidad, Envio, Legislatura, Estatus);
+                                ProgressBar_PLE_TMP.setValue(100);
+                                JOptionPane.showMessageDialog(null, "Información insertada a TMP, favor de revisar pantalla errores de insert");
+                            } catch (Exception ex) {
+                                Logger.getLogger(Integrar_TMP.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
+                        if (!"ALL_TABLES".equals(TABLA_SELECCIONADA)) {
+                            try {
+                                EliminaTMP elimina = new EliminaTMP();
+                                elimina.EliminaTMP(Entidad, Envio, Legislatura, TABLA_SELECCIONADA);
+
+                                Progressline.setText("");
+                                ProgressBar_PLE_TMP.setValue(1);
+                                Progressline.setText(TABLA_SELECCIONADA);
+
+                                switch (TABLA_SELECCIONADA) {
+
+                                    case "TMP_PLE_MEDS1_1":
+                                        new Tmp_ple_meds1_1_CSV()
+                                                .Meds1_1_CSV(directorio + "BD_datos_generales.csv",
+                                                        Entidad, Envio, Legislatura, Estatus);
+                                        break;
+
+                                    case "TMP_PLE_MEDS1_2":
+                                        new Tmp_ple_meds1_2_CSV()
+                                                .Meds1_2_CSV(directorio + "BD_comisiones_legislativas.csv",
+                                                        Entidad, Envio, Legislatura, Estatus);
+                                        break;
+
+                                    case "TMP_PLE_MEDS1_3":
+                                        new Tmp_ple_meds1_3_CSV()
+                                                .Meds1_3_CSV(directorio + "BD_personas_legisladoras.csv",
+                                                        Entidad, Envio, Legislatura, Estatus);
+                                        break;
+                                    case "TMP_PLE_MEDS1_4":
+                                        new Tmp_ple_meds1_4_CSV()
+                                                .Meds1_4_CSV(directorio + "BD_personal_apoyo.csv",
+                                                        Entidad, Envio, Legislatura, Estatus);
+                                        break;
+
+                                    case "TMP_PLE_MEDS1_5":
+                                        new Tmp_ple_meds1_5_CSV()
+                                                .Meds1_5_CSV(directorio + "BD_iniciativas.csv",
+                                                        Entidad, Envio, Legislatura, Estatus);
+                                        break;
+                                    
+                                    case "TMP_PLE_MEDS1_6":
+                                        new Tmp_ple_meds1_6_CSV()
+                                                .Meds1_6_CSV(directorio + "BD_iniciativas_urgente_obvia.csv",
+                                                        Entidad, Envio, Legislatura, Estatus);
+                                        break;
+
+                                    case "TMP_PLE_MEDS1_7":
+                                        new Tmp_ple_meds1_7_CSV()
+                                                .Meds1_7_CSV(directorio + "BD_juicios_politicos.csv",
+                                                        Entidad, Envio, Legislatura, Estatus);
+                                        break;
+
+                                    case "TMP_PLE_MEDS1_8":
+                                        new Tmp_ple_meds1_8_CSV()
+                                                .Meds1_8_CSV(directorio + "BD_declaraciones_procedencias.csv",
+                                                        Entidad, Envio, Legislatura, Estatus);
+                                        break;
+
+                                    case "TMP_PLE_MEDS1_9":
+                                        new Tmp_ple_meds1_9_CSV()
+                                                .Meds1_9_CSV(directorio + "BD_comparecencias.csv",
+                                                        Entidad, Envio, Legislatura, Estatus);
+                                        break;
+
+                                    default:
+                                        JOptionPane.showMessageDialog(null,
+                                                "Tabla no soportada: " + TABLA_SELECCIONADA);
+                                        return;
+                                }
+                                ProgressBar_PLE_TMP.setValue(100);
+                                JOptionPane.showMessageDialog(null,  "Información insertada a TMP, favor de revisar pantalla errores de insert");
+                            } catch (SQLException ex) {
+                                Logger.getLogger(Integrar_TMP.class.getName()).log(Level.SEVERE, "Error al eliminar TMP", ex);
+                            } catch (Exception ex) {
+                                Logger.getLogger(Integrar_TMP.class.getName()).log(Level.SEVERE, "Error al procesar CSV", ex);
+                            } finally {
+                                EnableTrue();
+                                ProgressBar_PLE_TMP.setVisible(false);
+                                Progressline.setVisible(false);
+                                Label_Progressline.setVisible(false);
+                            }
+                        }
+
+                    } else {
+                        System.out.println("botón xlsx");
+                        EnableFalse();
+                        Tmp_ple_meds1_1 ple_meds1_1 = new Tmp_ple_meds1_1();
+                        Tmp_ple_meds1_1A ple_meds1_1A = new Tmp_ple_meds1_1A();
+                        Tmp_ple_meds1_1B ple_meds1_1B = new Tmp_ple_meds1_1B();
+                        Tmp_ple_meds1_1C ple_meds1_1C = new Tmp_ple_meds1_1C();
+                        Tmp_ple_meds1_1D ple_meds1_1D = new Tmp_ple_meds1_1D();
+                        Tmp_ple_meds1_2 ple_meds1_2 = new Tmp_ple_meds1_2();
+                        Tmp_ple_meds1_3 ple_meds1_3 = new Tmp_ple_meds1_3();
+                        Tmp_ple_meds1_4 ple_meds1_4 = new Tmp_ple_meds1_4();
+                        Tmp_ple_meds1_5 ple_meds1_5 = new Tmp_ple_meds1_5();
+                        Tmp_ple_meds1_6 ple_meds1_6 = new Tmp_ple_meds1_6();
+                        Tmp_ple_meds1_7 ple_meds1_7 = new Tmp_ple_meds1_7();
+                        Tmp_ple_meds1_8 ple_meds1_8 = new Tmp_ple_meds1_8();
+                        Tmp_ple_meds1_9 ple_meds1_9 = new Tmp_ple_meds1_9();
+
+                        try {
+
+                            if (Procedure.equals("ALL_TABLES")) {
+                                Progressline.setText("");
+                                ProgressBar_PLE_TMP.setValue(3);
+                                Progressline.setText("TMP_PLE_MEDS1_1");
+                                ple_meds1_1.In_Tmp_ple_meds1_1(Entidad, Envio, Legislatura, CEstatus.getSelectedItem().toString());
+                                ProgressBar_PLE_TMP.setValue(7);
+                                Progressline.setText("TMP_PLE_MEDS1_1A");
+                                ple_meds1_1A.in_Tmp_ple_meds1_1A(Entidad, Envio, Legislatura);
+                                ProgressBar_PLE_TMP.setValue(14);
+                                Progressline.setText("TMP_PLE_MEDS1_1B");
+                                ple_meds1_1B.Tmp_ple_meds1_1B(Entidad, Envio, Legislatura);
+                                ProgressBar_PLE_TMP.setValue(21);
+                                Progressline.setText("TMP_PLE_MEDS1_1C");
+                                ple_meds1_1C.Tmp_ple_meds1_1C(Entidad, Envio, Legislatura);
+                                ProgressBar_PLE_TMP.setValue(27);
+                                Progressline.setText("TMP_PLE_MEDS1_1D");
+                                ple_meds1_1D.Tmp_ple_meds1_1D(Entidad, Envio, Legislatura);
+                                ProgressBar_PLE_TMP.setValue(34);
+                                Progressline.setText("TMP_PLE_MEDS1_2");
+                                ple_meds1_2.Tmp_ple_meds1_2(Entidad, Envio, Legislatura);
+                                ProgressBar_PLE_TMP.setValue(41);
+                                Progressline.setText("TMP_PLE_MEDS1_3");
+                                ple_meds1_3.Tmp_ple_meds1_3(Entidad, Envio, Legislatura);
+                                ProgressBar_PLE_TMP.setValue(48);
+                                Progressline.setText("TMP_PLE_MEDS1_4");
+                                ple_meds1_4.Tmp_ple_meds1_4(Entidad, Envio, Legislatura);
+                                ProgressBar_PLE_TMP.setValue(56);
+                                Progressline.setText("TMP_PLE_MEDS1_5");
+                                ple_meds1_5.Tmp_ple_meds1_5(Entidad, Envio, Legislatura);
+                                ProgressBar_PLE_TMP.setValue(64);
+                                Progressline.setText("TMP_PLE_MEDS1_6");
+                                ple_meds1_6.Tmp_ple_meds1_6(Entidad, Envio, Legislatura);
+                                ProgressBar_PLE_TMP.setValue(72);
+                                Progressline.setText("TMP_PLE_MEDS1_7");
+                                ple_meds1_7.Tmp_ple_meds1_7(Entidad, Envio, Legislatura);
+                                ProgressBar_PLE_TMP.setValue(80);
+                                Progressline.setText("TMP_PLE_MEDS1_8");
+                                ple_meds1_8.Tmp_ple_meds1_8(Entidad, Envio, Legislatura);
+                                ProgressBar_PLE_TMP.setValue(90);
+                                Progressline.setText("TMP_PLE_MEDS1_9");
+                                ple_meds1_9.Tmp_ple_meds1_9(Entidad, Envio, Legislatura);
+                                ProgressBar_PLE_TMP.setValue(100);
+                                JOptionPane.showMessageDialog(null, "Información insertada a TMP, favor de revisar pantalla errores de insert");
+
+                            }
+                            if (Procedure.equals("TMP_PLE_MEDS1_1")) {
+                                ProgressBar_PLE_TMP.setValue(15);
+                                ple_meds1_1.In_Tmp_ple_meds1_1(Entidad, Envio, Legislatura, CEstatus.getSelectedItem().toString());
+                                ProgressBar_PLE_TMP.setValue(100);
+                                JOptionPane.showMessageDialog(null, "Información insertada, favor de revisar pantalla errores de insert");
+                            }
+                            if (Procedure.equals("TMP_PLE_MEDS1_1A")) {
+                                ProgressBar_PLE_TMP.setValue(15);
+                                ple_meds1_1A.in_Tmp_ple_meds1_1A(Entidad, Envio, Legislatura);
+                                ProgressBar_PLE_TMP.setValue(100);
+                                JOptionPane.showMessageDialog(null, "Información insertada, favor de revisar pantalla errores de insert");
+                            }
+                            if (Procedure.equals("TMP_PLE_MEDS1_1B")) {
+                                ProgressBar_PLE_TMP.setValue(15);
+                                ple_meds1_1B.Tmp_ple_meds1_1B(Entidad, Envio, Legislatura);
+                                ProgressBar_PLE_TMP.setValue(100);
+                                JOptionPane.showMessageDialog(null, "Información insertada, favor de revisar pantalla errores de insert");
+                            }
+                            if (Procedure.equals("TMP_PLE_MEDS1_1C")) {
+                                ProgressBar_PLE_TMP.setValue(15);
+                                ple_meds1_1C.Tmp_ple_meds1_1C(Entidad, Envio, Legislatura);
+                                ProgressBar_PLE_TMP.setValue(100);
+                                JOptionPane.showMessageDialog(null, "Información insertada, favor de revisar pantalla errores de insert");
+                            }
+                            if (Procedure.equals("TMP_PLE_MEDS1_1D")) {
+                                ProgressBar_PLE_TMP.setValue(15);
+                                ple_meds1_1D.Tmp_ple_meds1_1D(Entidad, Envio, Legislatura);
+                                ProgressBar_PLE_TMP.setValue(100);
+                                JOptionPane.showMessageDialog(null, "Información insertada, favor de revisar pantalla errores de insert");
+                            }
+                            if (Procedure.equals("TMP_PLE_MEDS1_2")) {
+                                ProgressBar_PLE_TMP.setValue(15);
+                                ple_meds1_2.Tmp_ple_meds1_2(Entidad, Envio, Legislatura);
+                                ProgressBar_PLE_TMP.setValue(100);
+                                JOptionPane.showMessageDialog(null, "Información insertada, favor de revisar pantalla errores de insert");
+                            }
+                            if (Procedure.equals("TMP_PLE_MEDS1_3")) {
+                                ProgressBar_PLE_TMP.setValue(15);
+                                ple_meds1_3.Tmp_ple_meds1_3(Entidad, Envio, Legislatura);
+                                ProgressBar_PLE_TMP.setValue(100);
+                                JOptionPane.showMessageDialog(null, "Información insertada, favor de revisar pantalla errores de insert");
+                            }
+                            if (Procedure.equals("TMP_PLE_MEDS1_4")) {
+                                ProgressBar_PLE_TMP.setValue(15);
+                                ple_meds1_4.Tmp_ple_meds1_4(Entidad, Envio, Legislatura);
+                                ProgressBar_PLE_TMP.setValue(100);
+                                JOptionPane.showMessageDialog(null, "Información insertada, favor de revisar pantalla errores de insert");
+                            }
+                            if (Procedure.equals("TMP_PLE_MEDS1_5")) {
+                                ProgressBar_PLE_TMP.setValue(15);
+                                ple_meds1_5.Tmp_ple_meds1_5(Entidad, Envio, Legislatura);
+                                ProgressBar_PLE_TMP.setValue(100);
+                                JOptionPane.showMessageDialog(null, "Información insertada, favor de revisar pantalla errores de insert");
+                            }
+                            if (Procedure.equals("TMP_PLE_MEDS1_6")) {
+                                ProgressBar_PLE_TMP.setValue(15);
+                                ple_meds1_6.Tmp_ple_meds1_6(Entidad, Envio, Legislatura);
+                                ProgressBar_PLE_TMP.setValue(100);
+                                JOptionPane.showMessageDialog(null, "Información insertada, favor de revisar pantalla errores de insert");
+                            }
+                            if (Procedure.equals("TMP_PLE_MEDS1_7")) {
+                                ProgressBar_PLE_TMP.setValue(15);
+                                ple_meds1_7.Tmp_ple_meds1_7(Entidad, Envio, Legislatura);
+                                ProgressBar_PLE_TMP.setValue(100);
+                                JOptionPane.showMessageDialog(null, "Información insertada, favor de revisar pantalla errores de insert");
+                            }
+                            if (Procedure.equals("TMP_PLE_MEDS1_8")) {
+                                ProgressBar_PLE_TMP.setValue(15);
+                                ple_meds1_8.Tmp_ple_meds1_8(Entidad, Envio, Legislatura);
+                                ProgressBar_PLE_TMP.setValue(100);
+                                JOptionPane.showMessageDialog(null, "Información insertada, favor de revisar pantalla errores de insert");
+                            }
+                            if (Procedure.equals("TMP_PLE_MEDS1_9")) {
+                                ProgressBar_PLE_TMP.setValue(15);
+                                ple_meds1_9.Tmp_ple_meds1_9(Entidad, Envio, Legislatura);
+                                ProgressBar_PLE_TMP.setValue(100);
+                                JOptionPane.showMessageDialog(null, "Información insertada, favor de revisar pantalla errores de insert");
+                            }
+                            Label_Progressline.setVisible(false);
+                            ProgressBar_PLE_TMP.setVisible(false);
+                            Progressline.setVisible(false);
+                            EnableTrue();
+                        } catch (Exception ex) {
+                            Logger.getLogger(Integrar_TMP.class.getName()).log(Level.SEVERE, null, ex);
+                        } finally {
+                            EnableTrue();
+                            ProgressBar_PLE_TMP.setVisible(false);
+                            Progressline.setVisible(false);
+                            Label_Progressline.setVisible(false);
+                        }
+                    }
+                } catch (Exception ex) {
                     Logger.getLogger(Integrar_TMP.class.getName()).log(Level.SEVERE, null, ex);
                 }
-             }*/
-            
-        }
-        else{
-            
-            System.out.println("boton xlsx");
+            });
+
+            thread.start();
+
         
 
-   new Thread(() -> {    
-    Querys Q =new Querys();   
-    if (!RutaArchivo.getText().equals("")){     
-     if (!TEnvio.getText().equals("") && !TLegislatura.getText().equals("") ){    
-         Valores();
-          Estatus=Q.Estatus(Entidad, Legislatura, Envio);
-          
-       if (!Estatus.equals("Liberado"))   
-       {
-         EnableFalse();
-         Tmp_ple_meds1_1 ple_meds1_1 =new Tmp_ple_meds1_1();
-         Tmp_ple_meds1_1A ple_meds1_1A =new Tmp_ple_meds1_1A();
-         Tmp_ple_meds1_1B ple_meds1_1B =new Tmp_ple_meds1_1B();
-         Tmp_ple_meds1_1C ple_meds1_1C =new Tmp_ple_meds1_1C();
-         Tmp_ple_meds1_1D ple_meds1_1D =new Tmp_ple_meds1_1D();
-         Tmp_ple_meds1_2 ple_meds1_2 =new Tmp_ple_meds1_2();
-         Tmp_ple_meds1_3 ple_meds1_3 =new Tmp_ple_meds1_3();
-         Tmp_ple_meds1_4 ple_meds1_4 =new Tmp_ple_meds1_4();
-         Tmp_ple_meds1_5 ple_meds1_5 =new Tmp_ple_meds1_5();
-         Tmp_ple_meds1_6 ple_meds1_6 =new Tmp_ple_meds1_6();
-         Tmp_ple_meds1_7 ple_meds1_7 =new Tmp_ple_meds1_7();
-         Tmp_ple_meds1_8 ple_meds1_8 =new Tmp_ple_meds1_8();
-         Tmp_ple_meds1_9 ple_meds1_9 =new Tmp_ple_meds1_9();
-         
-         try { 
-             jProgressBar1.setVisible(true);
-             Ttabla.setVisible(true);
-             jLabel5.setVisible(true);
-             jProgressBar1.setValue(0);
-             if (Procedure.equals("ALL_TABLES"))
-             {
-             EliminaTMP Elimina=new EliminaTMP(); 
-             Elimina.EliminaTMP(Entidad, Envio, Legislatura);
-             Ttabla.setText("");    
-             jProgressBar1.setValue(3);
-             Ttabla.setText("TMP_PLE_MEDS1_1");
-             ple_meds1_1.In_Tmp_ple_meds1_1(Entidad,Envio,Legislatura,CEstatus.getSelectedItem().toString());
-              jProgressBar1.setValue(7);
-              Ttabla.setText("TMP_PLE_MEDS1_1A");
-             ple_meds1_1A.in_Tmp_ple_meds1_1A(Entidad, Envio, Legislatura);
-              jProgressBar1.setValue(14);
-               Ttabla.setText("TMP_PLE_MEDS1_1B");
-              ple_meds1_1B.Tmp_ple_meds1_1B(Entidad, Envio, Legislatura);
-              jProgressBar1.setValue(21);
-               Ttabla.setText("TMP_PLE_MEDS1_1C");
-              ple_meds1_1C.Tmp_ple_meds1_1C(Entidad, Envio, Legislatura);
-              jProgressBar1.setValue(27);
-               Ttabla.setText("TMP_PLE_MEDS1_1D");
-              ple_meds1_1D.Tmp_ple_meds1_1D(Entidad, Envio, Legislatura);
-              jProgressBar1.setValue(34);
-               Ttabla.setText("TMP_PLE_MEDS1_2");
-              ple_meds1_2.Tmp_ple_meds1_2(Entidad, Envio, Legislatura);
-              jProgressBar1.setValue(41);
-              Ttabla.setText("TMP_PLE_MEDS1_3");
-              ple_meds1_3.Tmp_ple_meds1_3(Entidad, Envio, Legislatura);
-              jProgressBar1.setValue(48);
-              Ttabla.setText("TMP_PLE_MEDS1_4");
-              ple_meds1_4.Tmp_ple_meds1_4(Entidad, Envio, Legislatura);
-              jProgressBar1.setValue(56);
-              Ttabla.setText("TMP_PLE_MEDS1_5");
-              ple_meds1_5.Tmp_ple_meds1_5(Entidad, Envio, Legislatura);
-              jProgressBar1.setValue(64);
-              Ttabla.setText("TMP_PLE_MEDS1_6");
-              ple_meds1_6.Tmp_ple_meds1_6(Entidad, Envio, Legislatura);
-              jProgressBar1.setValue(72);
-              Ttabla.setText("TMP_PLE_MEDS1_7");
-              ple_meds1_7.Tmp_ple_meds1_7(Entidad, Envio, Legislatura);
-              jProgressBar1.setValue(80);
-              Ttabla.setText("TMP_PLE_MEDS1_8");
-              ple_meds1_8.Tmp_ple_meds1_8(Entidad, Envio, Legislatura);
-               jProgressBar1.setValue(90);
-               Ttabla.setText("TMP_PLE_MEDS1_9");
-              ple_meds1_9.Tmp_ple_meds1_9(Entidad, Envio, Legislatura);
-              jProgressBar1.setValue(100);
-              JOptionPane.showMessageDialog(null, "Informacion insertada a TMP,favor de revisar pantalla errores de insert");
-              
-             }
-             if (Procedure.equals("TMP_PLE_MEDS1_1")){
-                 jProgressBar1.setValue(15);
-                 ple_meds1_1.In_Tmp_ple_meds1_1(Entidad,Envio,Legislatura,CEstatus.getSelectedItem().toString());
-                 jProgressBar1.setValue(100);
-                 JOptionPane.showMessageDialog(null, "Informacion insertada,favor de revisar pantalla errores de insert");
-             }
-             if (Procedure.equals("TMP_PLE_MEDS1_1A")){
-                 jProgressBar1.setValue(15);
-                 ple_meds1_1A.in_Tmp_ple_meds1_1A(Entidad, Envio, Legislatura);
-                 jProgressBar1.setValue(100);
-                JOptionPane.showMessageDialog(null, "Informacion insertada,favor de revisar pantalla errores de insert");
-             }
-                   if (Procedure.equals("TMP_PLE_MEDS1_1B")){
-                jProgressBar1.setValue(15);
-                ple_meds1_1B.Tmp_ple_meds1_1B(Entidad, Envio, Legislatura);
-                jProgressBar1.setValue(100);
-                JOptionPane.showMessageDialog(null, "Informacion insertada,favor de revisar pantalla errores de insert");
-             }
-                if (Procedure.equals("TMP_PLE_MEDS1_1C")){
-                jProgressBar1.setValue(15);    
-                ple_meds1_1C.Tmp_ple_meds1_1C(Entidad, Envio, Legislatura);
-                jProgressBar1.setValue(100);
-                JOptionPane.showMessageDialog(null, "Informacion insertada,favor de revisar pantalla errores de insert");
-             }
-             if (Procedure.equals("TMP_PLE_MEDS1_1D")){
-                jProgressBar1.setValue(15); 
-                ple_meds1_1D.Tmp_ple_meds1_1D(Entidad, Envio, Legislatura);
-                jProgressBar1.setValue(100);
-                JOptionPane.showMessageDialog(null, "Informacion insertada,favor de revisar pantalla errores de insert");
-             }    
-             if (Procedure.equals("TMP_PLE_MEDS1_2")){
-                jProgressBar1.setValue(15); 
-                ple_meds1_2.Tmp_ple_meds1_2(Entidad, Envio, Legislatura);
-                jProgressBar1.setValue(100);
-                JOptionPane.showMessageDialog(null, "Informacion insertada,favor de revisar pantalla errores de insert");
-             }   
-             if (Procedure.equals("TMP_PLE_MEDS1_3")){
-                jProgressBar1.setValue(15); 
-                ple_meds1_3.Tmp_ple_meds1_3(Entidad, Envio, Legislatura);
-                jProgressBar1.setValue(100);
-                JOptionPane.showMessageDialog(null, "Informacion insertada,favor de revisar pantalla errores de insert");
-             }   
-             if (Procedure.equals("TMP_PLE_MEDS1_4")){
-                jProgressBar1.setValue(15); 
-                ple_meds1_4.Tmp_ple_meds1_4(Entidad, Envio, Legislatura);
-                jProgressBar1.setValue(100);
-                JOptionPane.showMessageDialog(null, "Informacion insertada,favor de revisar pantalla errores de insert");
-             }  
-             if (Procedure.equals("TMP_PLE_MEDS1_5")){
-                jProgressBar1.setValue(15); 
-                ple_meds1_5.Tmp_ple_meds1_5(Entidad, Envio, Legislatura);
-                jProgressBar1.setValue(100);
-                JOptionPane.showMessageDialog(null, "Informacion insertada,favor de revisar pantalla errores de insert");
-             }  
-             if (Procedure.equals("TMP_PLE_MEDS1_6")){
-                jProgressBar1.setValue(15); 
-                ple_meds1_6.Tmp_ple_meds1_6(Entidad, Envio, Legislatura);
-                jProgressBar1.setValue(100);
-                JOptionPane.showMessageDialog(null, "Informacion insertada,favor de revisar pantalla errores de insert");
-             }  
-             if (Procedure.equals("TMP_PLE_MEDS1_7")){
-                jProgressBar1.setValue(15); 
-                ple_meds1_7.Tmp_ple_meds1_7(Entidad, Envio, Legislatura);
-                jProgressBar1.setValue(100);
-                JOptionPane.showMessageDialog(null, "Informacion insertada,favor de revisar pantalla errores de insert");
-             }  
-             if (Procedure.equals("TMP_PLE_MEDS1_8")){
-                jProgressBar1.setValue(15); 
-                ple_meds1_8.Tmp_ple_meds1_8(Entidad, Envio, Legislatura);
-                jProgressBar1.setValue(100);
-                JOptionPane.showMessageDialog(null, "Informacion insertada,favor de revisar pantalla errores de insert");
-             }  
-             if (Procedure.equals("TMP_PLE_MEDS1_9")){
-                jProgressBar1.setValue(15); 
-                ple_meds1_9.Tmp_ple_meds1_9(Entidad, Envio, Legislatura);
-                jProgressBar1.setValue(100);
-                JOptionPane.showMessageDialog(null, "Informacion insertada,favor de revisar pantalla errores de insert");
-             }  
-             jLabel5.setVisible(false);
-             jProgressBar1.setVisible(false);
-              Ttabla.setVisible(false);
-             EnableTrue();
-         } catch (Exception ex) {
-             Logger.getLogger(Integrar_TMP.class.getName()).log(Level.SEVERE, null, ex);
-         }
-    
-       }else{
-          JOptionPane.showMessageDialog(null, "La informacion se encuentra en estatus liberado-Entidad:"+Entidad+" Leg:"+Legislatura+" Envio:"+Envio); 
-       }
-       
-       }else
-         JOptionPane.showMessageDialog(null, "Favor de capturar Envio y Legislatura");
-    
-   }else
-       JOptionPane.showMessageDialog(null, "Favor de seleccionar archivo");
-     }).start();
-        
-        }
-    
+
     }//GEN-LAST:event_Button_Insertar
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void botón_log_tablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botón_log_tablaActionPerformed
         // TODO add your handling code here:
         Valores();
         if (!TEnvio.getText().equals("") && !TLegislatura.getText().equals("") && !CEntidad.getSelectedItem().toString().equals("")) {
@@ -617,51 +764,52 @@ public class Integrar_TMP extends javax.swing.JFrame {
                 ventanaAbierta = true;
                 Errores_InsertTMP Errores = new Errores_InsertTMP();
                 Errores.setVisible(true);
-               
+
             } else {
-                 JOptionPane.showMessageDialog(null, "Ventana Errores de insert abierta");
+                JOptionPane.showMessageDialog(null, "Ventana Errores de insert abierta");
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Favor de capturar Entidad,Envio y Legislatura");
+            JOptionPane.showMessageDialog(null, "Favor de capturar Entidad,Envío y Legislatura");
         }
 
-        
-    }//GEN-LAST:event_jButton2ActionPerformed
+
+    }//GEN-LAST:event_botón_log_tablaActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // TODO add your handling code here:
         Menu men = new Menu();
         men.setVisible(true);
-        
+
     }//GEN-LAST:event_formWindowClosing
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
-             jLabel5.setVisible(false);
-             jProgressBar1.setVisible(false);
-             RutaArchivo.setEnabled(false);
-             Ttabla.setVisible(false);
+        Label_Progressline.setVisible(false);
+        ProgressBar_PLE_TMP.setVisible(false);
+        RutaArchivo.setEnabled(false);
+        Progressline.setVisible(false);
     }//GEN-LAST:event_formWindowOpened
 
-    private void ButtonCsvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCsvActionPerformed
+    private void RadioButtonCsvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RadioButtonCsvActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_ButtonCsvActionPerformed
+    }//GEN-LAST:event_RadioButtonCsvActionPerformed
 
     private void ButtonXlsxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonXlsxActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ButtonXlsxActionPerformed
-  
-    
-    public void Valores(){
-        Entidad=CEntidad.getSelectedItem().toString();
-        Envio=TEnvio.getText();
-        Legislatura=TLegislatura.getText();
-        Procedure=Cproceso.getSelectedItem().toString();
-        
+
+    private void Combobox_procesoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Combobox_procesoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Combobox_procesoActionPerformed
+
+    public void Valores() {
+        Entidad = CEntidad.getSelectedItem().toString();
+        Envio = TEnvio.getText();
+        Legislatura = TLegislatura.getText();
+        Procedure = Combobox_proceso.getSelectedItem().toString();
+
     }
-    
-    
-    
+
     /**
      * @param args the command line arguments
      */
@@ -698,34 +846,34 @@ public class Integrar_TMP extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JRadioButton ButtonCsv;
+    private javax.swing.JButton Boton_insertar;
     private javax.swing.JRadioButton ButtonXlsx;
     private javax.swing.JComboBox CEntidad;
     private javax.swing.JComboBox CEstatus;
-    private javax.swing.JComboBox Cproceso;
-    private javax.swing.JLabel ENVIO;
-    private javax.swing.JLabel ENVIO1;
+    private javax.swing.JComboBox Combobox_proceso;
+    private javax.swing.JLabel Label_Estatus;
+    private javax.swing.JLabel Label_Legislatura;
+    private javax.swing.JLabel Label_Procedure;
+    private javax.swing.JLabel Label_Progressline;
+    private javax.swing.JLabel Label_RutaArchivo;
+    private javax.swing.JLabel Label_entidad;
+    private javax.swing.JLabel Label_envio;
+    private javax.swing.JLabel Label_formatoarchivo;
+    private javax.swing.JPanel Panel_PLE_ENCABEZADO;
+    private javax.swing.JPanel Panel_PLE_insertarTMP;
+    private javax.swing.JProgressBar ProgressBar_PLE_TMP;
+    private javax.swing.JLabel Progressline;
+    private javax.swing.JRadioButton RadioButtonCsv;
     private javax.swing.JTextField RutaArchivo;
     private javax.swing.JTextField TEnvio;
     private javax.swing.JTextField TLegislatura;
-    private javax.swing.JLabel Ttabla;
+    private javax.swing.JButton boton_ruta;
+    private javax.swing.JButton botón_log_tabla;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JProgressBar jProgressBar1;
     // End of variables declaration//GEN-END:variables
 }

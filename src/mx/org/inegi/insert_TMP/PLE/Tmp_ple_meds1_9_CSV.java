@@ -178,10 +178,10 @@ public class Tmp_ple_meds1_9_CSV {
                             System.out.println("ejecutar integración a BD");
                           
                         } else {
-                            JOptionPane.showMessageDialog(null, "Archivo .CSV sin Registros en Comparecencias");
+                            JOptionPane.showMessageDialog(null, "Archivo “Comparecencias”.CSV sin Registros en Comparecencias");
                         }
                     } else {
-                        JOptionPane.showMessageDialog(null, "El total de número de columnas en el archivo .CSV no coincide con la bd Oracle");
+                        JOptionPane.showMessageDialog(null, "El total de número de columnas en el archivo “Comparecencias”.CSV no coincide con la bd Oracle");
                     }
                 } catch (IOException e) {
                     System.out.println("++" + e);
@@ -201,10 +201,10 @@ public class Tmp_ple_meds1_9_CSV {
                     }
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "El archivo no está en formato UTF-8" + Ruta);
+                JOptionPane.showMessageDialog(null, "El archivo de la pestaña “Comparecencias” no está en formato UTF-8." + Ruta);
             }
         } catch (IOException e) {
-            JOptionPane.showMessageDialog(null, "Fallo al leer el archivo" + e);
+            JOptionPane.showMessageDialog(null, "Fallo al leer el archivo “Comparecencias” " + e);
             e.printStackTrace();
         }
     }

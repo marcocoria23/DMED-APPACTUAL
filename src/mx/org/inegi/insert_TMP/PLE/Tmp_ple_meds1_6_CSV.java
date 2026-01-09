@@ -41,7 +41,7 @@ public class Tmp_ple_meds1_6_CSV {
     DaoConexion conexion = new DaoConexion();
     Conver_Utf8 conUTF8 = new Conver_Utf8();
 
-    public void Meds1_1_CSV(String Ruta, String Entidad, String Envio, String Legislatura, String Estatus) throws Exception {
+    public void Meds1_6_CSV(String Ruta, String Entidad, String Envio, String Legislatura, String Estatus) throws Exception {
         ArrayList<String[]> Array;
         Array = new ArrayList();
         ARRAY array_to_pass;
@@ -169,7 +169,7 @@ public class Tmp_ple_meds1_6_CSV {
                             }
                         }
 
-                      /*  System.out.println("===== CONTENIDO ad (BeanTMP_PLE_MEDS1_6) =====");
+                        System.out.println("===== CONTENIDO ad (BeanTMP_PLE_MEDS1_6) =====");
                         System.out.println("Total en ad: " + ad.size());
 
                         for (int i = 0; i < ad.size(); i++) {
@@ -252,7 +252,7 @@ public class Tmp_ple_meds1_6_CSV {
                                     + ", P1_6_73=" + x.GetP1_6_73()
                                     + ", P1_6_74=" + x.GetP1_6_74()
                             );
-                        }*/
+                        }
 
                         System.out.println("entro 1");
                         if (TotalRegistros > 0) {
@@ -286,7 +286,7 @@ public class Tmp_ple_meds1_6_CSV {
                             JOptionPane.showMessageDialog(null, "Archivo .CSV sin Registros-Iniciativas Urgente Obvia");
                         }
                     } else {
-                        JOptionPane.showMessageDialog(null, "El total de numero de columnas en el archivo .CSV no coincide con la bd Oracle");
+                        JOptionPane.showMessageDialog(null, "El total de número de columnas en el archivo “Iniciativas Urgente Obvia”.CSV no coincide con la bd Oracle");
                     }
                 } catch (IOException e) {
                     System.out.println("++" + e);
@@ -306,10 +306,10 @@ public class Tmp_ple_meds1_6_CSV {
                     }
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "El archivo no esta en formato UTF-8" + Ruta);
+                JOptionPane.showMessageDialog(null, "El archivo de la pestaña “Iniciativas Urgente Obvia” no está en formato UTF-8." + Ruta);
             }
         } catch (IOException e) {
-            JOptionPane.showMessageDialog(null, "Fallo al leer el archivo" + e);
+            JOptionPane.showMessageDialog(null, "Fallo al leer el archivo “Iniciativas Urgente Obvia”" + e);
             e.printStackTrace();
         }
     }

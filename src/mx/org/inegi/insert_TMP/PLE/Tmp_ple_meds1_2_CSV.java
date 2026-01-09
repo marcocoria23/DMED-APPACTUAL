@@ -16,8 +16,6 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
-import mx.org.inegi.bean.PLE.BeanTMP_PLE_MEDS1_1;
-import mx.org.inegi.bean.PLE.BeanTMP_PLE_MEDS1_1A;
 import mx.org.inegi.bean.PLE.BeanTMP_PLE_MEDS1_2;
 import mx.org.inegi.conexion.PLE.DaoConexion;
 import mx.org.inegi.conexion.PLE.OracleDAOFactory;
@@ -43,7 +41,7 @@ public class Tmp_ple_meds1_2_CSV {
     DaoConexion conexion = new DaoConexion();
     Conver_Utf8 conUTF8 = new Conver_Utf8();
 
-    public void Meds1_1_CSV(String Ruta, String Entidad, String Envio, String Legislatura, String Estatus) throws Exception {
+    public void Meds1_2_CSV(String Ruta, String Entidad, String Envio, String Legislatura, String Estatus) throws Exception {
         ArrayList<String[]> Array;
         Array = new ArrayList();
         ARRAY array_to_pass;
@@ -113,7 +111,7 @@ public class Tmp_ple_meds1_2_CSV {
                             }
                         }
 
-                      /*  System.out.println("===== CONTENIDO ad (BeanTMP_PLE_MEDS1_1) =====");
+                       System.out.println("===== CONTENIDO ad (BeanTMP_PLE_MEDS1_1) =====");
                         System.out.println("Total en ad: " + ad.size());
 
                         for (int i = 0; i < ad.size(); i++) {
@@ -141,7 +139,7 @@ public class Tmp_ple_meds1_2_CSV {
                                     + ", P1_2_18=" + x.GetP1_2_18()
                                     + ", P1_2_19=" + x.GetP1_2_19()
                             );
-                        }*/
+                        }
 System.out.println("entro 1");
                         if (TotalRegistros > 0) {
                             con = OracleDAOFactory.creaConexion();
@@ -174,7 +172,7 @@ System.out.println("entro 1");
                             JOptionPane.showMessageDialog(null, "Archivo .CSV sin Registros-Comisiones Legislativas");
                         }
                     } else {
-                        JOptionPane.showMessageDialog(null, "El total de numero de columnas en el archivo .CSV no coincide con la bd Oracle");
+                        JOptionPane.showMessageDialog(null, "El total de número de columnas en el archivo “Comisiones Legislativas”.CSV no coincide con la bd Oracle");
                     }
                 } catch (IOException e) {
                     System.out.println("++" + e);
@@ -194,10 +192,10 @@ System.out.println("entro 1");
                     }
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "El archivo no esta en formato UTF-8" + Ruta);
+                JOptionPane.showMessageDialog(null, "El archivo de la pestaña “Comisiones Legislativas”  no está en formato UTF-8." + Ruta);
             }
         } catch (IOException e) {
-            JOptionPane.showMessageDialog(null, "Fallo al leer el archivo" + e);
+            JOptionPane.showMessageDialog(null, "Fallo al leer el archivo “Comisiones Legislativas” " + e);
             e.printStackTrace();
         }
     }

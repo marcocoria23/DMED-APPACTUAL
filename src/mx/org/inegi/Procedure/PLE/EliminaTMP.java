@@ -19,7 +19,7 @@ import mx.org.inegi.conexion.PLE.OracleDAOFactory;
 public class EliminaTMP {
     
     
- public void EliminaTMP(String Entidad,String Envio,String Legislatura) throws SQLException{
+ public void EliminaTMP(String Entidad,String Envio,String Legislatura, String Tabla) throws SQLException{
        
         CallableStatement st;
         Connection con = null;
@@ -27,19 +27,21 @@ public class EliminaTMP {
         
       try {
      
-         st = con.prepareCall("{call ELIMINA_TMPOBS(?, ?, ?)}");
+         st = con.prepareCall("{call ELIMINA_TMPOBS(?, ?, ?,?)}");
             // Registra el parámetro de salida
             st.setString(1, Entidad);
             st.setString(2, Envio);
             st.setString(3, Legislatura);
+            st.setString(4, Tabla);
+            System.out.println("CALL ELIMINA_TMPOBS(" + Entidad + ", " + Envio + ", " + Legislatura + ", '" + Tabla + "')");
             st.execute();
         
  } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e + "Favor de contactar al administrador");
+            JOptionPane.showMessageDialog(null,"Hubo un error al llamar el procedimiento ELIMINA_TMPOB en base de datos: "+ e + "Favor de contactar al administrador");
         } finally {
             try {
                 if (con != null) {
-                    System.out.println("cierraaa");
+                    System.out.println("cerrar conexión BD");
                     con.close();
                     con = null;
                 }
