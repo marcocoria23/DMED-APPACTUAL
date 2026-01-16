@@ -591,7 +591,7 @@ public class Integrar_TMP extends javax.swing.JFrame {
 
                     } else {
                         System.out.println("botón xlsx");
-                        EnableFalse();
+                        EnableFalse();                       
                         Tmp_ple_meds1_1 ple_meds1_1 = new Tmp_ple_meds1_1();
                         Tmp_ple_meds1_1A ple_meds1_1A = new Tmp_ple_meds1_1A();
                         Tmp_ple_meds1_1B ple_meds1_1B = new Tmp_ple_meds1_1B();
@@ -609,6 +609,8 @@ public class Integrar_TMP extends javax.swing.JFrame {
                         try {
 
                             if (Procedure.equals("ALL_TABLES")) {
+                             EliminaTMP Elimina = new EliminaTMP();
+                             Elimina.EliminaTMP(Entidad, Envio, Legislatura, "ALL_TABLES"); 
                                 Progressline.setText("");
                                 ProgressBar_PLE_TMP.setValue(3);
                                 Progressline.setText("TMP_PLE_MEDS1_1");
@@ -654,78 +656,104 @@ public class Integrar_TMP extends javax.swing.JFrame {
 
                             }
                             if (Procedure.equals("TMP_PLE_MEDS1_1")) {
+                                 EliminaTMP Elimina = new EliminaTMP();
+                                 Elimina.EliminaTMP(Entidad, Envio, Legislatura, "TMP_PLE_MEDS1_1");
                                 ProgressBar_PLE_TMP.setValue(15);
                                 ple_meds1_1.In_Tmp_ple_meds1_1(Entidad, Envio, Legislatura, CEstatus.getSelectedItem().toString());
                                 ProgressBar_PLE_TMP.setValue(100);
                                 JOptionPane.showMessageDialog(null, "Información insertada, favor de revisar pantalla errores de insert");
                             }
                             if (Procedure.equals("TMP_PLE_MEDS1_1A")) {
+                                EliminaTMP Elimina = new EliminaTMP();
+                                 Elimina.EliminaTMP(Entidad, Envio, Legislatura, "TMP_PLE_MEDS1_1A");
                                 ProgressBar_PLE_TMP.setValue(15);
                                 ple_meds1_1A.in_Tmp_ple_meds1_1A(Entidad, Envio, Legislatura);
                                 ProgressBar_PLE_TMP.setValue(100);
                                 JOptionPane.showMessageDialog(null, "Información insertada, favor de revisar pantalla errores de insert");
                             }
                             if (Procedure.equals("TMP_PLE_MEDS1_1B")) {
+                                 EliminaTMP Elimina = new EliminaTMP();
+                                 Elimina.EliminaTMP(Entidad, Envio, Legislatura, "TMP_PLE_MEDS1_1B");
                                 ProgressBar_PLE_TMP.setValue(15);
                                 ple_meds1_1B.Tmp_ple_meds1_1B(Entidad, Envio, Legislatura);
                                 ProgressBar_PLE_TMP.setValue(100);
                                 JOptionPane.showMessageDialog(null, "Información insertada, favor de revisar pantalla errores de insert");
                             }
                             if (Procedure.equals("TMP_PLE_MEDS1_1C")) {
+                                EliminaTMP Elimina = new EliminaTMP();
+                                 Elimina.EliminaTMP(Entidad, Envio, Legislatura, "TMP_PLE_MEDS1_1C");
                                 ProgressBar_PLE_TMP.setValue(15);
                                 ple_meds1_1C.Tmp_ple_meds1_1C(Entidad, Envio, Legislatura);
                                 ProgressBar_PLE_TMP.setValue(100);
                                 JOptionPane.showMessageDialog(null, "Información insertada, favor de revisar pantalla errores de insert");
                             }
                             if (Procedure.equals("TMP_PLE_MEDS1_1D")) {
+                                EliminaTMP Elimina = new EliminaTMP();
+                                 Elimina.EliminaTMP(Entidad, Envio, Legislatura, "TMP_PLE_MEDS1_1D");
                                 ProgressBar_PLE_TMP.setValue(15);
                                 ple_meds1_1D.Tmp_ple_meds1_1D(Entidad, Envio, Legislatura);
                                 ProgressBar_PLE_TMP.setValue(100);
                                 JOptionPane.showMessageDialog(null, "Información insertada, favor de revisar pantalla errores de insert");
                             }
                             if (Procedure.equals("TMP_PLE_MEDS1_2")) {
+                                EliminaTMP Elimina = new EliminaTMP();
+                                 Elimina.EliminaTMP(Entidad, Envio, Legislatura, "TMP_PLE_MEDS1_2");
                                 ProgressBar_PLE_TMP.setValue(15);
                                 ple_meds1_2.Tmp_ple_meds1_2(Entidad, Envio, Legislatura);
                                 ProgressBar_PLE_TMP.setValue(100);
                                 JOptionPane.showMessageDialog(null, "Información insertada, favor de revisar pantalla errores de insert");
                             }
                             if (Procedure.equals("TMP_PLE_MEDS1_3")) {
+                                EliminaTMP Elimina = new EliminaTMP();
+                                 Elimina.EliminaTMP(Entidad, Envio, Legislatura, "TMP_PLE_MEDS1_3");
                                 ProgressBar_PLE_TMP.setValue(15);
                                 ple_meds1_3.Tmp_ple_meds1_3(Entidad, Envio, Legislatura);
                                 ProgressBar_PLE_TMP.setValue(100);
                                 JOptionPane.showMessageDialog(null, "Información insertada, favor de revisar pantalla errores de insert");
                             }
                             if (Procedure.equals("TMP_PLE_MEDS1_4")) {
+                                EliminaTMP Elimina = new EliminaTMP();
+                                 Elimina.EliminaTMP(Entidad, Envio, Legislatura, "TMP_PLE_MEDS1_4");
                                 ProgressBar_PLE_TMP.setValue(15);
                                 ple_meds1_4.Tmp_ple_meds1_4(Entidad, Envio, Legislatura);
                                 ProgressBar_PLE_TMP.setValue(100);
                                 JOptionPane.showMessageDialog(null, "Información insertada, favor de revisar pantalla errores de insert");
                             }
                             if (Procedure.equals("TMP_PLE_MEDS1_5")) {
+                                 EliminaTMP Elimina = new EliminaTMP();
+                                 Elimina.EliminaTMP(Entidad, Envio, Legislatura, "TMP_PLE_MEDS1_5");
                                 ProgressBar_PLE_TMP.setValue(15);
                                 ple_meds1_5.Tmp_ple_meds1_5(Entidad, Envio, Legislatura);
                                 ProgressBar_PLE_TMP.setValue(100);
                                 JOptionPane.showMessageDialog(null, "Información insertada, favor de revisar pantalla errores de insert");
                             }
                             if (Procedure.equals("TMP_PLE_MEDS1_6")) {
+                                EliminaTMP Elimina = new EliminaTMP();
+                                 Elimina.EliminaTMP(Entidad, Envio, Legislatura, "TMP_PLE_MEDS1_6");
                                 ProgressBar_PLE_TMP.setValue(15);
                                 ple_meds1_6.Tmp_ple_meds1_6(Entidad, Envio, Legislatura);
                                 ProgressBar_PLE_TMP.setValue(100);
                                 JOptionPane.showMessageDialog(null, "Información insertada, favor de revisar pantalla errores de insert");
                             }
                             if (Procedure.equals("TMP_PLE_MEDS1_7")) {
+                                EliminaTMP Elimina = new EliminaTMP();
+                                 Elimina.EliminaTMP(Entidad, Envio, Legislatura, "TMP_PLE_MEDS1_7");
                                 ProgressBar_PLE_TMP.setValue(15);
                                 ple_meds1_7.Tmp_ple_meds1_7(Entidad, Envio, Legislatura);
                                 ProgressBar_PLE_TMP.setValue(100);
                                 JOptionPane.showMessageDialog(null, "Información insertada, favor de revisar pantalla errores de insert");
                             }
                             if (Procedure.equals("TMP_PLE_MEDS1_8")) {
+                                EliminaTMP Elimina = new EliminaTMP();
+                                 Elimina.EliminaTMP(Entidad, Envio, Legislatura, "TMP_PLE_MEDS1_8");
                                 ProgressBar_PLE_TMP.setValue(15);
                                 ple_meds1_8.Tmp_ple_meds1_8(Entidad, Envio, Legislatura);
                                 ProgressBar_PLE_TMP.setValue(100);
                                 JOptionPane.showMessageDialog(null, "Información insertada, favor de revisar pantalla errores de insert");
                             }
                             if (Procedure.equals("TMP_PLE_MEDS1_9")) {
+                                 EliminaTMP Elimina = new EliminaTMP();
+                                 Elimina.EliminaTMP(Entidad, Envio, Legislatura, "TMP_PLE_MEDS1_9");
                                 ProgressBar_PLE_TMP.setValue(15);
                                 ple_meds1_9.Tmp_ple_meds1_9(Entidad, Envio, Legislatura);
                                 ProgressBar_PLE_TMP.setValue(100);
