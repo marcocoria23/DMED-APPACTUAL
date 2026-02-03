@@ -9,6 +9,11 @@ import Pantallas_Menu.MenuProyectos;
 import Pantallas_PLE.Integrar_TMP;
 import Pantallas_PLE.Integrar_TR;
 import Pantallas_PLE.ValidaPLE;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import mx.org.inegi.Reportes.PLE.Genera_reporte_FechaTermino;
 
 /**
  *
@@ -36,10 +41,13 @@ public class Menu extends javax.swing.JFrame {
         Label_MenuPLE = new javax.swing.JLabel();
         MenuBar_PLE = new javax.swing.JMenuBar();
         Menu_PLE = new javax.swing.JMenu();
-        Menu_IntegraTMP = new javax.swing.JMenu();
-        Menu_IntegraTR = new javax.swing.JMenu();
-        Menu_Valida = new javax.swing.JMenu();
+        Menu_PLE_IntegraTMP = new javax.swing.JMenu();
+        Menu_PLE_IntegraTR = new javax.swing.JMenu();
+        Menu_PLE_Valida = new javax.swing.JMenu();
+        Menu_PLE_Reportes = new javax.swing.JMenu();
+        javax.swing.JMenuItem Menu_Reporte_FechaTermino = new javax.swing.JMenuItem();
 
+        setTitle("PLE");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
@@ -49,34 +57,58 @@ public class Menu extends javax.swing.JFrame {
         Label_MenuPLE.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Menu.png"))); // NOI18N
 
         Menu_PLE.setText("Menu");
-        Menu_PLE.setFont(new java.awt.Font("Sylfaen", 0, 18)); // NOI18N
+        Menu_PLE.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
 
-        Menu_IntegraTMP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Insertar.png"))); // NOI18N
-        Menu_IntegraTMP.setText("Integrar TMP");
-        Menu_IntegraTMP.addMouseListener(new java.awt.event.MouseAdapter() {
+        Menu_PLE_IntegraTMP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Insertar.png"))); // NOI18N
+        Menu_PLE_IntegraTMP.setText("Integrar TMP");
+        Menu_PLE_IntegraTMP.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                Menu_IntegraTMPMouseClicked(evt);
+                Menu_PLE_IntegraTMPMouseClicked(evt);
             }
         });
-        Menu_PLE.add(Menu_IntegraTMP);
+        Menu_PLE.add(Menu_PLE_IntegraTMP);
 
-        Menu_IntegraTR.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/InsertaBD.png"))); // NOI18N
-        Menu_IntegraTR.setText("Integrar TR");
-        Menu_IntegraTR.addMouseListener(new java.awt.event.MouseAdapter() {
+        Menu_PLE_IntegraTR.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/InsertaBD.png"))); // NOI18N
+        Menu_PLE_IntegraTR.setText("Integrar TR");
+        Menu_PLE_IntegraTR.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                Menu_IntegraTRMouseClicked(evt);
+                Menu_PLE_IntegraTRMouseClicked(evt);
             }
         });
-        Menu_PLE.add(Menu_IntegraTR);
+        Menu_PLE.add(Menu_PLE_IntegraTR);
 
-        Menu_Valida.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/BValidar.png"))); // NOI18N
-        Menu_Valida.setText("Validar");
-        Menu_Valida.addMouseListener(new java.awt.event.MouseAdapter() {
+        Menu_PLE_Valida.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/BValidar.png"))); // NOI18N
+        Menu_PLE_Valida.setText("Validar");
+        Menu_PLE_Valida.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                Menu_ValidaMouseClicked(evt);
+                Menu_PLE_ValidaMouseClicked(evt);
             }
         });
-        Menu_PLE.add(Menu_Valida);
+        Menu_PLE.add(Menu_PLE_Valida);
+
+        Menu_PLE_Reportes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Reportes.png"))); // NOI18N
+        Menu_PLE_Reportes.setText("reportes");
+        Menu_PLE_Reportes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Menu_PLE_ReportesMouseClicked(evt);
+            }
+        });
+
+        Menu_Reporte_FechaTermino.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fecha_termino.png"))); // NOI18N
+        Menu_Reporte_FechaTermino.setText("Reporte Fecha_termino");
+        Menu_Reporte_FechaTermino.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Menu_Reporte_FechaTerminoMouseClicked(evt);
+            }
+        });
+        Menu_Reporte_FechaTermino.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Menu_Reporte_FechaTerminoActionPerformed(evt);
+            }
+        });
+        Menu_PLE_Reportes.add(Menu_Reporte_FechaTermino);
+
+        Menu_PLE.add(Menu_PLE_Reportes);
 
         MenuBar_PLE.add(Menu_PLE);
 
@@ -86,30 +118,17 @@ public class Menu extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Label_MenuPLE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(Label_MenuPLE, javax.swing.GroupLayout.PREFERRED_SIZE, 881, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Label_MenuPLE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(Label_MenuPLE, javax.swing.GroupLayout.DEFAULT_SIZE, 456, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void Menu_IntegraTMPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu_IntegraTMPMouseClicked
-        // TODO add your handling code here:
-        Integrar_TMP In_TMP= new Integrar_TMP();
-        In_TMP.setVisible(true);
-        this.setVisible(false);
-        
-        
-    }//GEN-LAST:event_Menu_IntegraTMPMouseClicked
-
-    private void Menu_IntegraTRMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu_IntegraTRMouseClicked
-        // TODO add your handling code here:
-        Integrar_TR TR=new Integrar_TR ();
-        TR.setVisible(true);
-    }//GEN-LAST:event_Menu_IntegraTRMouseClicked
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // TODO add your handling code here:
@@ -117,13 +136,46 @@ public class Menu extends javax.swing.JFrame {
         Pro.setVisible(true);
     }//GEN-LAST:event_formWindowClosing
 
-    private void Menu_ValidaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu_ValidaMouseClicked
+    private void Menu_PLE_ValidaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu_PLE_ValidaMouseClicked
         // TODO add your handling code here:
         ValidaPLE Pvalida=new ValidaPLE();
         Pvalida.setVisible(true);
         this.setVisible(false);
-        
-    }//GEN-LAST:event_Menu_ValidaMouseClicked
+
+    }//GEN-LAST:event_Menu_PLE_ValidaMouseClicked
+
+    private void Menu_PLE_IntegraTRMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu_PLE_IntegraTRMouseClicked
+        // TODO add your handling code here:
+        Integrar_TR TR=new Integrar_TR ();
+        TR.setVisible(true);
+    }//GEN-LAST:event_Menu_PLE_IntegraTRMouseClicked
+
+    private void Menu_PLE_IntegraTMPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu_PLE_IntegraTMPMouseClicked
+        // TODO add your handling code here:
+        Integrar_TMP In_TMP= new Integrar_TMP();
+        In_TMP.setVisible(true);
+        this.setVisible(false);
+
+    }//GEN-LAST:event_Menu_PLE_IntegraTMPMouseClicked
+
+    private void Menu_PLE_ReportesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu_PLE_ReportesMouseClicked
+
+    }//GEN-LAST:event_Menu_PLE_ReportesMouseClicked
+
+    private void Menu_Reporte_FechaTerminoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Menu_Reporte_FechaTerminoActionPerformed
+     Genera_reporte_FechaTermino reporte_FechaTermino= new Genera_reporte_FechaTermino();
+        try { 
+            reporte_FechaTermino.exportarUltimosEnvios();
+        } catch (IOException ex) {
+            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_Menu_Reporte_FechaTerminoActionPerformed
+
+    private void Menu_Reporte_FechaTerminoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu_Reporte_FechaTerminoMouseClicked
+
+    }//GEN-LAST:event_Menu_Reporte_FechaTerminoMouseClicked
 
     /**
      * @param args the command line arguments
@@ -163,9 +215,10 @@ public class Menu extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Label_MenuPLE;
     private javax.swing.JMenuBar MenuBar_PLE;
-    private javax.swing.JMenu Menu_IntegraTMP;
-    private javax.swing.JMenu Menu_IntegraTR;
     private javax.swing.JMenu Menu_PLE;
-    private javax.swing.JMenu Menu_Valida;
+    private javax.swing.JMenu Menu_PLE_IntegraTMP;
+    private javax.swing.JMenu Menu_PLE_IntegraTR;
+    private javax.swing.JMenu Menu_PLE_Reportes;
+    private javax.swing.JMenu Menu_PLE_Valida;
     // End of variables declaration//GEN-END:variables
 }
