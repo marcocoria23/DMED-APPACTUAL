@@ -62,9 +62,9 @@ public class TR_JA_CONCLUSIONES {
                     int numeroColumnas = 0;
                     CSVRecord firstRecord = csvParser.iterator().next();
                     numeroColumnas = firstRecord.size();
-                    System.out.println("Número de columnas: " + numeroColumnas + "---->if (numeroColumnas <= 262) continúa...");
+                    System.out.println("Número de columnas: " + numeroColumnas + "---->if (numeroColumnas <= 271) continúa...");
 
-                    if (numeroColumnas <= 270) { // Cambiar el valor según el número de columnas esperado
+                    if (numeroColumnas <= 271) { // Cambiar el valor según el número de columnas esperado
                         for (CSVRecord record : csvParser) {
                             if (record.get(0).isEmpty()) {
                                 break; // Ignorar registros vacíos

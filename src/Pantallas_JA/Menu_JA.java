@@ -36,9 +36,9 @@ public class Menu_JA extends javax.swing.JFrame {
         Label_LogoJA = new javax.swing.JLabel();
         MenuBarJA = new javax.swing.JMenuBar();
         Menu_JA = new javax.swing.JMenu();
+        Crea_EBD = new javax.swing.JMenuItem();
         Integra_TR = new javax.swing.JMenuItem();
         Valida = new javax.swing.JMenuItem();
-        Crea_EBD = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
 
         jMenuItem3.setText("jMenuItem3");
@@ -55,6 +55,15 @@ public class Menu_JA extends javax.swing.JFrame {
         Label_LogoJA.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Logo_JA.png"))); // NOI18N
 
         Menu_JA.setText("Menú");
+
+        Crea_EBD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/CreaEBD_JA.jpg"))); // NOI18N
+        Crea_EBD.setText("Crea EBD");
+        Crea_EBD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Crea_EBDActionPerformed(evt);
+            }
+        });
+        Menu_JA.add(Crea_EBD);
 
         Integra_TR.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/InsertaTR_JA.jpg"))); // NOI18N
         Integra_TR.setText("Integra TR");
@@ -73,15 +82,6 @@ public class Menu_JA extends javax.swing.JFrame {
             }
         });
         Menu_JA.add(Valida);
-
-        Crea_EBD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/CreaEBD_JA.jpg"))); // NOI18N
-        Crea_EBD.setText("Crea EBD");
-        Crea_EBD.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Crea_EBDActionPerformed(evt);
-            }
-        });
-        Menu_JA.add(Crea_EBD);
 
         MenuBarJA.add(Menu_JA);
         MenuBarJA.add(jMenu3);

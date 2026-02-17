@@ -72,7 +72,7 @@ public class MenuProyectos extends javax.swing.JFrame {
         jPanel3.add(BTN_JA, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 320, 190, 120));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 3, 24)); // NOI18N
-        jLabel1.setText("Modulos DMED");
+        jLabel1.setText("Módulos DMED");
         jPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 70, 200, -1));
 
         BTN_PS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/PSF.png"))); // NOI18N

@@ -59,7 +59,7 @@ public class TR_JA_EXHORTOS_DESPACHOS {
                     CSVRecord firstRecord = csvParser.iterator().next();
                     numeroColumnas = firstRecord.size();
                     System.out.println("Número de columnas: " + numeroColumnas+ " ---->if (numeroColumnas <= 14) continua... ");
-                    if (numeroColumnas <= 14) { // Cambiar el valor según el número de columnas esperado
+                    if (numeroColumnas <= 15) { // Cambiar el valor según el número de columnas esperado
                         for (CSVRecord record : csvParser) {
                             if (record.get(0).isEmpty()) {
                                 break; // Ignorar registros vacíos

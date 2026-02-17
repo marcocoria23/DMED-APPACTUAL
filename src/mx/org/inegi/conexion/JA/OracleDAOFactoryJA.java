@@ -18,7 +18,7 @@ public class OracleDAOFactoryJA {
     
     public static Connection creaConexion(){
         Connection conn = null;
-        
+        System.out.println("Crear conexión a base de datos");
         try{
             Class.forName("oracle.jdbc.driver.OracleDriver").newInstance();
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex){

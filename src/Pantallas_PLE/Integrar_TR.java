@@ -54,13 +54,13 @@ public class Integrar_TR extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        Panel_PPLE = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        Btn_errores_insert = new javax.swing.JButton();
+        Btn_Insertar_TR = new javax.swing.JButton();
         CEntidad = new javax.swing.JComboBox();
         jLabel4 = new javax.swing.JLabel();
         ENVIO = new javax.swing.JLabel();
@@ -80,7 +80,7 @@ public class Integrar_TR extends javax.swing.JFrame {
             }
         });
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        Panel_PPLE.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Logo CNG.png"))); // NOI18N
 
@@ -101,25 +101,25 @@ public class Integrar_TR extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Cambria", 0, 18)); // NOI18N
         jLabel2.setText("Poderes Legislativos Estatales");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout Panel_PPLELayout = new javax.swing.GroupLayout(Panel_PPLE);
+        Panel_PPLE.setLayout(Panel_PPLELayout);
+        Panel_PPLELayout.setHorizontalGroup(
+            Panel_PPLELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_PPLELayout.createSequentialGroup()
                 .addContainerGap(276, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        Panel_PPLELayout.setVerticalGroup(
+            Panel_PPLELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Panel_PPLELayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(Panel_PPLELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(Panel_PPLELayout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -129,19 +129,24 @@ public class Integrar_TR extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/errorins.png"))); // NOI18N
-        jButton2.setToolTipText("Errores de Insert");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        Btn_errores_insert.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/errorins.png"))); // NOI18N
+        Btn_errores_insert.setToolTipText("Errores de Insert");
+        Btn_errores_insert.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                Btn_errores_insertActionPerformed(evt);
             }
         });
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/InsertaBD.png"))); // NOI18N
-        jButton3.setText("Insertar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        Btn_Insertar_TR.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/InsertaBD.png"))); // NOI18N
+        Btn_Insertar_TR.setText("Insertar");
+        Btn_Insertar_TR.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Btn_Insertar_TRMouseClicked(evt);
+            }
+        });
+        Btn_Insertar_TR.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                Btn_Insertar_TRActionPerformed(evt);
             }
         });
 
@@ -176,7 +181,7 @@ public class Integrar_TR extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton3)
+                        .addComponent(Btn_Insertar_TR)
                         .addGap(62, 62, 62))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addContainerGap(11, Short.MAX_VALUE)
@@ -198,7 +203,7 @@ public class Integrar_TR extends javax.swing.JFrame {
                             .addComponent(TEnvio, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(ENVIO))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(Btn_errores_insert, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18))
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -225,7 +230,7 @@ public class Integrar_TR extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(15, 15, 15)
-                        .addComponent(jButton2))
+                        .addComponent(Btn_errores_insert))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(55, 55, 55)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -252,7 +257,7 @@ public class Integrar_TR extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Cproceso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(69, 69, 69)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Btn_Insertar_TR, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(54, 54, 54)
                 .addComponent(Ttabla, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(31, Short.MAX_VALUE))
@@ -262,13 +267,13 @@ public class Integrar_TR extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(Panel_PPLE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Panel_PPLE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -276,7 +281,7 @@ public class Integrar_TR extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void Btn_errores_insertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_errores_insertActionPerformed
         // TODO add your handling code here:
         Valores();
         if (!TEnvio.getText().equals("") && !TLegislatura.getText().equals("") && !CEntidad.getSelectedItem().toString().equals("")) {
@@ -292,7 +297,7 @@ public class Integrar_TR extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Favor de capturar Entidad,Envio y Legislatura");
         }
 
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_Btn_errores_insertActionPerformed
 
     public void Valores(){
         Entidad=CEntidad.getSelectedItem().toString();
@@ -302,7 +307,7 @@ public class Integrar_TR extends javax.swing.JFrame {
     }
     
     
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void Btn_Insertar_TRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_Insertar_TRActionPerformed
         // TODO add your handling code here:
         ALL_TABLES ALL=new ALL_TABLES();
         TR_ple_meds1_1 TR1= new TR_ple_meds1_1();
@@ -398,7 +403,7 @@ public class Integrar_TR extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Favor de capturar Envio y Legislatura");
         }).start();
 
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_Btn_Insertar_TRActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
@@ -415,12 +420,16 @@ public class Integrar_TR extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void Btn_Insertar_TRMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_Insertar_TRMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Btn_Insertar_TRMouseClicked
+
     public void EnableFalse(){
       TEnvio.setEnabled(false);
          TLegislatura.setEnabled(false);
          CEntidad.setEnabled(false);
-         jButton3.setEnabled(false);
-         jButton2.setEnabled(false);
+         Btn_Insertar_TR.setEnabled(false);
+         Btn_errores_insert.setEnabled(false);
          Cproceso.setEnabled(false);
   }
   
@@ -428,8 +437,8 @@ public class Integrar_TR extends javax.swing.JFrame {
       TEnvio.setEnabled(true);
          TLegislatura.setEnabled(true);
          CEntidad.setEnabled(true);
-         jButton3.setEnabled(true);
-         jButton2.setEnabled(true);
+         Btn_Insertar_TR.setEnabled(true);
+         Btn_errores_insert.setEnabled(true);
          Cproceso.setEnabled(true);
   }
     
@@ -470,23 +479,23 @@ public class Integrar_TR extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Btn_Insertar_TR;
+    private javax.swing.JButton Btn_errores_insert;
     private javax.swing.JComboBox CEntidad;
     private javax.swing.JComboBox CEstatus;
     private javax.swing.JComboBox Cproceso;
     private javax.swing.JLabel ENVIO;
     private javax.swing.JLabel ENVIO1;
+    private javax.swing.JPanel Panel_PPLE;
     private javax.swing.JTextField TEnvio;
     private javax.swing.JTextField TLegislatura;
     private javax.swing.JLabel Ttabla;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     // End of variables declaration//GEN-END:variables

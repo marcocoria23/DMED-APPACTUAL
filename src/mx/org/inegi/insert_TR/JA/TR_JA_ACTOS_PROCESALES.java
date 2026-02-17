@@ -52,22 +52,29 @@ public class TR_JA_ACTOS_PROCESALES {
         try ( BufferedInputStream inputStream = new BufferedInputStream(new FileInputStream(NuevaRuta))) {
             byte[] bytes = new byte[3];
             int bytesRead = inputStream.read(bytes);
-            System.out.println("Leyendo: " + NuevaRuta);
+            System.out.println("------------Leyendo ACTOS PROCESALES: " + NuevaRuta);
             if (bytesRead >= 3 && bytes[0] == (byte) 0xEF && bytes[1] == (byte) 0xBB && bytes[2] == (byte) 0xBF) {
                 try ( BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(NuevaRuta), StandardCharsets.UTF_8));  CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT)) {
                     ArrayList<BeanTR_JA_ACTOS_PROCESALES> ad = new ArrayList<>();
                     int numeroColumnas = 0;
                     CSVRecord firstRecord = csvParser.iterator().next();
                     numeroColumnas = firstRecord.size();                  
-                    System.out.println("Número de columnas: " + numeroColumnas +"---->if (numeroColumnas <= 17) continúa..." );
+                    System.out.println("Número de columnas en archivo CSV: " + numeroColumnas +" Número de columnas esperado: <18." );
 
-                    if (numeroColumnas <=17) { // Cambiar el valor según el número de columnas esperado
-                        for (CSVRecord record : csvParser) { 
-                            if (record.get(0).isEmpty()) {
-                               break; // Ignorar registros vacíos
+                    if (numeroColumnas <=18) { // Cambiar el valor según el número de columnas esperado
+                        for (CSVRecord record : csvParser) {                           
+                            // Saltar las primeras 6 filas
+                            if (record.getRecordNumber() < 7) {
+                                continue;
                             }
-                            BeanTR_JA_ACTOS_PROCESALES c = new BeanTR_JA_ACTOS_PROCESALES();
+                            System.out.println("entró a leer fila "+record.getRecordNumber());
+
+                            if (record.get(0).isEmpty()) {                               
+                               break;
+                            }
+                            BeanTR_JA_ACTOS_PROCESALES c = new BeanTR_JA_ACTOS_PROCESALES();                           
                             c.SetNOMBRE_ORGANO_JURIS(record.get(0));
+                            
                             c.SetCLAVE_ORGANO(record.get(1));
                             c.SetPERIODO(record.get(2));
                             c.SetTOTAL_AUTOS(record.get(3));
@@ -86,8 +93,9 @@ public class TR_JA_ACTOS_PROCESALES {
                             c.SetCOMENTARIOS(record.get(16));
                             ad.add(c);
                             CFilas++;
-
+                            System.out.println("Valores capturados en Bean"+record);
                         }
+                        
                         CFilas2=CFilas;
                         if (CFilas > 0) {
                             con = OracleDAOFactoryJA.creaConexion();

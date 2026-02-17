@@ -60,7 +60,7 @@ public class TR_JA_ASUNTOS_HIDROCARBUROS {
                     numeroColumnas = firstRecord.size();
                     System.out.println("Número de columnas: " + numeroColumnas+"---->if (numeroColumnas <= 14) continúa...");
 
-                    if (numeroColumnas <= 14) { // Cambiar el valor según el número de columnas esperado
+                    if (numeroColumnas <= 16) { // Cambiar el valor según el número de columnas esperado
                         for (CSVRecord record : csvParser) {
                             if (record.get(0).isEmpty()) {
                                 break; // Ignorar registros vacíos

@@ -67,7 +67,7 @@ public class ValidaPLE extends javax.swing.JFrame {
         ENVIO1 = new javax.swing.JLabel();
         ENVIO = new javax.swing.JLabel();
         TEnvio = new javax.swing.JComboBox();
-        jToggleButton1 = new javax.swing.JToggleButton();
+        Btn_Validar = new javax.swing.JToggleButton();
         LEntidad = new javax.swing.JLabel();
         TEnvio_anterior = new javax.swing.JComboBox();
         ENVIO2 = new javax.swing.JLabel();
@@ -153,10 +153,10 @@ public class ValidaPLE extends javax.swing.JFrame {
             }
         });
 
-        jToggleButton1.setText("Validar");
-        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+        Btn_Validar.setText("Validar");
+        Btn_Validar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton1ActionPerformed(evt);
+                Btn_ValidarActionPerformed(evt);
             }
         });
 
@@ -205,7 +205,7 @@ public class ValidaPLE extends javax.swing.JFrame {
                 .addContainerGap(303, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_PLELayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Btn_Validar, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(21, 21, 21))
         );
         Panel_PLELayout.setVerticalGroup(
@@ -226,7 +226,7 @@ public class ValidaPLE extends javax.swing.JFrame {
                     .addComponent(TEnvio_anterior, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(CLegislatura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
-                .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Btn_Validar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -264,7 +264,7 @@ public class ValidaPLE extends javax.swing.JFrame {
         men.setVisible(true);
     }//GEN-LAST:event_formWindowClosing
 
-    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+    private void Btn_ValidarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_ValidarActionPerformed
         // TODO add your handling code here:
         
         new Thread(() -> {
@@ -287,7 +287,7 @@ public class ValidaPLE extends javax.swing.JFrame {
             }
 
         }).start();
-    }//GEN-LAST:event_jToggleButton1ActionPerformed
+    }//GEN-LAST:event_Btn_ValidarActionPerformed
 
     private void CEntidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CEntidadActionPerformed
         // TODO add your handling code here:
@@ -350,7 +350,7 @@ public class ValidaPLE extends javax.swing.JFrame {
       CLegislatura.setEnabled(false);
       TEnvio.setEnabled(false);
       TEnvio_anterior.setEnabled(false);
-      jToggleButton1.setEnabled(false);
+      Btn_Validar.setEnabled(false);
     }
     
      public void Habilita(){
@@ -358,7 +358,7 @@ public class ValidaPLE extends javax.swing.JFrame {
       CLegislatura.setEnabled(true);
       TEnvio.setEnabled(true);
       TEnvio_anterior.setEnabled(true);
-      jToggleButton1.setEnabled(true);
+      Btn_Validar.setEnabled(true);
         
     }
     
@@ -506,6 +506,7 @@ public class ValidaPLE extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JToggleButton Btn_Validar;
     private javax.swing.JComboBox CEntidad;
     private javax.swing.JComboBox CLegislatura;
     private javax.swing.JLabel ENVIO;
@@ -520,6 +521,5 @@ public class ValidaPLE extends javax.swing.JFrame {
     private javax.swing.JComboBox TEnvio_anterior;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JToggleButton jToggleButton1;
     // End of variables declaration//GEN-END:variables
 }

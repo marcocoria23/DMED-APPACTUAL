@@ -693,7 +693,7 @@ public class Exporta_validaciones {
             f.close();
             JOptionPane.showMessageDialog(null, "Archivo Guardado Correctamente", "", JOptionPane.INFORMATION_MESSAGE);
         } else {
-            JOptionPane.showMessageDialog(null, "Archivo sin extencion .xlsx", "", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Archivo sin extensión .xlsx", "", JOptionPane.WARNING_MESSAGE);
         }
 
         progressBar.setValue(0);

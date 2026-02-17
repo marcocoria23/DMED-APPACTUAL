@@ -24,13 +24,13 @@ public class EliminaBDJATRGEN {
         try {
             st = con.prepareCall("{call TRUNCAR_INFO_JA()}");
             st.execute();
-            
+              System.out.println("Se ejecutó paquete para eliminar información de tablas GEN");
         } catch (SQLException e){
             JOptionPane.showMessageDialog(null, e + "Favor de contactar al administrador");
         } finally {
             try {
                 if (con != null){
-                    System.out.println("cierra conexión BD para procedure TRUNCAR_INFO_JA");
+                    System.out.println("Cierra conexión de BD para procedure TRUNCAR_INFO_JA");
                     con.close();
                     con = null;
                 }

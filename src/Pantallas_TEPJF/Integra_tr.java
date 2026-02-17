@@ -45,11 +45,11 @@ public class Integra_tr extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        jComboBox1 = new javax.swing.JComboBox();
+        ComboBox_periodo = new javax.swing.JComboBox();
         jToggleButton1 = new javax.swing.JToggleButton();
         LProc = new javax.swing.JLabel();
         Progress = new javax.swing.JProgressBar();
-        jButton2 = new javax.swing.JButton();
+        Btn_Errores_insert = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -106,7 +106,7 @@ public class Integra_tr extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2024" }));
+        ComboBox_periodo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2024" }));
 
         jToggleButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Binsertar.png"))); // NOI18N
         jToggleButton1.setText("Insertar");
@@ -116,11 +116,11 @@ public class Integra_tr extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/errorins.png"))); // NOI18N
-        jButton2.setToolTipText("Errores de Insert");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        Btn_Errores_insert.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/errorins.png"))); // NOI18N
+        Btn_Errores_insert.setToolTipText("Errores de Insert");
+        Btn_Errores_insert.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                Btn_Errores_insertActionPerformed(evt);
             }
         });
 
@@ -135,9 +135,9 @@ public class Integra_tr extends javax.swing.JFrame {
                         .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(27, 27, 27)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(ComboBox_periodo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(Btn_Errores_insert, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(26, 26, 26))
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
@@ -151,8 +151,8 @@ public class Integra_tr extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2))
+                    .addComponent(ComboBox_periodo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Btn_Errores_insert))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
                 .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -194,8 +194,8 @@ public class Integra_tr extends javax.swing.JFrame {
             Progress.setVisible(true);
 
             try {
-                jButton2.setEnabled(false);
-                jComboBox1.setEnabled(false);
+                Btn_Errores_insert.setEnabled(false);
+                ComboBox_periodo.setEnabled(false);
                 jToggleButton1.setEnabled(false);
                 Elim.EliminaTR();
                 LProc.setText("Ins..TR_TEPJF_EXPEDIENTE");
@@ -213,8 +213,8 @@ public class Integra_tr extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Se ha insertado correctamente favor de verificar errores de insert");
                 LProc.setVisible(false);
                 Progress.setVisible(false);
-                jButton2.setEnabled(true);
-                jComboBox1.setEnabled(true);
+                Btn_Errores_insert.setEnabled(true);
+                ComboBox_periodo.setEnabled(true);
                 jToggleButton1.setEnabled(true);
             } catch (SQLException ex) {
                 System.out.println("Error al migrar de TEMP a TR " + ex);
@@ -225,7 +225,7 @@ public class Integra_tr extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void Btn_Errores_insertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_Errores_insertActionPerformed
         // TODO add your handling code here:
 
         if (!ventanaAbierta) {
@@ -237,7 +237,7 @@ public class Integra_tr extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Ventana Errores de insert abierta");
         }
 
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_Btn_Errores_insertActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // TODO add your handling code here:
@@ -281,10 +281,10 @@ public class Integra_tr extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Btn_Errores_insert;
+    private javax.swing.JComboBox ComboBox_periodo;
     private javax.swing.JLabel LProc;
     private javax.swing.JProgressBar Progress;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;

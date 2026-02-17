@@ -60,7 +60,7 @@ public class TR_JA_CUMPLIM_EJECUTORIAS {
                     numeroColumnas = firstRecord.size();
                     System.out.println("Número de columnas: " + numeroColumnas+"---->if (numeroColumnas <= 7) continúa...");
 
-                    if (numeroColumnas <= 7) { // Cambiar el valor según el número de columnas esperado
+                    if (numeroColumnas <= 8) { // Cambiar el valor según el número de columnas esperado
                         for (CSVRecord record : csvParser) {
                             if (record.get(0).isEmpty()) {
                                 break; // Ignorar registros vacíos

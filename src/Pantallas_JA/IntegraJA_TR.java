@@ -8,6 +8,9 @@ import Convertir_CSV.Convertir_CSV;
 import java.awt.Color;
 import java.awt.FileDialog;
 import java.io.File;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import mx.org.inegi.Procedure.JA.EliminaBDJATRGEN;
 import mx.org.inegi.insert_TR.JA.TR_JA_ACTOS_PROCESALES;
@@ -52,7 +55,7 @@ public class IntegraJA_TR extends javax.swing.JFrame {
 
         Label_icon_JA = new javax.swing.JLabel();
         Label_Titulo_JA = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
+        PanelRosaSalmon = new javax.swing.JPanel();
         Label_RutaArchivo = new javax.swing.JLabel();
         RutaArchivo = new javax.swing.JTextField();
         Button_Ruta = new javax.swing.JButton();
@@ -74,16 +77,16 @@ public class IntegraJA_TR extends javax.swing.JFrame {
         Label_Titulo_JA.setFont(new java.awt.Font("Cambria", 0, 18)); // NOI18N
         Label_Titulo_JA.setText("Procuraduría Agraria");
 
-        jPanel1.setBackground(new java.awt.Color(250, 128, 114));
+        PanelRosaSalmon.setBackground(new java.awt.Color(250, 128, 114));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout PanelRosaSalmonLayout = new javax.swing.GroupLayout(PanelRosaSalmon);
+        PanelRosaSalmon.setLayout(PanelRosaSalmonLayout);
+        PanelRosaSalmonLayout.setHorizontalGroup(
+            PanelRosaSalmonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        PanelRosaSalmonLayout.setVerticalGroup(
+            PanelRosaSalmonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 18, Short.MAX_VALUE)
         );
 
@@ -105,6 +108,11 @@ public class IntegraJA_TR extends javax.swing.JFrame {
 
         Button_Integrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/InsertaTR_JA.jpg"))); // NOI18N
         Button_Integrar.setText("Integrar TR");
+        Button_Integrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Button_IntegrarMouseClicked(evt);
+            }
+        });
         Button_Integrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Button_IntegrarActionPerformed(evt);
@@ -151,7 +159,7 @@ public class IntegraJA_TR extends javax.swing.JFrame {
                                 .addGap(23, 23, 23))))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(PanelRosaSalmon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(Label_RutaArchivo)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -178,7 +186,7 @@ public class IntegraJA_TR extends javax.swing.JFrame {
                         .addGap(16, 16, 16)
                         .addComponent(Label_Titulo_JA)))
                 .addGap(10, 10, 10)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(PanelRosaSalmon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(Button_Nota)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -225,6 +233,11 @@ public class IntegraJA_TR extends javax.swing.JFrame {
         TR_JA_TRAMITE TRA = new TR_JA_TRAMITE();
 
         EliminaBDJATRGEN elimina = new EliminaBDJATRGEN();
+        try {
+            elimina.EliminaBD();
+        } catch (SQLException ex) {
+            Logger.getLogger(IntegraJA_TR.class.getName()).log(Level.SEVERE, null, ex);
+        }
         Convertir_CSV convert = new Convertir_CSV();       
         new Thread(() -> {
             try {
@@ -232,7 +245,6 @@ public class IntegraJA_TR extends javax.swing.JFrame {
                 if (respuesta == JOptionPane.YES_OPTION) {
                     if (!RutaArchivo.getText().equals("")) {
                         muestra();
-                        //elimina.EliminaBD();
                         Button_Integrar.setEnabled(false);
                         convert.Convierte(RutaAr); //convierte archivo XLS a CSV
                         Progressbar_Cargando.setValue(5);
@@ -318,6 +330,10 @@ public class IntegraJA_TR extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_ErroresInsertActionPerformed
 
+    private void Button_IntegrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Button_IntegrarMouseClicked
+ EliminaBDJATRGEN elimina = new EliminaBDJATRGEN();        // TODO add your handling code here:
+    }//GEN-LAST:event_Button_IntegrarMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -363,8 +379,8 @@ public class IntegraJA_TR extends javax.swing.JFrame {
     private javax.swing.JLabel Label_RutaArchivo;
     private javax.swing.JLabel Label_Titulo_JA;
     private javax.swing.JLabel Label_icon_JA;
+    private javax.swing.JPanel PanelRosaSalmon;
     private javax.swing.JProgressBar Progressbar_Cargando;
     private javax.swing.JTextField RutaArchivo;
-    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

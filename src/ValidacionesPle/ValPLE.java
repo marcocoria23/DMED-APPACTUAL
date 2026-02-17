@@ -3530,7 +3530,7 @@ public class ValPLE {
                 XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                 celdaD2.setCellStyle(estiloCeldabordes0);
                 celdaD2.setCellType(CellType.STRING);
-                String txtD2 = "P1_2_17-Q(cant_reuniones_celebradas_transmitidas_comision_legislativa) Debe ser igual o menor a la cantidad reportada en la columna P1_2_15-O(cant_reuniones_celebradas_comision_legislativa).";
+                String txtD2 = "P1_2_17-R(cant_reuniones_celebradas_transmitidas_comision_legislativa) Debe ser igual o menor a la cantidad reportada en la columna P1_2_15-P(cant_reuniones_celebradas_comision_legislativa).";
                 XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                 celdaD2.setCellValue(textoD2);
 
@@ -4540,7 +4540,7 @@ public class ValPLE {
                 XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                 celdaD2.setCellStyle(estiloCeldabordes0);
                 celdaD2.setCellType(CellType.STRING);
-                String txtD2 = "Se debe de capturar el campo P1_3_15-P(ID_persona_legisladora_propietaria) o P1_3_16-Q(nombre_persona_legisladora_propietaria) debido a que se selecciono  la categoría \"Suplente\" '2' en la columna P1_3_14-O(caracter_cargo_persona_legisladora)";
+                String txtD2 = "Se debe de capturar el campo P1_3_15-P(ID_persona_legisladora_propietaria) Y P1_3_16-Q(nombre_persona_legisladora_propietaria) debido a que se selecciono  la categoría \"Suplente\" '2' en la columna P1_3_14-O(caracter_cargo_persona_legisladora)";
                 XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                 celdaD2.setCellValue(textoD2);
 
@@ -26943,7 +26943,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                 XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                 celdaD2.setCellStyle(estiloCeldabordes0);
                 celdaD2.setCellType(CellType.STRING);
-                String txtD2 = "Existe una iniciativa con estatus duplicado en el envío anterior. Para que el estatus de la iniciativa pueda ser el mismo  en los diferentes envíos: el campo C (cond_presentacion_iniciativa_periodo) deberá de ser ‘NO’.";
+                String txtD2 = "Existe una iniciativa con estatus duplicado en el envío anterior. Para que el estatus de la iniciativa pueda ser el mismo  en los diferentes envíos: el campo C P1_5_3 (cond_presentacion_iniciativa_periodo) deberá de ser ‘NO’";
                 XSSFRichTextString textoD6 = new XSSFRichTextString(txtD2);
                 celdaD2.setCellValue(textoD6);
 
