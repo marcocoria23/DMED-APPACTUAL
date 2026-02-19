@@ -167,20 +167,21 @@ public class QIniciativas {
         conexion.Conectar();
         Array = new ArrayList();
         if (!envio_anterior.equals(envio)) {
-        sql = "select * from(  \n" +
-"select count(ID_ACTUAL) as conteo, ID_ACTUAL,presenta_periodo, ESTATUS_ACTUAL, ID_ENTIDAD from( \n" +
-"select ID_ENTIDAD AS ID_ENTIDAD, C1_5_ID AS C1_5_ID1, p1_5_1 AS ID_ACTUAL, PRESENTO_INICIATIVA_PERIODO.descripcion as presenta_periodo,TC_ESTATUS.descripcion AS ESTATUS_ACTUAL\n" +
+        sql = "select * from(select count(ID_ACTUAL) as conteo, ID_ACTUAL,presenta_periodo, ESTATUS_ACTUAL, ID_ENTIDAD from( \n" +
+"select ID_ENTIDAD AS ID_ENTIDAD, C1_5_ID AS C1_5_ID1, p1_5_1 AS ID_ACTUAL, PRESENTO_INICIATIVA_PERIODO.descripcion as presenta_periodo,ACTUALIZACION_ESTATUS.DESCRIPCION AS ACTUALIZACION_ESTATUS,TC_ESTATUS.descripcion AS ESTATUS_ACTUAL\n" +
 "FROM TR_PLE_MEDS1_5 TR\n" +
 "INNER JOIN TC_PREG_SALTO PRESENTO_INICIATIVA_PERIODO ON TR.P1_5_3 = PRESENTO_INICIATIVA_PERIODO.id\n" +
-"FULL JOIN TC_ESTATUS_INICIATIVA TC_ESTATUS ON TR.P1_5_8 = TC_ESTATUS.id\n" +
-"WHERE ID_ENTIDAD=" + ID_entidad + " AND C1_5_ID='" + envio + "'--parametro actual\n" +
+"INNER JOIN TC_PREG_SALTO ACTUALIZACION_ESTATUS ON TR.P1_5_6 = ACTUALIZACION_ESTATUS.id\n" +
+"INNER JOIN TC_ESTATUS_INICIATIVA TC_ESTATUS ON TR.P1_5_8 = TC_ESTATUS.id\n" +
+"WHERE TR.P1_5_6=1  and(ID_ENTIDAD=" + ID_entidad + " AND C1_5_ID='" + envio + "')--parametro actual\n" +
 "UNION ALL\n" +
-"select ID_ENTIDAD AS ID_ENTIDAD, C1_5_ID AS C1_5_ID1, p1_5_1 AS ID_ACTUAL, PRESENTO_INICIATIVA_PERIODO.descripcion as presenta_periodo,TC_ESTATUS.descripcion AS ESTATUS_ACTUAL\n" +
+"select ID_ENTIDAD AS ID_ENTIDAD, C1_5_ID AS C1_5_ID1, p1_5_1 AS ID_ACTUAL, PRESENTO_INICIATIVA_PERIODO.descripcion as presenta_periodo, ACTUALIZACION_ESTATUS.DESCRIPCION AS ACTUALIZACION_ESTATUS, TC_ESTATUS.descripcion AS ESTATUS_ACTUAL\n" +
 "FROM TR_PLE_MEDS1_5 TR\n" +
 "INNER JOIN TC_PREG_SALTO PRESENTO_INICIATIVA_PERIODO ON TR.P1_5_3 = PRESENTO_INICIATIVA_PERIODO.id\n" +
-"FULL JOIN TC_ESTATUS_INICIATIVA TC_ESTATUS ON TR.P1_5_8 = TC_ESTATUS.id\n" +
+"INNER JOIN TC_PREG_SALTO ACTUALIZACION_ESTATUS ON TR.P1_5_6 = ACTUALIZACION_ESTATUS.id\n" +
+"INNER JOIN TC_ESTATUS_INICIATIVA TC_ESTATUS ON TR.P1_5_8 = TC_ESTATUS.id\n" +
 "WHERE ID_ENTIDAD=" + ID_entidad + " AND C1_5_ID='" + envio_anterior + "') --parametro anterior\n" +
-"group by ID_ENTIDAD, ID_ACTUAL,presenta_periodo, ESTATUS_ACTUAL) where conteo>1 ";
+"group by ID_ENTIDAD, ID_ACTUAL,presenta_periodo,ESTATUS_ACTUAL) where conteo>1 ";
         System.out.println(sql);
         resul = conexion.consultar(sql);
         try {

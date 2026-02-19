@@ -23,29 +23,26 @@ import javax.swing.JOptionPane;
 public class ValidaPLE extends javax.swing.JFrame {
 
     /**
-     * 
+     *
      * Creates new form ValidaPLE
      */
-    public static String entidad="",legislatura="",envio="",Nomentidad="",envio_anterior="";
-     ArrayList<String[]> ArrayEnvio;
-    
-    
+    public static String entidad = "", legislatura = "", envio = "", Nomentidad = "", envio_anterior = "";
+    ArrayList<String[]> ArrayEnvio;
+
     public ValidaPLE() {
         initComponents();
         this.setLocationRelativeTo(null);
-       // this.getContentPane().setBackground(Color.WHITE);//JFRAME COLOR POR DEFAULT BLANCO
-        
+        // this.getContentPane().setBackground(Color.WHITE);//JFRAME COLOR POR DEFAULT BLANCO
+
     }
-    
-    
-    public void valores()
-    {
-        entidad=CEntidad.getSelectedItem().toString().trim();
-        Nomentidad=LEntidad.getText().trim();
-        legislatura=CLegislatura.getSelectedItem().toString();
-        envio=TEnvio.getSelectedItem().toString().trim();
-        envio_anterior=TEnvio_anterior.getSelectedItem().toString().trim();
-       
+
+    public void valores() {
+        entidad = CEntidad.getSelectedItem().toString().trim();
+        Nomentidad = LEntidad.getText().trim();
+        legislatura = CLegislatura.getSelectedItem().toString();
+        envio = TEnvio.getSelectedItem().toString().trim();
+        envio_anterior = TEnvio_anterior.getSelectedItem().toString().trim();
+
     }
 
     /**
@@ -254,32 +251,32 @@ public class ValidaPLE extends javax.swing.JFrame {
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         // TODO add your handling code here:
-        Menu men=new Menu();
+        Menu men = new Menu();
         men.setVisible(true);
     }//GEN-LAST:event_formWindowClosed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // TODO add your handling code here:
-        Menu men=new Menu();
+        Menu men = new Menu();
         men.setVisible(true);
     }//GEN-LAST:event_formWindowClosing
 
     private void Btn_ValidarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_ValidarActionPerformed
         // TODO add your handling code here:
-        
+
         new Thread(() -> {
 
             ValPLE val = new ValPLE();
             try {
-                    if (!TEnvio.getSelectedItem().toString().trim().equals("")) {
+                if (!TEnvio.getSelectedItem().toString().trim().equals("")) {
 
-                        Desabilita();
-                        valores();
-                        val.ValidacionPLE();
-                        Habilita();
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Favor de ingresar Legislatura", "Valida", JOptionPane.WARNING_MESSAGE);
-                    }
+                    Desabilita();
+                    valores();
+                    val.ValidacionPLE();
+                    Habilita();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Favor de ingresar Legislatura", "Valida", JOptionPane.WARNING_MESSAGE);
+                }
             } catch (IOException ex) {
                 Logger.getLogger(ValidaPLE.class.getName()).log(Level.SEVERE, null, ex);
             } catch (SQLException ex) {
@@ -291,42 +288,54 @@ public class ValidaPLE extends javax.swing.JFrame {
 
     private void CEntidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CEntidadActionPerformed
         // TODO add your handling code here:
-        QGEN dat=new QGEN();
+        QGEN dat = new QGEN();
         asinga_NEntidad();
         LlenaComboLeg();
-       llenaCombo();
+        llenaCombo();
     }//GEN-LAST:event_CEntidadActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here
-        QGEN dat=new QGEN();
-       LlenaComboLeg();
+        QGEN dat = new QGEN();
+        LlenaComboLeg();
         llenaCombo();
         asinga_NEntidad();
     }//GEN-LAST:event_formWindowOpened
 
-    
-    public void LlenaComboLeg(){
-         QGEN dat=new QGEN();
-          CLegislatura.removeAllItems();
-         ArrayEnvio = dat.Legislatura(CEntidad.getSelectedItem().toString().trim());
-          for (String[] item : ArrayEnvio) {
+    public void LlenaComboLeg() {
+        QGEN dat = new QGEN();
+        CLegislatura.removeAllItems();
+        ArrayEnvio = dat.Legislatura(CEntidad.getSelectedItem().toString().trim());
+        for (String[] item : ArrayEnvio) {
             CLegislatura.addItem(Arrays.toString(item).replace("[", "").replace("]", ""));
-           
+
         }
     }
-    
-    public void llenaCombo(){
-         QGEN dat=new QGEN();
-          TEnvio.removeAllItems();
-          TEnvio_anterior.removeAllItems();
-         ArrayEnvio = dat.Envios(CEntidad.getSelectedItem().toString().trim(), CLegislatura.getSelectedItem().toString());
-          for (String[] item : ArrayEnvio) {
-            TEnvio.addItem(Arrays.toString(item).replace("[", "").replace("]", ""));
-            TEnvio_anterior.addItem(Arrays.toString(item).replace("[", "").replace("]", ""));
+
+    public void llenaCombo() {
+        QGEN dat = new QGEN();
+        TEnvio.removeAllItems();
+        TEnvio_anterior.removeAllItems();
+        ArrayEnvio = dat.Envios(CEntidad.getSelectedItem().toString().trim(), CLegislatura.getSelectedItem().toString());
+        int maximo = Integer.MIN_VALUE;
+        for (String[] item : ArrayEnvio) {
+            String valorStr = Arrays.toString(item).replace("[", "").replace("]", "").trim();
+            TEnvio.addItem(valorStr);
+            TEnvio_anterior.addItem(valorStr);
+            int valor = Integer.parseInt(valorStr);
+            if (valor > maximo) {
+                maximo = valor;
+            }
+        }
+        // Si hay valores
+        if (maximo != Integer.MIN_VALUE) {
+            // Envío = el más grande
+            TEnvio.setSelectedItem(String.valueOf(maximo));
+            // Envío anterior = el inmediato menor
+            TEnvio_anterior.setSelectedItem(String.valueOf(maximo - 1));
         }
     }
-    
+
     private void TEnvioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TEnvioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_TEnvioActionPerformed
@@ -337,139 +346,135 @@ public class ValidaPLE extends javax.swing.JFrame {
 
     private void CLegislaturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CLegislaturaActionPerformed
         // TODO add your handling code here:
-      if( CLegislatura.getSelectedIndex() > -1)
-       {
-           llenaCombo();  
-       }
-        
+        if (CLegislatura.getSelectedIndex() > -1) {
+            llenaCombo();
+        }
+
     }//GEN-LAST:event_CLegislaturaActionPerformed
 
-    
-    public void Desabilita(){
-      CEntidad.setEnabled(false);
-      CLegislatura.setEnabled(false);
-      TEnvio.setEnabled(false);
-      TEnvio_anterior.setEnabled(false);
-      Btn_Validar.setEnabled(false);
+    public void Desabilita() {
+        CEntidad.setEnabled(false);
+        CLegislatura.setEnabled(false);
+        TEnvio.setEnabled(false);
+        TEnvio_anterior.setEnabled(false);
+        Btn_Validar.setEnabled(false);
     }
-    
-     public void Habilita(){
-          CEntidad.setEnabled(true);
-      CLegislatura.setEnabled(true);
-      TEnvio.setEnabled(true);
-      TEnvio_anterior.setEnabled(true);
-      Btn_Validar.setEnabled(true);
-        
+
+    public void Habilita() {
+        CEntidad.setEnabled(true);
+        CLegislatura.setEnabled(true);
+        TEnvio.setEnabled(true);
+        TEnvio_anterior.setEnabled(true);
+        Btn_Validar.setEnabled(true);
+
     }
-    
-    public void asinga_NEntidad(){
-         if (CEntidad.getItemCount()>0)
-    {
-        switch(CEntidad.getSelectedItem().toString()){
-            case "1":
-             LEntidad.setText("Aguascalientes");
-                break;
-            case "2":
-             LEntidad.setText("Baja California");
-                break;
-            case "3":
-                LEntidad.setText("Baja California Sur");
-                break;
-            case "4":
-                LEntidad.setText("Campeche");
-                break;
-            case "5":
-                LEntidad.setText("Coahuila de Zaragoza");
-                break;
-            case "6":
-                LEntidad.setText("Colima");
-                break;
-            case "7":
-                LEntidad.setText("Chiapas");
-                break;
-            case "8":
-                LEntidad.setText("Chihuahua");
-                break;
-            case "9":
-                LEntidad.setText("Ciudad de México");
-                break;
-            case "10":
-                LEntidad.setText("Durango");
-                break;
-            case "11":
-                LEntidad.setText("Guanajuato");
-                break;
-            case "12":
-                LEntidad.setText("Guerrero");
-                break;
-            case "13":
-                LEntidad.setText("Hidalgo");
-                break;
-            case "14":
-                LEntidad.setText("Jalisco");
-                break;
-            case "15":
-                LEntidad.setText("México");
-                break;
-            case "16":
-                LEntidad.setText("Michoacán de Ocampo");
-                break;
-            case "17":
-                LEntidad.setText("Morelos");
-                break;
-            case "18":
-                LEntidad.setText("Nayarit");
-                break;
-            case "19":
-                LEntidad.setText("Nuevo León");
-                break;
-            case "20":
-                LEntidad.setText("Oaxaca");
-                break;
-            case "21":
-                LEntidad.setText("Puebla");
-                break;
-            case "22":
-                LEntidad.setText("Querétaro");
-                break;
-            case "23":
-                LEntidad.setText("Quintana Roo");
-                break;
-            case "24":
-                LEntidad.setText("San Luis Potosí");
-                break;
-            case "25":
-                LEntidad.setText("Sinaloa");
-                break;
-            case "26":
-                LEntidad.setText("Sonora");
-                break;
-            case "27":
-                LEntidad.setText("Tabasco");
-                break;
-            case "28":
-                LEntidad.setText("Tamaulipas");
-                break;
-            case "29":
-                LEntidad.setText("Tlaxcala");
-                break;
-            case "30":
-                LEntidad.setText("Veracruz de Ignacio de la Llave");
-                break;
-            case "31":
-                LEntidad.setText("Yucatán");
-                break;
-            case "32":
-                LEntidad.setText("Zacatecas");
-                break;
-            default:
-                JOptionPane.showMessageDialog(null, "No se Encontro Entidad", "Valida", JOptionPane.WARNING_MESSAGE);
-                JOptionPane.showMessageDialog(null, "Favor de contactar al Administrador", "Valida", JOptionPane.WARNING_MESSAGE);
+
+    public void asinga_NEntidad() {
+        if (CEntidad.getItemCount() > 0) {
+            switch (CEntidad.getSelectedItem().toString()) {
+                case "1":
+                    LEntidad.setText("Aguascalientes");
+                    break;
+                case "2":
+                    LEntidad.setText("Baja California");
+                    break;
+                case "3":
+                    LEntidad.setText("Baja California Sur");
+                    break;
+                case "4":
+                    LEntidad.setText("Campeche");
+                    break;
+                case "5":
+                    LEntidad.setText("Coahuila de Zaragoza");
+                    break;
+                case "6":
+                    LEntidad.setText("Colima");
+                    break;
+                case "7":
+                    LEntidad.setText("Chiapas");
+                    break;
+                case "8":
+                    LEntidad.setText("Chihuahua");
+                    break;
+                case "9":
+                    LEntidad.setText("Ciudad de México");
+                    break;
+                case "10":
+                    LEntidad.setText("Durango");
+                    break;
+                case "11":
+                    LEntidad.setText("Guanajuato");
+                    break;
+                case "12":
+                    LEntidad.setText("Guerrero");
+                    break;
+                case "13":
+                    LEntidad.setText("Hidalgo");
+                    break;
+                case "14":
+                    LEntidad.setText("Jalisco");
+                    break;
+                case "15":
+                    LEntidad.setText("México");
+                    break;
+                case "16":
+                    LEntidad.setText("Michoacán de Ocampo");
+                    break;
+                case "17":
+                    LEntidad.setText("Morelos");
+                    break;
+                case "18":
+                    LEntidad.setText("Nayarit");
+                    break;
+                case "19":
+                    LEntidad.setText("Nuevo León");
+                    break;
+                case "20":
+                    LEntidad.setText("Oaxaca");
+                    break;
+                case "21":
+                    LEntidad.setText("Puebla");
+                    break;
+                case "22":
+                    LEntidad.setText("Querétaro");
+                    break;
+                case "23":
+                    LEntidad.setText("Quintana Roo");
+                    break;
+                case "24":
+                    LEntidad.setText("San Luis Potosí");
+                    break;
+                case "25":
+                    LEntidad.setText("Sinaloa");
+                    break;
+                case "26":
+                    LEntidad.setText("Sonora");
+                    break;
+                case "27":
+                    LEntidad.setText("Tabasco");
+                    break;
+                case "28":
+                    LEntidad.setText("Tamaulipas");
+                    break;
+                case "29":
+                    LEntidad.setText("Tlaxcala");
+                    break;
+                case "30":
+                    LEntidad.setText("Veracruz de Ignacio de la Llave");
+                    break;
+                case "31":
+                    LEntidad.setText("Yucatán");
+                    break;
+                case "32":
+                    LEntidad.setText("Zacatecas");
+                    break;
+                default:
+                    JOptionPane.showMessageDialog(null, "No se Encontro Entidad", "Valida", JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Favor de contactar al Administrador", "Valida", JOptionPane.WARNING_MESSAGE);
+            }
         }
     }
-    }
-    
-    
+
     /**
      * @param args the command line arguments
      */

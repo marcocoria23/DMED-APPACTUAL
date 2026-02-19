@@ -26943,7 +26943,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                 XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                 celdaD2.setCellStyle(estiloCeldabordes0);
                 celdaD2.setCellType(CellType.STRING);
-                String txtD2 = "Existe una iniciativa con estatus duplicado en el envío anterior. Para que el estatus de la iniciativa pueda ser el mismo  en los diferentes envíos: el campo C P1_5_3 (cond_presentacion_iniciativa_periodo) deberá de ser ‘NO’";
+                String txtD2 = "La iniciativa presenta el mismo estatus que en el envío anterior, aunque se indicó actualización de estatus en los campos F-P1_5_6 (cond_actualizacion_estatus_iniciativa_periodo) y H-P1_5_8 (estatus_iniciativa). Favor de verificar la información capturada.";
                 XSSFRichTextString textoD6 = new XSSFRichTextString(txtD2);
                 celdaD2.setCellValue(textoD6);
 
