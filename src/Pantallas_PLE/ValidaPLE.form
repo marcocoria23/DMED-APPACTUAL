@@ -56,7 +56,7 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="jPanel2" alignment="1" max="32767" attributes="0"/>
+              <Component id="Banner_verde" alignment="1" max="32767" attributes="0"/>
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace pref="242" max="32767" attributes="0"/>
                   <Component id="Label_Titulo" min="-2" max="-2" attributes="0"/>
@@ -78,7 +78,7 @@
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
+                  <Component id="Banner_verde" min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -91,7 +91,7 @@
             </Property>
           </Properties>
         </Component>
-        <Container class="javax.swing.JPanel" name="jPanel2">
+        <Container class="javax.swing.JPanel" name="Banner_verde">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="33" green="66" red="0" type="rgb"/>
@@ -147,19 +147,19 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="CEntidad" alignment="0" min="-2" pref="53" max="-2" attributes="0"/>
-                      <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="LabelEntidad" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="ENVIO1" min="-2" max="-2" attributes="0"/>
+                      <Component id="LabelLegislatura" min="-2" max="-2" attributes="0"/>
                       <Component id="CLegislatura" min="-2" pref="53" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="ENVIO" min="-2" max="-2" attributes="0"/>
+                          <Component id="LabelEnvio" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="ENVIO2" min="-2" max="-2" attributes="0"/>
+                          <Component id="LabelEnvioAnterior" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
                           <Component id="TEnvio" min="-2" pref="53" max="-2" attributes="0"/>
@@ -183,10 +183,10 @@
                   <Component id="LEntidad" min="-2" pref="22" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="ENVIO1" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
-                      <Component id="jLabel4" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
-                      <Component id="ENVIO" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
-                      <Component id="ENVIO2" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
+                      <Component id="LabelLegislatura" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
+                      <Component id="LabelEntidad" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
+                      <Component id="LabelEnvio" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
+                      <Component id="LabelEnvioAnterior" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -203,7 +203,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="jLabel4">
+        <Component class="javax.swing.JLabel" name="LabelEntidad">
           <Properties>
             <Property name="text" type="java.lang.String" value="Entidad:"/>
           </Properties>
@@ -251,12 +251,12 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CEntidadActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JLabel" name="ENVIO1">
+        <Component class="javax.swing.JLabel" name="LabelLegislatura">
           <Properties>
             <Property name="text" type="java.lang.String" value="Legislatura:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="ENVIO">
+        <Component class="javax.swing.JLabel" name="LabelEnvio">
           <Properties>
             <Property name="text" type="java.lang.String" value="Envio:"/>
           </Properties>
@@ -296,7 +296,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TEnvio_anteriorActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JLabel" name="ENVIO2">
+        <Component class="javax.swing.JLabel" name="LabelEnvioAnterior">
           <Properties>
             <Property name="text" type="java.lang.String" value="Envio anterior:"/>
           </Properties>
