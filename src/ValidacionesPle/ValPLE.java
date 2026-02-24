@@ -3454,7 +3454,7 @@ public class ValPLE {
                 XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                 celdaD2.setCellStyle(estiloCeldabordes0);
                 celdaD2.setCellType(CellType.STRING);
-                String txtD2 = "Debe de capturar una cantidad mayor a 0 en la columna P1_2_17-Q(cant_reuniones_celebradas_transmitidas_comision_legislativa)(R) ya que P1_2_16-Q(cond_transmision_reuniones_celebradas_comision_legislativa)=Sí ";
+                String txtD2 = "Debe de capturar una cantidad mayor a 0 en la columna P1_2_17-R (cant_reuniones_celebradas_transmitidas_comision_legislativa) ya que el campo P1_2_16-Q(cond_transmision_reuniones_celebradas_comision_legislativa)=Sí ";
                 XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                 celdaD2.setCellValue(textoD2);
 
@@ -23231,7 +23231,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                 XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                 celdaD2.setCellStyle(estiloCeldabordes0);
                 celdaD2.setCellType(CellType.STRING);
-                String txtD2 = "No se deben de capturar los campos P1_5_67-BO(AGEM), P1_5_68-BP(ayuntamiento) debido a que en la columna tipo_promovente_iniciativa (P1_5_16) es diferente a  \"Ayuntamientos\" '9'";
+                String txtD2 = "No se deben de capturar los campos P1_5_67-BO(AGEM), P1_5_68-BP(ayuntamiento) debido a que en la columna tipo_promovente_iniciativa (P1_5_16-P) es diferente a  \"Ayuntamientos\" '9'";
                 XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                 celdaD2.setCellValue(textoD2);
 
@@ -24449,7 +24449,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                 XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                 celdaD2.setCellStyle(estiloCeldabordes0);
                 celdaD2.setCellType(CellType.STRING);
-                String txtD2 = "Debe capturar informacion en P1_5_75-BW(nombre_comision_legislativa_1_primer_estudio) y P1_5_74-BV(ID_comision_legislativa_1_primer_estudio) debido a P1_5_8 (estatus_iniciativa) se selecciono alguna de las categorias \"Estudio\" (2), \"Dictamen\" (5), \"Desechada o improcedente\" (6) o \"Aprobada o procedente\" (7).";
+                String txtD2 = "Debe capturar informacion en P1_5_75-BW(nombre_comision_legislativa_1_primer_estudio) y P1_5_74-BV(ID_comision_legislativa_1_primer_estudio) debido a que en P1_5_8-H (estatus_iniciativa) se selecciono alguna de las categorias \"Estudio\" (2), \"Dictamen\" (5), \"Desechada o improcedente\" (6) o \"Aprobada o procedente\" (7).";
                 XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                 celdaD2.setCellValue(textoD2);
 
@@ -29797,7 +29797,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "No debe seleccionar una categoria en P1_6_60-BH(AGEM) y P1_6_60-BH(AGEM) debido a P1_6_9-I(tipo_promovente_iniciativa_urgente_obvia) se selecciono una categoria diferente a \"Ayuntamientos\" (9).";
+                    String txtD2 = "No debe seleccionar una categoria en P1_6_60-BH(AGEM) y P1_6_61-BI(ayuntamiento) debido a P1_6_9-I(tipo_promovente_iniciativa_urgente_obvia) se selecciono una categoria diferente a \"Ayuntamientos\" (9).";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 

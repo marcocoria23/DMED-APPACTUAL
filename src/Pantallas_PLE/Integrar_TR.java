@@ -72,7 +72,7 @@ public class Integrar_TR extends javax.swing.JFrame {
         Ttabla = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         CEstatus = new javax.swing.JComboBox();
-        jButton1 = new javax.swing.JButton();
+        btn_actualizar = new javax.swing.JButton();
 
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
@@ -151,12 +151,28 @@ public class Integrar_TR extends javax.swing.JFrame {
         });
 
         CEntidad.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32" }));
+        CEntidad.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                CEntidadItemStateChanged(evt);
+            }
+        });
+        CEntidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CEntidadActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("Entidad:");
 
         ENVIO.setText("Envio:");
 
         ENVIO1.setText("Legislatura:");
+
+        TLegislatura.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TLegislaturaActionPerformed(evt);
+            }
+        });
 
         Cproceso.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ALL_TABLES", "TR_PLE_MEDS1_1", "TR_PLE_MEDS1_1A", "TR_PLE_MEDS1_1B", "TR_PLE_MEDS1_1C", "TR_PLE_MEDS1_1D", "TR_PLE_MEDS1_2", "TR_PLE_MEDS1_3", "TR_PLE_MEDS1_3A", "TR_PLE_MEDS1_4", "TR_PLE_MEDS1_5", "TR_PLE_MEDS1_6", "TR_PLE_MEDS1_7", "TR_PLE_MEDS1_8", "TR_PLE_MEDS1_9" }));
 
@@ -166,10 +182,10 @@ public class Integrar_TR extends javax.swing.JFrame {
 
         CEstatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "En Revision", "Liberado" }));
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/refresh.png"))); // NOI18N
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btn_actualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/refresh.png"))); // NOI18N
+        btn_actualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btn_actualizarActionPerformed(evt);
             }
         });
 
@@ -221,7 +237,7 @@ public class Integrar_TR extends javax.swing.JFrame {
                                 .addComponent(CEstatus, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(247, 247, 247)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btn_actualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -251,7 +267,7 @@ public class Integrar_TR extends javax.swing.JFrame {
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(CEstatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(3, 3, 3)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btn_actualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(25, 25, 25)
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -411,18 +427,30 @@ public class Integrar_TR extends javax.swing.JFrame {
        // CEstatus.setSelectedItem(Q.Estatus(Entidad, Legislatura, Envio));
     }//GEN-LAST:event_formWindowOpened
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btn_actualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_actualizarActionPerformed
         // TODO add your handling code here:
         Querys Q=new Querys();
         Valores();
         Q.Cambio_Estatus(Entidad, Legislatura, Envio, CEstatus.getSelectedItem().toString());
         JOptionPane.showMessageDialog(null, "Cambio de estatus correctamente");
         
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btn_actualizarActionPerformed
 
     private void Btn_Insertar_TRMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_Insertar_TRMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_Btn_Insertar_TRMouseClicked
+
+    private void TLegislaturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TLegislaturaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TLegislaturaActionPerformed
+
+    private void CEntidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CEntidadActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CEntidadActionPerformed
+
+    private void CEntidadItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_CEntidadItemStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CEntidadItemStateChanged
 
     public void EnableFalse(){
       TEnvio.setEnabled(false);
@@ -490,7 +518,7 @@ public class Integrar_TR extends javax.swing.JFrame {
     private javax.swing.JTextField TEnvio;
     private javax.swing.JTextField TLegislatura;
     private javax.swing.JLabel Ttabla;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btn_actualizar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
