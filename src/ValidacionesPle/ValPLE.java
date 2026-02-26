@@ -32,6 +32,7 @@ import ValidacionesPle.QuerysValPLE.QPersonas_legisladoras_extension;
 import ValidacionesPle.QuerysValPLE.QPersonal_Apoyo;
 import ValidacionesPle.QuerysValPLE.QIniciativas;
 import ValidacionesPle.QuerysValPLE.QIniciativas_Extension;
+import ValidacionesPle.QuerysValPLE.QIniciativas_Urgente_Extension;
 import ValidacionesPle.QuerysValPLE.QIniciativas_Urgente_obvia;
 import ValidacionesPle.QuerysValPLE.QDeclaraciones_Procedencia;
 import ValidacionesPle.QuerysValPLE.QJuicios_Politicos;
@@ -211,6 +212,13 @@ public class ValPLE {
         hojaUrgente_obvia.setColumnWidth(1, 30000);
         hojaUrgente_obvia.setColumnWidth(2, 5000);
         hojaUrgente_obvia.setColumnWidth(3, 20000);
+        
+         XSSFSheet hojaUrgente_obvia_extension = libro.createSheet("Urgente_obvia_extension");
+        hojaUrgente_obvia_extension.setColumnWidth(0, 8000);
+        hojaUrgente_obvia_extension.setColumnWidth(1, 8000);
+        hojaUrgente_obvia_extension.setColumnWidth(2, 30000);
+        hojaUrgente_obvia_extension.setColumnWidth(3, 5000);
+        hojaUrgente_obvia_extension.setColumnWidth(4, 20000);
 
         XSSFSheet hojaJuicios_politicos = libro.createSheet("juicios_politicos");
         hojaJuicios_politicos.setColumnWidth(0, 8000);
@@ -239,7 +247,7 @@ public class ValPLE {
 
         progressBar.setValue(1);
 
-       Despliega_Datos_Generales(libro, hojadatos_generales, estiloCelda0, estiloCelda1, estiloCeldabordes0, Pvalida.entidad, Pvalida.legislatura, Pvalida.envio, progressBar);
+      /* Despliega_Datos_Generales(libro, hojadatos_generales, estiloCelda0, estiloCelda1, estiloCeldabordes0, Pvalida.entidad, Pvalida.legislatura, Pvalida.envio, progressBar);
        Despliega_Comisiones_legislativas(libro, hojaComision, estiloCelda0, estiloCelda1, estiloCeldabordes0, Pvalida.entidad, Pvalida.legislatura, Pvalida.envio, progressBar);
        Despliega_Personas_Legisladoras(libro, hojaPersonas_legiladoras, estiloCelda0, estiloCelda1, estiloCeldabordes0, Pvalida.entidad, Pvalida.legislatura, Pvalida.envio, progressBar);
        Despliega_Personas_Legisladoras_NN(libro, hojaPersonas_legiladoras, estiloCelda0, estiloCelda1, estiloCeldabordes0, Pvalida.entidad, Pvalida.legislatura, Pvalida.envio, progressBar);   
@@ -248,6 +256,7 @@ public class ValPLE {
        Despliega_Iniciativas(libro, hojaIniciativas, estiloCelda0, estiloCelda1, estiloCeldabordes0, Pvalida.entidad, Pvalida.legislatura, Pvalida.envio, Pvalida.envio_anterior, progressBar);
        Despliega_Iniciativas_extension(libro, hojaIniciativas_extension, estiloCelda0, estiloCelda1, estiloCeldabordes0, Pvalida.entidad, Pvalida.legislatura, Pvalida.envio, progressBar);
         Despliega_Iniciativas_Urgente_Obvia(libro, hojaUrgente_obvia, estiloCelda0, estiloCelda1, estiloCeldabordes0, Pvalida.entidad, Pvalida.legislatura, Pvalida.envio, progressBar);
+       */ Despliega_Iniciativas_Urgente_Obvia_extension(libro, hojaUrgente_obvia_extension, estiloCelda0, estiloCelda1, estiloCeldabordes0, Pvalida.entidad, Pvalida.legislatura, Pvalida.envio, progressBar);
         Despliega_Juicios_Politicos(libro, hojaJuicios_politicos, estiloCelda0, estiloCelda1, estiloCeldabordes0, Pvalida.entidad, Pvalida.legislatura, Pvalida.envio, progressBar);
         Despliega_Declaraciones_Procedencia(libro, hojaDeclaraciones, estiloCelda0, estiloCelda1, estiloCeldabordes0, Pvalida.entidad, Pvalida.legislatura, Pvalida.envio, progressBar);
         Despliega_Comparecencias(libro, hojaComparecencias, estiloCelda0, estiloCelda1, estiloCeldabordes0, Pvalida.entidad, Pvalida.legislatura, Pvalida.envio, progressBar);
@@ -27377,7 +27386,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
             }
 
         }
-        progressBar.setValue(60);
+        progressBar.setValue(55);
 
     }
 
@@ -30906,9 +30915,416 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
 
             }
         }
-        progressBar.setValue(65);
+        progressBar.setValue(60);
     }
 
+      public void Despliega_Iniciativas_Urgente_Obvia_extension(XSSFWorkbook libro, XSSFSheet hojaUrgente_obvia_extension, XSSFCellStyle estiloCelda0, XSSFCellStyle estiloCelda1, XSSFCellStyle estiloCeldabordes0, String entidad, String legislatura, String envio, JProgressBar progressBar) throws SQLException {
+
+        int conEnc = 1, conDat = 2, coni = 1;
+        Border border = BorderFactory.createTitledBorder("Cargando...Iniciativas_urgente_extension");
+        progressBar.setBorder(border);
+        XSSFRow row00 = hojaUrgente_obvia_extension.createRow(0); // Fila
+        XSSFCell celda00 = row00.createCell(0); // Columna
+        celda00.setCellStyle(estiloCelda0);
+        celda00.setCellType(CellType.STRING);
+        String titulo00 = "Iniciativas Urgente Obvia Extension ";
+        XSSFRichTextString texto00 = new XSSFRichTextString(titulo00);
+        hojaUrgente_obvia_extension.addMergedRegion(new CellRangeAddress(0, 0, 0, 4));
+        celda00.setCellValue(texto00);
+        row00.setHeight((short) 600);
+        QIniciativas_Urgente_Extension ini_urg_ext = new QIniciativas_Urgente_Extension();
+        //verificar si existen datos en tabla antes de validar
+        DaoConexion conexion = new DaoConexion();
+        conexion.Conectar();
+        String sql = "Select * from  TR_PLE_MEDS1_6A where ID_ENTIDAD='" + entidad + "' and LEGISLATURA=" + legislatura + " and C1_6A_ID=" + envio + " ";
+        System.out.println(sql);
+        ResultSet resul = conexion.consultar(sql);
+        if (resul.next()) {
+            ArrayResult = ini_urg_ext.ID_INICIATIVA(entidad, legislatura, envio);
+            if (ArrayResult.size() > 0) {
+
+                XSSFRow filaEE1 = hojaUrgente_obvia_extension.createRow(conEnc);//FILA
+                XSSFCell celdaE1 = filaEE1.createCell(0);//COLUMNA
+                celdaE1.setCellStyle(estiloCelda1);
+                celdaE1.setCellType(CellType.STRING);
+                String txtE1 = "Numero_iniciativa_extension";
+                XSSFRichTextString textoE1 = new XSSFRichTextString(txtE1);
+                celdaE1.setCellValue(textoE1);
+
+               
+                XSSFCell celdaE4 = filaEE1.createCell(1);//COLUMNA
+                celdaE4.setCellStyle(estiloCelda1);
+                celdaE4.setCellType(CellType.STRING);
+                String txtE4 = "ID_Iniciativa_urgente_extension";
+                XSSFRichTextString textoE4 = new XSSFRichTextString(txtE4);
+                celdaE4.setCellValue(textoE4);
+
+                XSSFCell celdaE6 = filaEE1.createCell(2);//COLUMNA
+                celdaE6.setCellStyle(estiloCelda1);
+                celdaE6.setCellType(CellType.STRING);
+                String txtE6 = "OBSERVACIONES";
+                XSSFRichTextString textoE6 = new XSSFRichTextString(txtE6);
+                celdaE6.setCellValue(textoE6);
+
+                XSSFCell celdaE7 = filaEE1.createCell(3);//COLUMNA
+                celdaE7.setCellStyle(estiloCelda1);
+                celdaE7.setCellType(CellType.STRING);
+                String txtE7 = "ID_ENTIDAD";
+                XSSFRichTextString textoE7 = new XSSFRichTextString(txtE7);
+                celdaE7.setCellValue(textoE7);
+
+                XSSFCell celdaE8 = filaEE1.createCell(4);//COLUMNA
+                celdaE8.setCellStyle(estiloCelda1);
+                celdaE8.setCellType(CellType.STRING);
+                String txtE8 = "JUSTIFICACION";
+                XSSFRichTextString textoE8 = new XSSFRichTextString(txtE8);
+                celdaE8.setCellValue(textoE8);
+
+                for (int i = 0; i < ArrayResult.size(); i++) {
+                    XSSFRow filaEE2 = hojaUrgente_obvia_extension.createRow(conDat + i);
+
+                    XSSFCell celdaD1 = filaEE2.createCell(0);//COLUMNA
+                    celdaD1.setCellStyle(estiloCeldabordes0);
+                    celdaD1.setCellType(CellType.STRING);
+                    //String txtD1 = Arrays.toString(ArrayResult.get(i));
+                    String txtD1 = Arrays.toString(ArrayResult.get(i));
+                    txtD1 = txtD1.replace("[", "").replace("]", "").replace(" 00:00:00.0", "");
+                    String[] parts = txtD1.split(",");
+                    String parts1 = parts[1].trim();
+                    XSSFRichTextString textoD1 = new XSSFRichTextString(parts1);
+                    celdaD1.setCellValue(textoD1);
+
+                    XSSFCell celdaD10 = filaEE2.createCell(1);//COLUMNA
+                    celdaD10.setCellStyle(estiloCeldabordes0);
+                    celdaD10.setCellType(CellType.STRING);
+                    //String txtD1 = Arrays.toString(ArrayResult.get(i));
+                    String txtD10 = Arrays.toString(ArrayResult.get(i));
+                    txtD10 = txtD10.replace("[", "").replace("]", "").replace(" 00:00:00.0", "");
+                    String[] parts10 = txtD10.split(",");
+                    String parts11 = parts10[2].trim();
+                    XSSFRichTextString textoD10 = new XSSFRichTextString(parts11);
+                    celdaD10.setCellValue(textoD10);
+
+                    XSSFCell celdaD2 = filaEE2.createCell(2);//COLUMNA
+                    celdaD2.setCellStyle(estiloCeldabordes0);
+                    celdaD2.setCellType(CellType.STRING);
+                    String txtD2 = " El ID_INICIATIVA en la pestaña Iniciativas_urgente_extension ( P1_6A_2-B) no existe en la  pestaña Iniciativa Urgente Obvia (P1_6_1 - A)";
+                    XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
+                    celdaD2.setCellValue(textoD2);
+
+                    XSSFCell celdaD3 = filaEE2.createCell(3);//COLUMNA
+                    celdaD3.setCellStyle(estiloCeldabordes0);
+                    celdaD3.setCellType(CellType.STRING);
+                    String txtD3 = Arrays.toString(ArrayResult.get(i));
+                    txtD3 = txtD3.replace("[", "").replace("]", "").replace(" 00:00:00.0", "");
+                    String[] parts3 = txtD3.split(",");
+                    String parts4 = parts3[0].trim();
+                    XSSFRichTextString textoD3 = new XSSFRichTextString(parts4);
+                    celdaD3.setCellValue(textoD3);
+
+                    XSSFCell celdaD4 = filaEE2.createCell(4);//COLUMNA
+                    celdaD4.setCellStyle(estiloCeldabordes0);
+                    celdaD4.setCellType(CellType.STRING);
+                    String txtD4 = "";
+                    XSSFRichTextString textoD4 = new XSSFRichTextString(txtD4);
+                    celdaD4.setCellValue(textoD4);
+
+                    coni++;
+                }
+                conEnc = conEnc + coni;
+                conDat = conDat + coni;
+                coni = 1;
+            }
+
+            ArrayResult = ini_urg_ext.ID_PERSONA_LEGISLADORA(entidad, legislatura, envio);
+            if (ArrayResult.size() > 0) {
+                XSSFRow filaEE1 = hojaUrgente_obvia_extension.createRow(conEnc);//FILA
+                XSSFCell celdaE1 = filaEE1.createCell(0);//COLUMNA
+                celdaE1.setCellStyle(estiloCelda1);
+                celdaE1.setCellType(CellType.STRING);
+                String txtE1 = "Número_iniciativa_extension";
+                XSSFRichTextString textoE1 = new XSSFRichTextString(txtE1);
+                celdaE1.setCellValue(textoE1);
+
+               
+                XSSFCell celdaE2 = filaEE1.createCell(1);//COLUMNA
+                celdaE2.setCellStyle(estiloCelda1);
+                celdaE2.setCellType(CellType.STRING);
+                String txtE2 = "ID_Iniciativa_urgente_extension";
+                XSSFRichTextString textoE2 = new XSSFRichTextString(txtE2);
+                celdaE2.setCellValue(textoE2);
+
+                XSSFCell celdaE3 = filaEE1.createCell(2);//COLUMNA
+                celdaE3.setCellStyle(estiloCelda1);
+                celdaE3.setCellType(CellType.STRING);
+                String txtE3 = "OBSERVACIONES";
+                XSSFRichTextString textoE3 = new XSSFRichTextString(txtE3);
+                celdaE3.setCellValue(textoE3);
+
+                XSSFCell celdaE7 = filaEE1.createCell(3);//COLUMNA
+                celdaE7.setCellStyle(estiloCelda1);
+                celdaE7.setCellType(CellType.STRING);
+                String txtE7 = "ID_ENTIDAD";
+                XSSFRichTextString textoE7 = new XSSFRichTextString(txtE7);
+                celdaE7.setCellValue(textoE7);
+
+                XSSFCell celdaE8 = filaEE1.createCell(4);//COLUMNA
+                celdaE8.setCellStyle(estiloCelda1);
+                celdaE8.setCellType(CellType.STRING);
+                String txtE8 = "JUSTIFICACION";
+                XSSFRichTextString textoE8 = new XSSFRichTextString(txtE8);
+                celdaE8.setCellValue(textoE8);
+
+                for (int i = 0; i < ArrayResult.size(); i++) {
+                    XSSFRow filaEE2 = hojaUrgente_obvia_extension.createRow(conDat + i);
+
+                    XSSFCell celdaD1 = filaEE2.createCell(0);//COLUMNA
+                    celdaD1.setCellStyle(estiloCeldabordes0);
+                    celdaD1.setCellType(CellType.STRING);
+                    //String txtD1 = Arrays.toString(ArrayResult.get(i));
+                    String txtD1 = Arrays.toString(ArrayResult.get(i));
+                    txtD1 = txtD1.replace("[", "").replace("]", "").replace(" 00:00:00.0", "");
+                    String[] parts = txtD1.split(",");
+                    String parts1 = parts[1].trim();
+                    XSSFRichTextString textoD1 = new XSSFRichTextString(parts1);
+                    celdaD1.setCellValue(textoD1);
+
+                    XSSFCell celdaD10 = filaEE2.createCell(1);//COLUMNA
+                    celdaD10.setCellStyle(estiloCeldabordes0);
+                    celdaD10.setCellType(CellType.STRING);
+                    //String txtD1 = Arrays.toString(ArrayResult.get(i));
+                    String txtD10 = Arrays.toString(ArrayResult.get(i));
+                    txtD10 = txtD10.replace("[", "").replace("]", "").replace(" 00:00:00.0", "");
+                    String[] parts10 = txtD10.split(",");
+                    String parts11 = parts10[2].trim();
+                    XSSFRichTextString textoD10 = new XSSFRichTextString(parts11);
+                    celdaD10.setCellValue(textoD10);
+
+                    XSSFCell celdaD2 = filaEE2.createCell(2);//COLUMNA
+                    celdaD2.setCellStyle(estiloCeldabordes0);
+                    celdaD2.setCellType(CellType.STRING);
+                    String txtD2 = "El ID_PERSONA_LEGISLADORA en la pestaña de Iniciativas_extension (P1_6A_3-C) No existe en la pestaña personas_legisladoras (P1_3_1-A)";
+                    XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
+                    celdaD2.setCellValue(textoD2);
+
+                    XSSFCell celdaD3 = filaEE2.createCell(3);//COLUMNA
+                    celdaD3.setCellStyle(estiloCeldabordes0);
+                    celdaD3.setCellType(CellType.STRING);
+                    String txtD3 = Arrays.toString(ArrayResult.get(i));
+                    txtD3 = txtD3.replace("[", "").replace("]", "").replace(" 00:00:00.0", "");
+                    String[] parts3 = txtD3.split(",");
+                    String parts4 = parts3[0].trim();
+                    XSSFRichTextString textoD3 = new XSSFRichTextString(parts4);
+                    celdaD3.setCellValue(textoD3);
+
+                    XSSFCell celdaD4 = filaEE2.createCell(4);//COLUMNA
+                    celdaD4.setCellStyle(estiloCeldabordes0);
+                    celdaD4.setCellType(CellType.STRING);
+                    String txtD4 = "";
+                    XSSFRichTextString textoD4 = new XSSFRichTextString(txtD4);
+                    celdaD4.setCellValue(textoD4);
+
+                    coni++;
+                }
+                conEnc = conEnc + coni;
+                conDat = conDat + coni;
+                coni = 1;
+            }
+
+            ArrayResult = ini_urg_ext.PERSONA_REPETIDA(entidad, legislatura, envio);
+            if (ArrayResult.size() > 0) {
+                XSSFRow filaEE1 = hojaUrgente_obvia_extension.createRow(conEnc);//FILA
+                XSSFCell celdaE1 = filaEE1.createCell(0);//COLUMNA
+                celdaE1.setCellStyle(estiloCelda1);
+                celdaE1.setCellType(CellType.STRING);
+                String txtE1 = "Número_iniciativa_extension";
+                XSSFRichTextString textoE1 = new XSSFRichTextString(txtE1);
+                celdaE1.setCellValue(textoE1);
+
+                XSSFCell celdaE2 = filaEE1.createCell(1);//COLUMNA
+                celdaE2.setCellStyle(estiloCelda1);
+                celdaE2.setCellType(CellType.STRING);
+                String txtE2 = "ID_Iniciativa_urgente_extension";
+                XSSFRichTextString textoE2 = new XSSFRichTextString(txtE2);
+                celdaE2.setCellValue(textoE2);
+
+                XSSFCell celdaE3 = filaEE1.createCell(2);//COLUMNA
+                celdaE3.setCellStyle(estiloCelda1);
+                celdaE3.setCellType(CellType.STRING);
+                String txtE3 = "OBSERVACIONES";
+                XSSFRichTextString textoE3 = new XSSFRichTextString(txtE3);
+                celdaE3.setCellValue(textoE3);
+
+                XSSFCell celdaE7 = filaEE1.createCell(3);//COLUMNA
+                celdaE7.setCellStyle(estiloCelda1);
+                celdaE7.setCellType(CellType.STRING);
+                String txtE7 = "ID_ENTIDAD";
+                XSSFRichTextString textoE7 = new XSSFRichTextString(txtE7);
+                celdaE7.setCellValue(textoE7);
+
+                XSSFCell celdaE8 = filaEE1.createCell(4);//COLUMNA
+                celdaE8.setCellStyle(estiloCelda1);
+                celdaE8.setCellType(CellType.STRING);
+                String txtE8 = "JUSTIFICACION";
+                XSSFRichTextString textoE8 = new XSSFRichTextString(txtE8);
+                celdaE8.setCellValue(textoE8);
+
+                for (int i = 0; i < ArrayResult.size(); i++) {
+                    XSSFRow filaEE2 = hojaUrgente_obvia_extension.createRow(conDat + i);
+
+                    XSSFCell celdaD1 = filaEE2.createCell(0);//COLUMNA
+                    celdaD1.setCellStyle(estiloCeldabordes0);
+                    celdaD1.setCellType(CellType.STRING);
+                    //String txtD1 = Arrays.toString(ArrayResult.get(i));
+                    String txtD1 = Arrays.toString(ArrayResult.get(i));
+                    txtD1 = txtD1.replace("[", "").replace("]", "").replace(" 00:00:00.0", "");
+                    String[] parts = txtD1.split(",");
+                    String parts1 = parts[1].trim();
+                    XSSFRichTextString textoD1 = new XSSFRichTextString(parts1);
+                    celdaD1.setCellValue(textoD1);
+
+                    XSSFCell celdaD10 = filaEE2.createCell(1);//COLUMNA
+                    celdaD10.setCellStyle(estiloCeldabordes0);
+                    celdaD10.setCellType(CellType.STRING);
+                    //String txtD1 = Arrays.toString(ArrayResult.get(i));
+                    String txtD10 = Arrays.toString(ArrayResult.get(i));
+                    txtD10 = txtD10.replace("[", "").replace("]", "").replace(" 00:00:00.0", "");
+                    String[] parts10 = txtD10.split(",");
+                    String parts11 = parts10[2].trim();
+                    XSSFRichTextString textoD10 = new XSSFRichTextString(parts11);
+                    celdaD10.setCellValue(textoD10);
+
+                    XSSFCell celdaD2 = filaEE2.createCell(2);//COLUMNA
+                    celdaD2.setCellStyle(estiloCeldabordes0);
+                    celdaD2.setCellType(CellType.STRING);
+                    String txtD2 = "El ID_PERSONA_LEGISLADORA (P1_6A_3-A) de la tabla iniciativas_extension YA EXISTE en la tabla iniciativas. Favor de revisar la duplicidad para los ID que se indican";
+                    XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
+                    celdaD2.setCellValue(textoD2);
+
+                    XSSFCell celdaD3 = filaEE2.createCell(3);//COLUMNA
+                    celdaD3.setCellStyle(estiloCeldabordes0);
+                    celdaD3.setCellType(CellType.STRING);
+                    String txtD3 = Arrays.toString(ArrayResult.get(i));
+                    txtD3 = txtD3.replace("[", "").replace("]", "").replace(" 00:00:00.0", "");
+                    String[] parts3 = txtD3.split(",");
+                    String parts4 = parts3[0].trim();
+                    XSSFRichTextString textoD3 = new XSSFRichTextString(parts4);
+                    celdaD3.setCellValue(textoD3);
+
+                    XSSFCell celdaD4 = filaEE2.createCell(4);//COLUMNA
+                    celdaD4.setCellStyle(estiloCeldabordes0);
+                    celdaD4.setCellType(CellType.STRING);
+                    String txtD4 = "";
+                    XSSFRichTextString textoD4 = new XSSFRichTextString(txtD4);
+                    celdaD4.setCellValue(textoD4);
+
+                    coni++;
+                }
+                conEnc = conEnc + coni;
+                conDat = conDat + coni;
+                coni = 1;
+            }
+
+            ArrayResult = ini_urg_ext.PERSONA_ESPACIO_DISPONIBLE(entidad, legislatura, envio);
+            if (ArrayResult.size() > 0) {
+                XSSFRow filaEE1 = hojaUrgente_obvia_extension.createRow(conEnc);//FILA
+                XSSFCell celdaE1 = filaEE1.createCell(0);//COLUMNA
+                celdaE1.setCellStyle(estiloCelda1);
+                celdaE1.setCellType(CellType.STRING);
+                String txtE1 = "Número_iniciativa_extension";
+                XSSFRichTextString textoE1 = new XSSFRichTextString(txtE1);
+                celdaE1.setCellValue(textoE1);
+
+                XSSFCell celdaE2 = filaEE1.createCell(1);//COLUMNA
+                celdaE2.setCellStyle(estiloCelda1);
+                celdaE2.setCellType(CellType.STRING);
+                String txtE2 = "ID_Iniciativa_urgente_extension";
+                XSSFRichTextString textoE2 = new XSSFRichTextString(txtE2);
+                celdaE2.setCellValue(textoE2);
+
+                XSSFCell celdaE3 = filaEE1.createCell(2);//COLUMNA
+                celdaE3.setCellStyle(estiloCelda1);
+                celdaE3.setCellType(CellType.STRING);
+                String txtE3 = "OBSERVACIONES";
+                XSSFRichTextString textoE3 = new XSSFRichTextString(txtE3);
+                celdaE3.setCellValue(textoE3);
+
+                XSSFCell celdaE7 = filaEE1.createCell(3);//COLUMNA
+                celdaE7.setCellStyle(estiloCelda1);
+                celdaE7.setCellType(CellType.STRING);
+                String txtE7 = "ID_ENTIDAD";
+                XSSFRichTextString textoE7 = new XSSFRichTextString(txtE7);
+                celdaE7.setCellValue(textoE7);
+
+                XSSFCell celdaE8 = filaEE1.createCell(4);//COLUMNA
+                celdaE8.setCellStyle(estiloCelda1);
+                celdaE8.setCellType(CellType.STRING);
+                String txtE8 = "JUSTIFICACION";
+                XSSFRichTextString textoE8 = new XSSFRichTextString(txtE8);
+                celdaE8.setCellValue(textoE8);
+
+                for (int i = 0; i < ArrayResult.size(); i++) {
+                    XSSFRow filaEE2 = hojaUrgente_obvia_extension.createRow(conDat + i);
+
+                    XSSFCell celdaD1 = filaEE2.createCell(0);//COLUMNA
+                    celdaD1.setCellStyle(estiloCeldabordes0);
+                    celdaD1.setCellType(CellType.STRING);
+                    //String txtD1 = Arrays.toString(ArrayResult.get(i));
+                    String txtD1 = Arrays.toString(ArrayResult.get(i));
+                    txtD1 = txtD1.replace("[", "").replace("]", "").replace(" 00:00:00.0", "");
+                    String[] parts = txtD1.split(",");
+                    String parts1 = parts[0].trim();
+                    XSSFRichTextString textoD1 = new XSSFRichTextString(parts1);
+                    celdaD1.setCellValue(textoD1);
+
+                    XSSFCell celdaD10 = filaEE2.createCell(1);//COLUMNA
+                    celdaD10.setCellStyle(estiloCeldabordes0);
+                    celdaD10.setCellType(CellType.STRING);
+                    //String txtD1 = Arrays.toString(ArrayResult.get(i));
+                    String txtD10 = Arrays.toString(ArrayResult.get(i));
+                    txtD10 = txtD10.replace("[", "").replace("]", "").replace(" 00:00:00.0", "");
+                    String[] parts10 = txtD10.split(",");
+                    String parts11 = parts10[1].trim();
+                  XSSFRichTextString textoD10 = new XSSFRichTextString(parts11);
+                    celdaD10.setCellValue(textoD10);
+
+                    XSSFCell celdaD2 = filaEE2.createCell(2);//COLUMNA
+                    celdaD2.setCellStyle(estiloCeldabordes0);
+                    celdaD2.setCellType(CellType.STRING);
+                    String txtD2 = "Aún hay espacio en la tabla iniciativas_urgente_obvia para anotar personas_legisladoras_promoventes_iniciativa_urgente_obvia. Favor de eliminar los registros de la tabla de extensión y completar los espacios vacíos de personas_legisladoras_promoventes_iniciativa_urgente_obvia para el ID de iniciativa_urgente que se indica";
+                    XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
+                    celdaD2.setCellValue(textoD2);
+
+                    XSSFCell celdaD3 = filaEE2.createCell(3);//COLUMNA
+                    celdaD3.setCellStyle(estiloCeldabordes0);
+                    celdaD3.setCellType(CellType.STRING);
+                    String txtD3 = Arrays.toString(ArrayResult.get(i));
+                    txtD3 = txtD3.replace("[", "").replace("]", "").replace(" 00:00:00.0", "");
+                    String[] parts3 = txtD3.split(",");
+                    String parts4 = parts3[2].trim();
+                    XSSFRichTextString textoD3 = new XSSFRichTextString(parts4);
+                    celdaD3.setCellValue(textoD3);
+
+                    XSSFCell celdaD4 = filaEE2.createCell(4);//COLUMNA
+                    celdaD4.setCellStyle(estiloCeldabordes0);
+                    celdaD4.setCellType(CellType.STRING);
+                    String txtD4 = "";
+                    XSSFRichTextString textoD4 = new XSSFRichTextString(txtD4);
+                    celdaD4.setCellValue(textoD4);
+
+                    coni++;
+                }
+                conEnc = conEnc + coni;
+                conDat = conDat + coni;
+                coni = 1;
+            }
+
+        }
+        progressBar.setValue(65);
+
+    }
+
+    
     public void Despliega_Juicios_Politicos(XSSFWorkbook libro, XSSFSheet hojaJuicios_politicos, XSSFCellStyle estiloCelda0, XSSFCellStyle estiloCelda1, XSSFCellStyle estiloCeldabordes0, String entidad, String legislatura, String envio, JProgressBar progressBar) throws SQLException {
 
         int conEnc = 1, conDat = 2, coni = 1;

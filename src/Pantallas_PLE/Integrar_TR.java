@@ -21,10 +21,13 @@ import mx.org.inegi.insert_TR.PLE.TR_ple_meds1_3;
 import mx.org.inegi.insert_TR.PLE.TR_ple_meds1_3A;
 import mx.org.inegi.insert_TR.PLE.TR_ple_meds1_4;
 import mx.org.inegi.insert_TR.PLE.TR_ple_meds1_5;
+import mx.org.inegi.insert_TR.PLE.TR_ple_meds1_5A;
 import mx.org.inegi.insert_TR.PLE.TR_ple_meds1_6;
+import mx.org.inegi.insert_TR.PLE.TR_ple_meds1_6A;
 import mx.org.inegi.insert_TR.PLE.TR_ple_meds1_7;
 import mx.org.inegi.insert_TR.PLE.TR_ple_meds1_8;
 import mx.org.inegi.insert_TR.PLE.TR_ple_meds1_9;
+import mx.org.inegi.insert_TR.PLE.TR_ple_meds1_9A;
 
 /**
  *
@@ -336,10 +339,13 @@ public class Integrar_TR extends javax.swing.JFrame {
         TR_ple_meds1_3A TR3A= new TR_ple_meds1_3A();
         TR_ple_meds1_4 TR4= new TR_ple_meds1_4();
         TR_ple_meds1_5 TR5= new TR_ple_meds1_5();
+        TR_ple_meds1_5A TR5A= new TR_ple_meds1_5A();
         TR_ple_meds1_6 TR6= new TR_ple_meds1_6();
+        TR_ple_meds1_6A TR6A= new TR_ple_meds1_6A();
         TR_ple_meds1_7 TR7= new TR_ple_meds1_7();
         TR_ple_meds1_8 TR8= new TR_ple_meds1_8();
         TR_ple_meds1_9 TR9= new TR_ple_meds1_9();
+        TR_ple_meds1_9A TR9A= new TR_ple_meds1_9A();
         BarraInsert Barra=new BarraInsert();
         
         new Thread(() -> {
@@ -394,8 +400,16 @@ public class Integrar_TR extends javax.swing.JFrame {
                             TR5.TR_ple_meds1_5(Entidad, Legislatura, Envio);
                             JOptionPane.showMessageDialog(null, "Informacion insertada,favor de revisar pantalla errores de insert");
                         }
+                        if (Procedure.equals("TR_PLE_MEDS1_5A")){
+                            TR5A.TR_ple_meds1_5A(Entidad, Legislatura, Envio);
+                            JOptionPane.showMessageDialog(null, "Informacion insertada,favor de revisar pantalla errores de insert");
+                        }
                         if (Procedure.equals("TR_PLE_MEDS1_6")){
                             TR6.TR_ple_meds1_6(Entidad, Legislatura, Envio);
+                            JOptionPane.showMessageDialog(null, "Informacion insertada,favor de revisar pantalla errores de insert");
+                        }
+                        if (Procedure.equals("TR_PLE_MEDS1_6A")){
+                            TR6A.TR_ple_meds1_6A(Entidad, Legislatura, Envio);
                             JOptionPane.showMessageDialog(null, "Informacion insertada,favor de revisar pantalla errores de insert");
                         }
                         if (Procedure.equals("TR_PLE_MEDS1_7")){
@@ -410,6 +424,10 @@ public class Integrar_TR extends javax.swing.JFrame {
                             TR9.TR_ple_meds1_9(Entidad, Legislatura, Envio);
                             JOptionPane.showMessageDialog(null, "Informacion insertada,favor de revisar pantalla errores de insert");
                         }            
+                        if (Procedure.equals("TR_PLE_MEDS1_9A")){
+                            TR9A.TR_ple_meds1_9A(Entidad, Legislatura, Envio);
+                            JOptionPane.showMessageDialog(null, "Informacion insertada,favor de revisar pantalla errores de insert");
+                        }
                         Barra.setVisible(false);
                         EnableTrue();
                     } catch (Exception ex) {

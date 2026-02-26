@@ -109,9 +109,9 @@ public ArrayList PERSONA_REPETIDA(String ID_entidad,String Legislatura,String En
       try {
           while (resul.next()) {
               Array.add(new String[]{
-                 resul.getString("Numero_iniciativa_extension"),
-                 resul.getString("ID_Iniciativa_extension")
-                });
+                 resul.getString("ID_ENTIDAD"),
+                  resul.getString("Numero_iniciativa_extension"),
+                  resul.getString("ID_Iniciativa_extension")});
           }
       conexion.close();
      } catch (SQLException ex) {

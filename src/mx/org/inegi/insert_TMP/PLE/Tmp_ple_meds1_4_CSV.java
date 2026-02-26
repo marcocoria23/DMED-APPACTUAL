@@ -228,7 +228,7 @@ public class Tmp_ple_meds1_4_CSV {
                 JOptionPane.showMessageDialog(null, "El archivo de la pestaña “Personal de apoyo” no está en formato UTF-8." + Ruta);
             }
         } catch (IOException e) {
-            JOptionPane.showMessageDialog(null, "Fallo al leer el archivo “Personal de apoyo”" + e);
+            JOptionPane.showMessageDialog(null, "Falló al leer el archivo “Personal de apoyo”" + e);
             e.printStackTrace();
         }
     }
