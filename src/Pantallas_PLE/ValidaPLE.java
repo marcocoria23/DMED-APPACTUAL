@@ -312,29 +312,48 @@ public class ValidaPLE extends javax.swing.JFrame {
         }
     }
 
-    public void llenaCombo() {
-        QGEN dat = new QGEN();
-        TEnvio.removeAllItems();
-        TEnvio_anterior.removeAllItems();
-        ArrayEnvio = dat.Envios(CEntidad.getSelectedItem().toString().trim(), CLegislatura.getSelectedItem().toString());
-        int maximo = Integer.MIN_VALUE;
-        for (String[] item : ArrayEnvio) {
-            String valorStr = Arrays.toString(item).replace("[", "").replace("]", "").trim();
-            TEnvio.addItem(valorStr);
-            TEnvio_anterior.addItem(valorStr);
-            int valor = Integer.parseInt(valorStr);
-            if (valor > maximo) {
-                maximo = valor;
-            }
-        }
-        // Si hay valores
-        if (maximo != Integer.MIN_VALUE) {
-            // Envío = el más grande
-            TEnvio.setSelectedItem(String.valueOf(maximo));
-            // Envío anterior = el inmediato menor
-            TEnvio_anterior.setSelectedItem(String.valueOf(maximo - 1));
+  public void llenaCombo() {
+    QGEN dat = new QGEN();
+    TEnvio.removeAllItems();
+    TEnvio_anterior.removeAllItems();
+
+    ArrayEnvio = dat.Envios(
+            CEntidad.getSelectedItem().toString().trim(),
+            CLegislatura.getSelectedItem().toString()
+    );
+
+    float maximo = Float.MIN_VALUE;
+    float anterior = Float.MIN_VALUE;
+
+    for (String[] item : ArrayEnvio) {
+
+        String valorStr = Arrays.toString(item)
+                .replace("[", "")
+                .replace("]", "")
+                .trim();
+
+        TEnvio.addItem(valorStr);
+        TEnvio_anterior.addItem(valorStr);
+
+        float valor = Float.parseFloat(valorStr);
+
+        if (valor > maximo) {
+            anterior = maximo;
+            maximo = valor;
+        } else if (valor > anterior && valor != maximo) {
+            anterior = valor;
         }
     }
+
+    // Si hay valores
+    if (maximo != Float.MIN_VALUE) {
+        TEnvio.setSelectedItem(String.valueOf(maximo));
+    }
+
+    if (anterior != Float.MIN_VALUE) {
+        TEnvio_anterior.setSelectedItem(String.valueOf(anterior));
+    }
+}
 
     private void TEnvioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TEnvioActionPerformed
         // TODO add your handling code here:
