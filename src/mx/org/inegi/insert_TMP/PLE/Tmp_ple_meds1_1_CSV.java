@@ -44,7 +44,17 @@ public class Tmp_ple_meds1_1_CSV {
     public static String rutaCarpetaArchivos = "";
     DaoConexion conexion = new DaoConexion();
     Conver_Utf8 conUTF8 = new Conver_Utf8();
-
+    public String año;
+  
+  public int getAño(){
+     System.out.println("año en get: '" + año + "'");
+    if (año == null) return 0;
+    año = año.trim();
+    if (año.equals("Primer año")) return 1;
+    if (año.equals("Segundo año")) return 2;
+    if (año.equals("Tercer año")) return 3;
+    return 0;
+}
     public void Meds1_1_CSV(String Ruta, String Entidad, String Envio, String Legislatura, String Estatus) throws Exception {
         ArrayList<String[]> Array;
         Array = new ArrayList();
@@ -188,18 +198,18 @@ public class Tmp_ple_meds1_1_CSV {
 
                         for (int i = 0; i < ad.size(); i++) {
                             BeanTMP_PLE_MEDS1_1 x = ad.get(i);
-
+                            año=x.GetP1_1_7();
                             System.out.println("[" + i + "] "
                                     + "ENTIDAD=" + x.GetENTIDAD_TMP()
-                                    + ", P1_1_1=" + x.GetP1_1_1()
-                                    + ", P1_1_2=" + x.GetP1_1_2()
-                                    + ", P1_1_3=" + x.GetP1_1_3()
-                                    + ", P1_1_4=" + x.GetP1_1_4()
-                                    + ", P1_1_5=" + x.GetP1_1_5()
-                                    + ", P1_1_6=" + x.GetP1_1_6()
-                                    + ", P1_1_7=" + x.GetP1_1_7()
-                                    + ", P1_1_8=" + x.GetP1_1_8()
-                                    + ", P1_1_9=" + x.GetP1_1_9()
+                                    + ", Numero de legislatura (P1_1_1)=" + x.GetP1_1_1()
+                                    + ", Nombre Legislatura (P1_1_2)=" + x.GetP1_1_2()
+                                    + ", Inicio Legislatura(P1_1_3)=" + x.GetP1_1_3()
+                                    + ", Fin Legislatura(P1_1_4)=" + x.GetP1_1_4()
+                                    + ", Uninominales (P1_1_5)=" + x.GetP1_1_5()
+                                    + ", Plurinominales (P1_1_6)=" + x.GetP1_1_6()
+                                    + ", Año (P1_1_7)=" + x.GetP1_1_7()
+                                    + ", Inicio periodo(P1_1_8)=" + x.GetP1_1_8()
+                                    + ", Fin periodo (P1_1_9)=" + x.GetP1_1_9()
                                     + ", ESTATUS=" + x.GetESTATUS()
                             );
                         }
@@ -212,12 +222,11 @@ public class Tmp_ple_meds1_1_CSV {
 
                             System.out.println("[" + i + "] "
                                     + "ENTIDAD=" + x.GetENTIDAD()
-                                    + ", C1_1A=" + x.GetC1_1A()
-                                    + ", P1_1A_1=" + x.GetP1_1A_1()
-                                    + ", P1_1A_2=" + x.GetP1_1A_2()
-                                    + ", P1_1A_3=" + x.GetP1_1A_3()
-                                    + ", P1_1A_4=" + x.GetP1_1A_4()
-                            );
+                                    + ", Periodo (Reportado C1_1A)=" + x.GetC1_1A()
+                                    + ", Selección (P1_1A_1)=" + x.GetP1_1A_1()
+                                    + ", fecha inicio periodo (P1_1A_2)=" + x.GetP1_1A_2()
+                                    + ", fecha fin periodo (P1_1A_3)=" + x.GetP1_1A_3()
+                                    + ", sesiones celebradas (P1_1A_4)=" + x.GetP1_1A_4());
                         }
                         System.out.println("===== CONTENIDO ad2 (BeanTMP_PLE_MEDS1_1B) =====");
                         System.out.println("Total en ad2: " + ad2.size());

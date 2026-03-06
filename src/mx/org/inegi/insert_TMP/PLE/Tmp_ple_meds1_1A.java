@@ -24,6 +24,8 @@ import oracle.sql.StructDescriptor;
  * @author ANTONIO.CORIA
  */
 public class Tmp_ple_meds1_1A {
+    
+    
 
     public void in_Tmp_ple_meds1_1A(String Entidad, String Envio, String Legislatura) throws Exception {
 

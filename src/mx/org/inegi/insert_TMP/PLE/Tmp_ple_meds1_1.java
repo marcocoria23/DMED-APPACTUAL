@@ -25,7 +25,18 @@ import oracle.sql.StructDescriptor;
  * @author ANTONIO.CORIA
  */
 public class Tmp_ple_meds1_1 {
-
+  public String año;
+  
+  public int getAño(){
+     System.out.println("año en get: '" + año + "'");
+    if (año == null) return 0;
+    año = año.trim();
+    if (año.equals("Primer año")) return 1;
+    if (año.equals("Segundo año")) return 2;
+    if (año.equals("Tercer año")) return 3;
+    return 0;
+}
+  
     public void In_Tmp_ple_meds1_1(String Entidad, String Envio, String Legislatura, String Estatus) throws Exception {
 
         ARRAY array_to_pass;
@@ -64,39 +75,35 @@ public class Tmp_ple_meds1_1 {
 
             //imprimir
             for (BeanTMP_PLE_MEDS1_1 elemento : ad) {
+                año=elemento.GetP1_1_7(); //Guardar año
                 System.out.println("ID_ENTIDAD_TMP: " + elemento.GetID_ENTIDAD_TMP());
-                System.out.println("P1_1_1: " + elemento.GetP1_1_1());
-                System.out.println("P1_1_2: " + elemento.GetP1_1_2());
-                System.out.println("P1_1_3: " + elemento.GetP1_1_3());
-                System.out.println("P1_1_4: " + elemento.GetP1_1_4());
-                System.out.println("P1_1_5: " + elemento.GetP1_1_5());
-                System.out.println("P1_1_6: " + elemento.GetP1_1_6());
-                System.out.println("P1_1_7: " + elemento.GetP1_1_7());
-                System.out.println("P1_1_8: " + elemento.GetP1_1_8());
-                System.out.println("P1_1_9: " + elemento.GetP1_1_9());
+                System.out.println("Legislatura(P1_1_1): " + elemento.GetP1_1_1());
+                System.out.println("Nombre Legislatura(P1_1_2): " + elemento.GetP1_1_2());
+                System.out.println("Inicio Legislatura(P1_1_3): " + elemento.GetP1_1_3());
+                System.out.println("Fin Legislatura(P1_1_4): " + elemento.GetP1_1_4());
+                System.out.println("Uninominales(P1_1_5): " + elemento.GetP1_1_5());
+                System.out.println("Plurinominales(P1_1_6): " + elemento.GetP1_1_6());
+                System.out.println("Año(P1_1_7): " + elemento.GetP1_1_7());
+                System.out.println("Inicio periodo(P1_1_8): " + elemento.GetP1_1_8());
+                System.out.println("Fin periodo(P1_1_9): " + elemento.GetP1_1_9());
                 System.out.println("---------------------------------------");
             }
 
             sd = StructDescriptor.createDescriptor("OBJ_TMP_PLE_MEDS1_1", con);
             structs = new STRUCT[ad.size()];
-            System.out.println("entro 1");
-            System.out.println("tamaño " + ad.size());
+            System.out.println("Tamaño " + ad.size());
             for (int i = 0; i < ad.size(); i++) {
                 structs[i] = new STRUCT(sd, con, ad.get(i).toArray());
             }
-            System.out.println("entro 2");
+            System.out.println("Crear descriptor 1_1");
             descriptor = ArrayDescriptor.createDescriptor("ARR_OBJ_TMP_PLE_MEDS1_1", con);
-            System.out.println("entro 3");
             array_to_pass = new ARRAY(descriptor, con, structs);
-            System.out.println("entro 4");
+            System.out.println("Se llamó a paquete integrador TMP");
             st = con.prepareCall("{? = call(PKG_INTEGRADORXLSM.TMP_PLE_MEDS1_1(?))}");
-            System.out.println("entro 5");
             st.registerOutParameter(1, OracleTypes.INTEGER);
-            System.out.println("entro 6");
             st.setArray(2, array_to_pass);
-            System.out.println("entro 7");
+            System.out.println("Ejecutar statement");
             st.execute();
-            System.out.println("entro 8");
             // JOptionPane.showMessageDialog(null, "Registros insertados en tabla TMP_PLE_MEDS1_1, Favor de revisar pantalla Erores de insert");
         } finally {
             try {
@@ -104,7 +111,7 @@ public class Tmp_ple_meds1_1 {
                 structs = null;
                 descriptor = null;
                 if (con != null) {
-                    System.out.println("cierraaa");
+                    System.out.println("cerrar conexión 1_1");
                     // JOptionPane.showMessageDialog(null, "CONEXION CERRADA!!-TMP_PLE_MEDS1_1");
                     con.close();
                     con = null;

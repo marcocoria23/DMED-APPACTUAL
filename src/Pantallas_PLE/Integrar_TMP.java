@@ -7,6 +7,8 @@ package Pantallas_PLE;
 
 import java.awt.FileDialog;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -34,6 +36,10 @@ import mx.org.inegi.insert_TMP.PLE.Tmp_ple_meds1_6;
 import mx.org.inegi.insert_TMP.PLE.Tmp_ple_meds1_7;
 import mx.org.inegi.insert_TMP.PLE.Tmp_ple_meds1_8;
 import mx.org.inegi.insert_TMP.PLE.Tmp_ple_meds1_9;
+import mx.org.inegi.insert_TMP.PLE.valida_info_correcta_Generales.*;
+import mx.org.inegi.insert_TMP.PLE.Periodo;
+import mx.org.inegi.insert_TMP.PLE.valida_info_correcta_Generales;
+
 
 /**
  *
@@ -43,14 +49,20 @@ public class Integrar_TMP extends javax.swing.JFrame {
 
     public static String RutaAr = "", Entidad = "", Envio = "", Legislatura = "", Procedure = "";
     public static boolean ventanaAbierta = false;
-    String Estatus = "", directorio = "";
+    public static String Estatus = "", directorio = "";
 
     /**
      * Creates new form Integrar_TMP
      */
     public Integrar_TMP() {
-        initComponents();
-        this.setLocationRelativeTo(null);
+    initComponents();
+    this.setLocationRelativeTo(null);
+
+    CAño.removeAllItems(); // opcional, limpia el combo
+
+    CAño.addItem(new ItemCombo("Primer año", 1));
+    CAño.addItem(new ItemCombo("Segundo año", 2));
+    CAño.addItem(new ItemCombo("Tercer año", 3));
     }
 
     /**
@@ -66,8 +78,8 @@ public class Integrar_TMP extends javax.swing.JFrame {
         buttonGroup1 = new javax.swing.ButtonGroup();
         buttonGroup2 = new javax.swing.ButtonGroup();
         Panel_PLE_ENCABEZADO = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
+        Label_Logo = new javax.swing.JLabel();
+        Panel_Verde = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         Panel_PLE_insertarTMP = new javax.swing.JPanel();
         RutaArchivo = new javax.swing.JTextField();
@@ -80,7 +92,6 @@ public class Integrar_TMP extends javax.swing.JFrame {
         Label_envio = new javax.swing.JLabel();
         Label_Legislatura = new javax.swing.JLabel();
         TLegislatura = new javax.swing.JTextField();
-        TEnvio = new javax.swing.JTextField();
         ProgressBar_PLE_TMP = new javax.swing.JProgressBar();
         Label_Progressline = new javax.swing.JLabel();
         Combobox_proceso = new javax.swing.JComboBox();
@@ -89,8 +100,18 @@ public class Integrar_TMP extends javax.swing.JFrame {
         Label_Estatus = new javax.swing.JLabel();
         CEstatus = new javax.swing.JComboBox();
         RadioButtonCsv = new javax.swing.JRadioButton();
-        ButtonXlsx = new javax.swing.JRadioButton();
+        RadioButtonXlsx = new javax.swing.JRadioButton();
         Label_formatoarchivo = new javax.swing.JLabel();
+        Label_Periodo = new javax.swing.JLabel();
+        TEnvio = new javax.swing.JTextField();
+        CheckBox_1PO = new javax.swing.JCheckBox();
+        Label_Year = new javax.swing.JLabel();
+        CAño = new javax.swing.JComboBox();
+        CheckBox_1PR = new javax.swing.JCheckBox();
+        CheckBox_2PO = new javax.swing.JCheckBox();
+        CheckBox_3PR = new javax.swing.JCheckBox();
+        CheckBox_2PR = new javax.swing.JCheckBox();
+        CheckBox_3PO = new javax.swing.JCheckBox();
 
         javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
         jDialog1.getContentPane().setLayout(jDialog1Layout);
@@ -114,18 +135,18 @@ public class Integrar_TMP extends javax.swing.JFrame {
 
         Panel_PLE_ENCABEZADO.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Logo CNG.png"))); // NOI18N
+        Label_Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Logo CNG.png"))); // NOI18N
 
-        jPanel2.setBackground(new java.awt.Color(0, 153, 51));
+        Panel_Verde.setBackground(new java.awt.Color(0, 153, 51));
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout Panel_VerdeLayout = new javax.swing.GroupLayout(Panel_Verde);
+        Panel_Verde.setLayout(Panel_VerdeLayout);
+        Panel_VerdeLayout.setHorizontalGroup(
+            Panel_VerdeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        Panel_VerdeLayout.setVerticalGroup(
+            Panel_VerdeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 11, Short.MAX_VALUE)
         );
 
@@ -137,12 +158,12 @@ public class Integrar_TMP extends javax.swing.JFrame {
         Panel_PLE_ENCABEZADO.setLayout(Panel_PLE_ENCABEZADOLayout);
         Panel_PLE_ENCABEZADOLayout.setHorizontalGroup(
             Panel_PLE_ENCABEZADOLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(Panel_Verde, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_PLE_ENCABEZADOLayout.createSequentialGroup()
-                .addContainerGap(252, Short.MAX_VALUE)
+                .addContainerGap(295, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Label_Logo, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28))
         );
         Panel_PLE_ENCABEZADOLayout.setVerticalGroup(
@@ -150,15 +171,21 @@ public class Integrar_TMP extends javax.swing.JFrame {
             .addGroup(Panel_PLE_ENCABEZADOLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(Panel_PLE_ENCABEZADOLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Label_Logo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(Panel_PLE_ENCABEZADOLayout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(17, 17, 17)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(Panel_Verde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         Panel_PLE_insertarTMP.setBackground(new java.awt.Color(255, 255, 255));
+
+        RutaArchivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RutaArchivoActionPerformed(evt);
+            }
+        });
 
         boton_ruta.setText("....");
         boton_ruta.setToolTipText("Seleccionar Archivo");
@@ -187,6 +214,11 @@ public class Integrar_TMP extends javax.swing.JFrame {
         });
 
         CEntidad.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32" }));
+        CEntidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CEntidadActionPerformed(evt);
+            }
+        });
 
         Label_entidad.setText("Entidad:");
 
@@ -218,15 +250,67 @@ public class Integrar_TMP extends javax.swing.JFrame {
             }
         });
 
-        buttonGroup1.add(ButtonXlsx);
-        ButtonXlsx.setText("XLSX");
-        ButtonXlsx.addActionListener(new java.awt.event.ActionListener() {
+        buttonGroup1.add(RadioButtonXlsx);
+        RadioButtonXlsx.setText("XLSX");
+        RadioButtonXlsx.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ButtonXlsxActionPerformed(evt);
+                RadioButtonXlsxActionPerformed(evt);
             }
         });
 
         Label_formatoarchivo.setText("Formato de Archivo:");
+
+        Label_Periodo.setText("Periodo(s):");
+
+        CheckBox_1PO.setText("1PO");
+        CheckBox_1PO.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CheckBox_1POActionPerformed(evt);
+            }
+        });
+
+        Label_Year.setText("Año:");
+
+        CAño.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CAñoActionPerformed(evt);
+            }
+        });
+
+        CheckBox_1PR.setText("1PR");
+        CheckBox_1PR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CheckBox_1PRActionPerformed(evt);
+            }
+        });
+
+        CheckBox_2PO.setText("2PO");
+        CheckBox_2PO.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CheckBox_2POActionPerformed(evt);
+            }
+        });
+
+        CheckBox_3PR.setText("3PR");
+        CheckBox_3PR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CheckBox_3PRActionPerformed(evt);
+            }
+        });
+
+        CheckBox_2PR.setText("2PR");
+        CheckBox_2PR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CheckBox_2PRActionPerformed(evt);
+            }
+        });
+
+        CheckBox_3PO.setText("3PO");
+        CheckBox_3PO.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CheckBox_3POActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout Panel_PLE_insertarTMPLayout = new javax.swing.GroupLayout(Panel_PLE_insertarTMP);
         Panel_PLE_insertarTMP.setLayout(Panel_PLE_insertarTMPLayout);
@@ -235,44 +319,9 @@ public class Integrar_TMP extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_PLE_insertarTMPLayout.createSequentialGroup()
                 .addGroup(Panel_PLE_insertarTMPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(Panel_PLE_insertarTMPLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(Boton_insertar))
-                    .addGroup(Panel_PLE_insertarTMPLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(Panel_PLE_insertarTMPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_PLE_insertarTMPLayout.createSequentialGroup()
-                                .addComponent(ProgressBar_PLE_TMP, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 31, Short.MAX_VALUE))
-                            .addGroup(Panel_PLE_insertarTMPLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 438, Short.MAX_VALUE)
-                                .addComponent(boton_ruta)
-                                .addGap(62, 62, 62))
-                            .addGroup(Panel_PLE_insertarTMPLayout.createSequentialGroup()
-                                .addGap(0, 94, Short.MAX_VALUE)
-                                .addGroup(Panel_PLE_insertarTMPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(Panel_PLE_insertarTMPLayout.createSequentialGroup()
-                                        .addGap(6, 6, 6)
-                                        .addComponent(Label_Estatus)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(CEstatus, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(Label_formatoarchivo)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(RadioButtonCsv)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(ButtonXlsx))
-                                    .addComponent(Label_RutaArchivo)
-                                    .addGroup(Panel_PLE_insertarTMPLayout.createSequentialGroup()
-                                        .addGap(61, 61, 61)
-                                        .addComponent(RutaArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, 396, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(Label_Procedure))
-                                .addGap(45, 45, 45))))
-                    .addGroup(Panel_PLE_insertarTMPLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(Label_Progressline, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Progressline, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(ProgressBar_PLE_TMP, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 210, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, Panel_PLE_insertarTMPLayout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addGroup(Panel_PLE_insertarTMPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -292,55 +341,123 @@ public class Integrar_TMP extends javax.swing.JFrame {
                             .addComponent(TEnvio, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(Label_envio))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(botón_log_tabla, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(Panel_PLE_insertarTMPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(CAño, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Label_Year))
+                        .addGap(28, 28, 28)
+                        .addGroup(Panel_PLE_insertarTMPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(Panel_PLE_insertarTMPLayout.createSequentialGroup()
+                                .addGroup(Panel_PLE_insertarTMPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(Label_Periodo)
+                                    .addGroup(Panel_PLE_insertarTMPLayout.createSequentialGroup()
+                                        .addComponent(CheckBox_1PO)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(CheckBox_1PR)))
+                                .addGap(45, 45, 45)
+                                .addComponent(botón_log_tabla, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(Panel_PLE_insertarTMPLayout.createSequentialGroup()
+                                .addComponent(CheckBox_2PO)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(CheckBox_2PR))
+                            .addGroup(Panel_PLE_insertarTMPLayout.createSequentialGroup()
+                                .addComponent(CheckBox_3PO)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(CheckBox_3PR))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, Panel_PLE_insertarTMPLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(Label_Progressline, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(Panel_PLE_insertarTMPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(Panel_PLE_insertarTMPLayout.createSequentialGroup()
+                                .addComponent(Progressline, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(Boton_insertar))
+                            .addGroup(Panel_PLE_insertarTMPLayout.createSequentialGroup()
+                                .addGroup(Panel_PLE_insertarTMPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(Label_Procedure)
+                                    .addGroup(Panel_PLE_insertarTMPLayout.createSequentialGroup()
+                                        .addComponent(Label_Estatus)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(CEstatus, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(53, 53, 53)
+                                        .addComponent(Label_formatoarchivo)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(RadioButtonCsv)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(RadioButtonXlsx))
+                                    .addComponent(Label_RutaArchivo))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addGap(18, 18, 18))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_PLE_insertarTMPLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(Combobox_proceso, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(82, 82, 82))
+                .addGroup(Panel_PLE_insertarTMPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(RutaArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, 396, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(boton_ruta)
+                    .addComponent(Combobox_proceso, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(84, 84, 84))
         );
         Panel_PLE_insertarTMPLayout.setVerticalGroup(
             Panel_PLE_insertarTMPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Panel_PLE_insertarTMPLayout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addGroup(Panel_PLE_insertarTMPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(botón_log_tabla)
+                    .addGroup(Panel_PLE_insertarTMPLayout.createSequentialGroup()
+                        .addGroup(Panel_PLE_insertarTMPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(botón_log_tabla)
+                            .addGroup(Panel_PLE_insertarTMPLayout.createSequentialGroup()
+                                .addGroup(Panel_PLE_insertarTMPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(Panel_PLE_insertarTMPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(Label_Legislatura, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(Label_entidad, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(Panel_PLE_insertarTMPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(Label_Year)
+                                        .addComponent(Label_Periodo, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(Panel_PLE_insertarTMPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(TLegislatura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(CEntidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(TEnvio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(CAño, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(CheckBox_1PO)
+                                    .addComponent(CheckBox_1PR))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(Panel_PLE_insertarTMPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(CheckBox_2PO)
+                            .addComponent(CheckBox_2PR))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(Panel_PLE_insertarTMPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(CheckBox_3PO)
+                            .addComponent(CheckBox_3PR))
+                        .addGap(29, 29, 29)
+                        .addComponent(Label_RutaArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
                     .addGroup(Panel_PLE_insertarTMPLayout.createSequentialGroup()
                         .addComponent(Label_envio, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(TEnvio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(Panel_PLE_insertarTMPLayout.createSequentialGroup()
-                        .addGroup(Panel_PLE_insertarTMPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Label_Legislatura, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Label_entidad, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(Panel_PLE_insertarTMPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(TLegislatura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(CEntidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(47, 47, 47)
-                .addComponent(Label_RutaArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(135, 135, 135)))
                 .addComponent(RutaArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(boton_ruta)
-                .addGap(21, 21, 21)
+                .addGap(29, 29, 29)
                 .addGroup(Panel_PLE_insertarTMPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Label_Estatus, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(CEstatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Label_formatoarchivo)
                     .addComponent(RadioButtonCsv)
-                    .addComponent(ButtonXlsx)
-                    .addComponent(Label_formatoarchivo))
-                .addGap(21, 21, 21)
+                    .addComponent(RadioButtonXlsx))
+                .addGap(27, 27, 27)
                 .addComponent(Label_Procedure, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Combobox_proceso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50)
-                .addComponent(Boton_insertar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(13, 13, 13)
                 .addGroup(Panel_PLE_insertarTMPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Label_Progressline)
-                    .addComponent(Progressline, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(7, 7, 7)
+                    .addGroup(Panel_PLE_insertarTMPLayout.createSequentialGroup()
+                        .addGap(52, 52, 52)
+                        .addGroup(Panel_PLE_insertarTMPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Label_Progressline)
+                            .addComponent(Progressline, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(7, 7, 7))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_PLE_insertarTMPLayout.createSequentialGroup()
+                        .addComponent(Boton_insertar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)))
                 .addComponent(ProgressBar_PLE_TMP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -350,14 +467,18 @@ public class Integrar_TMP extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(Panel_PLE_ENCABEZADO, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(Panel_PLE_insertarTMP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(Panel_PLE_insertarTMP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(Panel_PLE_ENCABEZADO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Panel_PLE_insertarTMP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(Panel_PLE_insertarTMP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -404,22 +525,31 @@ public class Integrar_TMP extends javax.swing.JFrame {
 
 
     private void Button_Insertar(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_Insertar
-        Valores();//asigna valores a a entidad, legislatura y envío.
         String TABLA_SELECCIONADA = Combobox_proceso.getSelectedItem().toString();
+        List<Periodo> listaPeriodos = new ArrayList<>();         
+        ItemCombo seleccionado = (ItemCombo) CAño.getSelectedItem();
+        int año_seleccionado = seleccionado.getValor();
+        Valores();//asigna valores a a entidad, legislatura y envío.
         System.out.println("RUTA: " + RutaAr);
-
+    if (CheckBox_1PO.isSelected()) listaPeriodos.add(Periodo.PRIMER_ORDINARIO);
+    if (CheckBox_1PR.isSelected()) listaPeriodos.add(Periodo.PRIMER_RECESO);
+    if (CheckBox_2PO.isSelected()) listaPeriodos.add(Periodo.SEGUNDO_ORDINARIO);
+    if (CheckBox_2PR.isSelected()) listaPeriodos.add(Periodo.SEGUNDO_RECESO);
+    if (CheckBox_3PO.isSelected()) listaPeriodos.add(Periodo.TERCER_ORDINARIO);
+    if (CheckBox_3PR.isSelected()) listaPeriodos.add(Periodo.TERCER_RECESO);
+       
+    if (listaPeriodos.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "Debe seleccionar al menos un periodo");
+        return;
+    }
+ 
         //Asegurar que se haya seleccionado formato de archivo
-        if (!RadioButtonCsv.isSelected() && !ButtonXlsx.isSelected()) {
+        if (!RadioButtonCsv.isSelected() && !RadioButtonXlsx.isSelected()) {
             //JOptionPane.showMessageDialog(null, "FAVOR DE SELECCIONAR EL FORMATO DEL ARCHIVO (CSV O XLSX).");
-            JOptionPane.showMessageDialog(
-                    null,
-                    "<html>FAVOR DE SELECCIONAR EL FORMATO DEL ARCHIVO (<b>CSV</b> O <b>XLSX</b>).</html>",
-                    "Formato requerido",
-                    JOptionPane.WARNING_MESSAGE
-            );
+            JOptionPane.showMessageDialog( null,"<html>FAVOR DE SELECCIONAR EL FORMATO DEL ARCHIVO (<b>CSV</b> O <b>XLSX</b>).</html>","Formato requerido",JOptionPane.WARNING_MESSAGE);
             return;
         }
-
+        
         // Validar ruta de archivo
         if (RutaArchivo.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Favor de seleccionar archivo");
@@ -459,6 +589,12 @@ public class Integrar_TMP extends javax.swing.JFrame {
 
                     if (RadioButtonCsv.isSelected()) {
                         System.out.println("botón csv");
+                         valida_info_correcta_Generales valida_gral = new  valida_info_correcta_Generales();                                               
+                         // Validar año y periodo int anioApp,List<Periodo> periodosApp,String rutaExcel,String tipo_archivo)
+                            if (!valida_gral.valida_info_correcta_Generales(año_seleccionado, listaPeriodos, RutaAr, "CSV")) {
+                               JOptionPane.showMessageDialog(null, "Año y/o periodo seleccionados no coinciden con los datos reportados en Excel");
+                               return;
+                           }
                         if (TABLA_SELECCIONADA.equals("ALL_TABLES")) {
                              EliminaTMP Elimina = new EliminaTMP();
                              Elimina.EliminaTMP(Entidad, Envio, Legislatura, "ALL_TABLES");
@@ -518,56 +654,38 @@ public class Integrar_TMP extends javax.swing.JFrame {
                                 switch (TABLA_SELECCIONADA) {
 
                                     case "TMP_PLE_MEDS1_1":
-                                        new Tmp_ple_meds1_1_CSV()
-                                                .Meds1_1_CSV(directorio + "BD_datos_generales.csv",
-                                                        Entidad, Envio, Legislatura, Estatus);
+                                        new Tmp_ple_meds1_1_CSV().Meds1_1_CSV(directorio + "BD_datos_generales.csv",Entidad, Envio, Legislatura, Estatus);
                                         break;
 
                                     case "TMP_PLE_MEDS1_2":
-                                        new Tmp_ple_meds1_2_CSV()
-                                                .Meds1_2_CSV(directorio + "BD_comisiones_legislativas.csv",
-                                                        Entidad, Envio, Legislatura, Estatus);
+                                        new Tmp_ple_meds1_2_CSV().Meds1_2_CSV(directorio + "BD_comisiones_legislativas.csv",Entidad, Envio, Legislatura, Estatus);
                                         break;
 
                                     case "TMP_PLE_MEDS1_3":
-                                        new Tmp_ple_meds1_3_CSV()
-                                                .Meds1_3_CSV(directorio + "BD_personas_legisladoras.csv",
-                                                        Entidad, Envio, Legislatura, Estatus);
+                                        new Tmp_ple_meds1_3_CSV().Meds1_3_CSV(directorio + "BD_personas_legisladoras.csv",Entidad, Envio, Legislatura, Estatus);
                                         break;
                                     case "TMP_PLE_MEDS1_4":
-                                        new Tmp_ple_meds1_4_CSV()
-                                                .Meds1_4_CSV(directorio + "BD_personal_apoyo.csv",
-                                                        Entidad, Envio, Legislatura, Estatus);
+                                        new Tmp_ple_meds1_4_CSV().Meds1_4_CSV(directorio + "BD_personal_apoyo.csv",Entidad, Envio, Legislatura, Estatus);
                                         break;
 
                                     case "TMP_PLE_MEDS1_5":
-                                        new Tmp_ple_meds1_5_CSV()
-                                                .Meds1_5_CSV(directorio + "BD_iniciativas.csv",
-                                                        Entidad, Envio, Legislatura, Estatus);
+                                        new Tmp_ple_meds1_5_CSV().Meds1_5_CSV(directorio + "BD_iniciativas.csv",Entidad, Envio, Legislatura, Estatus);
                                         break;
                                     
                                     case "TMP_PLE_MEDS1_6":
-                                        new Tmp_ple_meds1_6_CSV()
-                                                .Meds1_6_CSV(directorio + "BD_iniciativas_urgente_obvia.csv",
-                                                        Entidad, Envio, Legislatura, Estatus);
+                                        new Tmp_ple_meds1_6_CSV().Meds1_6_CSV(directorio + "BD_iniciativas_urgente_obvia.csv",Entidad, Envio, Legislatura, Estatus);
                                         break;
 
                                     case "TMP_PLE_MEDS1_7":
-                                        new Tmp_ple_meds1_7_CSV()
-                                                .Meds1_7_CSV(directorio + "BD_juicios_politicos.csv",
-                                                        Entidad, Envio, Legislatura, Estatus);
+                                        new Tmp_ple_meds1_7_CSV().Meds1_7_CSV(directorio + "BD_juicios_politicos.csv",Entidad, Envio, Legislatura, Estatus);
                                         break;
 
                                     case "TMP_PLE_MEDS1_8":
-                                        new Tmp_ple_meds1_8_CSV()
-                                                .Meds1_8_CSV(directorio + "BD_declaraciones_procedencias.csv",
-                                                        Entidad, Envio, Legislatura, Estatus);
+                                        new Tmp_ple_meds1_8_CSV().Meds1_8_CSV(directorio + "BD_declaraciones_procedencias.csv",Entidad, Envio, Legislatura, Estatus);
                                         break;
 
                                     case "TMP_PLE_MEDS1_9":
-                                        new Tmp_ple_meds1_9_CSV()
-                                                .Meds1_9_CSV(directorio + "BD_comparecencias.csv",
-                                                        Entidad, Envio, Legislatura, Estatus);
+                                        new Tmp_ple_meds1_9_CSV().Meds1_9_CSV(directorio + "BD_comparecencias.csv",Entidad, Envio, Legislatura, Estatus);
                                         break;
 
                                     default:
@@ -591,6 +709,14 @@ public class Integrar_TMP extends javax.swing.JFrame {
 
                     } else {
                         System.out.println("botón xlsx");
+                        valida_info_correcta_Generales valida_gral = new  valida_info_correcta_Generales();
+                        
+                        // Validar año y periodo int anioApp,List<Periodo> periodosApp,String rutaExcel,String tipo_archivo)
+                            if (!valida_gral.valida_info_correcta_Generales(año_seleccionado, listaPeriodos, RutaAr, "XLSX")) {
+                               JOptionPane.showMessageDialog(null, "Año y/o periodo seleccionados no coinciden con los datos reportados en Excel");
+                               return;
+                           }
+
                         EnableFalse();                       
                         Tmp_ple_meds1_1 ple_meds1_1 = new Tmp_ple_meds1_1();
                         Tmp_ple_meds1_1A ple_meds1_1A = new Tmp_ple_meds1_1A();
@@ -822,20 +948,55 @@ public class Integrar_TMP extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_RadioButtonCsvActionPerformed
 
-    private void ButtonXlsxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonXlsxActionPerformed
+    private void RadioButtonXlsxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RadioButtonXlsxActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_ButtonXlsxActionPerformed
+    }//GEN-LAST:event_RadioButtonXlsxActionPerformed
 
     private void Combobox_procesoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Combobox_procesoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_Combobox_procesoActionPerformed
 
+    private void RutaArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RutaArchivoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_RutaArchivoActionPerformed
+
+    private void CheckBox_1POActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CheckBox_1POActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CheckBox_1POActionPerformed
+
+    private void CAñoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CAñoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CAñoActionPerformed
+
+    private void CheckBox_1PRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CheckBox_1PRActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CheckBox_1PRActionPerformed
+
+    private void CheckBox_2POActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CheckBox_2POActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CheckBox_2POActionPerformed
+
+    private void CheckBox_3PRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CheckBox_3PRActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CheckBox_3PRActionPerformed
+
+    private void CheckBox_2PRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CheckBox_2PRActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CheckBox_2PRActionPerformed
+
+    private void CheckBox_3POActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CheckBox_3POActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CheckBox_3POActionPerformed
+
+    private void CEntidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CEntidadActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CEntidadActionPerformed
+
     public void Valores() {
         Entidad = CEntidad.getSelectedItem().toString();
         Envio = TEnvio.getText();
         Legislatura = TLegislatura.getText();
-        Procedure = Combobox_proceso.getSelectedItem().toString();
-
+        Procedure = Combobox_proceso.getSelectedItem().toString();       
     }
 
     /**
@@ -875,23 +1036,34 @@ public class Integrar_TMP extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Boton_insertar;
-    private javax.swing.JRadioButton ButtonXlsx;
+    private javax.swing.JComboBox CAño;
     private javax.swing.JComboBox CEntidad;
     private javax.swing.JComboBox CEstatus;
+    private javax.swing.JCheckBox CheckBox_1PO;
+    private javax.swing.JCheckBox CheckBox_1PR;
+    private javax.swing.JCheckBox CheckBox_2PO;
+    private javax.swing.JCheckBox CheckBox_2PR;
+    private javax.swing.JCheckBox CheckBox_3PO;
+    private javax.swing.JCheckBox CheckBox_3PR;
     private javax.swing.JComboBox Combobox_proceso;
     private javax.swing.JLabel Label_Estatus;
     private javax.swing.JLabel Label_Legislatura;
+    private javax.swing.JLabel Label_Logo;
+    private javax.swing.JLabel Label_Periodo;
     private javax.swing.JLabel Label_Procedure;
     private javax.swing.JLabel Label_Progressline;
     private javax.swing.JLabel Label_RutaArchivo;
+    private javax.swing.JLabel Label_Year;
     private javax.swing.JLabel Label_entidad;
     private javax.swing.JLabel Label_envio;
     private javax.swing.JLabel Label_formatoarchivo;
     private javax.swing.JPanel Panel_PLE_ENCABEZADO;
     private javax.swing.JPanel Panel_PLE_insertarTMP;
+    private javax.swing.JPanel Panel_Verde;
     private javax.swing.JProgressBar ProgressBar_PLE_TMP;
     private javax.swing.JLabel Progressline;
     private javax.swing.JRadioButton RadioButtonCsv;
+    private javax.swing.JRadioButton RadioButtonXlsx;
     private javax.swing.JTextField RutaArchivo;
     private javax.swing.JTextField TEnvio;
     private javax.swing.JTextField TLegislatura;
@@ -900,8 +1072,6 @@ public class Integrar_TMP extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JDialog jDialog1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
 }
