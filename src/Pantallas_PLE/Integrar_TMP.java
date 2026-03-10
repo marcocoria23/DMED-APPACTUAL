@@ -592,7 +592,7 @@ public class Integrar_TMP extends javax.swing.JFrame {
                          valida_info_correcta_Generales valida_gral = new  valida_info_correcta_Generales();                                               
                          // Validar año y periodo int anioApp,List<Periodo> periodosApp,String rutaExcel,String tipo_archivo)
                             if (!valida_gral.valida_info_correcta_Generales(año_seleccionado, listaPeriodos, RutaAr, "CSV")) {
-                               JOptionPane.showMessageDialog(null, "Año y/o periodo seleccionados no coinciden con los datos reportados en Excel");
+                               JOptionPane.showMessageDialog(null, "Año, legislatura y/o periodo seleccionados no coinciden con los datos reportados en Excel. FAVOR DE REVISAR LA INFORMACIÓN");
                                return;
                            }
                         if (TABLA_SELECCIONADA.equals("ALL_TABLES")) {

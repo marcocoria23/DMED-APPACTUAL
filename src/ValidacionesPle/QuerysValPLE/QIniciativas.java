@@ -557,9 +557,12 @@ public class QIniciativas {
     public ArrayList cond_presentacion_iniciativa_periodo_si(String ID_entidad, String Legislatura, String Envio) {
         conexion.Conectar();
         Array = new ArrayList();
-        sql = "SELECT DISTINCT ID_ENTIDAD, P1_5_1, legislatura FROM TR_PLE_MEDS1_5_\n" +
-"WHERE (P1_5_1 NOT IN (SELECT P1_5_1 FROM TR_PLE_MEDS1_5_ WHERE ID_ENTIDAD= "+ ID_entidad + " AND P1_5_3=1) )\n" +
-"and  ID_ENTIDAD=" + ID_entidad+ " AND Legislatura=" + Legislatura ;
+        sql = "SELECT DISTINCT t.ID_ENTIDAD, t.P1_5_1, t.legislatura, t.C1_5_ID as envío\n" +
+                "FROM TR_PLE_MEDS1_5 t\n" +
+                "WHERE NOT EXISTS (\n" +
+                "    SELECT 1 FROM TR_PLE_MEDS1_5 s WHERE s.P1_5_1 = t.P1_5_1 AND s.P1_5_3 = 1\n" +
+                "    AND s.ID_ENTIDAD = "+ ID_entidad+ ")\n" +
+                "and  t.ID_ENTIDAD=" + ID_entidad+ " AND  t.legislatura=" + Legislatura+ " AND  t.C1_5_ID=" + Envio ;
         System.out.println(sql);
         resul = conexion.consultar(sql);
         try {

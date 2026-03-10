@@ -304,16 +304,32 @@ public class ValidaPLE extends javax.swing.JFrame {
 
     public void LlenaComboLeg() {
         QGEN dat = new QGEN();
-        CLegislatura.removeAllItems();
-        ArrayEnvio = dat.Legislatura(CEntidad.getSelectedItem().toString().trim());
-        for (String[] item : ArrayEnvio) {
-            CLegislatura.addItem(Arrays.toString(item).replace("[", "").replace("]", ""));
+    CLegislatura.removeAllItems();
 
+    ArrayEnvio = dat.Legislatura(CEntidad.getSelectedItem().toString().trim());
+
+    float mayor = Float.MIN_VALUE;
+    String valorMayor = "";
+
+    for (String[] item : ArrayEnvio) {
+
+        String valor = Arrays.toString(item).replace("[", "").replace("]", "");
+        CLegislatura.addItem(valor);
+
+        float numero = Float.parseFloat(valor); // convertir a número
+
+        if (numero > mayor) {
+            mayor = numero;
+            valorMayor = valor;
         }
     }
 
+    // seleccionar automáticamente el mayor
+    CLegislatura.setSelectedItem(valorMayor);
+    }
+
   public void llenaCombo() {
-    QGEN dat = new QGEN();
+ QGEN dat = new QGEN();
     TEnvio.removeAllItems();
     TEnvio_anterior.removeAllItems();
 
@@ -323,14 +339,10 @@ public class ValidaPLE extends javax.swing.JFrame {
     );
 
     float maximo = Float.MIN_VALUE;
-    float anterior = Float.MIN_VALUE;
 
     for (String[] item : ArrayEnvio) {
 
-        String valorStr = Arrays.toString(item)
-                .replace("[", "")
-                .replace("]", "")
-                .trim();
+        String valorStr = Arrays.toString(item).replace("[", "").replace("]", "").trim();
 
         TEnvio.addItem(valorStr);
         TEnvio_anterior.addItem(valorStr);
@@ -338,35 +350,30 @@ public class ValidaPLE extends javax.swing.JFrame {
         float valor = Float.parseFloat(valorStr);
 
         if (valor > maximo) {
-            anterior = maximo;
             maximo = valor;
-        } else if (valor > anterior && valor != maximo) {
-            anterior = valor;
         }
     }
 
-    // Si hay valores
     if (maximo != Float.MIN_VALUE) {
-        TEnvio.setSelectedItem(String.valueOf(maximo));
-    }
+        float anterior = maximo - 1;
 
-    if (anterior != Float.MIN_VALUE) {
-        TEnvio_anterior.setSelectedItem(String.valueOf(anterior));
+        TEnvio.setSelectedItem(String.valueOf((int) maximo));
+        TEnvio_anterior.setSelectedItem(String.valueOf((int) anterior));
     }
 }
 
     private void TEnvioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TEnvioActionPerformed
-        // TODO add your handling code here:
+     
     }//GEN-LAST:event_TEnvioActionPerformed
 
     private void TEnvio_anteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TEnvio_anteriorActionPerformed
-        // TODO add your handling code here:
+     
     }//GEN-LAST:event_TEnvio_anteriorActionPerformed
 
     private void CLegislaturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CLegislaturaActionPerformed
         // TODO add your handling code here:
         if (CLegislatura.getSelectedIndex() > -1) {
-            llenaCombo();
+            LlenaComboLeg();
         }
 
     }//GEN-LAST:event_CLegislaturaActionPerformed

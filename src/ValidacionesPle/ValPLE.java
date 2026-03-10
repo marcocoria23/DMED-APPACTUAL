@@ -19741,7 +19741,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                 XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                 celdaD2.setCellStyle(estiloCeldabordes0);
                 celdaD2.setCellType(CellType.STRING);
-                String txtD2 = "No existe registro en los envíos anteriores que indique que la iniciativa fue presentada en el periodo reportado (campo cond_presentacion_iniciativa_periodo(C = 'Sí').";                 
+                String txtD2 = "Se indica que la iniciativa no fue presentada en el periodo actual (cond_presentacion_iniciativa_legislatura_actual = \"No\"); sin embargo, en los envíos anteriores no se localizó registro de esta iniciativa con cond_presentacion_iniciativa_periodo = \"Sí\", por lo que no se cuenta con antecedente de su presentación en un periodo previo.";                 
                 XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                 celdaD2.setCellValue(textoD2);
 
@@ -23012,7 +23012,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                 XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                 celdaD2.setCellStyle(estiloCeldabordes0);
                 celdaD2.setCellType(CellType.STRING);
-                String txtD2 = "No puede repetir el identificador de la comisión legislativa asignado en la columna ID_comision_legislativa en las columnas P1_5_61-BI(ID_comision_legislativa_1)   Identificador primer comisión legislativa, P1_5_63-BK(ID_comision_legislativa_2)    Identificador segunda comisión legislativa, P1_5_65-BM(ID_comision_legislativa_3) Identificador tercer comisión legislativa";
+                String txtD2 = "Los valores capturados en los campos ID_comision_legislativa no deben repetirse. Verifique que los identificadores registrados en P1_5_61-BI (ID_comision_legislativa_1), P1_5_63-BK (ID_comision_legislativa_2) y P1_5_65-BM (ID_comision_legislativa_3) sean diferentes entre sí."; 
                 XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                 celdaD2.setCellValue(textoD2);
 
