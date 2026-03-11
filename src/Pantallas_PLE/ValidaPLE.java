@@ -5,6 +5,9 @@
  */
 package Pantallas_PLE;
 
+import static Pantallas_PLE.Integrar_TR.Entidad;
+import static Pantallas_PLE.Integrar_TR.Envio;
+import static Pantallas_PLE.Integrar_TR.Legislatura;
 import ValidacionesPle.QuerysValPLE.QGEN;
 import ValidacionesPle.ValPLE;
 import java.awt.Color;
@@ -15,6 +18,7 @@ import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import mx.org.inegi.QuerysGeneral.PLE.Querys;
 
 /**
  *
@@ -69,6 +73,7 @@ public class ValidaPLE extends javax.swing.JFrame {
         TEnvio_anterior = new javax.swing.JComboBox();
         LabelEnvioAnterior = new javax.swing.JLabel();
         CLegislatura = new javax.swing.JComboBox();
+        Liberar = new javax.swing.JButton();
 
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
@@ -109,7 +114,7 @@ public class ValidaPLE extends javax.swing.JFrame {
             Panel_PLE_LOGOLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(Banner_verde, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_PLE_LOGOLayout.createSequentialGroup()
-                .addContainerGap(242, Short.MAX_VALUE)
+                .addContainerGap(263, Short.MAX_VALUE)
                 .addComponent(Label_Titulo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Label_logo, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -173,13 +178,19 @@ public class ValidaPLE extends javax.swing.JFrame {
             }
         });
 
+        Liberar.setBackground(new java.awt.Color(175, 207, 144));
+        Liberar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        Liberar.setText("Liberar");
+        Liberar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LiberarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout Panel_PLELayout = new javax.swing.GroupLayout(Panel_PLE);
         Panel_PLE.setLayout(Panel_PLELayout);
         Panel_PLELayout.setHorizontalGroup(
             Panel_PLELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Panel_PLELayout.createSequentialGroup()
-                .addComponent(LEntidad, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 240, Short.MAX_VALUE))
             .addGroup(Panel_PLELayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(Panel_PLELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -199,51 +210,54 @@ public class ValidaPLE extends javax.swing.JFrame {
                         .addComponent(TEnvio, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(TEnvio_anterior, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(303, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_PLELayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(Btn_Validar, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21))
+                .addGap(36, 36, 36)
+                .addGroup(Panel_PLELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(Liberar, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
+                    .addComponent(Btn_Validar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(LEntidad, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         Panel_PLELayout.setVerticalGroup(
             Panel_PLELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Panel_PLELayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(LEntidad, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(Panel_PLELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(LabelLegislatura, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(LabelEntidad, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(LabelEnvio, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(LabelEnvioAnterior, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(Panel_PLELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CEntidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TEnvio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TEnvio_anterior, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CLegislatura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
-                .addComponent(Btn_Validar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(26, 26, 26)
+                .addGroup(Panel_PLELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(LEntidad, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(Panel_PLELayout.createSequentialGroup()
+                        .addGroup(Panel_PLELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(LabelLegislatura, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(LabelEntidad, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(LabelEnvio, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(LabelEnvioAnterior, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(Panel_PLELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(CEntidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TEnvio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TEnvio_anterior, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(CLegislatura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Btn_Validar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(41, 41, 41)
+                .addComponent(Liberar)
+                .addContainerGap(80, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(Panel_PLE_LOGO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(Panel_PLE, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Panel_PLE_LOGO, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(Panel_PLE, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(Panel_PLE_LOGO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Panel_PLE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(3, 3, 3))
+                .addContainerGap())
         );
 
         pack();
@@ -269,7 +283,6 @@ public class ValidaPLE extends javax.swing.JFrame {
             ValPLE val = new ValPLE();
             try {
                 if (!TEnvio.getSelectedItem().toString().trim().equals("")) {
-
                     Desabilita();
                     valores();
                     val.ValidacionPLE();
@@ -282,7 +295,7 @@ public class ValidaPLE extends javax.swing.JFrame {
             } catch (SQLException ex) {
                 Logger.getLogger(ValidaPLE.class.getName()).log(Level.SEVERE, null, ex);
             }
-
+            JOptionPane.showMessageDialog(null, "<html>Favor de revisar el archivo de observaciones. Si no se detectan observaciones, <b>recuerde realizar la liberación de la información tanto en Base de datos como en archivo de seguimiento</b>.</html>", "Recordatorio", JOptionPane.WARNING_MESSAGE);
         }).start();
     }//GEN-LAST:event_Btn_ValidarActionPerformed
 
@@ -377,6 +390,12 @@ public class ValidaPLE extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_CLegislaturaActionPerformed
+
+    private void LiberarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LiberarActionPerformed
+        Querys Q=new Querys();
+        Q.Cambio_Estatus(Entidad, Legislatura, Envio, "Liberado");
+        JOptionPane.showMessageDialog(null, "Cambio de estatus correctamente");
+    }//GEN-LAST:event_LiberarActionPerformed
 
     public void Desabilita() {
         CEntidad.setEnabled(false);
@@ -548,6 +567,7 @@ public class ValidaPLE extends javax.swing.JFrame {
     private javax.swing.JLabel LabelLegislatura;
     private javax.swing.JLabel Label_Titulo;
     private javax.swing.JLabel Label_logo;
+    private javax.swing.JButton Liberar;
     private javax.swing.JPanel Panel_PLE;
     private javax.swing.JPanel Panel_PLE_LOGO;
     private javax.swing.JComboBox TEnvio;
