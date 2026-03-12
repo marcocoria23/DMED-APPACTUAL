@@ -26,19 +26,19 @@ import org.apache.commons.csv.CSVRecord;
 public class valida_info_correcta_Generales {
 
     private boolean correcto;
-    private int año;
-    private int legislatura;
+    public boolean AñoOk,PeriodosOk,LegisOk,EntidadOk;
+    private int año, legislatura, entidad;
     // Lista de periodos leídos del Excel (se llenan en leerXLSX / leerCSV)
     private List<Periodo> periodosExcel = new ArrayList<>();
 
     /**
-     * Valida que el año Y los periodos seleccionados en la app
-     * coincidan con lo reportado en el archivo Excel/CSV.
+     * Valida que el año Y los periodos seleccionados en la app coincidan con lo
+     * reportado en el archivo Excel/CSV.
      *
-     * @param anioApp       Año seleccionado en el combo de la app (1, 2 o 3)
-     * @param periodosApp   Lista de periodos marcados con checkbox en la app
-     * @param rutaExcel     Ruta del archivo CSV o XLSX
-     * @param tipo_archivo  "CSV" o "XLSX"
+     * @param anioApp Año seleccionado en el combo de la app (1, 2 o 3)
+     * @param periodosApp Lista de periodos marcados con checkbox en la app
+     * @param rutaExcel Ruta del archivo CSV o XLSX
+     * @param tipo_archivo "CSV" o "XLSX"
      * @return true si año Y periodos coinciden; false en caso contrario
      */
     public boolean valida_info_correcta_Generales(int anioApp,
@@ -52,24 +52,28 @@ public class valida_info_correcta_Generales {
         } else if (tipo_archivo.equals("CSV")) {
             leerCSV(rutaExcel);
         }
-// Validar Legilsatura
-boolean LegisOk = (legislatura == Integer.parseInt(Integrar_TMP.Legislatura));
-System.out.println("Legislatura excel: " + legislatura
+        // Validar Legilsatura
+        LegisOk = (legislatura == Integer.parseInt(Integrar_TMP.Legislatura));
+        System.out.println("Legislatura excel: " + legislatura
                 + ", Legislatura capturado en app: " + Integrar_TMP.Legislatura
-                + ", ¿legislatura correcto?: " + LegisOk);
+                + ", ¿Legislatura correcto?: " + LegisOk);
         // Validar año
-        boolean anioOk = (año == anioApp);
+        AñoOk = (año == anioApp);
         System.out.println("Año Excel: " + año
                 + ", año capturado en app: " + anioApp
-                + ", ¿año correcto?: " + anioOk);
-
-        // ✅ FIX 2: Validar también que los periodos coincidan
-        boolean periodosOk = validarPeriodos(periodosApp);
+                + ", ¿año correcto?: " + AñoOk);
+        // Validar Legilsatura
+        EntidadOk = (entidad == Integer.parseInt(Integrar_TMP.Entidad));
+        System.out.println("Entidad excel: " + entidad
+                + ", Legislatura capturado en app: " + Integrar_TMP.Legislatura
+                + ", ¿Entidad correcta?: " + EntidadOk);
+        // Validar periodos
+        PeriodosOk = validarPeriodos(periodosApp);
         System.out.println("Periodos app:   " + periodosApp);
         System.out.println("Periodos Excel: " + periodosExcel);
-        System.out.println("¿Periodos correctos?: " + periodosOk);
+        System.out.println("¿Periodos correctos?: " + PeriodosOk);
 
-        correcto = anioOk && periodosOk &&LegisOk;
+        correcto = AñoOk && PeriodosOk && LegisOk && EntidadOk;
         return correcto;
     }
 
@@ -97,28 +101,26 @@ System.out.println("Legislatura excel: " + legislatura
     }
 
     /**
-     * Lee el año y los periodos desde un archivo XLSX
-     * SIN insertar datos en la base de datos.
+     * Lee el año y los periodos desde un archivo XLSX SIN insertar datos en la
+     * base de datos.
      *
-     * ✅ FIX 3: No llama a In_Tmp_ple_meds1_1 (que hace INSERT en BD).
-     *    Lee directamente el Excel usando DatosGenerales_xlsm.
+     * ✅ FIX 3: No llama a In_Tmp_ple_meds1_1 (que hace INSERT en BD). Lee
+     * directamente el Excel usando DatosGenerales_xlsm.
      */
     public void leerXLSX() throws Exception {
         DatosGenerales_xlsm xlsm = new DatosGenerales_xlsm();
+        String valorEntidad = xlsm.LeerExcel(9, 29);
+        entidad = Integer.parseInt(valorEntidad);
 
         String valorAño = xlsm.LeerExcel(22, 12);
         año = parsearAño(valorAño);
-        
-        String Legis = xlsm.LeerExcel(13, 4);
-        legislatura = parsearLegislatura(Legis );
 
-        // Leer periodos marcados con "x" en el Excel
-        // La tabla TR_PLE_MEDS1_1A tiene 6 periodos: columnas de la hoja
-        // Según Tmp_ple_meds1_1_CSV: el primer marcador "X" está en col 13,
-        // y cada periodo ocupa 5 columnas (13, 18, 23, 28, 33, 38)
-        // En XLSX usamos las celdas equivalentes del xlsm
-        int[] filasXLSX   = {25, 26, 27, 28, 29, 30}; // filas de cada periodo en Excel
-        int   colMarcador = 12;                          // columna donde aparece la "x"
+        String Legis = xlsm.LeerExcel(13, 4);
+        legislatura = parsearLegislatura(Legis);
+
+        //Leer periodos
+        int[] filasXLSX = {25, 26, 27, 28, 29, 30};
+        int colMarcador = 12;
         Periodo[] orden = {
             Periodo.PRIMER_ORDINARIO,
             Periodo.PRIMER_RECESO,
@@ -140,7 +142,6 @@ System.out.println("Legislatura excel: " + legislatura
         }
     }
 
-   
     public void leerCSV(String ruta) throws Exception {
         // Convertir a UTF-8 igual que en Tmp_ple_meds1_1_CSV
         Convertir_UTF8.Conver_Utf8 conUTF8 = new Convertir_UTF8.Conver_Utf8();
@@ -161,8 +162,7 @@ System.out.println("Legislatura excel: " + legislatura
                 try (BufferedReader reader = new BufferedReader(
                         new InputStreamReader(
                                 new FileInputStream(nuevaRuta),
-                                StandardCharsets.UTF_8));
-                     CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT)) {
+                                StandardCharsets.UTF_8)); CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT)) {
 
                     int fila = 0;
                     for (CSVRecord record : csvParser) {
@@ -204,20 +204,28 @@ System.out.println("Legislatura excel: " + legislatura
     }
 
     /**
-     * Convierte el texto del año a su número equivalente.
-     * Mismo criterio que getAño() en Tmp_ple_meds1_1 y Tmp_ple_meds1_1_CSV.
+     * Convierte el texto del año a su número equivalente. Mismo criterio que
+     * getAño() en Tmp_ple_meds1_1 y Tmp_ple_meds1_1_CSV.
      */
     private int parsearAño(String valorAño) {
-        if (valorAño == null) return 0;
+        if (valorAño == null) {
+            return 0;
+        }
         valorAño = valorAño.trim();
-        if (valorAño.equals("Primer año"))   return 1;
-        if (valorAño.equals("Segundo año"))  return 2;
-        if (valorAño.equals("Tercer año"))   return 3;
+        if (valorAño.equals("Primer año")) {
+            return 1;
+        }
+        if (valorAño.equals("Segundo año")) {
+            return 2;
+        }
+        if (valorAño.equals("Tercer año")) {
+            return 3;
+        }
         return 0;
     }
-    
+
     private int parsearLegislatura(String valorLegis) {
-             Map<Character, Integer> mapa = new HashMap<>();
+        Map<Character, Integer> mapa = new HashMap<>();
         mapa.put('I', 1);
         mapa.put('V', 5);
         mapa.put('X', 10);
@@ -246,7 +254,7 @@ System.out.println("Legislatura excel: " + legislatura
         }
 
         return resultado;
-    
+
     }
 
     public boolean Correcto() {

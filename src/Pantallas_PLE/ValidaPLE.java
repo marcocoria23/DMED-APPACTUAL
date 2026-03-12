@@ -393,8 +393,8 @@ public class ValidaPLE extends javax.swing.JFrame {
 
     private void LiberarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LiberarActionPerformed
         Querys Q=new Querys();
-        Q.Cambio_Estatus(Entidad, Legislatura, Envio, "Liberado");
-        JOptionPane.showMessageDialog(null, "Cambio de estatus correctamente");
+        Q.Cambio_Estatus(CEntidad.getSelectedItem().toString(), CLegislatura.getSelectedItem().toString(), TEnvio.getSelectedItem().toString(), "Liberado");
+        JOptionPane.showMessageDialog(null, "<html>Se ha <b>liberado</b> la información para la <br>Entidad "+CEntidad.getSelectedItem().toString()+" </html>");
     }//GEN-LAST:event_LiberarActionPerformed
 
     public void Desabilita() {

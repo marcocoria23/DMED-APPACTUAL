@@ -208,7 +208,7 @@ public class Querys {
     
       
       
-        public void Cambio_Estatus(String entidad,String Legislatura,String Envio,String Estatus){
+     public void Cambio_Estatus(String entidad,String Legislatura,String Envio,String Estatus){
      conexion.Conectar();
       sql="UPDATE TR_PLE_MEDS1_1 SET ESTATUS='"+Estatus+"'  WHERE ID_ENTIDAD='"+entidad+"' AND LEGISLATURA='"+Legislatura+"' AND C1_1_ID='"+Envio+"'" ;
       sql2="UPDATE TMP_PLE_MEDS1_1 SET ESTATUS='"+Estatus+"'  WHERE ID_ENTIDAD_TMP='"+entidad+"' AND LEGISLATURA_TMP='"+Legislatura+"' AND C1_1_ID_TMP='"+Envio+"'" ;
