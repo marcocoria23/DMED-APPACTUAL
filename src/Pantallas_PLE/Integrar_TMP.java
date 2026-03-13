@@ -590,7 +590,7 @@ public class Integrar_TMP extends javax.swing.JFrame {
                         if (!valida_gral.LegisOk)    JOptionPane.showMessageDialog(null, "<html><b>La LEGISLATURA capturada no coincide</b> con el archivo de Excel.</html>");
                         if (!valida_gral.AñoOk)      JOptionPane.showMessageDialog(null, "<html><b>El AÑO capturado no coincide</b> con el archivo de Excel.</html>");
                         if (!valida_gral.PeriodosOk) JOptionPane.showMessageDialog(null, "<html><b>Los PERIODOS capturados no coinciden</b> con el archivo de Excel.</html>");
-                        
+                        //
                     }
                     EnableTrue();
                 });
