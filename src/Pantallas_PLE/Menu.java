@@ -5,10 +5,9 @@
  */
 package Pantallas_PLE;
 
+
+import ExtraeExeGeneral.ExtraeExe;
 import Pantallas_Menu.MenuProyectos;
-import Pantallas_PLE.Integrar_TMP;
-import Pantallas_PLE.Integrar_TR;
-import Pantallas_PLE.ValidaPLE;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -41,6 +40,7 @@ public class Menu extends javax.swing.JFrame {
         Label_MenuPLE = new javax.swing.JLabel();
         MenuBar_PLE = new javax.swing.JMenuBar();
         Menu_PLE = new javax.swing.JMenu();
+        jMenu1 = new javax.swing.JMenu();
         Menu_PLE_IntegraTMP = new javax.swing.JMenu();
         Menu_PLE_IntegraTR = new javax.swing.JMenu();
         Menu_PLE_Valida = new javax.swing.JMenu();
@@ -58,6 +58,15 @@ public class Menu extends javax.swing.JFrame {
 
         Menu_PLE.setText("Menu");
         Menu_PLE.setFont(new java.awt.Font("Arial Narrow", 0, 18)); // NOI18N
+
+        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Archivo.png"))); // NOI18N
+        jMenu1.setText("Preparar Archivo");
+        jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu1MouseClicked(evt);
+            }
+        });
+        Menu_PLE.add(jMenu1);
 
         Menu_PLE_IntegraTMP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Insertar.png"))); // NOI18N
         Menu_PLE_IntegraTMP.setText("Integrar TMP");
@@ -177,6 +186,18 @@ public class Menu extends javax.swing.JFrame {
 
     }//GEN-LAST:event_Menu_Reporte_FechaTerminoMouseClicked
 
+    private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
+        // TODO add your handling code here:
+        ExtraeExe ex=new ExtraeExe();
+        new Thread(() -> {
+            try{
+        ex.ejecutarExeDesdeResources("/mx/org/inegi/ConvertidorArchivosPLE/ConverValoresPLE.exe","ConverValoresPLE");
+            }catch(Exception e){
+                System.out.println("Error "+e);
+            }
+        }).start();
+    }//GEN-LAST:event_jMenu1MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -220,5 +241,6 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenu Menu_PLE_IntegraTR;
     private javax.swing.JMenu Menu_PLE_Reportes;
     private javax.swing.JMenu Menu_PLE_Valida;
+    private javax.swing.JMenu jMenu1;
     // End of variables declaration//GEN-END:variables
 }
