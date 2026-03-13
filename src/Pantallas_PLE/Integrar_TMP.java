@@ -586,10 +586,11 @@ public class Integrar_TMP extends javax.swing.JFrame {
                     if (tipo.equals("CSV")) {
                         JOptionPane.showMessageDialog(null, "Año, legislatura y/o periodo no coinciden con el archivo. FAVOR DE REVISAR");
                     } else {
-                        if (!valida_gral.AñoOk)      JOptionPane.showMessageDialog(null, "<html><b>El año capturado no coincide</b> con el archivo de Excel.</html>");
-                        if (!valida_gral.EntidadOk)  JOptionPane.showMessageDialog(null, "<html><b>La entidad capturada no coincide</b> con el archivo de Excel.</html>");
-                        if (!valida_gral.PeriodosOk) JOptionPane.showMessageDialog(null, "<html><b>Los periodos capturados no coinciden</b> con el archivo de Excel.</html>");
-                        if (!valida_gral.LegisOk)    JOptionPane.showMessageDialog(null, "<html><b>La legislatura capturada no coincide</b> con el archivo de Excel.</html>");
+                        if (!valida_gral.EntidadOk)  JOptionPane.showMessageDialog(null, "<html><b>La ENTIDAD capturada no coincide</b> con el archivo de Excel.</html>");
+                        if (!valida_gral.LegisOk)    JOptionPane.showMessageDialog(null, "<html><b>La LEGISLATURA capturada no coincide</b> con el archivo de Excel.</html>");
+                        if (!valida_gral.AñoOk)      JOptionPane.showMessageDialog(null, "<html><b>El AÑO capturado no coincide</b> con el archivo de Excel.</html>");
+                        if (!valida_gral.PeriodosOk) JOptionPane.showMessageDialog(null, "<html><b>Los PERIODOS capturados no coinciden</b> con el archivo de Excel.</html>");
+                        
                     }
                     EnableTrue();
                 });
