@@ -1668,7 +1668,7 @@ public ArrayList DCtipo_candidatura_persona_legisladora(String ID_entidad,String
 public ArrayList NDCtipo_candidatura_persona_legisladora(String ID_entidad,String Legislatura,String Envio){
      conexion.Conectar();
       Array = new ArrayList();
-      sql="select  ID_ENTIDAD, ENTIDAD, C1_3_ID, P1_3_1, P1_3_34,P1_3_36 from TR_PLE_MEDS1_3 where P1_3_34=1 and P1_3_36 is null"
+      sql="select  ID_ENTIDAD, ENTIDAD, C1_3_ID, P1_3_1, P1_3_34,P1_3_36 from TR_PLE_MEDS1_3 where P1_3_34<>1 and P1_3_36 is not null"
               + " AND ID_ENTIDAD="+ID_entidad+" AND Legislatura="+Legislatura+" AND C1_3_ID='"+Envio+"'";
       System.out.println(sql);
       resul=conexion.consultar(sql);

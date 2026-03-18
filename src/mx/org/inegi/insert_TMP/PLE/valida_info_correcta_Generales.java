@@ -31,16 +31,7 @@ public class valida_info_correcta_Generales {
     // Lista de periodos leídos del Excel (se llenan en leerXLSX / leerCSV)
     private List<Periodo> periodosExcel = new ArrayList<>();
 
-    /**
-     * Valida que el año Y los periodos seleccionados en la app coincidan con lo
-     * reportado en el archivo Excel/CSV.
-     *
-     * @param anioApp Año seleccionado en el combo de la app (1, 2 o 3)
-     * @param periodosApp Lista de periodos marcados con checkbox en la app
-     * @param rutaExcel Ruta del archivo CSV o XLSX
-     * @param tipo_archivo "CSV" o "XLSX"
-     * @return true si año Y periodos coinciden; false en caso contrario
-     */
+   
     public boolean valida_info_correcta_Generales(int anioApp,
             List<Periodo> periodosApp,
             String rutaExcel,
@@ -56,31 +47,28 @@ public class valida_info_correcta_Generales {
         LegisOk = (legislatura == Integer.parseInt(Integrar_TMP.Legislatura));
         System.out.println("Legislatura excel: " + legislatura
                 + ", Legislatura capturado en app: " + Integrar_TMP.Legislatura
-                + ", ¿Legislatura correcto?: " + LegisOk);
+                + ", ¿Legislatura correcta?: " + LegisOk);
         // Validar año
         AñoOk = (año == anioApp);
         System.out.println("Año Excel: " + año
-                + ", año capturado en app: " + anioApp
-                + ", ¿año correcto?: " + AñoOk);
+                + ", Año capturado en app: " + anioApp
+                + ", ¿Año correcto?: " + AñoOk);
         // Validar Legilsatura
         EntidadOk = (entidad == Integer.parseInt(Integrar_TMP.Entidad));
         System.out.println("Entidad excel: " + entidad
-                + ", Legislatura capturado en app: " + Integrar_TMP.Legislatura
+                + ", Entidad capturado en app: " + Integrar_TMP.Legislatura
                 + ", ¿Entidad correcta?: " + EntidadOk);
         // Validar periodos
         PeriodosOk = validarPeriodos(periodosApp);
         System.out.println("Periodos app:   " + periodosApp);
-        System.out.println("Periodos Excel: " + periodosExcel);
-        System.out.println("¿Periodos correctos?: " + PeriodosOk);
+        System.out.println(", Periodos Excel: " + periodosExcel);
+        System.out.println(", ¿Periodos correctos?: " + PeriodosOk);
 
         correcto = AñoOk && PeriodosOk && LegisOk && EntidadOk;
         return correcto;
     }
 
-    /**
-     * Compara los periodos seleccionados en la app contra los leídos del Excel.
-     * Deben ser exactamente los mismos (sin importar orden).
-     */
+    
     private boolean validarPeriodos(List<Periodo> periodosApp) {
         if (periodosApp.size() != periodosExcel.size()) {
             return false;
@@ -100,13 +88,7 @@ public class valida_info_correcta_Generales {
         return true;
     }
 
-    /**
-     * Lee el año y los periodos desde un archivo XLSX SIN insertar datos en la
-     * base de datos.
-     *
-     * ✅ FIX 3: No llama a In_Tmp_ple_meds1_1 (que hace INSERT en BD). Lee
-     * directamente el Excel usando DatosGenerales_xlsm.
-     */
+    
     public void leerXLSX() throws Exception {
         DatosGenerales_xlsm xlsm = new DatosGenerales_xlsm();
         String valorEntidad = xlsm.LeerExcel(9, 29);

@@ -85,6 +85,32 @@ public ArrayList T1_NOT_NULL(String ID_entidad,String Legislatura,String Envio){
     return Array;
  }
     
+        public ArrayList PERIODOS_FECHAS(String ID_entidad,String Legislatura,String Envio){
+     conexion.Conectar();
+      Array = new ArrayList();
+      sql="SELECT t.* FROM TR_PLE_MEDS1_1A t WHERE t.ID_ENTIDAD   = '"+ID_entidad+"'\n" +
+"  AND t.C1_1A_ID != 1 and  AND t.C1_1A_ID ="+Envio+" \n" +
+"  AND NOT EXISTS ( SELECT 1 FROM TR_PLE_MEDS1_1A hist WHERE hist.ENTIDAD = t.ENTIDAD  AND hist.C1_1A   = t.C1_1A\n" +
+"        -- Comparar solo mes y día contra registros históricos (años anteriores)\n" +
+"        AND TO_CHAR(TO_DATE(hist.P1_1A_2, 'DD/MM/YYYY'), 'MM-DD') = TO_CHAR(TO_DATE(t.P1_1A_2, 'DD/MM/YYYY'), 'MM-DD')\n" +
+"        AND TO_CHAR(TO_DATE(hist.P1_1A_3, 'DD/MM/YYYY'), 'MM-DD') = TO_CHAR(TO_DATE(t.P1_1A_3, 'DD/MM/YYYY'), 'MM-DD')\n" +
+"        -- Solo comparar contra años anteriores (no contra sí mismo)\n" +
+"        AND TO_NUMBER(SUBSTR(hist.P1_1A_2, 7, 4)) < TO_NUMBER(SUBSTR(t.P1_1A_2, 7, 4)))";
+      System.out.println(sql);
+      resul=conexion.consultar(sql);
+      try {
+          while (resul.next()) {
+              Array.add(new String[]{
+                  resul.getString("ID_ENTIDAD"),
+                  resul.getString("C1_1A")
+                });
+          }
+      conexion.close();
+     } catch (SQLException ex) {
+            Logger.getLogger(QComisiones_Legislativas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    return Array;
+ }
   //P1_1_4(termino_funciones_legislatura)L19 no debe ser menor a P1_1_3(inicio_funciones_legislatura)F19
 public ArrayList termino_funciones_legislatura(String ID_entidad,String Legislatura,String Envio){
      conexion.Conectar();

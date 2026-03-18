@@ -208,7 +208,7 @@ public ArrayList NDCnombre_persona_legisladora_1(String ID_entidad,String Legisl
 public ArrayList DCID_persona_legisladora_1(String ID_entidad,String Legislatura,String Envio){
      conexion.Conectar();
       Array = new ArrayList();
-      sql="select ID_ENTIDAD, ENTIDAD, C1_6_ID, P1_6_1, P1_6_9, P1_6_10, P1_6_11 from tr_ple_meds1_6 where (P1_6_42 is null and P1_6_43 is not null) or (P1_6_42 is not null and P1_6_43 is null) and (ID_ENTIDAD="+ID_entidad+" AND Legislatura="+Legislatura+" AND C1_6_ID='"+Envio+"')";
+      sql="select ID_ENTIDAD, ENTIDAD, C1_6_ID, P1_6_1, P1_6_9, P1_6_10, P1_6_11 from tr_ple_meds1_6 where (P1_6_11 is null or P1_6_10 is null)  and P1_6_9=3 and (ID_ENTIDAD="+ID_entidad+" AND Legislatura="+Legislatura+" AND C1_6_ID='"+Envio+"')";
       System.out.println(sql);
       resul=conexion.consultar(sql);
       try {
@@ -578,7 +578,7 @@ public ArrayList NDCnombre_comision_legislativa_1(String ID_entidad,String Legis
 public ArrayList nombre_comision_legislativa_1(String ID_entidad,String Legislatura,String Envio){
      conexion.Conectar();
       Array = new ArrayList();
-      sql="select ID_ENTIDAD, ENTIDAD, C1_6_ID, P1_6_1, P1_6_9, P1_6_54, P1_6_55 from tr_ple_meds1_6 where (P1_6_54 is null and P1_6_55 is not null) or (P1_6_54 is not null and P1_6_55 is null) and (ID_ENTIDAD="+ID_entidad+" AND Legislatura="+Legislatura+" AND C1_6_ID='"+Envio+"')";
+      sql="select ID_ENTIDAD, ENTIDAD, C1_6_ID, P1_6_1, P1_6_9, P1_6_54, P1_6_55 from tr_ple_meds1_6 where P1_6_9=5 and (P1_6_54 is null or P1_6_55 is null) and (ID_ENTIDAD="+ID_entidad+" AND Legislatura="+Legislatura+" AND C1_6_ID='"+Envio+"')";
       System.out.println(sql);
       resul=conexion.consultar(sql);
       try {
@@ -637,26 +637,7 @@ public ArrayList NDCID_comision_legislativa_2(String ID_entidad,String Legislatu
     return Array;
  }
 
-//Debe capturar información en P1_6_56-BD(ID_comision_legislativa_2) o P1_6_57-BE(nombre_comision_legislativa_2) debido a que se selecciono una categoría en cualquiera de las ya mencionadas.
-public ArrayList ID_comision_legislativa_2(String ID_entidad,String Legislatura,String Envio){
-     conexion.Conectar();
-      Array = new ArrayList();
-      sql="select ID_ENTIDAD, ENTIDAD, C1_6_ID, P1_6_1, P1_6_55, P1_6_56, P1_6_57 from tr_ple_meds1_6  where (P1_6_56 is null and P1_6_57 is not null) or (P1_6_56 is not null and P1_6_57 is null) and (ID_ENTIDAD="+ID_entidad+" AND Legislatura="+Legislatura+" AND C1_6_ID='"+Envio+"')";
-      System.out.println(sql);
-      resul=conexion.consultar(sql);
-      try {
-          while (resul.next()) {
-              Array.add(new String[]{
-                  resul.getString("ID_ENTIDAD"),
-                  resul.getString("P1_6_1")
-                });
-          }
-      conexion.close();
-     } catch (SQLException ex) {
-            Logger.getLogger(QComparecencias.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    return Array;
- }
+
 
 //No se puede repetir el identificar de las comisiones legislativas en P1_6_54-BB(ID_comision_legislativa_1), P1_6_56-BD(ID_comision_legislativa_2) y P1_6_58-BF(ID_comision_legislativa_3).
 public ArrayList NCID_comision_legislativa_1(String ID_entidad,String Legislatura,String Envio){
@@ -833,7 +814,7 @@ public ArrayList NDCayuntamiento(String ID_entidad,String Legislatura,String Env
 public ArrayList AGEM(String ID_entidad,String Legislatura,String Envio){
      conexion.Conectar();
       Array = new ArrayList();
-      sql="select ID_ENTIDAD, ENTIDAD, C1_6_ID, P1_6_1, P1_6_9, P1_6_60, P1_6_61 from tr_ple_meds1_6 where (P1_6_60 is null and P1_6_61 is not null) or (P1_6_60 is not null and P1_6_61 is null) and (ID_ENTIDAD="+ID_entidad+" AND Legislatura="+Legislatura+" AND C1_6_ID='"+Envio+"')";
+      sql="select ID_ENTIDAD, ENTIDAD, C1_6_ID, P1_6_1, P1_6_9, P1_6_60, P1_6_61 from tr_ple_meds1_6 where P1_6_9=9 and (P1_6_60 is null or P1_6_61 is null) and (ID_ENTIDAD="+ID_entidad+" AND Legislatura="+Legislatura+" AND C1_6_ID='"+Envio+"')";
       System.out.println(sql);
       resul=conexion.consultar(sql);
       try {

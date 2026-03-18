@@ -125,7 +125,7 @@ public class Querys {
     return Array;
  }   
      
-     
+    
      public void EliminaRegERRORES_INSERT_RALAB(String Tabla,String entidad,String Envio,String Legislatura){
  conexion.Conectar();    
       sql="DELETE FROM TR_PLE_OBSERVACIONES WHERE ENTIDAD='"+entidad+"' AND LEGISLATURA='"+Legislatura+"'  AND ID_ENVIO='"+Envio+"' AND CAMPO='-808' " ;

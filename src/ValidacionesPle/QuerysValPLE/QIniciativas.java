@@ -22,7 +22,29 @@ public class QIniciativas {
     String sql, NMunicipio;
     ArrayList<String[]> Array;
     ResultSet resul;
+ public ArrayList ExistenIniciativas(String ID_entidad, String Legislatura, String envio) {
+        conexion.Conectar();
+        Array = new ArrayList();
+        sql = "SELECT  '0' AS resultado, '" + ID_entidad + " ' AS ID_ENTIDAD, 'no hay datos' AS ID_ACTUAL FROM DUAL\n" +
+"WHERE NOT EXISTS (   SELECT 1   FROM TR_PLE_MEDS1_5   WHERE\n" +
+                "ID_ENTIDAD=" + ID_entidad + " AND Legislatura=" + Legislatura + " AND C1_5_ID='" + envio + "')";
+        System.out.println(sql);
+        resul = conexion.consultar(sql);
+        try {
+            while (resul.next()) {
+                Array.add(new String[]{
+                    resul.getString("ID_ENTIDAD"),
+                    resul.getString("ID_ACTUAL")
+                });
+            }
+            conexion.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(QIniciativas.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
+        return Array;
+    }
+ 
     public ArrayList Estructura_ID(String ID_entidad, String Legislatura, String envio) {
         conexion.Conectar();
         Array = new ArrayList();
@@ -1893,7 +1915,7 @@ public class QIniciativas {
     public ArrayList DCnombre_comision_legislativa_1_segundo_estudio(String ID_entidad, String Legislatura, String Envio) {
         conexion.Conectar();
         Array = new ArrayList();
-        sql = "select ID_ENTIDAD, ENTIDAD, C1_5_ID, P1_5_1, P1_5_10, P1_5_84, P1_5_85 from tr_ple_meds1_5 where P1_5_10 = 4 and (P1_5_84 is null and P1_5_85 is not null)  or (P1_5_84 is not null and P1_5_85 is null) "
+        sql = "select ID_ENTIDAD, ENTIDAD, C1_5_ID, P1_5_1, P1_5_10, P1_5_84, P1_5_85 from tr_ple_meds1_5 where (P1_5_10 = 4 or P1_5_10 = 2) and (P1_5_84 is null  or  P1_5_85 is null)"
                 + " AND ID_ENTIDAD=" + ID_entidad + " AND Legislatura=" + Legislatura + " AND C1_5_ID='" + Envio + "'";
         System.out.println(sql);
         resul = conexion.consultar(sql);

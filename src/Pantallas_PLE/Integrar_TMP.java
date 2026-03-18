@@ -538,7 +538,7 @@ public class Integrar_TMP extends javax.swing.JFrame {
     if (CheckBox_3PO.isSelected()) listaPeriodos.add(Periodo.TERCER_ORDINARIO);
     if (CheckBox_3PR.isSelected()) listaPeriodos.add(Periodo.TERCER_RECESO);
 
-    // Validaciones rápidas en EDT (sin bloquear)
+    // Validaciones en ED (antes de insertar a TMP)
     if (listaPeriodos.isEmpty()) {
         JOptionPane.showMessageDialog(null, "Debe seleccionar al menos un periodo");
         return;
@@ -563,7 +563,6 @@ public class Integrar_TMP extends javax.swing.JFrame {
         return;
     }
 
-    // ✅ Mostrar label ANTES de lanzar el hilo — ahora SÍ se verá
     Label_Progressline.setText("<html><b>ESPERE UN MOMENTO, SE ESTÁ VALIDANDO INFORMACIÓN GENERAL</b></html>");
     Label_Progressline.setVisible(true);
     ProgressBar_PLE_TMP.setIndeterminate(true); // barra animada mientras valida

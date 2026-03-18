@@ -314,7 +314,7 @@ public class ValPLE {
                 XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                 celdaD2.setCellStyle(estiloCeldabordes0);
                 celdaD2.setCellType(CellType.STRING);
-                String txtD2 = "P1_1_1(numero_legislatura) E14 No debe ser null o P1_1_2(nombre_legislatura)K14 o P1_1_3(inicio_funciones_legislatura)F19 o  P1_1_4(termino_funciones_legislatura)L19 o P1_1_5(distritos_uninominales)Y19 o P1_1_6(diputaciones_plurinominales)AD19 o P1_1_7(ejercicio_constitucional_informacion_reportada)M23 o P1_1_8(fecha_inicio_informacion_reportada)V23 o P1_1_9(fecha_termino_informacion_reportada)AC23 No deben ser Null";
+                String txtD2 = "El campo P1_1_1(numero_legislatura) E14 No debe estar vacío o P1_1_2(nombre_legislatura)K14 o P1_1_3(inicio_funciones_legislatura)F19 o  P1_1_4(termino_funciones_legislatura)L19 o P1_1_5(distritos_uninominales)Y19 o P1_1_6(diputaciones_plurinominales)AD19 o P1_1_7(ejercicio_constitucional_informacion_reportada)M23 o P1_1_8(fecha_inicio_informacion_reportada)V23 o P1_1_9(fecha_termino_informacion_reportada)AC23 no deben estar vacíos. Favor de completar con la información correspondiente a cada campo.";
                 XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                 celdaD2.setCellValue(textoD2);
 
@@ -409,6 +409,48 @@ public class ValPLE {
             coni = 1;
         }
         
+         ArrayResult = DG.PERIODOS_FECHAS(entidad, legislatura, envio);
+        if (ArrayResult.size() > 0) {
+            XSSFRow filaEE1 = hojadatos_generales.createRow(conEnc);//FILA
+            XSSFCell celdaE1 = filaEE1.createCell(0);//COLUMNA
+            celdaE1.setCellStyle(estiloCelda1);
+            celdaE1.setCellType(CellType.STRING);
+            String txtE1 = "ID";
+            XSSFRichTextString textoE1 = new XSSFRichTextString(txtE1);
+            celdaE1.setCellValue(textoE1);
+
+            XSSFCell celdaE6 = filaEE1.createCell(1);//COLUMNA
+            celdaE6.setCellStyle(estiloCelda1);
+            celdaE6.setCellType(CellType.STRING);
+            String txtE6 = "OBSERVACIONES";
+            XSSFRichTextString textoE6 = new XSSFRichTextString(txtE6);
+            celdaE6.setCellValue(textoE6);
+
+            for (int i = 0; i < ArrayResult.size(); i++) {
+                XSSFRow filaEE2 = hojadatos_generales.createRow(conDat + i);
+
+                XSSFCell celdaD1 = filaEE2.createCell(0);//COLUMNA
+                celdaD1.setCellStyle(estiloCeldabordes0);
+                celdaD1.setCellType(CellType.STRING);
+                //String txtD1 = Arrays.toString(ArrayResult.get(i));
+                String txtD1 = "No Aplica";
+                XSSFRichTextString textoD1 = new XSSFRichTextString(txtD1);
+                celdaD1.setCellValue(textoD1);
+
+                XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
+                celdaD2.setCellStyle(estiloCeldabordes0);
+                celdaD2.setCellType(CellType.STRING);
+                String txtD2 = "Favor de revisar los campos fecha_inicio_p y fecha_termino_p, ya que no son consistentes con las fechas reportadas en envíos anteriores para el mismo periodo.";
+                XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
+                celdaD2.setCellValue(textoD2);
+
+                coni++;
+            }
+            conEnc = conEnc + coni;
+            conDat = conDat + coni;
+            coni = 1;
+        }
+       
     ArrayResult = DG.anio_periodo(entidad, legislatura, envio);
         if (ArrayResult.size() > 0) {
             XSSFRow filaEE1 = hojadatos_generales.createRow(conEnc);//FILA
@@ -484,7 +526,7 @@ public class ValPLE {
                 XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                 celdaD2.setCellStyle(estiloCeldabordes0);
                 celdaD2.setCellType(CellType.STRING);
-                String txtD2 = "Las fechas para este periodo legislativo ya fueron registradas en la base de datos en envío anterior. (fecha_inicio_informacion_reportada, fecha_termino_informacion_reportada )";
+                String txtD2 = "Las fechas para este periodo legislativo ya fueron registradas en la base de datos en algún envío anterior. (fecha_inicio_informacion_reportada, fecha_termino_informacion_reportada )";
                 XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                 celdaD2.setCellValue(textoD2);
 
@@ -569,7 +611,7 @@ public class ValPLE {
                 XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                 celdaD2.setCellStyle(estiloCeldabordes0);
                 celdaD2.setCellType(CellType.STRING);
-                String txtD2 = "P1_1_8(fecha_inicio_informacion_reportada)V23 no esta entre P1_1_3(inicio_funciones_legislatura)F19 y P1_1_4(termino_funciones_legislatura)L19";
+                String txtD2 = "P1_1_8(fecha_inicio_informacion_reportada)V23 no está entre P1_1_3(inicio_funciones_legislatura)F19 y P1_1_4(termino_funciones_legislatura)L19";
                 XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                 celdaD2.setCellValue(textoD2);
 
@@ -611,7 +653,7 @@ public class ValPLE {
                 XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                 celdaD2.setCellStyle(estiloCeldabordes0);
                 celdaD2.setCellType(CellType.STRING);
-                String txtD2 = "P1_1_9(fecha_termino_informacion_reportada)AC23 no esta entre P1_1_8(fecha_inicio_informacion_reportada)V23 y P1_1_4(termino_funciones_legislatura)L19";
+                String txtD2 = "P1_1_9(fecha_termino_informacion_reportada)AC23 no está entre P1_1_8(fecha_inicio_informacion_reportada)V23 y P1_1_4(termino_funciones_legislatura)L19";
                 XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                 celdaD2.setCellValue(textoD2);
 
@@ -746,7 +788,7 @@ public class ValPLE {
                 XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                 celdaD2.setCellStyle(estiloCeldabordes0);
                 celdaD2.setCellType(CellType.STRING);
-                String txtD2 = "P1_1A_2(fecha_inicio_p) no esta entre P1_1_8(fecha_inicio_informacion_reportada)V23 y P1_1_9(fecha_termino_informacion_reportada)AC23";
+                String txtD2 = "P1_1A_2(fecha_inicio_p) no está entre P1_1_8(fecha_inicio_informacion_reportada)V23 y P1_1_9(fecha_termino_informacion_reportada)AC23";
                 XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                 celdaD2.setCellValue(textoD2);
 
@@ -791,7 +833,7 @@ public class ValPLE {
                 XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                 celdaD2.setCellStyle(estiloCeldabordes0);
                 celdaD2.setCellType(CellType.STRING);
-                String txtD2 = "P1_1A_3(fecha_termino_p) no esta entre P1_1_8(fecha_inicio_informacion_reportada)V23 y P1_1_9(fecha_termino_informacion_reportada)AC23";
+                String txtD2 = "P1_1A_3(fecha_termino_p) no está entre P1_1_8(fecha_inicio_informacion_reportada)V23 y P1_1_9(fecha_termino_informacion_reportada)AC23";
                 XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                 celdaD2.setCellValue(textoD2);
 
@@ -875,7 +917,7 @@ public class ValPLE {
                 XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                 celdaD2.setCellStyle(estiloCeldabordes0);
                 celdaD2.setCellType(CellType.STRING);
-                String txtD2 = "P1_1B_2(periodos_extraordinarios_celebrados)AB33 no debe ser null ya que P1_1B_1(cond_celebracion_periodos_extraordinarios)M33=Sí(1)";
+                String txtD2 = "El campo P1_1B_2(periodos_extraordinarios_celebrados)AB33 no debe estar vacío, debido a que en el campo P1_1B_1(cond_celebracion_periodos_extraordinarios)M33 se selecionó '1.Sí'.";
                 XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                 celdaD2.setCellValue(textoD2);
 
@@ -1004,7 +1046,7 @@ public class ValPLE {
                 XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                 celdaD2.setCellStyle(estiloCeldabordes0);
                 celdaD2.setCellType(CellType.STRING);
-                String txtD2 = "P1_1C_1(fecha_inicio_pe),P1_1C_2(fecha_termino_pe) o P1_1C_3(sesiones_celebradas_pe) en periodo_extraordinario_reportado no deben ser NULL";
+                String txtD2 = "Los campos P1_1C_1(fecha_inicio_pe),P1_1C_2(fecha_termino_pe) o P1_1C_3(sesiones_celebradas_pe) en periodo_extraordinario_reportado no deben ser estar vacíos";
                 XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                 celdaD2.setCellValue(textoD2);
 
@@ -2627,7 +2669,7 @@ public class ValPLE {
                 XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                 celdaD2.setCellStyle(estiloCeldabordes0);
                 celdaD2.setCellType(CellType.STRING);
-                String txtD2 = "No se debe de capturar informacion en P1_2_10-J(tema_5_comision_legislativa) ya que no se selecciono ningun tema en P1_2_9-I(tema_4_comision_legislativa)   ";
+                String txtD2 = "No se debe de capturar información en el campo P1_2_10-J(tema_5_comision_legislativa) ya que no se seleccionó ningún tema en el campo P1_2_9-I(tema_4_comision_legislativa).";
                 XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                 celdaD2.setCellValue(textoD2);
 
@@ -6601,7 +6643,7 @@ public class ValPLE {
                 XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                 celdaD2.setCellStyle(estiloCeldabordes0);
                 celdaD2.setCellType(CellType.STRING);
-                String txtD2 = "Se debe de capturar el campo P1_3_36-AK(tipo_candidatura_persona_legisladora) debido a que el campo  P1_3_34-AI(forma_eleccion_persona_legisladora) se selecciono \"Mayoría relativa\"'1'";
+                String txtD2 = "Se debe de capturar el campo P1_3_36-AK(tipo_candidatura_persona_legisladora) debido a que en el campo  P1_3_34-AI(forma_eleccion_persona_legisladora) se selecciono \"Mayoría relativa\"'1'";
                 XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                 celdaD2.setCellValue(textoD2);
 
@@ -6677,7 +6719,7 @@ public class ValPLE {
                 XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                 celdaD2.setCellStyle(estiloCeldabordes0);
                 celdaD2.setCellType(CellType.STRING);
-                String txtD2 = "No debe de capturar el campo P1_3_36-AK(tipo_candidatura_persona_legisladora) debido a que el campo  P1_3_34-AI(forma_eleccion_persona_legisladora) se selecciono \"Mayoría relativa\"'1'";
+                String txtD2 = "No debe de capturar el campo P1_3_36-AK(tipo_candidatura_persona_legisladora) debido a que en el campo  P1_3_34-AI(forma_eleccion_persona_legisladora) NO se seleccionó \"Mayoría relativa\"'1'";
                 XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                 celdaD2.setCellValue(textoD2);
 
@@ -7057,7 +7099,7 @@ public class ValPLE {
                 XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                 celdaD2.setCellStyle(estiloCeldabordes0);
                 celdaD2.setCellType(CellType.STRING);
-                String txtD2 = "No se debe de capturar el campo P1_3_39-AN(partido_politico_2_candidatura_coalicion) debido a que el campo P1_3_38-AM(partido_politico_1_candidatura_coalicion) esta vacio";
+                String txtD2 = "No se debe de capturar el campo P1_3_39-AN(partido_politico_2_candidatura_coalicion) debido a que el campo P1_3_38-AM(partido_politico_1_candidatura_coalicion) esta vacío";
                 XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                 celdaD2.setCellValue(textoD2);
 
@@ -7133,7 +7175,7 @@ public class ValPLE {
                 XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                 celdaD2.setCellStyle(estiloCeldabordes0);
                 celdaD2.setCellType(CellType.STRING);
-                String txtD2 = "No se debe de capturar el campo P1_3_40-AO(partido_politico_3_candidatura_coalicion) debido a que el campo P1_3_39-AN(partido_politico_2_candidatura_coalicion) esta vacio";
+                String txtD2 = "No se debe de capturar el campo P1_3_40-AO(partido_politico_3_candidatura_coalicion) debido a que el campo P1_3_39-AN(partido_politico_2_candidatura_coalicion) está vacío.";
                 XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                 celdaD2.setCellValue(textoD2);
 
@@ -7209,7 +7251,7 @@ public class ValPLE {
                 XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                 celdaD2.setCellStyle(estiloCeldabordes0);
                 celdaD2.setCellType(CellType.STRING);
-                String txtD2 = "No se debe de capturar el campo P1_3_41-AP(partido_politico_4_candidatura_coalicion) debido a que el campo P1_3_40-AO(partido_politico_3_candidatura_coalicion) esta vacio";
+                String txtD2 = "No se debe de capturar el campo P1_3_41-AP(partido_politico_4_candidatura_coalicion) debido a que el campo P1_3_40-AO(partido_politico_3_candidatura_coalicion) esta vacío";
                 XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                 celdaD2.setCellValue(textoD2);
 
@@ -7285,7 +7327,7 @@ public class ValPLE {
                 XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                 celdaD2.setCellStyle(estiloCeldabordes0);
                 celdaD2.setCellType(CellType.STRING);
-                String txtD2 = "No se debe de capturar el campoP1_3_42-AQ(partido_politico_5_candidatura_coalicion) debido a que el campo P1_3_41-AP(partido_politico_4_candidatura_coalicion) esta vacio";
+                String txtD2 = "No se debe de capturar el campoP1_3_42-AQ(partido_politico_5_candidatura_coalicion) debido a que el campo P1_3_41-AP(partido_politico_4_candidatura_coalicion) esta vacío";
                 XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                 celdaD2.setCellValue(textoD2);
 
@@ -10877,15 +10919,15 @@ public class ValPLE {
         CAMPO2_4[8] = "P1_3_119";
 
         String[] DCAMPO2 = new String[9];
-        DCAMPO2[0] = "No se puede capturar informacion en alguno de los siguientes Campos P1_3_84-CG(ID_comision_legislativa_2),P1_3_85-CH(nombre_comision_legislativa_2),P1_3_86-CI(cargo_comision_legislativa_2),P1_3_87-CJ(cant_reuniones_celebradas_comision_legislativa_2_asistidas) debido a que el campo :P1_3_81(CD)(nombre_comision_legislativa_1) esta vacio.";
-        DCAMPO2[1] = "No se puede capturar informacion en alguno de los siguientes Campos P1_3_88-CK(ID_comision_legislativa_3),P1_3_89-CL(nombre_comision_legislativa_3),P1_3_90-CM(cargo_comision_legislativa_3),P1_3_91-CN(cant_reuniones_celebradas_comision_legislativa_3_asistidas) debido a que el campo :P1_3_85(CH)(nombre_comision_legislativa_2) esta vacio.";
-        DCAMPO2[2] = "No se puede capturar informacion en alguno de los siguientes Campos P1_3_92-CO(ID_comision_legislativa_4),P1_3_93-CP(nombre_comision_legislativa_4),P1_3_94-CQ(cargo_comision_legislativa_4),P1_3_95-CR(cant_reuniones_celebradas_comision_legislativa_4_asistidas) debido a que el campo :P1_3_89(CL)(nombre_comision_legislativa_3) esta vacio.";
-        DCAMPO2[3] = "No se puede capturar informacion en alguno de los siguientes Campos P1_3_96-CS(ID_comision_legislativa_5),P1_3_97-CT(nombre_comision_legislativa_5),P1_3_98-CU(cargo_comision_legislativa_5),P1_3_99-CV(cant_reuniones_celebradas_comision_legislativa_5_asistidas) debido a que el campo :P1_3_93(CP)(nombre_comision_legislativa_4) esta vacio.";
-        DCAMPO2[4] = "No se puede capturar informacion en alguno de los siguientes Campos P1_3_100-CW(ID_comision_legislativa_6),P1_3_101-CX(nombre_comision_legislativa_6),P1_3_102-CY(cargo_comision_legislativa_6),P1_3_103-CZ(cant_reuniones_celebradas_comision_legislativa_6_asistidas) debido a que el campo :P1_3_97(CT)(nombre_comision_legislativa_5) esta vacio.";
-        DCAMPO2[5] = "No se puede capturar informacion en alguno de los siguientes Campos P1_3_104-DA(ID_comision_legislativa_7),P1_3_105-DB(nombre_comision_legislativa_7),P1_3_106-DC(cargo_comision_legislativa_7),P1_3_107-DD(cant_reuniones_celebradas_comision_legislativa_7_asistidas) debido a que el campo :P1_3_101(CX)(nombre_comision_legislativa_6) esta vacio.";
-        DCAMPO2[6] = "No se puede capturar informacion en alguno de los siguientes Campos P1_3_108-DE(ID_comision_legislativa_8),P1_3_109-DF(nombre_comision_legislativa_8),P1_3_110-DG(cargo_comision_legislativa_8),P1_3_111-DH(cant_reuniones_celebradas_comision_legislativa_8_asistidas) debido a que el campo :P1_3_105(DB)(nombre_comision_legislativa_7) esta vacio.";
-        DCAMPO2[7] = "No se puede capturar informacion en alguno de los siguientes Campos P1_3_112-DI(ID_comision_legislativa_9),P1_3_113-DJ(nombre_comision_legislativa_9),P1_3_114-DK(cargo_comision_legislativa_9),P1_3_115-DL(cant_reuniones_celebradas_comision_legislativa_9_asistidas) debido a que el campo :P1_3_109(DF)(nombre_comision_legislativa_8) esta vacio.";
-        DCAMPO2[8] = "No se puede capturar informacion en alguno de los siguientes Campos P1_3_116-DM(ID_comision_legislativa_10),P1_3_117-DN(nombre_comision_legislativa_10),P1_3_118-DO(cargo_comision_legislativa_10),P1_3_119-DP(cant_reuniones_celebradas_comision_legislativa_10_asistidas) debido a que el campo :P1_3_113(DJ)(nombre_comision_legislativa_9) esta vacio.";
+        DCAMPO2[0] = "No se puede capturar información en alguno de los siguientes Campos P1_3_84-CG(ID_comision_legislativa_2),P1_3_85-CH(nombre_comision_legislativa_2),P1_3_86-CI(cargo_comision_legislativa_2),P1_3_87-CJ(cant_reuniones_celebradas_comision_legislativa_2_asistidas) debido a que el campo :P1_3_81(CD)(nombre_comision_legislativa_1) está vacío.";
+        DCAMPO2[1] = "No se puede capturar información en alguno de los siguientes Campos P1_3_88-CK(ID_comision_legislativa_3),P1_3_89-CL(nombre_comision_legislativa_3),P1_3_90-CM(cargo_comision_legislativa_3),P1_3_91-CN(cant_reuniones_celebradas_comision_legislativa_3_asistidas) debido a que el campo :P1_3_85(CH)(nombre_comision_legislativa_2) está vacío.";
+        DCAMPO2[2] = "No se puede capturar información en alguno de los siguientes Campos P1_3_92-CO(ID_comision_legislativa_4),P1_3_93-CP(nombre_comision_legislativa_4),P1_3_94-CQ(cargo_comision_legislativa_4),P1_3_95-CR(cant_reuniones_celebradas_comision_legislativa_4_asistidas) debido a que el campo :P1_3_89(CL)(nombre_comision_legislativa_3) está vacío.";
+        DCAMPO2[3] = "No se puede capturar información en alguno de los siguientes Campos P1_3_96-CS(ID_comision_legislativa_5),P1_3_97-CT(nombre_comision_legislativa_5),P1_3_98-CU(cargo_comision_legislativa_5),P1_3_99-CV(cant_reuniones_celebradas_comision_legislativa_5_asistidas) debido a que el campo :P1_3_93(CP)(nombre_comision_legislativa_4) está vacío.";
+        DCAMPO2[4] = "No se puede capturar información en alguno de los siguientes Campos P1_3_100-CW(ID_comision_legislativa_6),P1_3_101-CX(nombre_comision_legislativa_6),P1_3_102-CY(cargo_comision_legislativa_6),P1_3_103-CZ(cant_reuniones_celebradas_comision_legislativa_6_asistidas) debido a que el campo :P1_3_97(CT)(nombre_comision_legislativa_5) eestá vacío.";
+        DCAMPO2[5] = "No se puede capturar información en alguno de los siguientes Campos P1_3_104-DA(ID_comision_legislativa_7),P1_3_105-DB(nombre_comision_legislativa_7),P1_3_106-DC(cargo_comision_legislativa_7),P1_3_107-DD(cant_reuniones_celebradas_comision_legislativa_7_asistidas) debido a que el campo :P1_3_101(CX)(nombre_comision_legislativa_6) está vacío.";
+        DCAMPO2[6] = "No se puede capturar información en alguno de los siguientes Campos P1_3_108-DE(ID_comision_legislativa_8),P1_3_109-DF(nombre_comision_legislativa_8),P1_3_110-DG(cargo_comision_legislativa_8),P1_3_111-DH(cant_reuniones_celebradas_comision_legislativa_8_asistidas) debido a que el campo :P1_3_105(DB)(nombre_comision_legislativa_7) está vacío.";
+        DCAMPO2[7] = "No se puede capturar información en alguno de los siguientes Campos P1_3_112-DI(ID_comision_legislativa_9),P1_3_113-DJ(nombre_comision_legislativa_9),P1_3_114-DK(cargo_comision_legislativa_9),P1_3_115-DL(cant_reuniones_celebradas_comision_legislativa_9_asistidas) debido a que el campo :P1_3_109(DF)(nombre_comision_legislativa_8) está vacío.";
+        DCAMPO2[8] = "No se puede capturar información en alguno de los siguientes Campos P1_3_116-DM(ID_comision_legislativa_10),P1_3_117-DN(nombre_comision_legislativa_10),P1_3_118-DO(cargo_comision_legislativa_10),P1_3_119-DP(cant_reuniones_celebradas_comision_legislativa_10_asistidas) debido a que el campo :P1_3_113(DJ)(nombre_comision_legislativa_9) está vacío.";
 
         String[] CAMPO3 = new String[10];
         CAMPO3[0] = "P1_3_80-CC(ID_comision_legislativa_1)";
@@ -19306,6 +19348,82 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
             conDat = conDat + coni;
             coni = 1;
         }
+         ArrayResult = InS.ExistenIniciativas(entidad, legislatura, envio);
+        if (ArrayResult.size() > 0) {
+
+            XSSFRow filaEE1 = hojaIniciativas.createRow(conEnc);//FILA
+            XSSFCell celdaE1 = filaEE1.createCell(0);//COLUMNA
+            celdaE1.setCellStyle(estiloCelda1);
+            celdaE1.setCellType(CellType.STRING);
+            String txtE1 = "ID_iniciativa";
+            XSSFRichTextString textoE1 = new XSSFRichTextString(txtE1);
+            celdaE1.setCellValue(textoE1);
+
+            XSSFCell celdaE6 = filaEE1.createCell(1);//COLUMNA
+            celdaE6.setCellStyle(estiloCelda1);
+            celdaE6.setCellType(CellType.STRING);
+            String txtE6 = "OBSERVACIONES";
+            XSSFRichTextString textoE6 = new XSSFRichTextString(txtE6);
+            celdaE6.setCellValue(textoE6);
+
+            XSSFCell celdaE7 = filaEE1.createCell(2);//COLUMNA
+            celdaE7.setCellStyle(estiloCelda1);
+            celdaE7.setCellType(CellType.STRING);
+            String txtE7 = "ID_ENTIDAD";
+            XSSFRichTextString textoE7 = new XSSFRichTextString(txtE7);
+            celdaE7.setCellValue(textoE7);
+
+            XSSFCell celdaE8 = filaEE1.createCell(3);//COLUMNA
+            celdaE8.setCellStyle(estiloCelda1);
+            celdaE8.setCellType(CellType.STRING);
+            String txtE8 = "JUSTIFICACION";
+            XSSFRichTextString textoE8 = new XSSFRichTextString(txtE8);
+            celdaE8.setCellValue(textoE8);
+
+            for (int i = 0; i < ArrayResult.size(); i++) {
+
+                XSSFRow filaEE2 = hojaIniciativas.createRow(conDat + i);
+                XSSFCell celdaD1 = filaEE2.createCell(0);//COLUMNA
+                celdaD1.setCellStyle(estiloCeldabordes0);
+                celdaD1.setCellType(CellType.STRING);
+                //String txtD1 = Arrays.toString(ArrayResult.get(i));
+                String txtD1 = Arrays.toString(ArrayResult.get(i));
+                txtD1 = txtD1.replace("[", "").replace("]", "").replace(" 00:00:00.0", "");
+                String[] parts = txtD1.split(",");
+                String parts1 = parts[1].trim();
+                XSSFRichTextString textoD1 = new XSSFRichTextString(parts1);
+                celdaD1.setCellValue(textoD1);
+
+                XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
+                celdaD2.setCellStyle(estiloCeldabordes0);
+                celdaD2.setCellType(CellType.STRING);
+                String txtD2 = "¡LA PESTAÑA DE INICIATIVAS ESTÁ VACÍA! Favor de revisar";
+                XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
+                celdaD2.setCellValue(textoD2);
+
+                XSSFCell celdaD3 = filaEE2.createCell(2);//COLUMNA
+                celdaD3.setCellStyle(estiloCeldabordes0);
+                celdaD3.setCellType(CellType.STRING);
+                String txtD3 = Arrays.toString(ArrayResult.get(i));
+                txtD3 = txtD3.replace("[", "").replace("]", "").replace(" 00:00:00.0", "");
+                String[] parts3 = txtD3.split(",");
+                String parts4 = parts3[0].trim();
+                XSSFRichTextString textoD3 = new XSSFRichTextString(parts4);
+                celdaD3.setCellValue(textoD3);
+
+                XSSFCell celdaD4 = filaEE2.createCell(3);//COLUMNA
+                celdaD4.setCellStyle(estiloCeldabordes0);
+                celdaD4.setCellType(CellType.STRING);
+                String txtD4 = "";
+                XSSFRichTextString textoD4 = new XSSFRichTextString(txtD4);
+                celdaD4.setCellValue(textoD4);
+
+                coni++;
+            }
+            conEnc = conEnc + coni;
+            conDat = conDat + coni;
+            coni = 1;
+        }
         
         ArrayResult = InS.P1_5_3_null(entidad, legislatura, envio);
         if (ArrayResult.size() > 0) {
@@ -20278,7 +20396,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                 XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                 celdaD2.setCellStyle(estiloCeldabordes0);
                 celdaD2.setCellType(CellType.STRING);
-                String txtD2 = "P1_5_9-I(otro_estatus_iniciativa_especifique) Debe especificar el otro estatus de la iniciativa debido a que P1_5_8-H(estatus_iniciativa) se selecciono \"Otro estatus (especifique)\"'8' ";
+                String txtD2 = "Debe especificar información en el campo P1_5_9-I (otro_estatus_iniciativa_especifique), ya que en P1_5_8-H (estatus_iniciativa) se seleccionó la opción \"8.Otro estatus (especifique)\".";
                 XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                 celdaD2.setCellValue(textoD2);
 
@@ -20354,7 +20472,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                 XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                 celdaD2.setCellStyle(estiloCeldabordes0);
                 celdaD2.setCellType(CellType.STRING);
-                String txtD2 = "P1_5_9-I(otro_estatus_iniciativa_especifique) No se debe especificar el otro estatus de la iniciativa debido a que P1_5_8-H(estatus_iniciativa) no se selecciono \"Otro estatus (especifique)\"'8' ";
+                String txtD2 = "No debe capturar información en el campo P1_5_9-I (otro_estatus_iniciativa_especifique), ya que en P1_5_8-H (estatus_iniciativa) no se seleccionó la opción \"8.Otro estatus (especifique)\" ";
                 XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                 celdaD2.setCellValue(textoD2);
 
@@ -20582,7 +20700,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                 XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                 celdaD2.setCellStyle(estiloCeldabordes0);
                 celdaD2.setCellType(CellType.STRING);
-                String txtD2 = "En caso de que haya seleccionado la categoría \"Estudio\" en la columna P1_5_8-H(estatus_iniciativa), únicamente puede seleccionar la categoría \"Primer estudio\" o \"Segundo estudio\" en la columna P1_5_10-J(etapa_procesal_iniciativa)";
+                String txtD2 = "Si en P1_5_8-H (estatus_iniciativa) se seleccionó la categoría \"Estudio\", únicamente debe seleccionar \"Primer estudio\" o \"Segundo estudio\" en P1_5_10-J (etapa_procesal_iniciativa).";
                 XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                 celdaD2.setCellValue(textoD2);
 
@@ -22088,7 +22206,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                 XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                 celdaD2.setCellStyle(estiloCeldabordes0);
                 celdaD2.setCellType(CellType.STRING);
-                String txtD2 = "No debe seleccionar una categoria en P1_5_57-BE(grupo_parlamentario) debido a P1_5_16 (tipo_promovente_iniciativa) se selecciono una categoria diferente a \"Grupo parlamentario\" (4).";
+                String txtD2 = "No debe seleccionar una información en P1_5_57-BE(grupo_parlamentario) debido a que en P1_5_16 (tipo_promovente_iniciativa) se seleccionó una categoría diferente a \"4.Grupo parlamentario\".";
                 XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                 celdaD2.setCellValue(textoD2);
 
@@ -22164,7 +22282,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                 XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                 celdaD2.setCellStyle(estiloCeldabordes0);
                 celdaD2.setCellType(CellType.STRING);
-                String txtD2 = "No debe especificar en P1_5_58-BF(varios_grupos_parlamentarios_especifique_1) debido a P1_5_57 (grupo_parlamentario) se selecciono una categoría diferente a \"Varios\" (88).";
+                String txtD2 = "El campo P1_5_58-BF(varios_grupos_parlamentarios_especifique_1) no debe contener información, debido a que en P1_5_57 (grupo_parlamentario) se seleccionó una categoría diferente a \"88.Varios\".";
                 XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                 celdaD2.setCellValue(textoD2);
 
@@ -22544,7 +22662,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                 XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                 celdaD2.setCellStyle(estiloCeldabordes0);
                 celdaD2.setCellType(CellType.STRING);
-                String txtD2 = "El campo P1_5_3-C(cond_presentacion_iniciativa_periodo) no se debe de capturar debido a que en la columna cond_presentacion_iniciativa_legislatura_actual (P1_5_2) se selecciono la opcion \"NO\" '2'";
+                String txtD2 = "El campo P1_5_3-C(cond_presentacion_iniciativa_periodo) no se debe de capturar debido a que en la columna cond_presentacion_iniciativa_legislatura_actual (P1_5_2) se seleccionó la opción \"2.NO\".";
                 XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                 celdaD2.setCellValue(textoD2);
 
@@ -22696,7 +22814,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                 XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                 celdaD2.setCellStyle(estiloCeldabordes0);
                 celdaD2.setCellType(CellType.STRING);
-                String txtD2 = "Se deben de capturar las columnas P1_5_61-BI(ID_comision_legislativa_1) y P1_5_62-BJ(nombre_comision_legislativa_1) debido a que tipo_promovente_iniciativa (P1_5_16) se  selecciono \"Comisión legislativa\"'5' ";
+                String txtD2 = "Se deben de capturar las columnas P1_5_61-BI(ID_comision_legislativa_1) y P1_5_62-BJ(nombre_comision_legislativa_1) debido a que en tipo_promovente_iniciativa (P1_5_16) se  seleccionó \"5.Comisión legislativa\".";
                 XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                 celdaD2.setCellValue(textoD2);
 
@@ -22772,7 +22890,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                 XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                 celdaD2.setCellStyle(estiloCeldabordes0);
                 celdaD2.setCellType(CellType.STRING);
-                String txtD2 = "No se deben de capturar las columnas P1_5_61-BI(ID_comision_legislativa_1) y P1_5_62-BJ(nombre_comision_legislativa_1) debido a que tipo_promovente_iniciativa (P1_5_16) no se  selecciono \"Comisión legislativa\"'5";
+                String txtD2 = "No se deben de capturar las columnas P1_5_61-BI(ID_comision_legislativa_1) y P1_5_62-BJ(nombre_comision_legislativa_1) debido a que en tipo_promovente_iniciativa (P1_5_16) no se  seleccionó \"5.Comisión legislativa\".";
                 XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                 celdaD2.setCellValue(textoD2);
 
@@ -23468,7 +23586,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                 XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                 celdaD2.setCellStyle(estiloCeldabordes0);
                 celdaD2.setCellType(CellType.STRING);
-                String txtD2 = "Debe especificar el dato en P1_5_70-BR(otro_tipo_organo_constitucional_autonomo_especifique) debido a P1_5_69 (tipo_organo_constitucional_autonomo) se selecciono la categoria \"Otro órgano constitucional autónomo (específique)\"  (7).";
+                String txtD2 = "Debe especificar el dato en P1_5_70-BR(otro_tipo_organo_constitucional_autonomo_especifique) debido a que en P1_5_69 (tipo_organo_constitucional_autonomo) se seleccionó: \"7.Otro órgano constitucional autónomo (específique)\".";
                 XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                 celdaD2.setCellValue(textoD2);
 
@@ -23697,7 +23815,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                 XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                 celdaD2.setCellStyle(estiloCeldabordes0);
                 celdaD2.setCellType(CellType.STRING);
-                String txtD2 = "Debe especificar el dato en P1_5_70-BR(otro_tipo_organo_constitucional_autonomo_especifique) debido a P1_5_69 (tipo_organo_constitucional_autonomo) se selecciono la categoria \"Otro órgano constitucional autónomo (específique)\"  (7).";
+                String txtD2 = "Debe especificar el dato en P1_5_70-BR(otro_tipo_organo_constitucional_autonomo_especifique) debido a que en P1_5_69 (tipo_organo_constitucional_autonomo) se seleccionó: \"7.Otro órgano constitucional autónomo (específique)\" .";
                 XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                 celdaD2.setCellValue(textoD2);
 
@@ -23774,7 +23892,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                 XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                 celdaD2.setCellStyle(estiloCeldabordes0);
                 celdaD2.setCellType(CellType.STRING);
-                String txtD2 = "No debe especificar el dato en P1_5_70-BR(otro_tipo_organo_constitucional_autonomo_especifique) debido a P1_5_69 (tipo_organo_constitucional_autonomo) se selecciono una categoria diferente a \"Otro órgano constitucional autónomo (específique)\"  (7).";
+                String txtD2 = "No debe especificar el dato en P1_5_70-BR(otro_tipo_organo_constitucional_autonomo_especifique) debido a que en P1_5_69 (tipo_organo_constitucional_autonomo) se seleccionó una categoría diferente a \"7.Otro órgano constitucional autónomo (específique)\".";
                 XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                 celdaD2.setCellValue(textoD2);
 
@@ -23850,7 +23968,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                 XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                 celdaD2.setCellStyle(estiloCeldabordes0);
                 celdaD2.setCellType(CellType.STRING);
-                String txtD2 = "Debe especificar el dato en P1_5_71-BS(otro_tipo_promovente_iniciativa_especifique) debido a P1_5_16 (tipo_promovente_iniciativa) se selecciono la categoria \"Otro tipo de promovente (especifique)\" (12).";
+                String txtD2 = "Debe especificar el dato en P1_5_71-BS(otro_tipo_promovente_iniciativa_especifique) debido a que en P1_5_16 (tipo_promovente_iniciativa) se seleccionó:\"12.Otro tipo de promovente (especifique)\".";
                 XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                 celdaD2.setCellValue(textoD2);
 
@@ -23926,7 +24044,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                 XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                 celdaD2.setCellStyle(estiloCeldabordes0);
                 celdaD2.setCellType(CellType.STRING);
-                String txtD2 = "No debe especificar el dato en P1_5_71-BS(otro_tipo_promovente_iniciativa_especifique) debido a P1_5_16 (tipo_promovente_iniciativa) se selecciono una categoria diferente a \"Otro tipo de promovente (especifique)\" (12).";
+                String txtD2 = "No debe especificar el dato en P1_5_71-BS(otro_tipo_promovente_iniciativa_especifique) debido a P1_5_16 (tipo_promovente_iniciativa) se seleccionó una categoría diferente a \"12.Otro tipo de promovente (especifique)\".";
                 XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                 celdaD2.setCellValue(textoD2);
 
@@ -24306,7 +24424,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                 XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                 celdaD2.setCellStyle(estiloCeldabordes0);
                 celdaD2.setCellType(CellType.STRING);
-                String txtD2 = "No debe seleccionar una categoria en P1_5_73-BU(cond_adhesion_iniciativa) debido a P1_5_7 (cond_modificacion_informacion_ingreso_periodo) se selecciono la categoria \"No\" (2).";
+                String txtD2 = "No debe de haber información en el campo en P1_5_73-BU(cond_adhesion_iniciativa) debido a que en el campo P1_5_7 (cond_modificacion_informacion_ingreso_periodo) se seleccionó: \"(2).No\".";
                 XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                 celdaD2.setCellValue(textoD2);
 
@@ -24382,7 +24500,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                 XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                 celdaD2.setCellStyle(estiloCeldabordes0);
                 celdaD2.setCellType(CellType.STRING);
-                String txtD2 = "No debe especificar el dato en P1_5_75-BW(nombre_comision_legislativa_1_primer_estudio) y P1_5_74-BV(ID_comision_legislativa_1_primer_estudio) debido a P1_5_8 (estatus_iniciativa) se selecciono una categoria diferente a \"Estudio\" (2), \"Dictamen\" (5), \"Desechada o improcedente\" (6) o \"Aprobada o procedente\" (7).";
+                String txtD2 = "No debe especificar el dato en P1_5_75-BW(nombre_comision_legislativa_1_primer_estudio) y P1_5_74-BV(ID_comision_legislativa_1_primer_estudio) debido a que en P1_5_8 (estatus_iniciativa) se seleccionó una categoría diferente a \"2.Estudio\", \"5.Dictamen\", \"6.Desechada o improcedente\" o \"7.Aprobada o procedente\".";
                 XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                 celdaD2.setCellValue(textoD2);
 
@@ -24458,7 +24576,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                 XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                 celdaD2.setCellStyle(estiloCeldabordes0);
                 celdaD2.setCellType(CellType.STRING);
-                String txtD2 = "Debe capturar informacion en P1_5_75-BW(nombre_comision_legislativa_1_primer_estudio) y P1_5_74-BV(ID_comision_legislativa_1_primer_estudio) debido a que en P1_5_8-H (estatus_iniciativa) se selecciono alguna de las categorias \"Estudio\" (2), \"Dictamen\" (5), \"Desechada o improcedente\" (6) o \"Aprobada o procedente\" (7).";
+                String txtD2 = "Debe capturar información en los campos P1_5_75-BW(nombre_comision_legislativa_1_primer_estudio) y P1_5_74-BV(ID_comision_legislativa_1_primer_estudio) debido a que en  el campo P1_5_8-H (estatus_iniciativa) se seleccionó alguna de las categorías: \"Estudio(2)\", \"Dictamen (5)\", \"Desechada o improcedente(6)\" o \"Aprobada o procedente(7)\".";
                 XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                 celdaD2.setCellValue(textoD2);
 
@@ -24549,7 +24667,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "No se deben de capturar los campos " + Campo2 + "-" + DCampo2 + ", " + Campo3 + "-" + DCampo3 + " debido a que el campo " + Campo1 + "-" + DCampo1 + " viene vacio";
+                    String txtD2 = "No se deben de capturar los campos " + Campo2 + "-" + DCampo2 + ", " + Campo3 + "-" + DCampo3 + " debido a que el campo " + Campo1 + "-" + DCampo1 + " está vacío";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -24944,7 +25062,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                 XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                 celdaD2.setCellStyle(estiloCeldabordes0);
                 celdaD2.setCellType(CellType.STRING);
-                String txtD2 = "Debe capturar información en P1_5_85-CG(nombre_comision_legislativa_1_segundo_estudio) o P1_5_84-CF(ID_comision_legislativa_1_segundo_estudio) debido a que se selecciono información en cualquiera de las ya mencionadas.";
+                String txtD2 = "Debe capturar información en P1_5_85-CG(nombre_comision_legislativa_1_segundo_estudio) o P1_5_84-CF(ID_comision_legislativa_1_segundo_estudio) debido a que se seleccionó la categoría \"2.Segundo estudio\" o \"4.Segundo dictamen\" en la columna etapa_procesal_iniciativa.";
                 XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                 celdaD2.setCellValue(textoD2);
 
@@ -25036,7 +25154,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "No se puede capturar informacion en las columnas " + Campo2 + "-" + DCampo2 + ", " + Campo3 + "-" + DCampo3 + " debido a que el campo " + Campo1 + "-" + DCampo1 + " viene vacio ";
+                    String txtD2 = "No se puede capturar información en las columnas " + Campo2 + "-" + DCampo2 + ", " + Campo3 + "-" + DCampo3 + " debido a que el campo " + Campo1 + "-" + DCampo1 + " está vacío.";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -25278,7 +25396,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                 XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                 celdaD2.setCellStyle(estiloCeldabordes0);
                 celdaD2.setCellType(CellType.STRING);
-                String txtD2 = "No debe especificar el dato en P1_5_94-CP(tipo_primer_dictamen) y P1_5_96-CR(sentido_resolucion_primer_dictamen) debido a P1_5_8 (estatus_iniciativa) se selecciono una categoria difrente a \"Dictamen\" (5), \"Desechada o improcedente\" (6) o \"Aprobada o procedente\" (7).";
+                String txtD2 = "No debe capturar información en P1_5_94-CP (tipo_primer_dictamen) ni en P1_5_96-CR (sentido_resolucion_primer_dictamen), ya que en P1_5_8 (estatus_iniciativa) se seleccionó una categoría distinta de \"Dictamen\" (5), \"Desechada o improcedente\" (6) o \"Aprobada o procedente\" (7).";
                 XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                 celdaD2.setCellValue(textoD2);
 
@@ -25354,7 +25472,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                 XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                 celdaD2.setCellStyle(estiloCeldabordes0);
                 celdaD2.setCellType(CellType.STRING);
-                String txtD2 = "Debe especificar el dato en P1_5_95-CQ(otro_tipo_primer_dictamen_especifique) debido a P1_5_94 (tipo_primer_dictamen) se selecciono la categoria \"Otro tipo (especifique)\" (8).";
+                String txtD2 = "Debe capturar información en P1_5_95-CQ (otro_tipo_primer_dictamen_especifique), ya que en P1_5_94 (tipo_primer_dictamen) se seleccionó la opción \"Otro tipo (especifique)\" (8).";
                 XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                 celdaD2.setCellValue(textoD2);
 
@@ -25430,7 +25548,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                 XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                 celdaD2.setCellStyle(estiloCeldabordes0);
                 celdaD2.setCellType(CellType.STRING);
-                String txtD2 = "No debe especificar el dato en P1_5_95-CQ(otro_tipo_primer_dictamen_especifique) debido a P1_5_94 (tipo_primer_dictamen) se selecciono una categoria diferente a \"Otro tipo (especifique)\" (8).";
+                String txtD2 = "No debe capturar información en P1_5_95-CQ (otro_tipo_primer_dictamen_especifique), ya que en P1_5_94 (tipo_primer_dictamen) se seleccionó una categoría distinta de \"Otro tipo (especifique)\" (8).";
                 XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                 celdaD2.setCellValue(textoD2);
 
@@ -25582,7 +25700,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                 XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                 celdaD2.setCellStyle(estiloCeldabordes0);
                 celdaD2.setCellType(CellType.STRING);
-                String txtD2 = "Debe especificar el dato en P1_5_97-CS(otro_sentido_resolucion_primer_dictamen_especifique) debido a P1_5_96 (entido_resolucion_primer_dictamen) se selecciono \"En otro sentido de resolución (especifique)\" (4).";
+                String txtD2 = "Debe capturar información en P1_5_97-CS (otro_sentido_resolucion_primer_dictamen_especifique), ya que en P1_5_96 (sentido_resolucion_primer_dictamen) se seleccionó la opción \"En otro sentido de resolución (especifique)\" (4).";
                 XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                 celdaD2.setCellValue(textoD2);
 
@@ -25658,7 +25776,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                 XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                 celdaD2.setCellStyle(estiloCeldabordes0);
                 celdaD2.setCellType(CellType.STRING);
-                String txtD2 = "No debe especificar el dato en P1_5_97-CS(otro_sentido_resolucion_primer_dictamen_especifique) debido a P1_5_96 (entido_resolucion_primer_dictamen) se selecciono una categoria diferente a \"En otro sentido de resolución (especifique)\" (4).";
+                String txtD2 = "No debe capturar información en P1_5_97-CS (otro_sentido_resolucion_primer_dictamen_especifique), ya que en P1_5_96 (sentido_resolucion_primer_dictamen) se seleccionó una categoría distinta de \\\"En otro sentido de resolución (especifique)\\\" (4).";
                 XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                 celdaD2.setCellValue(textoD2);
 
@@ -25734,7 +25852,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                 XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                 celdaD2.setCellStyle(estiloCeldabordes0);
                 celdaD2.setCellType(CellType.STRING);
-                String txtD2 = "No debe selecciona una categoria en P1_5_98-CT(tipo_segundo_dictamen) y P1_5_100-CV(sentido_resolucion_segundo_dictamen) debido a P1_5_10 (etapa_procesal_iniciativa) se selecciono una categoria diferente a  \"Segundo dictamen\" (4).";
+                String txtD2 = "Los campos P1_5_98-CT(tipo_segundo_dictamen) y P1_5_100-CV(sentido_resolucion_segundo_dictamen) no deben contener información, debido a que en P1_5_10 (etapa_procesal_iniciativa) se seleccionó una categoría diferente a  \"4.Segundo dictamen\".";
                 XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                 celdaD2.setCellValue(textoD2);
 
@@ -25810,7 +25928,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                 XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                 celdaD2.setCellStyle(estiloCeldabordes0);
                 celdaD2.setCellType(CellType.STRING);
-                String txtD2 = "Debe especificar el dato en P1_5_99-CU(otro_tipo_segundo_dictamen_especifique) debido a P1_5_98 (tipo_segundo_dictamen) se selecciono la categoria \"Otro tipo (especifique)\" (8).";
+                String txtD2 = "Debe capturar el campo P1_5_99-CU(otro_tipo_segundo_dictamen_especifique) debido a  que en P1_5_98 (tipo_segundo_dictamen) se seleccionó: \"8.Otro tipo (especifique)\".";
                 XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                 celdaD2.setCellValue(textoD2);
 
@@ -25886,7 +26004,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                 XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                 celdaD2.setCellStyle(estiloCeldabordes0);
                 celdaD2.setCellType(CellType.STRING);
-                String txtD2 = "No debe especificar el dato en P1_5_99-CU(otro_tipo_segundo_dictamen_especifique) debido a P1_5_98 (tipo_segundo_dictamen) se selecciono una categoria diferente a \"Otro tipo (especifique)\" (8).";
+                String txtD2 = "No debe capturar datos en P1_5_99-CU(otro_tipo_segundo_dictamen_especifique) debido a que en P1_5_98 (tipo_segundo_dictamen) se seleccionó una categoría diferente a \"8.Otro tipo (especifique)\".";
                 XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                 celdaD2.setCellValue(textoD2);
 
@@ -25962,7 +26080,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                 XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                 celdaD2.setCellStyle(estiloCeldabordes0);
                 celdaD2.setCellType(CellType.STRING);
-                String txtD2 = "Debe especificar el dato en P1_5_101-CW(otro_sentido_resolucion_segundo_dictamen_especifique) debido a P1_5_100 (sentido_resolucion_segundo_dictamen) se selecciono  \"En otro sentido de resolución (especifique)\" (4).";
+                String txtD2 = "Debe capturar dato en P1_5_101-CW(otro_sentido_resolucion_segundo_dictamen_especifique) debido a que en P1_5_100 (sentido_resolucion_segundo_dictamen) se seleccionó:  \"4.En otro sentido de resolución (especifique)\".";
                 XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                 celdaD2.setCellValue(textoD2);
 
@@ -26038,7 +26156,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                 XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                 celdaD2.setCellStyle(estiloCeldabordes0);
                 celdaD2.setCellType(CellType.STRING);
-                String txtD2 = "No debe especificar el dato en P1_5_101-CW(otro_sentido_resolucion_segundo_dictamen_especifique) debido a P1_5_100 (sentido_resolucion_segundo_dictamen) se selecciono una categoria diferente a \"En otro sentido de resolución (especifique)\" (4).";
+                String txtD2 = "No debe capturar el campo P1_5_101-CW(otro_sentido_resolucion_segundo_dictamen_especifique) debido a que en P1_5_100 (sentido_resolucion_segundo_dictamen) NO se seleccionó: \"4.En otro sentido de resolución (especifique)\".";
                 XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                 celdaD2.setCellValue(textoD2);
 
@@ -26114,7 +26232,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                 XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                 celdaD2.setCellStyle(estiloCeldabordes0);
                 celdaD2.setCellType(CellType.STRING);
-                String txtD2 = "No debe introducir un dato en P1_5_102-CX(fecha_resolucion_pleno_iniciativa), P1_5_103-CY(sentido_resolucion_pleno_iniciativa), P1_5_104-CZ(total_votaciones_pleno_iniciativa), P1_5_105-DA(votaciones_pleno_a_favor_iniciativa), P1_5_106-DB(votaciones_pleno_en_contra_iniciativa) y P1_5_107-DC(votaciones_pleno_abstencion_iniciativa) debido a P1_5_8 (estatus_iniciativa) se selecciono una categoria diferente a \"Desechada o improcedente\" (6) o \"Aprobada o procedente\" (7)";
+                String txtD2 = "No debe capturar P1_5_102-CX(fecha_resolucion_pleno_iniciativa), P1_5_103-CY(sentido_resolucion_pleno_iniciativa), P1_5_104-CZ(total_votaciones_pleno_iniciativa), P1_5_105-DA(votaciones_pleno_a_favor_iniciativa), P1_5_106-DB(votaciones_pleno_en_contra_iniciativa) y P1_5_107-DC(votaciones_pleno_abstencion_iniciativa) debido a que en P1_5_8 (estatus_iniciativa) NO se seleccionó: \"6.Desechada o improcedente\" o \"7.Aprobada o procedente\".";
                 XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                 celdaD2.setCellValue(textoD2);
 
@@ -26570,7 +26688,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                 XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                 celdaD2.setCellStyle(estiloCeldabordes0);
                 celdaD2.setCellType(CellType.STRING);
-                String txtD2 = "No debe introducir un dato en P1_5_108-DD(fecha_remision_ejecutivo_iniciativa) y P1_5_109-DE(sentido_resolucion_ejecutivo_iniciativa) debido a P1_5_8 (estatus_iniciativa) se selecciono una categoria diferente a \"Aprobada o procedente\" (7).";
+                String txtD2 = "No debe introducir un dato en P1_5_108-DD(fecha_remision_ejecutivo_iniciativa) y P1_5_109-DE(sentido_resolucion_ejecutivo_iniciativa) debido a que en P1_5_8 (estatus_iniciativa) NO se seleccióno: \"7.Aprobada o procedente\"";
                 XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                 celdaD2.setCellValue(textoD2);
 
@@ -26722,7 +26840,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                 XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                 celdaD2.setCellStyle(estiloCeldabordes0);
                 celdaD2.setCellType(CellType.STRING);
-                String txtD2 = "No debe introducir una fecha en P1_5_110-DF(fecha_publicacion_gaceta_oficial_iniciativa) debido a P1_5_109 (sentido_resolucion_ejecutivo_iniciativa) se selecciono una categoria diferente a \"Aprobado\" (2).";
+                String txtD2 = "No debe introducir una fecha en P1_5_110-DF(fecha_publicacion_gaceta_oficial_iniciativa) debido a que en P1_5_109 (sentido_resolucion_ejecutivo_iniciativa) NO se seleccionó: \"2.Aprobado\".";
                 XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                 celdaD2.setCellValue(textoD2);
 
@@ -27689,7 +27807,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "Debe especificar el tipo de iniciativa en P1_6_8-H(otro_tipo_iniciativa_urgente_obvia_especifique) debido a P1_6_7-G(tipo_iniciativa_urgente_obvia) se selecciono la categoría \"Otro tipo (especifique)\" (3).";
+                    String txtD2 = "Debe especificar el tipo de iniciativa en P1_6_8-H(otro_tipo_iniciativa_urgente_obvia_especifique) debido a que en P1_6_7-G(tipo_iniciativa_urgente_obvia) se seleccionó: \"3.Otro tipo (especifique)\" .";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -27765,7 +27883,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "No debe especificar el tipo de iniciativa en P1_6_8-H(otro_tipo_iniciativa_urgente_obvia_especifique) debido a P1_6_7-G(tipo_iniciativa_urgente_obvia) se selecciono la categoría diferente a \"Otro tipo (especifique)\" (3).";
+                    String txtD2 = "No debe especificar el tipo de iniciativa en P1_6_8-H(otro_tipo_iniciativa_urgente_obvia_especifique) debido a que en P1_6_7-G(tipo_iniciativa_urgente_obvia) se seleccionó: \"3.Otro tipo (especifique)\".";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -27841,7 +27959,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "Debe seleccionar una categoria en P1_6_11-K(nombre_persona_legisladora_1) y P1_6_10-J(ID_persona_legisladora_1) debido a P1_6_9-I(tipo_promovente_iniciativa_urgente_obvia) se selecciono \"Personas legisladoras\" (3).";
+                    String txtD2 = "Debe capturar P1_6_11-K(nombre_persona_legisladora_1) y P1_6_10-J(ID_persona_legisladora_1) debido a que en  P1_6_9-I(tipo_promovente_iniciativa_urgente_obvia) se seleccionó: \"3.Personas legisladoras\".";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -27917,7 +28035,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "No debe seleccionar una categoria en P1_6_11-K(nombre_persona_legisladora_1) y P1_6_10-J(ID_persona_legisladora_1) debido a P1_6_9-I(tipo_promovente_iniciativa_urgente_obvia) se selecciono una categoria diferente a \"Personas legisladoras\" (3).";
+                    String txtD2 = "No debe caputrar P1_6_11-K(nombre_persona_legisladora_1) y P1_6_10-J(ID_persona_legisladora_1) debido a que en P1_6_9-I(tipo_promovente_iniciativa_urgente_obvia) NO se seleccionó: \"3.Personas legisladoras\".";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -27993,7 +28111,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "Debe capturar información en P1_6_10-J(ID_persona_legisladora_1) o P1_6_11-K(nombre_persona_legisladora_1) debido a  se selecciono una categoría en cualquiera de las ya mencionadas.";
+                    String txtD2 = "Debe capturar información en P1_6_10-J(ID_persona_legisladora_1) y P1_6_11-K(nombre_persona_legisladora_1) debido a se seleccionó: \"Personas legisladoras\" en la columna tipo_promovente_iniciativa_urgente_obvia.";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -28023,25 +28141,25 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
             }
 
             String[] CAMPOS = new String[19];
-            CAMPOS[0] = "No debe seleccionar una categoria en  ,P1_6_12,-L(ID_persona_legisladora_2) y  ,P1_6_13,-M(nombre_persona_legisladora_2) debido a  ,P1_6_11,-K(nombre_persona_legisladora_1) no se selecciono una categoria.";
-            CAMPOS[1] = "No debe seleccionar una categoria en ,P1_6_14,-N(ID_persona_legisladora_3) y ,P1_6_15,-O(nombre_persona_legisladora_3) debido a ,P1_6_13,-M(nombre_persona_legisladora_2) no se selecciono una categoria.";
-            CAMPOS[2] = "No debe seleccionar una categoria en ,P1_6_16,-P(ID_persona_legisladora_4) y ,P1_6_17,-Q(nombre_persona_legisladora_4) debido a ,P1_6_15,-O(nombre_persona_legisladora_3) no se selecciono una categoria.";
-            CAMPOS[3] = "No debe seleccionar una categoria en ,P1_6_18,-R(ID_persona_legisladora_5) y ,P1_6_19,-S(nombre_persona_legisladora_5) debido a ,P1_6_17,-Q(nombre_persona_legisladora_4) no se selecciono una categoria.";
-            CAMPOS[4] = "No debe seleccionar una categoria en ,P1_6_20,-T(ID_persona_legisladora_6) y ,P1_6_21,-U(nombre_persona_legisladora_6) debido a ,P1_6_19,-S(nombre_persona_legisladora_5) no se selecciono una categoria.";
-            CAMPOS[5] = "No debe seleccionar una categoria en ,P1_6_22,-V(ID_persona_legisladora_7) y ,P1_6_23,-W(nombre_persona_legisladora_7) debido a ,P1_6_21,-U(nombre_persona_legisladora_6) no se selecciono una categoria.";
-            CAMPOS[6] = "No debe seleccionar una categoria en ,P1_6_24,-X(ID_persona_legisladora_8) y ,P1_6_25,-Y(nombre_persona_legisladora_8) debido a ,P1_6_23,-W(nombre_persona_legisladora_7) no se selecciono una categoria.";
-            CAMPOS[7] = "No debe seleccionar una categoria en ,P1_6_26,-Z(ID_persona_legisladora_9) y ,P1_6_27,-AA(nombre_persona_legisladora_9) debido a ,P1_6_25,-Y(nombre_persona_legisladora_8) no se selecciono una categoria.";
-            CAMPOS[8] = "No debe seleccionar una categoria en ,P1_6_28,-AB(ID_persona_legisladora_10) y ,P1_6_29,-AC(nombre_persona_legisladora_10) debido a ,P1_6_27,-AA(nombre_persona_legisladora_9) no se selecciono una categoria.";
-            CAMPOS[9] = "No debe seleccionar una categoria en ,P1_6_30,-AD(ID_persona_legisladora_11) y ,P1_6_31,-AE(nombre_persona_legisladora_11) debido a ,P1_6_29,-AC(nombre_persona_legisladora_10) no se selecciono una categoria.";
-            CAMPOS[10] = "No debe seleccionar una categoria en ,P1_6_32,-AF(ID_persona_legisladora_12) y ,P1_6_33,-AG(nombre_persona_legisladora_12) debido a ,P1_6_31,-AE(nombre_persona_legisladora_11) no se selecciono una categoria.";
-            CAMPOS[11] = "No debe seleccionar una categoria en ,P1_6_34,-AH(ID_persona_legisladora_13) y ,P1_6_35,-AI(nombre_persona_legisladora_13) debido a ,P1_6_33,-AG(nombre_persona_legisladora_12) no se selecciono una categoria.";
-            CAMPOS[12] = "No debe seleccionar una categoria en ,P1_6_36,-AJ(ID_persona_legisladora_14) y ,P1_6_37,-AK(nombre_persona_legisladora_14) debido a ,P1_6_35,-AI(nombre_persona_legisladora_13) no se selecciono una categoria.";
-            CAMPOS[13] = "No debe seleccionar una categoria en ,P1_6_38,-AL(ID_persona_legisladora_15) y ,P1_6_39,-AM(nombre_persona_legisladora_15) debido a ,P1_6_37,-AK(nombre_persona_legisladora_14) no se selecciono una categoria.";
-            CAMPOS[14] = "No debe seleccionar una categoria en ,P1_6_40,-AN(ID_persona_legisladora_16) y ,P1_6_41,-AO(nombre_persona_legisladora_16) debido a ,P1_6_39,-AM(nombre_persona_legisladora_15) no se selecciono una categoria.";
-            CAMPOS[15] = "No debe seleccionar una categoria en ,P1_6_42,-AP(ID_persona_legisladora_17) y ,P1_6_43,-AQ(nombre_persona_legisladora_17) debido a ,P1_6_41,-AO(nombre_persona_legisladora_16) no se selecciono una categoria.";
-            CAMPOS[16] = "No debe seleccionar una categoria en ,P1_6_44,-AR(ID_persona_legisladora_18) y ,P1_6_45,-AS(nombre_persona_legisladora_18) debido a ,P1_6_43,-AQ(nombre_persona_legisladora_17) no se selecciono una categoria.";
-            CAMPOS[17] = "No debe seleccionar una categoria en ,P1_6_46,-AT(ID_persona_legisladora_19) y ,P1_6_47,-AU(nombre_persona_legisladora_19) debido a ,P1_6_45,-AS(nombre_persona_legisladora_18) no se selecciono una categoria.";
-            CAMPOS[18] = "No debe seleccionar una categoria en ,P1_6_48,-AV(ID_persona_legisladora_20) y ,P1_6_49,-AW(nombre_persona_legisladora_20) debido a ,P1_6_47,-AU(nombre_persona_legisladora_19) no se selecciono una categoria.";
+            CAMPOS[0] = "No se debe capturar P1_6_12,-L(ID_persona_legisladora_2) y  ,P1_6_13,-M(nombre_persona_legisladora_2) debido a que en P1_6_11,-K(nombre_persona_legisladora_1) no se seleccionó una categoría.";
+            CAMPOS[1] = "No se debe capturar P1_6_14,-N(ID_persona_legisladora_3) y ,P1_6_15,-O(nombre_persona_legisladora_3) debido a que en P1_6_13,-M(nombre_persona_legisladora_2) no se seleccionó una categoría.";
+            CAMPOS[2] = "No se debe capturar P1_6_16,-P(ID_persona_legisladora_4) y ,P1_6_17,-Q(nombre_persona_legisladora_4) debido a que en P1_6_15,-O(nombre_persona_legisladora_3) no se seleccionó una categoría.";
+            CAMPOS[3] = "No se debe capturar P1_6_18,-R(ID_persona_legisladora_5) y ,P1_6_19,-S(nombre_persona_legisladora_5) debido a que en P1_6_17,-Q(nombre_persona_legisladora_4) no se seleccionó una categoría.";
+            CAMPOS[4] = "No se debe capturar P1_6_20,-T(ID_persona_legisladora_6) y ,P1_6_21,-U(nombre_persona_legisladora_6) debido a que en P1_6_19,-S(nombre_persona_legisladora_5) no se seleccionó una categoría.";
+            CAMPOS[5] = "No se debe capturar P1_6_22,-V(ID_persona_legisladora_7) y ,P1_6_23,-W(nombre_persona_legisladora_7) debido a que en P1_6_21,-U(nombre_persona_legisladora_6) no se seleccionó una categoría.";
+            CAMPOS[6] = "No se debe capturar P1_6_24,-X(ID_persona_legisladora_8) y ,P1_6_25,-Y(nombre_persona_legisladora_8) debido a que en P1_6_23,-W(nombre_persona_legisladora_7) no se seleccionó una categoría.";
+            CAMPOS[7] = "No se debe capturar P1_6_26,-Z(ID_persona_legisladora_9) y ,P1_6_27,-AA(nombre_persona_legisladora_9) debido a que en P1_6_25,-Y(nombre_persona_legisladora_8) no se seleccionó una categoría.";
+            CAMPOS[8] = "No se debe capturar P1_6_28,-AB(ID_persona_legisladora_10) y ,P1_6_29,-AC(nombre_persona_legisladora_10) debido a que en P1_6_27,-AA(nombre_persona_legisladora_9) no se seleccionó una categoría.";
+            CAMPOS[9] = "No se debe capturar P1_6_30,-AD(ID_persona_legisladora_11) y ,P1_6_31,-AE(nombre_persona_legisladora_11) debido a que en P1_6_29,-AC(nombre_persona_legisladora_10) no se seleccionó una categoría.";
+            CAMPOS[10] = "No se debe capturar P1_6_32,-AF(ID_persona_legisladora_12) y ,P1_6_33,-AG(nombre_persona_legisladora_12) debido a que en P1_6_31,-AE(nombre_persona_legisladora_11) no se seleccionó una categoría.";
+            CAMPOS[11] = "No se debe capturar P1_6_34,-AH(ID_persona_legisladora_13) y ,P1_6_35,-AI(nombre_persona_legisladora_13) debido a que en P1_6_33,-AG(nombre_persona_legisladora_12) no se seleccionó una categoría.";
+            CAMPOS[12] = "No se debe capturar P1_6_36,-AJ(ID_persona_legisladora_14) y ,P1_6_37,-AK(nombre_persona_legisladora_14) debido a que en P1_6_35,-AI(nombre_persona_legisladora_13) no se seleccionó una categoría.";
+            CAMPOS[13] = "No se debe capturar P1_6_38,-AL(ID_persona_legisladora_15) y ,P1_6_39,-AM(nombre_persona_legisladora_15) debido a que en P1_6_37,-AK(nombre_persona_legisladora_14) no se seleccionó una categoría.";
+            CAMPOS[14] = "No se debe capturar P1_6_40,-AN(ID_persona_legisladora_16) y ,P1_6_41,-AO(nombre_persona_legisladora_16) debido a que en P1_6_39,-AM(nombre_persona_legisladora_15) no se seleccionó una categoría.";
+            CAMPOS[15] = "No se debe capturar P1_6_42,-AP(ID_persona_legisladora_17) y ,P1_6_43,-AQ(nombre_persona_legisladora_17) debido a que en P1_6_41,-AO(nombre_persona_legisladora_16) no se seleccionó una categoría.";
+            CAMPOS[16] = "No se debe capturar P1_6_44,-AR(ID_persona_legisladora_18) y ,P1_6_45,-AS(nombre_persona_legisladora_18) debido a que en P1_6_43,-AQ(nombre_persona_legisladora_17) no se seleccionó una categoría.";
+            CAMPOS[17] = "No se debe capturar P1_6_46,-AT(ID_persona_legisladora_19) y ,P1_6_47,-AU(nombre_persona_legisladora_19) debido a que en P1_6_45,-AS(nombre_persona_legisladora_18) no se seleccionó una categoría.";
+            CAMPOS[18] = "No se debe capturar P1_6_48,-AV(ID_persona_legisladora_20) y ,P1_6_49,-AW(nombre_persona_legisladora_20) debido a que en P1_6_47,-AU(nombre_persona_legisladora_19) no se seleccionó una categoría.";
 
             for (int j = 0; j < CAMPOS.length; j++) {
                 String TCAMPOS = CAMPOS[j].replace("[", "").replace("]", "").replace(" 00:00:00.0", "").trim();
@@ -28362,7 +28480,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "Debe seleccionar una categoria en P1_6_50-AX(grupo_parlamentario) debido a P1_6_9-I(tipo_promovente_iniciativa_urgente_obvia) se selecciono \"Grupo parlamentario\" (4).";
+                    String txtD2 = "Debe capturar P1_6_50-AX(grupo_parlamentario) debido a que en  P1_6_9-I(tipo_promovente_iniciativa_urgente_obvia) se seleccionó \"4.Grupo parlamentario\".";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -28438,7 +28556,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "No debe seleccionar una categoria en P1_6_50-AX(grupo_parlamentario) debido a P1_6_9-I(tipo_promovente_iniciativa_urgente_obvia) se selecciono una categoria diferente a \"Grupo parlamentario\" (4).";
+                    String txtD2 = "No debe capturar P1_6_50-AX(grupo_parlamentario) debido a que en  P1_6_9-I(tipo_promovente_iniciativa_urgente_obvia) se seleccionó una categoría diferente a \"4.Grupo parlamentario\" .";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -28514,7 +28632,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "Debe especificar  la categoria en P1_6_51-AY(varios_grupos_parlamentarios_especifique_1) debido a P1_6_50-AX(grupo_parlamentario) se selecciono \"Varios\" (88).";
+                    String txtD2 = "Debe capturar P1_6_51-AY(varios_grupos_parlamentarios_especifique_1) debido a que en P1_6_50-AX(grupo_parlamentario) se seleccionó: \"88.Varios\".";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -28590,7 +28708,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "No debe especificar  la categoria en P1_6_51-AY(varios_grupos_parlamentarios_especifique_1) debido a P1_6_50-AX(grupo_parlamentario) se selecciono una categoria diferente a \"Varios\" (88). ";
+                    String txtD2 = "No debe capturar P1_6_51-AY(varios_grupos_parlamentarios_especifique_1) debido a que en  P1_6_50-AX(grupo_parlamentario) se seleccionó una categoría diferente a \"Varios\" (88). ";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -28818,7 +28936,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "Debe seleccionar una categoria en P1_6_54-BB(ID_comision_legislativa_1) y P1_6_55-BC(nombre_comision_legislativa_1) debido a P1_6_9-I(tipo_promovente_iniciativa_urgente_obvia) se selecciono \"Comisión legislativa\" (5).";
+                    String txtD2 = "Debe capturar P1_6_54-BB(ID_comision_legislativa_1) y P1_6_55-BC(nombre_comision_legislativa_1) debido a que en P1_6_9-I(tipo_promovente_iniciativa_urgente_obvia) se seleccionó: \"Comisión legislativa\" (5).";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -28894,7 +29012,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "No debe seleccionar una categoria en P1_6_54-BB(ID_comision_legislativa_1) y P1_6_55-BC(nombre_comision_legislativa_1) debido a P1_6_9-I(tipo_promovente_iniciativa_urgente_obvia) se selecciono una categoria diferente a \"Comisión legislativa\" (5).";
+                    String txtD2 = "No debe capturar P1_6_54-BB(ID_comision_legislativa_1) y P1_6_55-BC(nombre_comision_legislativa_1) debido a que en  P1_6_9-I(tipo_promovente_iniciativa_urgente_obvia) se seleccion{o una categoría diferente a \"Comisión legislativa\" (5).";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -28970,7 +29088,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "Debe capturar información en P1_6_54-BB(ID_comision_legislativa_1) o P1_6_55-BC(nombre_comision_legislativa_1) debido a que se selecciono una categoría en cualquiera de las ya mencionadas.";
+                    String txtD2 = "Debe capturar información en P1_6_54-BB(ID_comision_legislativa_1) y P1_6_55-BC(nombre_comision_legislativa_1), ya que en P1_6_9-H (tipo_promovente_iniciativa_urgente_obvia) se seleccionó la opción \"Comisión legislativa\".";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -28997,82 +29115,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                 conDat = conDat + coni;
                 coni = 1;
             }
-
-            ArrayResult = InUrg.DCID_comision_legislativa_2(entidad, legislatura, envio);
-            if (ArrayResult.size() > 0) {
-                XSSFRow filaEE1 = hojaIniciativas_Urgente_Obvia.createRow(conEnc);//FILA
-                XSSFCell celdaE1 = filaEE1.createCell(0);//COLUMNA
-                celdaE1.setCellStyle(estiloCelda1);
-                celdaE1.setCellType(CellType.STRING);
-                String txtE1 = "ID_iniciativa";
-                XSSFRichTextString textoE1 = new XSSFRichTextString(txtE1);
-                celdaE1.setCellValue(textoE1);
-
-                XSSFCell celdaE6 = filaEE1.createCell(1);//COLUMNA
-                celdaE6.setCellStyle(estiloCelda1);
-                celdaE6.setCellType(CellType.STRING);
-                String txtE6 = "OBSERVACIONES";
-                XSSFRichTextString textoE6 = new XSSFRichTextString(txtE6);
-                celdaE6.setCellValue(textoE6);
-
-                XSSFCell celdaE7 = filaEE1.createCell(2);//COLUMNA
-                celdaE7.setCellStyle(estiloCelda1);
-                celdaE7.setCellType(CellType.STRING);
-                String txtE7 = "ID_ENTIDAD";
-                XSSFRichTextString textoE7 = new XSSFRichTextString(txtE7);
-                celdaE7.setCellValue(textoE7);
-
-                XSSFCell celdaE8 = filaEE1.createCell(3);//COLUMNA
-                celdaE8.setCellStyle(estiloCelda1);
-                celdaE8.setCellType(CellType.STRING);
-                String txtE8 = "JUSTIFICACION";
-                XSSFRichTextString textoE8 = new XSSFRichTextString(txtE8);
-                celdaE8.setCellValue(textoE8);
-
-                for (int i = 0; i < ArrayResult.size(); i++) {
-                    XSSFRow filaEE2 = hojaIniciativas_Urgente_Obvia.createRow(conDat + i);
-
-                    XSSFCell celdaD1 = filaEE2.createCell(0);//COLUMNA
-                    celdaD1.setCellStyle(estiloCeldabordes0);
-                    celdaD1.setCellType(CellType.STRING);
-                    //String txtD1 = Arrays.toString(ArrayResult.get(i));
-                    String txtD1 = Arrays.toString(ArrayResult.get(i));
-                    txtD1 = txtD1.replace("[", "").replace("]", "").replace(" 00:00:00.0", "");
-                    String[] parts = txtD1.split(",");
-                    String parts1 = parts[1].trim();
-                    XSSFRichTextString textoD1 = new XSSFRichTextString(parts1);
-                    celdaD1.setCellValue(textoD1);
-
-                    XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
-                    celdaD2.setCellStyle(estiloCeldabordes0);
-                    celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "Debe seleccionar una categoria en P1_6_56-BD(ID_comision_legislativa_2) y P1_6_57-BE(nombre_comision_legislativa_2) debido a P1_6_55-BC(nombre_comision_legislativa_1) se selecciono una categoria.";
-                    XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
-                    celdaD2.setCellValue(textoD2);
-
-                    XSSFCell celdaD3 = filaEE2.createCell(2);//COLUMNA
-                    celdaD3.setCellStyle(estiloCeldabordes0);
-                    celdaD3.setCellType(CellType.STRING);
-                    String txtD3 = Arrays.toString(ArrayResult.get(i));
-                    txtD3 = txtD3.replace("[", "").replace("]", "").replace(" 00:00:00.0", "");
-                    String[] parts3 = txtD3.split(",");
-                    String parts4 = parts3[0].trim();
-                    XSSFRichTextString textoD3 = new XSSFRichTextString(parts4);
-                    celdaD3.setCellValue(textoD3);
-
-                    XSSFCell celdaD4 = filaEE2.createCell(3);//COLUMNA
-                    celdaD4.setCellStyle(estiloCeldabordes0);
-                    celdaD4.setCellType(CellType.STRING);
-                    String txtD4 = "";
-                    XSSFRichTextString textoD4 = new XSSFRichTextString(txtD4);
-                    celdaD4.setCellValue(textoD4);
-
-                    coni++;
-                }
-                conEnc = conEnc + coni;
-                conDat = conDat + coni;
-                coni = 1;
-            }
+         
 
             ArrayResult = InUrg.NDCID_comision_legislativa_2(entidad, legislatura, envio);
             if (ArrayResult.size() > 0) {
@@ -29122,7 +29165,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "No debe seleccionar una categoria en P1_6_56-BD(ID_comision_legislativa_2) y P1_6_57-BE(nombre_comision_legislativa_2) debido a P1_6_55-BC(nombre_comision_legislativa_1) no se selecciono una categoria.";
+                    String txtD2 = "No debe capturar  P1_6_56-BD(ID_comision_legislativa_2) y P1_6_57-BE(nombre_comision_legislativa_2) debido a que en P1_6_55-BC(nombre_comision_legislativa_1) no se seleccionó una categoría.";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -29150,82 +29193,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                 coni = 1;
             }
 
-            ArrayResult = InUrg.ID_comision_legislativa_2(entidad, legislatura, envio);
-            if (ArrayResult.size() > 0) {
-                XSSFRow filaEE1 = hojaIniciativas_Urgente_Obvia.createRow(conEnc);//FILA
-                XSSFCell celdaE1 = filaEE1.createCell(0);//COLUMNA
-                celdaE1.setCellStyle(estiloCelda1);
-                celdaE1.setCellType(CellType.STRING);
-                String txtE1 = "ID_iniciativa";
-                XSSFRichTextString textoE1 = new XSSFRichTextString(txtE1);
-                celdaE1.setCellValue(textoE1);
-
-                XSSFCell celdaE6 = filaEE1.createCell(1);//COLUMNA
-                celdaE6.setCellStyle(estiloCelda1);
-                celdaE6.setCellType(CellType.STRING);
-                String txtE6 = "OBSERVACIONES";
-                XSSFRichTextString textoE6 = new XSSFRichTextString(txtE6);
-                celdaE6.setCellValue(textoE6);
-
-                XSSFCell celdaE7 = filaEE1.createCell(2);//COLUMNA
-                celdaE7.setCellStyle(estiloCelda1);
-                celdaE7.setCellType(CellType.STRING);
-                String txtE7 = "ID_ENTIDAD";
-                XSSFRichTextString textoE7 = new XSSFRichTextString(txtE7);
-                celdaE7.setCellValue(textoE7);
-
-                XSSFCell celdaE8 = filaEE1.createCell(3);//COLUMNA
-                celdaE8.setCellStyle(estiloCelda1);
-                celdaE8.setCellType(CellType.STRING);
-                String txtE8 = "JUSTIFICACION";
-                XSSFRichTextString textoE8 = new XSSFRichTextString(txtE8);
-                celdaE8.setCellValue(textoE8);
-
-                for (int i = 0; i < ArrayResult.size(); i++) {
-                    XSSFRow filaEE2 = hojaIniciativas_Urgente_Obvia.createRow(conDat + i);
-
-                    XSSFCell celdaD1 = filaEE2.createCell(0);//COLUMNA
-                    celdaD1.setCellStyle(estiloCeldabordes0);
-                    celdaD1.setCellType(CellType.STRING);
-                    //String txtD1 = Arrays.toString(ArrayResult.get(i));
-                    String txtD1 = Arrays.toString(ArrayResult.get(i));
-                    txtD1 = txtD1.replace("[", "").replace("]", "").replace(" 00:00:00.0", "");
-                    String[] parts = txtD1.split(",");
-                    String parts1 = parts[1].trim();
-                    XSSFRichTextString textoD1 = new XSSFRichTextString(parts1);
-                    celdaD1.setCellValue(textoD1);
-
-                    XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
-                    celdaD2.setCellStyle(estiloCeldabordes0);
-                    celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "Debe capturar información en P1_6_56-BD(ID_comision_legislativa_2) o P1_6_57-BE(nombre_comision_legislativa_2) debido a que se selecciono una categoría en cualquiera de las ya mencionadas.";
-                    XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
-                    celdaD2.setCellValue(textoD2);
-
-                    XSSFCell celdaD3 = filaEE2.createCell(2);//COLUMNA
-                    celdaD3.setCellStyle(estiloCeldabordes0);
-                    celdaD3.setCellType(CellType.STRING);
-                    String txtD3 = Arrays.toString(ArrayResult.get(i));
-                    txtD3 = txtD3.replace("[", "").replace("]", "").replace(" 00:00:00.0", "");
-                    String[] parts3 = txtD3.split(",");
-                    String parts4 = parts3[0].trim();
-                    XSSFRichTextString textoD3 = new XSSFRichTextString(parts4);
-                    celdaD3.setCellValue(textoD3);
-
-                    XSSFCell celdaD4 = filaEE2.createCell(3);//COLUMNA
-                    celdaD4.setCellStyle(estiloCeldabordes0);
-                    celdaD4.setCellType(CellType.STRING);
-                    String txtD4 = "";
-                    XSSFRichTextString textoD4 = new XSSFRichTextString(txtD4);
-                    celdaD4.setCellValue(textoD4);
-
-                    coni++;
-                }
-                conEnc = conEnc + coni;
-                conDat = conDat + coni;
-                coni = 1;
-            }
-
+           
             ArrayResult = InUrg.NCID_comision_legislativa_1(entidad, legislatura, envio);
             if (ArrayResult.size() > 0) {
                 XSSFRow filaEE1 = hojaIniciativas_Urgente_Obvia.createRow(conEnc);//FILA
@@ -29274,7 +29242,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "No se puede repetir el identificar de las comisiones legislativas en P1_6_54-BB(ID_comision_legislativa_1), P1_6_56-BD(ID_comision_legislativa_2) y P1_6_58-BF(ID_comision_legislativa_3).";
+                    String txtD2 = "No se pueden repetir las comisiones legislativas en P1_6_54-BB(ID_comision_legislativa_1), P1_6_56-BD(ID_comision_legislativa_2) y P1_6_58-BF(ID_comision_legislativa_3).";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -29350,7 +29318,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "No se puede repetir la comisión legislativa en P1_6_55-BC(nombre_comision_legislativa_1), P1_6_57-BE(nombre_comision_legislativa_2) y P1_6_59-BG(nombre_comision_legislativa_3). ";
+                    String txtD2 = "No se pueden repetir las comisión legislativa en P1_6_55-BC(nombre_comision_legislativa_1), P1_6_57-BE(nombre_comision_legislativa_2) y P1_6_59-BG(nombre_comision_legislativa_3). ";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -29454,82 +29422,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                 coni = 1;
             }
 
-            ArrayResult = InUrg.DCID_comision_legislativa_3(entidad, legislatura, envio);
-            if (ArrayResult.size() > 0) {
-                XSSFRow filaEE1 = hojaIniciativas_Urgente_Obvia.createRow(conEnc);//FILA
-                XSSFCell celdaE1 = filaEE1.createCell(0);//COLUMNA
-                celdaE1.setCellStyle(estiloCelda1);
-                celdaE1.setCellType(CellType.STRING);
-                String txtE1 = "ID_iniciativa";
-                XSSFRichTextString textoE1 = new XSSFRichTextString(txtE1);
-                celdaE1.setCellValue(textoE1);
-
-                XSSFCell celdaE6 = filaEE1.createCell(1);//COLUMNA
-                celdaE6.setCellStyle(estiloCelda1);
-                celdaE6.setCellType(CellType.STRING);
-                String txtE6 = "OBSERVACIONES";
-                XSSFRichTextString textoE6 = new XSSFRichTextString(txtE6);
-                celdaE6.setCellValue(textoE6);
-
-                XSSFCell celdaE7 = filaEE1.createCell(2);//COLUMNA
-                celdaE7.setCellStyle(estiloCelda1);
-                celdaE7.setCellType(CellType.STRING);
-                String txtE7 = "ID_ENTIDAD";
-                XSSFRichTextString textoE7 = new XSSFRichTextString(txtE7);
-                celdaE7.setCellValue(textoE7);
-
-                XSSFCell celdaE8 = filaEE1.createCell(3);//COLUMNA
-                celdaE8.setCellStyle(estiloCelda1);
-                celdaE8.setCellType(CellType.STRING);
-                String txtE8 = "JUSTIFICACION";
-                XSSFRichTextString textoE8 = new XSSFRichTextString(txtE8);
-                celdaE8.setCellValue(textoE8);
-
-                for (int i = 0; i < ArrayResult.size(); i++) {
-                    XSSFRow filaEE2 = hojaIniciativas_Urgente_Obvia.createRow(conDat + i);
-
-                    XSSFCell celdaD1 = filaEE2.createCell(0);//COLUMNA
-                    celdaD1.setCellStyle(estiloCeldabordes0);
-                    celdaD1.setCellType(CellType.STRING);
-                    //String txtD1 = Arrays.toString(ArrayResult.get(i));
-                    String txtD1 = Arrays.toString(ArrayResult.get(i));
-                    txtD1 = txtD1.replace("[", "").replace("]", "").replace(" 00:00:00.0", "");
-                    String[] parts = txtD1.split(",");
-                    String parts1 = parts[1].trim();
-                    XSSFRichTextString textoD1 = new XSSFRichTextString(parts1);
-                    celdaD1.setCellValue(textoD1);
-
-                    XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
-                    celdaD2.setCellStyle(estiloCeldabordes0);
-                    celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "Debe seleccionar una categoria en P1_6_58-BF(ID_comision_legislativa_3) y P1_6_59-BG(nombre_comision_legislativa_3) debido a P1_6_57-BE(nombre_comision_legislativa_2) se selecciono una categoria.";
-                    XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
-                    celdaD2.setCellValue(textoD2);
-
-                    XSSFCell celdaD3 = filaEE2.createCell(2);//COLUMNA
-                    celdaD3.setCellStyle(estiloCeldabordes0);
-                    celdaD3.setCellType(CellType.STRING);
-                    String txtD3 = Arrays.toString(ArrayResult.get(i));
-                    txtD3 = txtD3.replace("[", "").replace("]", "").replace(" 00:00:00.0", "");
-                    String[] parts3 = txtD3.split(",");
-                    String parts4 = parts3[0].trim();
-                    XSSFRichTextString textoD3 = new XSSFRichTextString(parts4);
-                    celdaD3.setCellValue(textoD3);
-
-                    XSSFCell celdaD4 = filaEE2.createCell(3);//COLUMNA
-                    celdaD4.setCellStyle(estiloCeldabordes0);
-                    celdaD4.setCellType(CellType.STRING);
-                    String txtD4 = "";
-                    XSSFRichTextString textoD4 = new XSSFRichTextString(txtD4);
-                    celdaD4.setCellValue(textoD4);
-
-                    coni++;
-                }
-                conEnc = conEnc + coni;
-                conDat = conDat + coni;
-                coni = 1;
-            }
-
+          
             ArrayResult = InUrg.NDCID_comision_legislativa_3(entidad, legislatura, envio);
             if (ArrayResult.size() > 0) {
                 XSSFRow filaEE1 = hojaIniciativas_Urgente_Obvia.createRow(conEnc);//FILA
@@ -29578,7 +29471,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "No debe seleccionar una categoria en P1_6_58-BF(ID_comision_legislativa_3) y P1_6_59-BG(nombre_comision_legislativa_3) debido a P1_6_57-BE(nombre_comision_legislativa_2) no se selecciono una categoria.";
+                    String txtD2 = "No debe capturar en P1_6_58-BF(ID_comision_legislativa_3) y P1_6_59-BG(nombre_comision_legislativa_3) debido a que en P1_6_57-BE(nombre_comision_legislativa_2) no se seleccionó una opción.";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -29606,82 +29499,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                 coni = 1;
             }
 
-            ArrayResult = InUrg.nombre_comision_legislativa_3(entidad, legislatura, envio);
-            if (ArrayResult.size() > 0) {
-                XSSFRow filaEE1 = hojaIniciativas_Urgente_Obvia.createRow(conEnc);//FILA
-                XSSFCell celdaE1 = filaEE1.createCell(0);//COLUMNA
-                celdaE1.setCellStyle(estiloCelda1);
-                celdaE1.setCellType(CellType.STRING);
-                String txtE1 = "ID_iniciativa";
-                XSSFRichTextString textoE1 = new XSSFRichTextString(txtE1);
-                celdaE1.setCellValue(textoE1);
-
-                XSSFCell celdaE6 = filaEE1.createCell(1);//COLUMNA
-                celdaE6.setCellStyle(estiloCelda1);
-                celdaE6.setCellType(CellType.STRING);
-                String txtE6 = "OBSERVACIONES";
-                XSSFRichTextString textoE6 = new XSSFRichTextString(txtE6);
-                celdaE6.setCellValue(textoE6);
-
-                XSSFCell celdaE7 = filaEE1.createCell(2);//COLUMNA
-                celdaE7.setCellStyle(estiloCelda1);
-                celdaE7.setCellType(CellType.STRING);
-                String txtE7 = "ID_ENTIDAD";
-                XSSFRichTextString textoE7 = new XSSFRichTextString(txtE7);
-                celdaE7.setCellValue(textoE7);
-
-                XSSFCell celdaE8 = filaEE1.createCell(3);//COLUMNA
-                celdaE8.setCellStyle(estiloCelda1);
-                celdaE8.setCellType(CellType.STRING);
-                String txtE8 = "JUSTIFICACION";
-                XSSFRichTextString textoE8 = new XSSFRichTextString(txtE8);
-                celdaE8.setCellValue(textoE8);
-
-                for (int i = 0; i < ArrayResult.size(); i++) {
-                    XSSFRow filaEE2 = hojaIniciativas_Urgente_Obvia.createRow(conDat + i);
-
-                    XSSFCell celdaD1 = filaEE2.createCell(0);//COLUMNA
-                    celdaD1.setCellStyle(estiloCeldabordes0);
-                    celdaD1.setCellType(CellType.STRING);
-                    //String txtD1 = Arrays.toString(ArrayResult.get(i));
-                    String txtD1 = Arrays.toString(ArrayResult.get(i));
-                    txtD1 = txtD1.replace("[", "").replace("]", "").replace(" 00:00:00.0", "");
-                    String[] parts = txtD1.split(",");
-                    String parts1 = parts[1].trim();
-                    XSSFRichTextString textoD1 = new XSSFRichTextString(parts1);
-                    celdaD1.setCellValue(textoD1);
-
-                    XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
-                    celdaD2.setCellStyle(estiloCeldabordes0);
-                    celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "Debe capturar información en P1_6_58-BF(ID_comision_legislativa_3) o P1_6_59-BG(nombre_comision_legislativa_3) debido a que se selecciono una categoría en cualquiera de las ya mencionadas.";
-                    XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
-                    celdaD2.setCellValue(textoD2);
-
-                    XSSFCell celdaD3 = filaEE2.createCell(2);//COLUMNA
-                    celdaD3.setCellStyle(estiloCeldabordes0);
-                    celdaD3.setCellType(CellType.STRING);
-                    String txtD3 = Arrays.toString(ArrayResult.get(i));
-                    txtD3 = txtD3.replace("[", "").replace("]", "").replace(" 00:00:00.0", "");
-                    String[] parts3 = txtD3.split(",");
-                    String parts4 = parts3[0].trim();
-                    XSSFRichTextString textoD3 = new XSSFRichTextString(parts4);
-                    celdaD3.setCellValue(textoD3);
-
-                    XSSFCell celdaD4 = filaEE2.createCell(3);//COLUMNA
-                    celdaD4.setCellStyle(estiloCeldabordes0);
-                    celdaD4.setCellType(CellType.STRING);
-                    String txtD4 = "";
-                    XSSFRichTextString textoD4 = new XSSFRichTextString(txtD4);
-                    celdaD4.setCellValue(textoD4);
-
-                    coni++;
-                }
-                conEnc = conEnc + coni;
-                conDat = conDat + coni;
-                coni = 1;
-            }
-
+            
             ArrayResult = InUrg.DCayuntamiento(entidad, legislatura, envio);
             if (ArrayResult.size() > 0) {
                 XSSFRow filaEE1 = hojaIniciativas_Urgente_Obvia.createRow(conEnc);//FILA
@@ -29730,7 +29548,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "Debe seleccionar una categoria en P1_6_61-BI(ayuntamiento) y P1_6_60-BH(AGEM) debido a P1_6_9-I(tipo_promovente_iniciativa_urgente_obvia) se selecciono \"Ayuntamientos\" (9).";
+                    String txtD2 = "Debe capturar P1_6_61-BI(ayuntamiento) y P1_6_60-BH(AGEM) debido a que en P1_6_9-I(tipo_promovente_iniciativa_urgente_obvia) se seleccionó: \"Ayuntamientos\" (9).";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -29806,7 +29624,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "No debe seleccionar una categoria en P1_6_60-BH(AGEM) y P1_6_61-BI(ayuntamiento) debido a P1_6_9-I(tipo_promovente_iniciativa_urgente_obvia) se selecciono una categoria diferente a \"Ayuntamientos\" (9).";
+                    String txtD2 = "No debe capturar P1_6_60-BH(AGEM) y P1_6_61-BI(ayuntamiento) debido a que en P1_6_9-I(tipo_promovente_iniciativa_urgente_obvia) se seleccion: \"Ayuntamientos\" (9).";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -29882,7 +29700,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "Debe capturar información en P1_6_60-BH(AGEM) o P1_6_60-BH(AGEM) debido a que se selecciono una categoría en cualquiera de las ya mencionadas.";
+                    String txtD2 = "Debe capturar información en P1_6_60-BH(AGEM) y P1_6_61-BI(ayuntamiento) debido a que se seleccionó la opción 'Ayuntamientos' en la columna (I) tipo_promovente_iniciativa_urgente_obvia. ";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -29958,7 +29776,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "Debe seleccionar una categoria en P1_6_62-BJ(tipo_organo_constitucional_autonomo) debido a P1_6_9-I(tipo_promovente_iniciativa_urgente_obvia) se selecciono \"Órgano constitucional autónomo\" (10).";
+                    String txtD2 = "Debe capturar P1_6_62-BJ(tipo_organo_constitucional_autonomo) debido a que en P1_6_9-I(tipo_promovente_iniciativa_urgente_obvia) se seleccionó \"Órgano constitucional autónomo\" (10).";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -30034,7 +29852,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "No debe seleccionar una categoria en P1_6_62-BJ(tipo_organo_constitucional_autonomo) debido a P1_6_9-I(tipo_promovente_iniciativa_urgente_obvia) se selecciono una categoria diferente a \"Órgano constitucional autónomo\" (10).";
+                    String txtD2 = "No debe capturar P1_6_62-BJ(tipo_organo_constitucional_autonomo) debido a que en P1_6_9-I(tipo_promovente_iniciativa_urgente_obvia) se seleccionó una categoría diferente a \"Órgano constitucional autónomo\" (10).";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -30110,7 +29928,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "Debe espeficar el otro organo consitutucional en P1_6_63-BK(otro_tipo_organo_constitucional_autonomo_especifique) debido a P1_6_62-BJ(tipo_organo_constitucional_autonomo) se selecciono la categoria \"Otro órgano constitucional autónomo (específique)\" (7).";
+                    String txtD2 = "Debe espeficar el otro órgano consitutucional en P1_6_63-BK(otro_tipo_organo_constitucional_autonomo_especifique) debido a que en P1_6_62-BJ(tipo_organo_constitucional_autonomo) se seleccionó: \"Otro órgano constitucional autónomo (específique)\" (7).";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -30186,7 +30004,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "No debe especificar el organo en P1_6_63-BK(otro_tipo_organo_constitucional_autonomo_especifique) debido a P1_6_62-BJ(tipo_organo_constitucional_autonomo) se selecciono una categoria diferente a  \"Otro órgano constitucional autónomo (específique)\" (7).";
+                    String txtD2 = "No debe especificar el órgano en P1_6_63-BK(otro_tipo_organo_constitucional_autonomo_especifique) debido a que en P1_6_62-BJ(tipo_organo_constitucional_autonomo) se seleccionó una categoría diferente a  \"Otro órgano constitucional autónomo (específique)\" (7).";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -30262,7 +30080,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "Debe espeficar el otro organo consitutucional en P1_6_64-BL(otro_tipo_promovente_iniciativa_urgente_obvia_especifique) debido a P1_6_9-I(tipo_promovente_iniciativa_urgente_obvia). se selecciono la categoria \"Otro tipo de promovente (especifique)\" (11).";
+                    String txtD2 = "Debe espeficar el otro órgano consitutucional en P1_6_64-BL(otro_tipo_promovente_iniciativa_urgente_obvia_especifique) debido a que en P1_6_9-I(tipo_promovente_iniciativa_urgente_obvia). se seleccionó: \"Otro tipo de promovente (especifique)\" (11).";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -30414,7 +30232,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "En la columna P1_6_67-BO(sentido_resolucion_pleno_iniciativa_urgente_obvia) unicamante puede seleccionar \"Desechado\"  (1) debido a P1_6_3-C(estatus_iniciativa_urgente_obvia) se selecciono \"Desechada o improcedente\" (2).";
+                    String txtD2 = "En la columna P1_6_67-BO(sentido_resolucion_pleno_iniciativa_urgente_obvia) únicamante puede seleccionar \"1.Desechado\", debido a que en P1_6_3-C(estatus_iniciativa_urgente_obvia) se seleccionó \"2.Desechada o improcedente\".";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -30490,7 +30308,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "En la columna P1_6_67-BO(sentido_resolucion_pleno_iniciativa_urgente_obvia) unicamante puede seleccionar \"Aprobado\"  (2) debido a P1_6_3-C(estatus_iniciativa_urgente_obvia) se selecciono \"Aprobada o procedente\" (2).";
+                    String txtD2 = "En la columna P1_6_67-BO(sentido_resolucion_pleno_iniciativa_urgente_obvia) únicamante puede seleccionar \"Aprobado\"  (2) debido a que en P1_6_3-C(estatus_iniciativa_urgente_obvia) se seleccionó \"Aprobada o procedente\" (2).";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -30566,7 +30384,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "En la columna P1_6_68-BP(total_votaciones_pleno_iniciativa_urgente_obvia) debe ser igual o menor a la suma de las cantidades reportadas en las columnas \"P1_1_5(distritos_uninominales)\" y \"P1_1_6(diputaciones_plurinominales)\" de la tabla datos_generales.";
+                    String txtD2 = "La cantidad reportada en la columna P1_6_68-BP(total_votaciones_pleno_iniciativa_urgente_obvia) debe ser igual o menor a la suma de las cantidades reportadas en las columnas \"P1_1_5(distritos_uninominales)\" y \"P1_1_6(diputaciones_plurinominales)\" de la tabla datos_generales.";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -30642,7 +30460,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "En la columna P1_6_68-BP(total_votaciones_pleno_iniciativa_urgente_obvia) debe ser igual a la suma de las cantidades reportadas en las columnas P1_6_69-BQ(votaciones_pleno_a_favor_iniciativa_urgente_obvia), P1_6_70-BR(votaciones_pleno_en_contra_iniciativa)_urgente_obvia) y P1_6_71-BS(votaciones_pleno_abstencion_iniciativa_urgente_obvia).";
+                    String txtD2 = "La cantidad reportada en la columna P1_6_68-BP(total_votaciones_pleno_iniciativa_urgente_obvia) debe ser igual a la suma de las cantidades reportadas en las columnas P1_6_69-BQ(votaciones_pleno_a_favor_iniciativa_urgente_obvia), P1_6_70-BR(votaciones_pleno_en_contra_iniciativa)_urgente_obvia) y P1_6_71-BS(votaciones_pleno_abstencion_iniciativa_urgente_obvia).";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -30718,7 +30536,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "Debe introducir un dato en P1_6_74-BV(fecha_publicacion_gaceta_oficial_iniciativa_urgente_obvia) debido a P1_6_73-BU(sentido_resolucion_ejecutivo_iniciativa_urgente_obvia) se selecciono \"Aprobada\" (1).";
+                    String txtD2 = "Debe capturar P1_6_74-BV(fecha_publicacion_gaceta_oficial_iniciativa_urgente_obvia) debido a que en P1_6_73-BU(sentido_resolucion_ejecutivo_iniciativa_urgente_obvia) se seleccionó: \"Aprobada\" (1).";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -30794,7 +30612,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "No debe introducir un dato en P1_6_74-BV(fecha_publicacion_gaceta_oficial_iniciativa_urgente_obvia) debido a P1_6_73-BU(sentido_resolucion_ejecutivo_iniciativa_urgente_obvia) se selecciono una categoria diferente a \"Aprobada\" (1).";
+                    String txtD2 = "No debe capturar P1_6_74-BV(fecha_publicacion_gaceta_oficial_iniciativa_urgente_obvia) debido a que en P1_6_73-BU(sentido_resolucion_ejecutivo_iniciativa_urgente_obvia) se seleccionó una categoría diferente a \"Aprobada\" (1).";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -31473,7 +31291,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "No debe seleccionar una categoría en P1_7_3-C(cond_presentacion_denuncia_juicio_politico_periodo) debido a P1_7_2-B(cond_presentacion_denuncia_juicio_politico_legislatura_actual) se selecciono \"No\" (2)";
+                    String txtD2 = "No debe capturar P1_7_3-C(cond_presentacion_denuncia_juicio_politico_periodo) debido a que enP1_7_2-B(cond_presentacion_denuncia_juicio_politico_legislatura_actual) se seleccionó: \"No\" (2)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -31549,7 +31367,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "Debe seleccionar una categoría en P1_7_3-C(cond_presentacion_denuncia_juicio_politico_periodo) debido a P1_7_2-B(cond_presentacion_denuncia_juicio_politico_legislatura_actual) se selecciono una categoría diferente de \"No\" (2)";
+                    String txtD2 = "Debe seleccionar una categoría en P1_7_3-C(cond_presentacion_denuncia_juicio_politico_periodo) debido a P1_7_2-B(cond_presentacion_denuncia_juicio_politico_legislatura_actual) se seleccionó una categoría diferente de \"No\" (2)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -31625,7 +31443,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "Debe seleccionar una categoría en P1_7_4-D(numero_legislatura_presentacion_denuncia_juicio_politico) debido a P1_7_2-B(cond_presentacion_denuncia_juicio_politico_legislatura_actual) se selecciono \"No\" (2)";
+                    String txtD2 = "Debe capturar P1_7_4-D(numero_legislatura_presentacion_denuncia_juicio_politico) debido a que en P1_7_2-B(cond_presentacion_denuncia_juicio_politico_legislatura_actual) se seleccionó: \"No\" (2)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -31701,7 +31519,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "No debe seleccionar una categoría en P1_7_4-D(numero_legislatura_presentacion_denuncia_juicio_politico) debido a P1_7_2-B(cond_presentacion_denuncia_juicio_politico_legislatura_actual) se selecciono una categoría diferente de \"No\" (2)";
+                    String txtD2 = "No debe seleccionar una categoría en P1_7_4-D(numero_legislatura_presentacion_denuncia_juicio_politico) debido a P1_7_2-B(cond_presentacion_denuncia_juicio_politico_legislatura_actual) se seleccionó una categoría diferente de \"No\" (2)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -31777,8 +31595,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "Debe seleccionar una categoría en P1_7_6-F(cond_actualizacion_estatus_denuncia_juicio_politico_periodo) debido a P1_7_2-B(cond_presentacion_denuncia_juicio_politico_legislatura_actual) se selecciono \"No\" (2) o P1_7_3-C(cond_presentacion_denuncia_juicio_politico_periodo) se selecciono \"No\" (2)";
-                    XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
+                    String txtD2 = "Debe capturar P1_7_6-F (cond_actualizacion_estatus_denuncia_juicio_politico_periodo), ya que en P1_7_2-B (cond_presentacion_denuncia_juicio_politico_legislatura_actual) se seleccionó \"No\" (2) o en P1_7_3-C (cond_presentacion_denuncia_juicio_politico_periodo) se seleccionó \"No\" (2).";                    XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
                     XSSFCell celdaD3 = filaEE2.createCell(2);//COLUMNA
@@ -31853,7 +31670,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "No debe seleccionar una categoría en P1_7_6-F(cond_actualizacion_estatus_denuncia_juicio_politico_periodo) debido a P1_7_2-B(cond_presentacion_denuncia_juicio_politico_legislatura_actual) o P1_7_3-C(cond_presentacion_denuncia_juicio_politico_periodo) se selecciono una categoría diferente de \"No\" (2)";
+                    String txtD2 = "No debe capturar P1_7_6-F(cond_actualizacion_estatus_denuncia_juicio_politico_periodo) debido a P1_7_2-B(cond_presentacion_denuncia_juicio_politico_legislatura_actual) o P1_7_3-C(cond_presentacion_denuncia_juicio_politico_periodo) se seleccionó una categoría diferente de \"No\" (2)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -31929,7 +31746,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "No debe seleccionar una categoría en P1_7_7-G(estatus_denuncia_juicio_politico) debido a P1_7_6-F(cond_actualizacion_estatus_denuncia_juicio_politico_periodo) se selecciono \"No\" (2)";
+                    String txtD2 = "No debe capturar P1_7_7-G(estatus_denuncia_juicio_politico) debido a que en P1_7_6-F(cond_actualizacion_estatus_denuncia_juicio_politico_periodo) se seleccionó: \"No\" (2)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -32005,7 +31822,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "Debe seleccionar únicamente en P1_7_7-G(estatus_denuncia_juicio_politico) las categorías de \"En trámite en instancia substanciadora\" (3) o \"Concluida\" (6) debido a P1_7_6-F(cond_actualizacion_estatus_denuncia_juicio_politico_periodo) se selecciono \"Sí\" (1)";
+                    String txtD2 = "Únicamente es posible elegir en P1_7_7-G(estatus_denuncia_juicio_politico) las categorías: \"3.En trámite en instancia substanciadora\" o \"6.Concluida\"  debido a que en P1_7_6-F(cond_actualizacion_estatus_denuncia_juicio_politico_periodo) se seleccionó: \"Sí\" (1)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -32081,7 +31898,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "Debe especificar el dato en P1_7_8-H(improcedente_estatus_denuncia_juicio_politico_especifique) debido a P1_7_7-G(estatus_denuncia_juicio_politico) se selecciono \"Improcedente (especifique)\" (4)";
+                    String txtD2 = "Debe capturar P1_7_8-H(improcedente_estatus_denuncia_juicio_politico_especifique) debido a que en P1_7_7-G(estatus_denuncia_juicio_politico) se seleccionó \"Improcedente (especifique)\" (4)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -32157,7 +31974,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "No debe especificar el dato en P1_7_8-H(improcedente_estatus_denuncia_juicio_politico_especifique) debido a P1_7_7-G(estatus_denuncia_juicio_politico) se selecciono una categoría diferente de \"Improcedente (especifique)\" (4)";
+                    String txtD2 = "No debe caputar P1_7_8-H(improcedente_estatus_denuncia_juicio_politico_especifique) debido a que en P1_7_7-G(estatus_denuncia_juicio_politico) se seleccionó una categoría diferente de \"Improcedente (especifique)\" (4)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -32233,7 +32050,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "Debe especificar el dato en P1_7_9-I(otro_estatus_denuncia_juicio_politico_especifique) debido a P1_7_7-G(estatus_denuncia_juicio_politico) se selecciono \"Otro estatus (especifique)\" (7)";
+                    String txtD2 = "Debe capturar P1_7_9-I(otro_estatus_denuncia_juicio_politico_especifique) debido a que en P1_7_7-G(estatus_denuncia_juicio_politico) se seleccionó: \"Otro estatus (especifique)\" (7)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -32309,7 +32126,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "No debe especificar el dato en P1_7_9-I(otro_estatus_denuncia_juicio_politico_especifique) debido a P1_7_7-G(estatus_denuncia_juicio_politico) se selecciono una categoría diferente de \"Otro estatus (especifique)\" (7)";
+                    String txtD2 = "No debe capturar P1_7_9-I(otro_estatus_denuncia_juicio_politico_especifique) debido a P1_7_7-G(estatus_denuncia_juicio_politico) se seleccionó una categoría diferente de \"Otro estatus (especifique)\" (7)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -32385,7 +32202,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "No debe introducir un dato en P1_7_10-J(fecha_ingreso_denuncia_juicio_politico_oficialia_partes) debido a P1_7_2-B(cond_presentacion_denuncia_juicio_politico_legislatura_actual) se selecciono \"No\" (2) o P1_7_3-C(cond_presentacion_denuncia_juicio_politico_periodo) se selecciono \"No\" (2)";
+                    String txtD2 = "No debe capturar P1_7_10-J(fecha_ingreso_denuncia_juicio_politico_oficialia_partes) debido a que en P1_7_2-B(cond_presentacion_denuncia_juicio_politico_legislatura_actual) se seleccionó \"No\" (2) o P1_7_3-C(cond_presentacion_denuncia_juicio_politico_periodo) se selecciono \"No\" (2)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -32461,7 +32278,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "Debe introducir un dato en P1_7_10-J(fecha_ingreso_denuncia_juicio_politico_oficialia_partes) debido a P1_7_2-B(cond_presentacion_denuncia_juicio_politico_legislatura_actual) o P1_7_3-C(cond_presentacion_denuncia_juicio_politico_periodo) se selecciono una categoría diferente de \"No\" (2)";
+                    String txtD2 = "Debe capturar P1_7_10-J(fecha_ingreso_denuncia_juicio_politico_oficialia_partes) debido a P1_7_2-B(cond_presentacion_denuncia_juicio_politico_legislatura_actual) o P1_7_3-C(cond_presentacion_denuncia_juicio_politico_periodo) se seleccionó una categoría diferente de \"No\" (2)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -32537,7 +32354,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "La fecha registrada en P1_7_10-J(fecha_ingreso_denuncia_juicio_politico_oficialia_partes) debe ser igual o menor a La fecha registrada en  P1_1_9(fecha_termino_informacion_reportada) de La tabla datos_generales";
+                    String txtD2 = "La fecha registrada en P1_7_10-J(fecha_ingreso_denuncia_juicio_politico_oficialia_partes) debe ser igual o menor a La fecha registrada en  P1_1_9(fecha_termino_informacion_reportada) de la tabla datos_generales";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -32613,7 +32430,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "Debe introducir un dato en P1_7_11-K(fecha_procedencia_denuncia_juicio_politico) debido a P1_7_3-C(cond_presentacion_denuncia_juicio_politico_periodo) se selecciono \"Sí\" (1) y en P1_7_7-G(estatus_denuncia_juicio_politico) se selecciono la categoría de \"En trámite en instancia substanciadora\" (5) o \"Concluida\" (6)";
+                    String txtD2 = "Debe capturar P1_7_11-K(fecha_procedencia_denuncia_juicio_politico) debido a P1_7_3-C(cond_presentacion_denuncia_juicio_politico_periodo) se seleccionó: \"Sí\" (1) y en P1_7_7-G(estatus_denuncia_juicio_politico) se seleccionó: \"En trámite en instancia substanciadora\" (5) o \"Concluida\" (6)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -32689,7 +32506,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "No debe introducir un dato en P1_7_11-K(fecha_procedencia_denuncia_juicio_politico) debido a P1_7_3-C(cond_presentacion_denuncia_juicio_politico_periodo) se selecciono una categoría diferente de \"Sí\" (1) y en P1_7_7-G(estatus_denuncia_juicio_politico) se selecciono una categoría diferente de \"En trámite en instancia substanciadora\" (5) o \"Concluida\" (6)";
+                    String txtD2 = "No capturar P1_7_11-K(fecha_procedencia_denuncia_juicio_politico) debido a que en P1_7_3-C(cond_presentacion_denuncia_juicio_politico_periodo) se seleccionó una categoría diferente de \"Sí\" (1) y en P1_7_7-G(estatus_denuncia_juicio_politico) se selecciono una categoría diferente de \"En trámite en instancia substanciadora\" (5) o \"Concluida\" (6)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -32765,7 +32582,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "No debe introducir un dato en P1_7_11-K(fecha_procedencia_denuncia_juicio_politico) debido a P1_7_3-C(cond_presentacion_denuncia_juicio_politico_periodo) se selecciono una categoría diferente de \"Sí\" (1) y en P1_7_7-G(estatus_denuncia_juicio_politico) se selecciono una categoría diferente de \"En trámite en instancia substanciadora\" (5) o \"Concluida\" (6)";
+                    String txtD2 = "No debe capturar P1_7_11-K(fecha_procedencia_denuncia_juicio_politico) debido a que en P1_7_3-C(cond_presentacion_denuncia_juicio_politico_periodo) se seleccionó una categoría diferente de \"Sí\" (1) y en P1_7_7-G(estatus_denuncia_juicio_politico) se seleccionóuna categoría diferente de \"En trámite en instancia substanciadora\" (5) o \"Concluida\" (6)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -32841,7 +32658,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "Debe introducir un dato en P1_7_12-L(fecha_resolucion_pleno_juicio_politico) debido a P1_7_7-G(estatus_denuncia_juicio_politico) se selecciono \"Concluida\" (6)";
+                    String txtD2 = "Debe capturar P1_7_12-L(fecha_resolucion_pleno_juicio_politico) debido a que en P1_7_7-G(estatus_denuncia_juicio_politico) se seleccionó: \"Concluida\" (6)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -32917,7 +32734,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "No debe introducir un dato en P1_7_12-L(fecha_resolucion_pleno_juicio_politico) debido a P1_7_7-G(estatus_denuncia_juicio_politico) se selecciono una categoría diferente de \"Concluida\" (6)";
+                    String txtD2 = "No debe capturar P1_7_12-L(fecha_resolucion_pleno_juicio_politico) debido a que en P1_7_7-G(estatus_denuncia_juicio_politico) se seleccionó una categoría diferente de \"Concluida\" (6)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -33069,7 +32886,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "Debe seleccionar un dato en P1_7_13-M(sentido_resolucion_pleno_juicio_politico) debido a P1_7_7-G(estatus_denuncia_juicio_politico) se selecciono \"Concluida\" (6)";
+                    String txtD2 = "Debe capturar P1_7_13-M(sentido_resolucion_pleno_juicio_politico) debido a que enP1_7_7-G(estatus_denuncia_juicio_politico) se seleccionó: \"Concluida\" (6)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -33145,7 +32962,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "No debe seleccionar un dato en P1_7_13-M(sentido_resolucion_pleno_juicio_politico) debido a P1_7_7-G(estatus_denuncia_juicio_politico) se selecciono una categoría diferente de \"Concluida\" (6)";
+                    String txtD2 = "No debe capturar P1_7_13-M(sentido_resolucion_pleno_juicio_politico) debido a que en P1_7_7-G(estatus_denuncia_juicio_politico) se seleccionó una categoría diferente de \"Concluida\" (6)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -33221,7 +33038,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "Debe introducir un dato en P1_7_14-N(total_votaciones_pleno_juicio_politico) debido a P1_7_7-G(estatus_denuncia_juicio_politico) se selecciono \"Concluida\" (6)";
+                    String txtD2 = "Debe capturar P1_7_14-N(total_votaciones_pleno_juicio_politico) debido a que en P1_7_7-G(estatus_denuncia_juicio_politico) se seleccionó: \"Concluida\" (6)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -33297,7 +33114,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "No debe introducir un dato en P1_7_14-N(total_votaciones_pleno_juicio_politico) debido a P1_7_7-G(estatus_denuncia_juicio_politico) se selecciono una categoría diferente de \"Concluida\" (6)";
+                    String txtD2 = "No debe capturar P1_7_14-N(total_votaciones_pleno_juicio_politico) debido a que en P1_7_7-G(estatus_denuncia_juicio_politico) se seleccionó una categoría diferente de \"Concluida\" (6)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -33525,7 +33342,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "Debe introducir un dato en P1_7_15-O(votaciones_pleno_a_favor_juicio_politico) debido a P1_7_7-G(estatus_denuncia_juicio_politico) se selecciono \"Concluida\" (6)";
+                    String txtD2 = "Debe capturar P1_7_15-O(votaciones_pleno_a_favor_juicio_politico) debido a que en P1_7_7-G(estatus_denuncia_juicio_politico) se seleccionó: \"Concluida\" (6)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -33601,7 +33418,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "No debe introducir un dato en P1_7_15-O(votaciones_pleno_a_favor_juicio_politico) debido a P1_7_7-G(estatus_denuncia_juicio_politico) se selecciono una categoría diferente de \"Concluida\" (6)";
+                    String txtD2 = "No debe capturar P1_7_15-O(votaciones_pleno_a_favor_juicio_politico) debido a que en P1_7_7-G(estatus_denuncia_juicio_politico) se seleccionó una categoría diferente de \"Concluida\" (6)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -33677,7 +33494,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "Debe introducir un dato en P1_7_16-P(votaciones_pleno_en_contra_juicio_politico) debido a P1_7_7-G(estatus_denuncia_juicio_politico) se selecciono \"Concluida\" (6)";
+                    String txtD2 = "Debe capturar P1_7_16-P(votaciones_pleno_en_contra_juicio_politico) debido a que en P1_7_7-G(estatus_denuncia_juicio_politico) se seleccionó: \"Concluida\" (6)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -33753,7 +33570,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "No debe introducir un dato en P1_7_16-P(votaciones_pleno_en_contra_juicio_politico) debido a P1_7_7-G(estatus_denuncia_juicio_politico) se selecciono una categoría diferente de \"Concluida\" (6)";
+                    String txtD2 = "No debe capturar P1_7_16-P(votaciones_pleno_en_contra_juicio_politico) debido a que en P1_7_7-G(estatus_denuncia_juicio_politico) se seleccionó una categoría diferente de \"Concluida\" (6)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -33829,7 +33646,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "Debe introducir un dato en P1_7_17-Q(votaciones_pleno_abstencion_juicio_politico) debido a P1_7_7-G(estatus_denuncia_juicio_politico) se selecciono \"Concluida\" (6)";
+                    String txtD2 = "Debe introducir un dato en P1_7_17-Q(votaciones_pleno_abstencion_juicio_politico) debido a que en P1_7_7-G(estatus_denuncia_juicio_politico) se seleccionó \"Concluida\" (6)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -33905,7 +33722,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "Debe introducir un dato en P1_7_18-R(nombre_1_persona_servidora_publica_juicio_politico) debido a P1_7_7-G(estatus_denuncia_juicio_politico) se selecciono \"Concluida\" (6)";
+                    String txtD2 = "Debe introducir un dato en P1_7_18-R(nombre_1_persona_servidora_publica_juicio_politico) debido a que en P1_7_7-G(estatus_denuncia_juicio_politico) se seleccionó: \"Concluida\" (6)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -33981,7 +33798,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "No debe introducir un dato en P1_7_18-R(nombre_1_persona_servidora_publica_juicio_politico) debido a P1_7_7-G(estatus_denuncia_juicio_politico) se selecciono una categoría diferente de \"Concluida\" (6)";
+                    String txtD2 = "No debe introducir un dato en P1_7_18-R(nombre_1_persona_servidora_publica_juicio_politico) debido a que en P1_7_7-G(estatus_denuncia_juicio_politico) se seleccionó una categoría diferente de \"Concluida\" (6)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -34059,7 +33876,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "No debe introducir un dato en P1_7_19-S(nombre_2_persona_servidora_publica_juicio_politico) debido a P1_7_18-R(nombre_1_persona_servidora_publica_juicio_politico) no se introdujo un dato";
+                    String txtD2 = "No debe introducir un dato en P1_7_19-S(nombre_2_persona_servidora_publica_juicio_politico) debido a que en P1_7_18-R(nombre_1_persona_servidora_publica_juicio_politico) no se introdujo un dato";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -34137,7 +33954,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "No debe introducir un dato en P1_7_20-T(nombre_3_persona_servidora_publica_juicio_politico) debido a  P1_7_19-S(nombre_2_persona_servidora_publica_juicio_politico) no se introdujo un dato";
+                    String txtD2 = "No debe introducir un dato en P1_7_20-T(nombre_3_persona_servidora_publica_juicio_politico) debido a que en P1_7_19-S(nombre_2_persona_servidora_publica_juicio_politico) no se introdujo un dato";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -34213,7 +34030,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "Debe introducir un dato en P1_7_21-U(apellido_1_persona_servidora_publica_juicio_politico) debido a P1_7_7-G(estatus_denuncia_juicio_politico) se selecciono \"Concluida\" (6)";
+                    String txtD2 = "Debe introducir un dato en P1_7_21-U(apellido_1_persona_servidora_publica_juicio_politico) debido a que en P1_7_7-G(estatus_denuncia_juicio_politico) se seleccionó: \"Concluida\" (6)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -34289,7 +34106,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "No debe introducir un dato en P1_7_21-U(apellido_1_persona_servidora_publica_juicio_politico) debido a P1_7_7-G(estatus_denuncia_juicio_politico) se selecciono una categoría diferente de \"Concluida\" (6)";
+                    String txtD2 = "No debe introducir un dato en P1_7_21-U(apellido_1_persona_servidora_publica_juicio_politico) debido a P1_7_7-G(estatus_denuncia_juicio_politico) se seleccionó una categoría diferente de \"Concluida\" (6)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -34367,7 +34184,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "No debe introducir un dato en P1_7_22-V(apellido_2_persona_servidora_publica_juicio_politico) debido a P1_7_21-U(apellido_1_persona_servidora_publica_juicio_politico) no se introdujo un dato";
+                    String txtD2 = "No debe introducir un dato en P1_7_22-V(apellido_2_persona_servidora_publica_juicio_politico) debido a que en P1_7_21-U(apellido_1_persona_servidora_publica_juicio_politico) no se introdujo un dato";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -34445,7 +34262,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "No debe introducir un dato en P1_7_23-W(apellido_3_persona_servidora_publica_juicio_politico) debido a P1_7_22-V(apellido_2_persona_servidora_publica_juicio_politico) no se introdujo un dato.";
+                    String txtD2 = "No debe introducir un dato en P1_7_23-W(apellido_3_persona_servidora_publica_juicio_politico) debido a que en P1_7_22-V(apellido_2_persona_servidora_publica_juicio_politico) no se introdujo un dato.";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -34521,7 +34338,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "Debe seleccionar una categoría en P1_7_24-X(sexo_persona_servidora_publica_juicio_politico) debido a P1_7_7-G(estatus_denuncia_juicio_politico) se selecciono \"Concluida\" (6)";
+                    String txtD2 = "Debe seleccionar una categoría en P1_7_24-X(sexo_persona_servidora_publica_juicio_politico) debido a que en P1_7_7-G(estatus_denuncia_juicio_politico) se seleccionó: \"Concluida\" (6)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -34597,7 +34414,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "No debe seleccionar una categoría en P1_7_24-X(sexo_persona_servidora_publica_juicio_politico) debido a P1_7_7-G(estatus_denuncia_juicio_politico) se selecciono una categoría diferente de \"Concluida\" (6)";
+                    String txtD2 = "No debe seleccionar una categoría en P1_7_24-X(sexo_persona_servidora_publica_juicio_politico) debido a que en P1_7_7-G(estatus_denuncia_juicio_politico) se seleccionó una categoría diferente de \"Concluida\" (6)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -34673,7 +34490,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "Debe seleccionar una categoría en P1_7_25-Y(cargo_persona_servidora_publica_juicio_politico) debido a P1_7_7-G(estatus_denuncia_juicio_politico) se selecciono \"Concluida\" (6)";
+                    String txtD2 = "Debe seleccionar una categoría en P1_7_25-Y(cargo_persona_servidora_publica_juicio_politico) debido a que en P1_7_7-G(estatus_denuncia_juicio_politico) se seleccionó: \"Concluida\" (6)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -34749,7 +34566,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "No debe seleccionar una categoría en P1_7_25-Y(cargo_persona_servidora_publica_juicio_politico) debido a P1_7_7-G(estatus_denuncia_juicio_politico) se selecciono una categoría diferente de \"Concluida\" (6)";
+                    String txtD2 = "No debe seleccionar una categoría en P1_7_25-Y(cargo_persona_servidora_publica_juicio_politico) debido a P1_7_7-G(estatus_denuncia_juicio_politico) se seleccionó una categoría diferente de \"Concluida\" (6)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -34825,7 +34642,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "Debe seleccionar una categoría en P1_7_26-Z(cond_pertenencia_legislatura_actual_persona_legisladora_juicio_politico) debido a P1_7_2-B(cond_presentacion_denuncia_juicio_politico_legislatura_actual) se selecciono  \"Sí\" y en  P1_7_25-Y(cargo_persona_servidora_publica_juicio_politico) se selecciono \"Legislador(a) del Congreso de la entidad federativa\" (3)";
+                    String txtD2 = "Debe seleccionar una categoría en P1_7_26-Z(cond_pertenencia_legislatura_actual_persona_legisladora_juicio_politico) debido a P1_7_2-B(cond_presentacion_denuncia_juicio_politico_legislatura_actual) se seleccionó:  \"Sí\" y en  P1_7_25-Y(cargo_persona_servidora_publica_juicio_politico) se seleccionó: \"Legislador(a) del Congreso de la entidad federativa\" (3)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -34901,7 +34718,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "No debe seleccionar una categoría en P1_7_26-Z(cond_pertenencia_legislatura_actual_persona_legisladora_juicio_politico) debido a P1_7_2-B(cond_presentacion_denuncia_juicio_politico_legislatura_actual) se selecciono una categoría diferente de \"Sí\" y en  P1_7_25-Y(cargo_persona_servidora_publica_juicio_politico) se selecciono una categoría diferente de \"Legislador(a) del Congreso de la entidad federativa\" (3)";
+                    String txtD2 = "No debe seleccionar una categoría en P1_7_26-Z(cond_pertenencia_legislatura_actual_persona_legisladora_juicio_politico) debido a P1_7_2-B(cond_presentacion_denuncia_juicio_politico_legislatura_actual) se selecciono una categoría diferente de \"Sí\" y en  P1_7_25-Y(cargo_persona_servidora_publica_juicio_politico) se seleccionó una categoría diferente de \"Legislador(a) del Congreso de la entidad federativa\" (3)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -35053,7 +34870,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "No debe introducir un dato en P1_7_28-AB(nombre_persona_legisladora_juicio_politico) debido a P1_7_26-Z(cond_pertenencia_legislatura_actual_persona_legisladora_juicio_politico) se selecciono una categoría diferente a \"Sí\" (1)";
+                    String txtD2 = "No debe introducir un dato en P1_7_28-AB(nombre_persona_legisladora_juicio_politico) debido a P1_7_26-Z(cond_pertenencia_legislatura_actual_persona_legisladora_juicio_politico) se seleccionó una categoría diferente a \"Sí\" (1)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -35129,8 +34946,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "Debe introducir un dato en P1_7_29-AC(nombre_institucion_persona_servidora_publica_juicio_politico) debido a  P1_7_25-Y(cargo_persona_servidora_publica_juicio_politico) se selecciono \"Titular de alguna institución o unidad administrativa de la Administración Pública Estatal (excluyendo, de ser el caso, a la Procuraduría General de Justicia)\" (2), \"Titular de algún otro órgano constitucional autónomo de la entidad federativa (excluyendo al organismo público local electoral, al organismo garante de acceso a la información y protección de datos personales, al organismo público de derechos humanos de la entidad federativa, y, de ser el caso, a la Fiscalía General de la entidad federativa)\" (10) o \"Titular de alguna institución o unidad administrativa de la Administración Pública del municipio o demarcación territorial\" (14)";
-                    XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
+                    String txtD2 = "Debe capturar información en P1_7_29-AC (nombre_institucion_persona_servidora_publica_juicio_politico), ya que en P1_7_25-Y (cargo_persona_servidora_publica_juicio_politico) se seleccionó alguna de las siguientes opciones: \"Titular de alguna institución o unidad administrativa de la Administración Pública Estatal (excluyendo, de ser el caso, a la Procuraduría General de Justicia)\" (2), \"Titular de algún otro órgano constitucional autónomo de la entidad federativa (excluyendo al organismo público local electoral, al organismo garante de acceso a la información y protección de datos personales, al organismo público de derechos humanos de la entidad federativa y, de ser el caso, a la Fiscalía General de la entidad federativa)\" (10) o \"Titular de alguna institución o unidad administrativa de la Administración Pública del municipio o demarcación territorial\" (14).";                    XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
                     XSSFCell celdaD3 = filaEE2.createCell(2);//COLUMNA
@@ -35205,7 +35021,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "No debe introducir un dato en P1_7_29-AC(nombre_institucion_persona_servidora_publica_juicio_politico) debido a  P1_7_25-Y(cargo_persona_servidora_publica_juicio_politico) se selecciono una categoría diferente a \"Titular de alguna institución o unidad administrativa de la Administración Pública Estatal (excluyendo, de ser el caso, a la Procuraduría General de Justicia)\" (2), \"Titular de algún otro órgano constitucional autónomo de la entidad federativa (excluyendo al organismo público local electoral, al organismo garante de acceso a la información y protección de datos personales, al organismo público de derechos humanos de la entidad federativa, y, de ser el caso, a la Fiscalía General de la entidad federativa)\" (10) o \"Titular de alguna institución o unidad administrativa de la Administración Pública del municipio o demarcación territorial\" (14)";
+                    String txtD2 = "No capturar P1_7_29-AC(nombre_institucion_persona_servidora_publica_juicio_politico) debido a  P1_7_25-Y(cargo_persona_servidora_publica_juicio_politico) se selecciono una categoría diferente a \"Titular de alguna institución o unidad administrativa de la Administración Pública Estatal (excluyendo, de ser el caso, a la Procuraduría General de Justicia)\" (2), \"Titular de algún otro órgano constitucional autónomo de la entidad federativa (excluyendo al organismo público local electoral, al organismo garante de acceso a la información y protección de datos personales, al organismo público de derechos humanos de la entidad federativa, y, de ser el caso, a la Fiscalía General de la entidad federativa)\" (10) o \"Titular de alguna institución o unidad administrativa de la Administración Pública del municipio o demarcación territorial\" (14)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -35281,7 +35097,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "Debe seleccionar una categoría en P1_7_30-AD(AGEM_persona_servidora_publica_juicio_politico) debido a P1_7_25-Y(cargo_persona_servidora_publica_juicio_politico) se selecciono \"Presidente(a) municipal\" (11), \"Regidor(a)\" (12), \"Síndico(a)\" (13), \"Titular de alguna institución o unidad administrativa de la Administración Pública del municipio o demarcación territorial\" (14) u \"Otro cargo del ámbito municipal (especifique)\" (16)";
+                    String txtD2 = "Debe capturar P1_7_30-AD(AGEM_persona_servidora_publica_juicio_politico) debido a P1_7_25-Y(cargo_persona_servidora_publica_juicio_politico) se selecciono \"Presidente(a) municipal\" (11), \"Regidor(a)\" (12), \"Síndico(a)\" (13), \"Titular de alguna institución o unidad administrativa de la Administración Pública del municipio o demarcación territorial\" (14) u \"Otro cargo del ámbito municipal (especifique)\" (16)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -35357,7 +35173,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "No debe seleccionar una categoría en P1_7_30-AD(AGEM_persona_servidora_publica_juicio_politico) debido a P1_7_25-Y(cargo_persona_servidora_publica_juicio_politico) se selecciono una categoría diferente a \"Presidente(a) municipal\" (11), \"Regidor(a)\" (12), \"Síndico(a)\" (13), \"Titular de alguna institución o unidad administrativa de la Administración Pública del municipio o demarcación territorial\" (14) u \"Otro cargo del ámbito municipal (especifique)\" (16)";
+                    String txtD2 = "No debe seleccionar una categoría en P1_7_30-AD(AGEM_persona_servidora_publica_juicio_politico) debido a P1_7_25-Y(cargo_persona_servidora_publica_juicio_politico) se seleccionó una categoría diferente a \"Presidente(a) municipal\" (11), \"Regidor(a)\" (12), \"Síndico(a)\" (13), \"Titular de alguna institución o unidad administrativa de la Administración Pública del municipio o demarcación territorial\" (14) u \"Otro cargo del ámbito municipal (especifique)\" (16)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -35433,7 +35249,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "Debe introducir un dato en P1_7_31-AE(municipio_persona_servidora_publica_juicio_politico) debido a P1_7_25-Y(cargo_persona_servidora_publica_juicio_politico) se selecciono \"Presidente(a) municipal\" (11), \"Regidor(a)\" (12), \"Síndico(a)\" (13), \"Titular de alguna institución o unidad administrativa de la Administración Pública del municipio o demarcación territorial\" (14) u \"Otro cargo del ámbito municipal (especifique)\" (16)";
+                    String txtD2 = "Debe introducir un dato en P1_7_31-AE(municipio_persona_servidora_publica_juicio_politico) debido a P1_7_25-Y(cargo_persona_servidora_publica_juicio_politico) se seleccionó \"Presidente(a) municipal\" (11), \"Regidor(a)\" (12), \"Síndico(a)\" (13), \"Titular de alguna institución o unidad administrativa de la Administración Pública del municipio o demarcación territorial\" (14) u \"Otro cargo del ámbito municipal (especifique)\" (16)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -35509,7 +35325,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "No debe introducir un dato en P1_7_31-AE(municipio_persona_servidora_publica_juicio_politico) debido a P1_7_25-Y(cargo_persona_servidora_publica_juicio_politico) se selecciono una categoría diferente a \"Presidente(a) municipal\" (11), \"Regidor(a)\" (12), \"Síndico(a)\" (13), \"Titular de alguna institución o unidad administrativa de la Administración Pública del municipio o demarcación territorial\" (14) u \"Otro cargo del ámbito municipal (especifique)\" (16)";
+                    String txtD2 = "No debe introducir un dato en P1_7_31-AE(municipio_persona_servidora_publica_juicio_politico) debido a P1_7_25-Y(cargo_persona_servidora_publica_juicio_politico) se seleccionó una categoría diferente a \"Presidente(a) municipal\" (11), \"Regidor(a)\" (12), \"Síndico(a)\" (13), \"Titular de alguna institución o unidad administrativa de la Administración Pública del municipio o demarcación territorial\" (14) u \"Otro cargo del ámbito municipal (especifique)\" (16)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -35585,7 +35401,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "Debe especificar el dato en P1_7_32-AF(otro_cargo_persona_servidora_publica_juicio_politico_ambito_estatal_especifique) debido a  P1_7_25-Y(cargo_persona_servidora_publica_juicio_politico) se selecciono \"Otro cargo del ámbito estatal (especifique)\" (15).";
+                    String txtD2 = "Debe especificar el dato en P1_7_32-AF(otro_cargo_persona_servidora_publica_juicio_politico_ambito_estatal_especifique) debido a  P1_7_25-Y(cargo_persona_servidora_publica_juicio_politico) se seleccionó \"Otro cargo del ámbito estatal (especifique)\" (15).";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -35661,7 +35477,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "No debe especificar el dato en P1_7_32-AF(otro_cargo_persona_servidora_publica_juicio_politico_ambito_estatal_especifique) debido a P1_7_25-Y(cargo_persona_servidora_publica_juicio_politico) se selecciono una categoría diferente a \"Otro cargo del ámbito estatal (especifique)\" (15)";
+                    String txtD2 = "No debe especificar el dato en P1_7_32-AF(otro_cargo_persona_servidora_publica_juicio_politico_ambito_estatal_especifique) debido a P1_7_25-Y(cargo_persona_servidora_publica_juicio_politico) se seleccionó una categoría diferente a \"Otro cargo del ámbito estatal (especifique)\" (15)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -35737,7 +35553,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "Debe especificar el dato en P1_7_33-AG(otro_cargo_persona_servidora_publica_juicio_politico_ambito_municipal_especifique) debido a  P1_7_25-Y(cargo_persona_servidora_publica_juicio_politico) se selecciono \"Otro cargo del ámbito municipal (especifique)\" (15)";
+                    String txtD2 = "Debe especificar el dato en P1_7_33-AG(otro_cargo_persona_servidora_publica_juicio_politico_ambito_municipal_especifique) debido a que en P1_7_25-Y(cargo_persona_servidora_publica_juicio_politico) se seleccionó: \"Otro cargo del ámbito municipal (especifique)\" (15)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -35813,7 +35629,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "No debe especificar el dato en P1_7_33-AG(otro_cargo_persona_servidora_publica_juicio_politico_ambito_municipal_especifique) debido a P1_7_25-Y(cargo_persona_servidora_publica_juicio_politico) se selecciono una categoría diferente a \"Otro cargo del ámbito municipal (especifique)\" (15)";
+                    String txtD2 = "No debe especificar el dato en P1_7_33-AG(otro_cargo_persona_servidora_publica_juicio_politico_ambito_municipal_especifique) debido a P1_7_25-Y(cargo_persona_servidora_publica_juicio_politico) se seleccionó una categoría diferente a \"Otro cargo del ámbito municipal (especifique)\" (15)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -35889,7 +35705,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "Debe seleccionar una categoría en P1_7_34-AH(perjuicio_a_los_intereses_publicos_fundamentales_y_de_su_buen_despacho_1) debido a P1_7_7-G(estatus_denuncia_juicio_politico) se selecciono \"Concluida\" (6)";
+                    String txtD2 = "Debe seleccionar una categoría en P1_7_34-AH(perjuicio_a_los_intereses_publicos_fundamentales_y_de_su_buen_despacho_1) debido a P1_7_7-G(estatus_denuncia_juicio_politico) se seleccionó: \"Concluida\" (6)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -35965,7 +35781,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "No debe seleccionar una categoría en P1_7_34-AH(perjuicio_a_los_intereses_publicos_fundamentales_y_de_su_buen_despacho_1) debido a P1_7_7-G(estatus_denuncia_juicio_politico) se selecciono una categoría diferente a \"Concluida\" (6)";
+                    String txtD2 = "No debe seleccionar una categoría en P1_7_34-AH(perjuicio_a_los_intereses_publicos_fundamentales_y_de_su_buen_despacho_1) debido a P1_7_7-G(estatus_denuncia_juicio_politico) se seleccionó una categoría diferente a \"Concluida\" (6)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -36197,7 +36013,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "Debe introducir un dato en P1_7_37-AK(otro_perjuicio_a_los_intereses_publicos_fundamentales_y_de_su_buen_despacho_especifique) debido a P1_7_34-AH(perjuicio_a_los_intereses_publicos_fundamentales_y_de_su_buen_despacho_1), P1_7_35-AI(perjuicio_a_los_intereses_publicos_fundamentales_y_de_su_buen_despacho_2) o P1_7_36-AJ(perjuicio_a_los_intereses_publicos_fundamentales_y_de_su_buen_despacho_3) se selecciono \"Otro perjuicio a los intereses públicos fundamentales y de su buen despacho (especifique)\" (9)";
+                    String txtD2 = "Debe introducir un dato en P1_7_37-AK(otro_perjuicio_a_los_intereses_publicos_fundamentales_y_de_su_buen_despacho_especifique) debido a P1_7_34-AH(perjuicio_a_los_intereses_publicos_fundamentales_y_de_su_buen_despacho_1), P1_7_35-AI(perjuicio_a_los_intereses_publicos_fundamentales_y_de_su_buen_despacho_2) o P1_7_36-AJ(perjuicio_a_los_intereses_publicos_fundamentales_y_de_su_buen_despacho_3) se seleccionó: \"Otro perjuicio a los intereses públicos fundamentales y de su buen despacho (especifique)\" (9)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -36273,7 +36089,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "No debe introducir un dato en P1_7_37-AK(otro_perjuicio_a_los_intereses_publicos_fundamentales_y_de_su_buen_despacho_especifique) debido a P1_7_34-AH(perjuicio_a_los_intereses_publicos_fundamentales_y_de_su_buen_despacho_1), P1_7_35-AI(perjuicio_a_los_intereses_publicos_fundamentales_y_de_su_buen_despacho_2) o P1_7_36-AJ(perjuicio_a_los_intereses_publicos_fundamentales_y_de_su_buen_despacho_3) se selecciono una categoría diferente de \"Otro perjuicio a los intereses públicos fundamentales y de su buen despacho (especifique)\" (9)";
+                    String txtD2 = "No debe introducir un dato en P1_7_37-AK(otro_perjuicio_a_los_intereses_publicos_fundamentales_y_de_su_buen_despacho_especifique) debido a P1_7_34-AH(perjuicio_a_los_intereses_publicos_fundamentales_y_de_su_buen_despacho_1), P1_7_35-AI(perjuicio_a_los_intereses_publicos_fundamentales_y_de_su_buen_despacho_2) o P1_7_36-AJ(perjuicio_a_los_intereses_publicos_fundamentales_y_de_su_buen_despacho_3) se seleccionó una categoría diferente de \"Otro perjuicio a los intereses públicos fundamentales y de su buen despacho (especifique)\" (9)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -36620,7 +36436,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "Debe seleccionar una categoria en P1_8_3-C(cond_presentacion_denuncia_declaracion_procedencia_periodo) debido a P1_8_2-B(cond_presentacion_denuncia_declaracion_procedencia_legislatura_actual) se selecciono una categoria diferente de \"No\" (2)";
+                    String txtD2 = "Debe seleccionar una categoria en P1_8_3-C(cond_presentacion_denuncia_declaracion_procedencia_periodo) debido a P1_8_2-B(cond_presentacion_denuncia_declaracion_procedencia_legislatura_actual) se seleccionó una categoria diferente de \"No\" (2)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -36696,7 +36512,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "Debe seleccionar una categoria en P1_8_4-D(numero_legislatura_presentacion_denuncia_declaracion_procedencia) debido a P1_8_2-B(cond_presentacion_denuncia_declaracion_procedencia_legislatura_actual) se selecciono la categoria \"No\" (2)";
+                    String txtD2 = "Debe seleccionar una categoria en P1_8_4-D(numero_legislatura_presentacion_denuncia_declaracion_procedencia) debido a P1_8_2-B(cond_presentacion_denuncia_declaracion_procedencia_legislatura_actual) se seleccionó la categoria \"No\" (2)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -36772,7 +36588,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "No debe seleccionar una categoria en P1_8_4-D(numero_legislatura_presentacion_denuncia_declaracion_procedencia) debido a P1_8_2-B(cond_presentacion_denuncia_declaracion_procedencia_legislatura_actual) se selecciono una categoria diferente de \"No\" (2)";
+                    String txtD2 = "No debe seleccionar una categoria en P1_8_4-D(numero_legislatura_presentacion_denuncia_declaracion_procedencia) debido a P1_8_2-B(cond_presentacion_denuncia_declaracion_procedencia_legislatura_actual) se seleccionó una categoria diferente de \"No\" (2)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -36848,7 +36664,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "Debe seleccionar una categoria en P1_8_6-F(cond_actualizacion_estatus_denuncia_declaracion_procedencia_periodo) debido a P1_8_2-B(cond_presentacion_denuncia_declaracion_procedencia_legislatura_actual) o P1_8_3-C(cond_presentacion_denuncia_declaracion_procedencia_periodo) se selecciono la categoria \"No\" (2)";
+                    String txtD2 = "Debe seleccionar una categoria en P1_8_6-F(cond_actualizacion_estatus_denuncia_declaracion_procedencia_periodo) debido a P1_8_2-B(cond_presentacion_denuncia_declaracion_procedencia_legislatura_actual) o P1_8_3-C(cond_presentacion_denuncia_declaracion_procedencia_periodo) se seleccionó la categoria \"No\" (2)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -36924,7 +36740,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "No debe seleccionar una categoria en P1_8_6-F(cond_actualizacion_estatus_denuncia_declaracion_procedencia_periodo) debido a P1_8_2-B(cond_presentacion_denuncia_declaracion_procedencia_legislatura_actual) o P1_8_3-C(cond_presentacion_denuncia_declaracion_procedencia_periodo) se selecciono la categoria diferente a \"No\" (2)";
+                    String txtD2 = "No debe seleccionar una categoria en P1_8_6-F(cond_actualizacion_estatus_denuncia_declaracion_procedencia_periodo) debido a P1_8_2-B(cond_presentacion_denuncia_declaracion_procedencia_legislatura_actual) o P1_8_3-C(cond_presentacion_denuncia_declaracion_procedencia_periodo) se seleccionó la categoria diferente a \"No\" (2)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -37000,7 +36816,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "No debe seleccionar una categoria en P1_8_7-G(estatus_denuncia_declaracion_procedencia) debido a P1_8_6-F(cond_actualizacion_estatus_denuncia_declaracion_procedencia_periodo) se selecciono la categoria \"No\" (2)";
+                    String txtD2 = "No debe seleccionar una categoria en P1_8_7-G(estatus_denuncia_declaracion_procedencia) debido a P1_8_6-F(cond_actualizacion_estatus_denuncia_declaracion_procedencia_periodo) se seleccionó la categoria \"No\" (2)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -37076,7 +36892,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "Debe seleccionar una categoria en P1_8_7-G(estatus_denuncia_declaracion_procedencia) debido a P1_8_6-F(cond_actualizacion_estatus_denuncia_declaracion_procedencia_periodo) se selecciono la categoria diferente de \"No\" (2)";
+                    String txtD2 = "Debe seleccionar una categoria en P1_8_7-G(estatus_denuncia_declaracion_procedencia) debido a P1_8_6-F(cond_actualizacion_estatus_denuncia_declaracion_procedencia_periodo) se seleccionó la categoria diferente de \"No\" (2)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -37152,7 +36968,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "Debe seleccionar en P1_8_7-G(estatus_denuncia_declaracion_procedencia) la categoria de \"En trámite en instancia substanciadora\" (3) o \"Concluida\" (6) debido a P1_8_6-F(cond_actualizacion_estatus_denuncia_declaracion_procedencia_periodo) se selecciono \"Sí\" (1)";
+                    String txtD2 = "Debe seleccionar en P1_8_7-G(estatus_denuncia_declaracion_procedencia) la categoria de \"En trámite en instancia substanciadora\" (3) o \"Concluida\" (6) debido a P1_8_6-F(cond_actualizacion_estatus_denuncia_declaracion_procedencia_periodo) se seleccionó: \"Sí\" (1)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -37228,7 +37044,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "Debe especificar el dato en P1_8_8-H(improcedente_estatus_denuncia_declaracion_procedencia_especifique) debido a P1_8_7-G(estatus_denuncia_declaracion_procedencia) se selecciono la categoria \"Improcedente (especifique)\" (4)";
+                    String txtD2 = "Debe especificar el dato en P1_8_8-H(improcedente_estatus_denuncia_declaracion_procedencia_especifique) debido a P1_8_7-G(estatus_denuncia_declaracion_procedencia) se seleccionó la categoria \"Improcedente (especifique)\" (4)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -37304,7 +37120,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "No debe especificar el dato en P1_8_8-H(improcedente_estatus_denuncia_declaracion_procedencia_especifique) debido a P1_8_7-G(estatus_denuncia_declaracion_procedencia) se selecciono una categoria diferente de \"Improcedente (especifique)\" (4)";
+                    String txtD2 = "No debe especificar el dato en P1_8_8-H(improcedente_estatus_denuncia_declaracion_procedencia_especifique) debido a P1_8_7-G(estatus_denuncia_declaracion_procedencia) se seleccionó una categoria diferente de \"Improcedente (especifique)\" (4)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -37380,7 +37196,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "Debe especificar la categoria en P1_8_9-I(otro_estatus_denuncia_declaracion_procedencia_especifique) debido a P1_8_7-G(estatus_denuncia_declaracion_procedencia) se selecciono \"Otro estatus (especifique)\" (7)";
+                    String txtD2 = "Debe especificar la categoria en P1_8_9-I(otro_estatus_denuncia_declaracion_procedencia_especifique) debido a P1_8_7-G(estatus_denuncia_declaracion_procedencia) se seleccionó \"Otro estatus (especifique)\" (7)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -37456,7 +37272,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "No debe especificar la categoria en P1_8_9-I(otro_estatus_denuncia_declaracion_procedencia_especifique) debido a P1_8_7-G(estatus_denuncia_declaracion_procedencia) se selecciono una categoria diferente de \"Otro estatus (especifique)\" (7)";
+                    String txtD2 = "No debe especificar la categoria en P1_8_9-I(otro_estatus_denuncia_declaracion_procedencia_especifique) debido a P1_8_7-G(estatus_denuncia_declaracion_procedencia) se seleccionó una categoria diferente de \"Otro estatus (especifique)\" (7)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -37532,7 +37348,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "No dede introducir un dato en P1_8_10-J(fecha_ingreso_denuncia_declaracion_procedencia_oficialia_partes) debido a P1_8_2-B(cond_presentacion_denuncia_declaracion_procedencia_legislatura_actual) o P1_8_3-C(cond_presentacion_denuncia_declaracion_procedencia_periodo) se selecciono \"No\" (2)";
+                    String txtD2 = "No dede introducir un dato en P1_8_10-J(fecha_ingreso_denuncia_declaracion_procedencia_oficialia_partes) debido a P1_8_2-B(cond_presentacion_denuncia_declaracion_procedencia_legislatura_actual) o P1_8_3-C(cond_presentacion_denuncia_declaracion_procedencia_periodo) se seleccionó \"No\" (2)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -37608,7 +37424,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "Debe introducir un dato en P1_8_10-J(fecha_ingreso_denuncia_declaracion_procedencia_oficialia_partes) debido a P1_8_2-B(cond_presentacion_denuncia_declaracion_procedencia_legislatura_actual) o P1_8_3-C(cond_presentacion_denuncia_declaracion_procedencia_periodo) se selecciono una categoria diferente de \"No\" (2)";
+                    String txtD2 = "Debe introducir un dato en P1_8_10-J(fecha_ingreso_denuncia_declaracion_procedencia_oficialia_partes) debido a P1_8_2-B(cond_presentacion_denuncia_declaracion_procedencia_legislatura_actual) o P1_8_3-C(cond_presentacion_denuncia_declaracion_procedencia_periodo) se seleccionó una categoria diferente de \"No\" (2)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -37684,7 +37500,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "La fecha registrada en P1_8_10-J(fecha_ingreso_denuncia_declaracion_procedencia_oficialia_partes) Debe ser igual o menor a la fecha registrada en P1_1_9(fecha_termino_informacion_reportada) de la tabla datos_generales";
+                    String txtD2 = "La fecha registrada en el campo P1_8_10-J(fecha_ingreso_denuncia_declaracion_procedencia_oficialia_partes) debe ser igual o menor a la fecha registrada en P1_1_9(fecha_termino_informacion_reportada) de la tabla datos_generales";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -37760,7 +37576,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "Debe introducir un dato en P1_8_11-K(fecha_procedencia_denuncia_declaracion_procedencia) debido a P1_8_3-C(cond_presentacion_denuncia_declaracion_procedencia_periodo) se selecciono la categoria \"Sí\" (1) y P1_8_7-G(estatus_denuncia_declaracion_procedencia) se selecciono la categoria \"En trámite en instancia substanciadora\" (5) o \"Concluida\" (6)";
+                    String txtD2 = "Debe introducir un dato en P1_8_11-K(fecha_procedencia_denuncia_declaracion_procedencia) debido a P1_8_3-C(cond_presentacion_denuncia_declaracion_procedencia_periodo) se selecciono la categoria \"Sí\" (1) y P1_8_7-G(estatus_denuncia_declaracion_procedencia) se seleccionó: \"En trámite en instancia substanciadora\" (5) o \"Concluida\" (6)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -37836,7 +37652,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "No debe introducir un dato en P1_8_11-K(fecha_procedencia_denuncia_declaracion_procedencia) debido a P1_8_3-C(cond_presentacion_denuncia_declaracion_procedencia_periodo) se selecciono una categoria diferente a \"Sí\" (1) y P1_8_7-G(estatus_denuncia_declaracion_procedencia) se selecciono una categoria diferente a \"En trámite en instancia substanciadora\" (5) o \"Concluida\" (6)";
+                    String txtD2 = "No debe introducir un dato en P1_8_11-K(fecha_procedencia_denuncia_declaracion_procedencia) debido a P1_8_3-C(cond_presentacion_denuncia_declaracion_procedencia_periodo) se selecciono una categoria diferente a \"Sí\" (1) y P1_8_7-G(estatus_denuncia_declaracion_procedencia) se seleccionó una categoria diferente a \"En trámite en instancia substanciadora\" (5) o \"Concluida\" (6)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -38064,7 +37880,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "No debe introducir un dato en P1_8_12-L(fecha_resolucion_pleno_declaracion_procedencia) debido a P1_8_7-G(estatus_denuncia_declaracion_procedencia) se selecciono una categoria diferente a \"Concluida\" (6)";
+                    String txtD2 = "No debe introducir un dato en P1_8_12-L(fecha_resolucion_pleno_declaracion_procedencia) debido a P1_8_7-G(estatus_denuncia_declaracion_procedencia) se seleccionó una categoria diferente a \"Concluida\" (6)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -38140,7 +37956,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "Debe seleccionar una categoria en P1_8_13-M(sentido_resolucion_pleno_declaracion_procedencia) debido a P1_8_7-G(estatus_denuncia_declaracion_procedencia) se selecciono la categoria \"Concluida\" (6)";
+                    String txtD2 = "Debe seleccionar una categoria en P1_8_13-M(sentido_resolucion_pleno_declaracion_procedencia) debido a P1_8_7-G(estatus_denuncia_declaracion_procedencia) se seleccionó la categoria \"Concluida\" (6)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -38292,7 +38108,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "Debe seleccionar una categoria en P1_8_13-M(sentido_resolucion_pleno_declaracion_procedencia) debido a P1_8_7-G(estatus_denuncia_declaracion_procedencia) se selecciono la categoria \"Concluida\" (6)";
+                    String txtD2 = "Debe seleccionar una categoria en P1_8_13-M(sentido_resolucion_pleno_declaracion_procedencia) debido a P1_8_7-G(estatus_denuncia_declaracion_procedencia) se seleccionó la categoria \"Concluida\" (6)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -38368,7 +38184,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "No debe seleccionar una categoria en P1_8_13-M(sentido_resolucion_pleno_declaracion_procedencia) debido a P1_8_7-G(estatus_denuncia_declaracion_procedencia) se selecciono una categoria diferente a \"Concluida\" (6)";
+                    String txtD2 = "No debe seleccionar una categoria en P1_8_13-M(sentido_resolucion_pleno_declaracion_procedencia) debido a P1_8_7-G(estatus_denuncia_declaracion_procedencia) se seleccionó una categoria diferente a \"Concluida\" (6)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -38444,7 +38260,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "Debe introducir un dato en P1_8_14-N(total_votaciones_pleno_declaracion_procedencia), P1_8_15-O(votaciones_pleno_a_favor_declaracion_procedencia), P1_8_16-P(votaciones_pleno_en_contra_declaracion_procedencia) y P1_8_17-Q(votaciones_pleno_abstencion_declaracion_procedencia) debido a P1_8_7-G(estatus_denuncia_declaracion_procedencia) se selecciono la categoria \"Concluida\" (6)";
+                    String txtD2 = "Debe introducir un dato en P1_8_14-N(total_votaciones_pleno_declaracion_procedencia), P1_8_15-O(votaciones_pleno_a_favor_declaracion_procedencia), P1_8_16-P(votaciones_pleno_en_contra_declaracion_procedencia) y P1_8_17-Q(votaciones_pleno_abstencion_declaracion_procedencia) debido a P1_8_7-G(estatus_denuncia_declaracion_procedencia) se seleccionó la categoria \"Concluida\" (6)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -38520,7 +38336,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "No debe introducir un dato en P1_8_14-N(total_votaciones_pleno_declaracion_procedencia), P1_8_15-O(votaciones_pleno_a_favor_declaracion_procedencia), P1_8_16-P(votaciones_pleno_en_contra_declaracion_procedencia) y P1_8_17-Q(votaciones_pleno_abstencion_declaracion_procedencia) debido a P1_8_7-G(estatus_denuncia_declaracion_procedencia) se selecciono una categoria diferente a \"Concluida\" (6)";
+                    String txtD2 = "No debe introducir un dato en P1_8_14-N(total_votaciones_pleno_declaracion_procedencia), P1_8_15-O(votaciones_pleno_a_favor_declaracion_procedencia), P1_8_16-P(votaciones_pleno_en_contra_declaracion_procedencia) y P1_8_17-Q(votaciones_pleno_abstencion_declaracion_procedencia) debido a P1_8_7-G(estatus_denuncia_declaracion_procedencia) se seleccionó una categoria diferente a \"Concluida\" (6)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -38596,7 +38412,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "Debe introducir un dato en P1_8_18-R(nombre_1_persona_servidora_publica_declaracion_procedencia), P1_8_19-S(nombre_2_persona_servidora_publica_declaracion_procedencia) y P1_8_20-T(nombre_3_persona_servidora_publica_declaracion_procedencia) debido a P1_8_7-G(estatus_denuncia_declaracion_procedencia) se selecciono la categoria de \"Concluida\" (6)";
+                    String txtD2 = "Debe introducir un dato en P1_8_18-R(nombre_1_persona_servidora_publica_declaracion_procedencia), P1_8_19-S(nombre_2_persona_servidora_publica_declaracion_procedencia) y P1_8_20-T(nombre_3_persona_servidora_publica_declaracion_procedencia) debido a P1_8_7-G(estatus_denuncia_declaracion_procedencia) se seleccionó la categoria de \"Concluida\" (6)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -38672,7 +38488,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "No debe introducir un dato en P1_8_18-R(nombre_1_persona_servidora_publica_declaracion_procedencia), P1_8_19-S(nombre_2_persona_servidora_publica_declaracion_procedencia) y P1_8_20-T(nombre_3_persona_servidora_publica_declaracion_procedencia) debido a P1_8_7-G(estatus_denuncia_declaracion_procedencia) se selecciono una categoria diferente a \"Concluida\" (6)";
+                    String txtD2 = "No debe introducir un dato en P1_8_18-R(nombre_1_persona_servidora_publica_declaracion_procedencia), P1_8_19-S(nombre_2_persona_servidora_publica_declaracion_procedencia) y P1_8_20-T(nombre_3_persona_servidora_publica_declaracion_procedencia) debido a P1_8_7-G(estatus_denuncia_declaracion_procedencia) se seleccionó una categoria diferente a \"Concluida\" (6)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -38748,7 +38564,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "Debe introducir un dato en P1_8_21-U(apellido_1_persona_servidora_publica_declaracion_procedencia) debido a P1_8_7-G(estatus_denuncia_declaracion_procedencia) se selecciono la categoria \"Concluida\" (6)";
+                    String txtD2 = "Debe introducir un dato en P1_8_21-U(apellido_1_persona_servidora_publica_declaracion_procedencia) debido a P1_8_7-G(estatus_denuncia_declaracion_procedencia) se seleccionó la categoria \"Concluida\" (6)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -38824,7 +38640,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "No debe introducir un dato en P1_8_21-U(apellido_1_persona_servidora_publica_declaracion_procedencia) debido a P1_8_7-G(estatus_denuncia_declaracion_procedencia) se selecciono una categoria diferente de \"Concluida\" (6)";
+                    String txtD2 = "No debe introducir un dato en P1_8_21-U(apellido_1_persona_servidora_publica_declaracion_procedencia) debido a P1_8_7-G(estatus_denuncia_declaracion_procedencia) se seleccionó una categoria diferente de \"Concluida\" (6)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -38902,7 +38718,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "No debe introducir un dato en P1_8_22-V(apellido_2_persona_servidora_publica_declaracion_procedencia) debido a P1_8_21-U(apellido_1_persona_servidora_publica_declaracion_procedencia) no se introducio un dato.";
+                    String txtD2 = "No debe introducir un dato en P1_8_22-V(apellido_2_persona_servidora_publica_declaracion_procedencia) debido a P1_8_21-U(apellido_1_persona_servidora_publica_declaracion_procedencia) no se introdujo un dato.";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -38980,7 +38796,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "No debe introducir un dato en P1_8_23-W(apellido_3_persona_servidora_publica_declaracion_procedencia) debido a P1_8_22-V(apellido_2_persona_servidora_publica_declaracion_procedencia) no se introducio un dato";
+                    String txtD2 = "No debe introducir un dato en P1_8_23-W(apellido_3_persona_servidora_publica_declaracion_procedencia) debido a P1_8_22-V(apellido_2_persona_servidora_publica_declaracion_procedencia) no se introdujo un dato";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -39056,7 +38872,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "Debe seleccionar una categoria en P1_8_24-X(sexo_persona_servidora_publica_declaracion_procedencia) y en P1_8_25-Y(cargo_persona_servidora_publica_declaracion_procedencia) debido a P1_8_7-G(estatus_denuncia_declaracion_procedencia) se selecciono  \"Concluida\" (6)";
+                    String txtD2 = "Debe seleccionar una categoria en P1_8_24-X(sexo_persona_servidora_publica_declaracion_procedencia) y en P1_8_25-Y(cargo_persona_servidora_publica_declaracion_procedencia) debido a P1_8_7-G(estatus_denuncia_declaracion_procedencia) se seleccionó:  \"Concluida\" (6)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -39132,7 +38948,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "No debe seleccionar una categoria en P1_8_24-X(sexo_persona_servidora_publica_declaracion_procedencia) y en P1_8_25-Y(cargo_persona_servidora_publica_declaracion_procedencia) debido a P1_8_7-G(estatus_denuncia_declaracion_procedencia) se selecciono una categoria diferente a \"Concluida\" (6)";
+                    String txtD2 = "No debe seleccionar una categoria en P1_8_24-X(sexo_persona_servidora_publica_declaracion_procedencia) y en P1_8_25-Y(cargo_persona_servidora_publica_declaracion_procedencia) debido a P1_8_7-G(estatus_denuncia_declaracion_procedencia) se seleccionó una categoria diferente a \"Concluida\" (6)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -39208,7 +39024,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "Debe seleccionar una categoria en P1_8_26-Z(cond_pertenencia_legislatura_actual_persona_legisladora_declaracion_procedencia) debido a P1_8_2-B(cond_presentacion_denuncia_declaracion_procedencia_legislatura_actual) se selecciono la categoria \"Sí\" (1) y P1_8_25-Y(cargo_persona_servidora_publica_declaracion_procedencia) se selecciono \"Legislador(a) del Congreso de la entidad federativa\" (3)";
+                    String txtD2 = "Debe seleccionar una categoria en P1_8_26-Z(cond_pertenencia_legislatura_actual_persona_legisladora_declaracion_procedencia) debido a P1_8_2-B(cond_presentacion_denuncia_declaracion_procedencia_legislatura_actual) se seleccionó la categoria \"Sí\" (1) y P1_8_25-Y(cargo_persona_servidora_publica_declaracion_procedencia) se selecciono \"Legislador(a) del Congreso de la entidad federativa\" (3)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -39284,7 +39100,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "No debe seleccionar una categoria en P1_8_26-Z(cond_pertenencia_legislatura_actual_persona_legisladora_declaracion_procedencia) debido a P1_8_2-B(cond_presentacion_denuncia_declaracion_procedencia_legislatura_actual) se selecciono una categoria diferente a \"Sí\" (1) y P1_8_25-Y(cargo_persona_servidora_publica_declaracion_procedencia) se selecciono diferente a \"Legislador(a) del Congreso de la entidad federativa\" (3)";
+                    String txtD2 = "No debe seleccionar una categoria en P1_8_26-Z(cond_pertenencia_legislatura_actual_persona_legisladora_declaracion_procedencia) debido a P1_8_2-B(cond_presentacion_denuncia_declaracion_procedencia_legislatura_actual) se seleccionó una categoria diferente a \"Sí\" (1) y P1_8_25-Y(cargo_persona_servidora_publica_declaracion_procedencia) se selecciono diferente a \"Legislador(a) del Congreso de la entidad federativa\" (3)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -39360,7 +39176,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "Debe seleccionar un dato en P1_8_27-AA(ID_persona_legisladora_declaracion_procedencia) debido a P1_8_26-Z(cond_pertenencia_legislatura_actual_persona_legisladora_declaracion_procedencia) se selecciono la categoria \"Sí\" (1)";
+                    String txtD2 = "Debe seleccionar un dato en P1_8_27-AA(ID_persona_legisladora_declaracion_procedencia) debido a P1_8_26-Z(cond_pertenencia_legislatura_actual_persona_legisladora_declaracion_procedencia) se seleccionó la categoria \"Sí\" (1)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -39436,7 +39252,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "No debe seleccionar un dato en P1_8_27-AA(ID_persona_legisladora_declaracion_procedencia) debido a P1_8_26-Z(cond_pertenencia_legislatura_actual_persona_legisladora_declaracion_procedencia) se selecciono una categoria diferente a \"Sí\" (1)";
+                    String txtD2 = "No debe seleccionar un dato en P1_8_27-AA(ID_persona_legisladora_declaracion_procedencia) debido a P1_8_26-Z(cond_pertenencia_legislatura_actual_persona_legisladora_declaracion_procedencia) se seleccionó una categoria diferente a \"Sí\" (1)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -39512,7 +39328,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "Debe introducir un dato en P1_8_28-AB(nombre_persona_legisladora_declaracion_procedencia) debido a P1_8_26-Z(cond_pertenencia_legislatura_actual_persona_legisladora_declaracion_procedencia) se selecciono la categoria \"Sí\" (1)";
+                    String txtD2 = "Debe introducir un dato en P1_8_28-AB(nombre_persona_legisladora_declaracion_procedencia) debido a P1_8_26-Z(cond_pertenencia_legislatura_actual_persona_legisladora_declaracion_procedencia) se seleccionó: \"Sí\" (1)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -39588,7 +39404,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "No debe introducir un dato en P1_8_28-AB(nombre_persona_legisladora_declaracion_procedencia) debido a P1_8_26-Z(cond_pertenencia_legislatura_actual_persona_legisladora_declaracion_procedencia) se selecciono una categoria diferente a \"Sí\" (1)";
+                    String txtD2 = "No debe introducir un dato en P1_8_28-AB(nombre_persona_legisladora_declaracion_procedencia) debido a P1_8_26-Z(cond_pertenencia_legislatura_actual_persona_legisladora_declaracion_procedencia) se seleccionó una categoria diferente a \"Sí\" (1)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -39664,7 +39480,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "Debe introducir un dato en P1_8_29-AC(nombre_institucion_persona_servidora_publica_declaracion_procedencia) debido a P1_8_25-Y(cargo_persona_servidora_publica_declaracion_procedencia) se selecciono una categoria \"Titular de alguna institución  o unidad administrativa de la Administración Pública Estatal (excluyendo, de ser el caso, a la Procuraduría General de Justicia)\" (2), \"Titular de algún otro órgano constitucional autónomo de la entidad federativa (excluyendo al organismo público local electoral, al organismo garante de acceso a la información y protección de datos personales, al organismo público de derechos humanos de la entidad federativa, y, de ser el caso, a la Fiscalía General de la entidad federativa)\" (10) o \"Titular de alguna institución o unidad administrativa de la Administración Pública del municipio o demarcación territorial\" (14)";
+                    String txtD2 = "Debe introducir un dato en P1_8_29-AC(nombre_institucion_persona_servidora_publica_declaracion_procedencia) debido a P1_8_25-Y(cargo_persona_servidora_publica_declaracion_procedencia) se seleccionó una categoria \"Titular de alguna institución  o unidad administrativa de la Administración Pública Estatal (excluyendo, de ser el caso, a la Procuraduría General de Justicia)\" (2), \"Titular de algún otro órgano constitucional autónomo de la entidad federativa (excluyendo al organismo público local electoral, al organismo garante de acceso a la información y protección de datos personales, al organismo público de derechos humanos de la entidad federativa, y, de ser el caso, a la Fiscalía General de la entidad federativa)\" (10) o \"Titular de alguna institución o unidad administrativa de la Administración Pública del municipio o demarcación territorial\" (14)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -39740,7 +39556,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "Debe seleccionar un dato en P1_8_30-AD(AGEM_persona_servidora_publica_declaracion_procedencia) debido a P1_8_25-Y(cargo_persona_servidora_publica_declaracion_procedencia) se selecciono  \"Presidente(a) municipal\" (11), \"Regidor(a)\" (12), \"Síndico(a)\" (13), \"Titular de alguna institución o unidad administrativa de la Administración Pública del municipio o demarcación territorial\" (14) u \"Otro cargo del ámbito municipal (especifique)\" (16)";
+                    String txtD2 = "Debe seleccionar un dato en P1_8_30-AD(AGEM_persona_servidora_publica_declaracion_procedencia) debido a P1_8_25-Y(cargo_persona_servidora_publica_declaracion_procedencia) se seleccionó: \"Presidente(a) municipal\" (11), \"Regidor(a)\" (12), \"Síndico(a)\" (13), \"Titular de alguna institución o unidad administrativa de la Administración Pública del municipio o demarcación territorial\" (14) u \"Otro cargo del ámbito municipal (especifique)\" (16)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -39816,7 +39632,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "No debe seleccionar un  dato en P1_8_30-AD(AGEM_persona_servidora_publica_declaracion_procedencia) debido a P1_8_25-Y(cargo_persona_servidora_publica_declaracion_procedencia) se selecciono una categoria diferente a \"Presidente(a) municipal\" (11), \"Regidor(a)\" (12), \"Síndico(a)\" (13), \"Titular de alguna institución o unidad administrativa de la Administración Pública del municipio o demarcación territorial\" (14) u \"Otro cargo del ámbito municipal (especifique)\" (16)";
+                    String txtD2 = "No debe seleccionar un  dato en P1_8_30-AD(AGEM_persona_servidora_publica_declaracion_procedencia) debido a P1_8_25-Y(cargo_persona_servidora_publica_declaracion_procedencia) se seleccionó una categoria diferente a \"Presidente(a) municipal\" (11), \"Regidor(a)\" (12), \"Síndico(a)\" (13), \"Titular de alguna institución o unidad administrativa de la Administración Pública del municipio o demarcación territorial\" (14) u \"Otro cargo del ámbito municipal (especifique)\" (16)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -39892,7 +39708,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "Debe introducir un dato en P1_8_31-AE(municipio_persona_servidora_publica_declaracion_procedencia) debido a P1_8_25-Y(cargo_persona_servidora_publica_declaracion_procedencia) se selecciono  \"Presidente(a) municipal\" (11), \"Regidor(a)\" (12), \"Síndico(a)\" (13), \"Titular de alguna institución o unidad administrativa de la Administración Pública del municipio o demarcación territorial\" (14) u \"Otro cargo del ámbito municipal (especifique)\" (16)";
+                    String txtD2 = "Debe introducir un dato en P1_8_31-AE(municipio_persona_servidora_publica_declaracion_procedencia) debido a P1_8_25-Y(cargo_persona_servidora_publica_declaracion_procedencia) se seleccionó:  \"Presidente(a) municipal\" (11), \"Regidor(a)\" (12), \"Síndico(a)\" (13), \"Titular de alguna institución o unidad administrativa de la Administración Pública del municipio o demarcación territorial\" (14) u \"Otro cargo del ámbito municipal (especifique)\" (16)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -39968,7 +39784,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "Debe introducir un dato en P1_8_32-AF(otro_cargo_persona_servidora_publica_declaracion_procedencia_ambito_estatal_especifique) debido a P1_8_25-Y(cargo_persona_servidora_publica_declaracion_procedencia) se selecciono la categoria \"Otro cargo del ámbito estatal (especifique)\" (15)";
+                    String txtD2 = "Debe introducir un dato en P1_8_32-AF(otro_cargo_persona_servidora_publica_declaracion_procedencia_ambito_estatal_especifique) debido a P1_8_25-Y(cargo_persona_servidora_publica_declaracion_procedencia) se seleccionó la categoria \"Otro cargo del ámbito estatal (especifique)\" (15)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -40044,7 +39860,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "No debe introducir un dato en P1_8_32-AF(otro_cargo_persona_servidora_publica_declaracion_procedencia_ambito_estatal_especifique) debido a P1_8_25-Y(cargo_persona_servidora_publica_declaracion_procedencia) se selecciono una categoria diferente a \"Otro cargo del ámbito estatal (especifique)\" (15)";
+                    String txtD2 = "No debe introducir un dato en P1_8_32-AF(otro_cargo_persona_servidora_publica_declaracion_procedencia_ambito_estatal_especifique) debido a P1_8_25-Y(cargo_persona_servidora_publica_declaracion_procedencia) se seleccionó una categoria diferente a \"Otro cargo del ámbito estatal (especifique)\" (15)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -40120,7 +39936,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "Debe introducir un dato en P1_8_33-AG(otro_cargo_persona_servidora_publica_declaracion_procedencia_ambito_municipal_especifique) debido a P1_8_25-Y(cargo_persona_servidora_publica_declaracion_procedencia) se selecciono la categoria  \"Otro cargo del ámbito municipal (especifique)\" (16)";
+                    String txtD2 = "Debe introducir un dato en P1_8_33-AG(otro_cargo_persona_servidora_publica_declaracion_procedencia_ambito_municipal_especifique) debido a P1_8_25-Y(cargo_persona_servidora_publica_declaracion_procedencia) se seleccionó la categoria  \"Otro cargo del ámbito municipal (especifique)\" (16)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -40196,7 +40012,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "No debe introducir un dato en P1_8_33-AG(otro_cargo_persona_servidora_publica_declaracion_procedencia_ambito_municipal_especifique) debido a P1_8_25-Y(cargo_persona_servidora_publica_declaracion_procedencia) se selecciono una categoria diferente a  \"Otro cargo del ámbito municipal (especifique)\" (16)";
+                    String txtD2 = "No debe introducir un dato en P1_8_33-AG(otro_cargo_persona_servidora_publica_declaracion_procedencia_ambito_municipal_especifique) debido a P1_8_25-Y(cargo_persona_servidora_publica_declaracion_procedencia) se seleccionó una categoria diferente a  \"Otro cargo del ámbito municipal (especifique)\" (16)";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -42295,7 +42111,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "No debe especificar la informacion P1_9_26-Z(otro_cargo_persona_servidora_publica_comparecencia_ambito_municipal_especifique) ya que P1_9_21-U(cargo_persona_servidora_publica_comparecencia) no se selecciono \"Otro cargo del ámbito municipal (especifique)\" (15)";
+                    String txtD2 = "No debe capturar información en el campo P1_9_26-Z (otro_cargo_persona_servidora_publica_comparecencia_ambito_municipal_especifique), ya que en P1_9_21-U (cargo_persona_servidora_publica_comparecencia) no se seleccionó la opción \"15.Otro cargo del ámbito municipal (especifique)\". ";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
