@@ -247,7 +247,7 @@ public class ValPLE {
 
         progressBar.setValue(1);
 
-       Despliega_Datos_Generales(libro, hojadatos_generales, estiloCelda0, estiloCelda1, estiloCeldabordes0, Pvalida.entidad, Pvalida.legislatura, Pvalida.envio, progressBar);
+       Despliega_Datos_Generales(libro, hojadatos_generales, estiloCelda0, estiloCelda1, estiloCeldabordes0, Pvalida.entidad, Pvalida.legislatura, Pvalida.envio,Pvalida.envio_anterior, progressBar);
        Despliega_Comisiones_legislativas(libro, hojaComision, estiloCelda0, estiloCelda1, estiloCeldabordes0, Pvalida.entidad, Pvalida.legislatura, Pvalida.envio, progressBar);
        Despliega_Personas_Legisladoras(libro, hojaPersonas_legiladoras, estiloCelda0, estiloCelda1, estiloCeldabordes0, Pvalida.entidad, Pvalida.legislatura, Pvalida.envio, progressBar);
        Despliega_Personas_Legisladoras_NN(libro, hojaPersonas_legiladoras, estiloCelda0, estiloCelda1, estiloCeldabordes0, Pvalida.entidad, Pvalida.legislatura, Pvalida.envio, progressBar);   
@@ -266,7 +266,7 @@ public class ValPLE {
 
     }
 
-    public void Despliega_Datos_Generales(XSSFWorkbook libro, XSSFSheet hojadatos_generales, XSSFCellStyle estiloCelda0, XSSFCellStyle estiloCelda1, XSSFCellStyle estiloCeldabordes0, String entidad, String legislatura, String envio, JProgressBar progressBar) {
+    public void Despliega_Datos_Generales(XSSFWorkbook libro, XSSFSheet hojadatos_generales, XSSFCellStyle estiloCelda0, XSSFCellStyle estiloCelda1, XSSFCellStyle estiloCeldabordes0, String entidad, String legislatura, String envio, String envio_anterior,JProgressBar progressBar) {
         int conEnc = 1, conDat = 2, coni = 1;
         Border border = BorderFactory.createTitledBorder("Cargando...Datos_generales");
         progressBar.setBorder(border);
@@ -663,7 +663,47 @@ public class ValPLE {
             conDat = conDat + coni;
             coni = 1;
         }
+ ArrayResult = DG.PERIODO_FECHA_menor(entidad, legislatura, envio, envio_anterior);
+        if (ArrayResult.size() > 0) {
+            XSSFRow filaEE1 = hojadatos_generales.createRow(conEnc);//FILA
+            XSSFCell celdaE1 = filaEE1.createCell(0);//COLUMNA
+            celdaE1.setCellStyle(estiloCelda1);
+            celdaE1.setCellType(CellType.STRING);
+            String txtE1 = "ID";
+            XSSFRichTextString textoE1 = new XSSFRichTextString(txtE1);
+            celdaE1.setCellValue(textoE1);
 
+            XSSFCell celdaE6 = filaEE1.createCell(1);//COLUMNA
+            celdaE6.setCellStyle(estiloCelda1);
+            celdaE6.setCellType(CellType.STRING);
+            String txtE6 = "OBSERVACIONES";
+            XSSFRichTextString textoE6 = new XSSFRichTextString(txtE6);
+            celdaE6.setCellValue(textoE6);
+
+            for (int i = 0; i < ArrayResult.size(); i++) {
+                XSSFRow filaEE2 = hojadatos_generales.createRow(conDat + i);
+
+                XSSFCell celdaD1 = filaEE2.createCell(0);//COLUMNA
+                celdaD1.setCellStyle(estiloCeldabordes0);
+                celdaD1.setCellType(CellType.STRING);
+                //String txtD1 = Arrays.toString(ArrayResult.get(i));
+                String txtD1 = "No Aplica";
+                XSSFRichTextString textoD1 = new XSSFRichTextString(txtD1);
+                celdaD1.setCellValue(textoD1);
+
+                XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
+                celdaD2.setCellStyle(estiloCeldabordes0);
+                celdaD2.setCellType(CellType.STRING);
+                String txtD2 = "La fecha fecha_inicio_p es menor a la fecha_termino_p del periodo anterior";
+                XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
+                celdaD2.setCellValue(textoD2);
+
+                coni++;
+            }
+            conEnc = conEnc + coni;
+            conDat = conDat + coni;
+            coni = 1;
+        }
         ArrayResult = DG.condicion_reporteX(entidad, legislatura, envio);
         if (ArrayResult.size() > 0) {
             XSSFRow filaEE1 = hojadatos_generales.createRow(conEnc);//FILA
