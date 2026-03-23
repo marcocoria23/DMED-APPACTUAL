@@ -28180,37 +28180,37 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                 coni = 1;
             }
 
-            String[] CAMPOS = new String[19];
-            CAMPOS[0] = "No se debe capturar P1_6_12,-L(ID_persona_legisladora_2) y  ,P1_6_13,-M(nombre_persona_legisladora_2) debido a que en P1_6_11,-K(nombre_persona_legisladora_1) no se seleccionó una categoría.";
-            CAMPOS[1] = "No se debe capturar P1_6_14,-N(ID_persona_legisladora_3) y ,P1_6_15,-O(nombre_persona_legisladora_3) debido a que en P1_6_13,-M(nombre_persona_legisladora_2) no se seleccionó una categoría.";
-            CAMPOS[2] = "No se debe capturar P1_6_16,-P(ID_persona_legisladora_4) y ,P1_6_17,-Q(nombre_persona_legisladora_4) debido a que en P1_6_15,-O(nombre_persona_legisladora_3) no se seleccionó una categoría.";
-            CAMPOS[3] = "No se debe capturar P1_6_18,-R(ID_persona_legisladora_5) y ,P1_6_19,-S(nombre_persona_legisladora_5) debido a que en P1_6_17,-Q(nombre_persona_legisladora_4) no se seleccionó una categoría.";
-            CAMPOS[4] = "No se debe capturar P1_6_20,-T(ID_persona_legisladora_6) y ,P1_6_21,-U(nombre_persona_legisladora_6) debido a que en P1_6_19,-S(nombre_persona_legisladora_5) no se seleccionó una categoría.";
-            CAMPOS[5] = "No se debe capturar P1_6_22,-V(ID_persona_legisladora_7) y ,P1_6_23,-W(nombre_persona_legisladora_7) debido a que en P1_6_21,-U(nombre_persona_legisladora_6) no se seleccionó una categoría.";
-            CAMPOS[6] = "No se debe capturar P1_6_24,-X(ID_persona_legisladora_8) y ,P1_6_25,-Y(nombre_persona_legisladora_8) debido a que en P1_6_23,-W(nombre_persona_legisladora_7) no se seleccionó una categoría.";
-            CAMPOS[7] = "No se debe capturar P1_6_26,-Z(ID_persona_legisladora_9) y ,P1_6_27,-AA(nombre_persona_legisladora_9) debido a que en P1_6_25,-Y(nombre_persona_legisladora_8) no se seleccionó una categoría.";
-            CAMPOS[8] = "No se debe capturar P1_6_28,-AB(ID_persona_legisladora_10) y ,P1_6_29,-AC(nombre_persona_legisladora_10) debido a que en P1_6_27,-AA(nombre_persona_legisladora_9) no se seleccionó una categoría.";
-            CAMPOS[9] = "No se debe capturar P1_6_30,-AD(ID_persona_legisladora_11) y ,P1_6_31,-AE(nombre_persona_legisladora_11) debido a que en P1_6_29,-AC(nombre_persona_legisladora_10) no se seleccionó una categoría.";
-            CAMPOS[10] = "No se debe capturar P1_6_32,-AF(ID_persona_legisladora_12) y ,P1_6_33,-AG(nombre_persona_legisladora_12) debido a que en P1_6_31,-AE(nombre_persona_legisladora_11) no se seleccionó una categoría.";
-            CAMPOS[11] = "No se debe capturar P1_6_34,-AH(ID_persona_legisladora_13) y ,P1_6_35,-AI(nombre_persona_legisladora_13) debido a que en P1_6_33,-AG(nombre_persona_legisladora_12) no se seleccionó una categoría.";
-            CAMPOS[12] = "No se debe capturar P1_6_36,-AJ(ID_persona_legisladora_14) y ,P1_6_37,-AK(nombre_persona_legisladora_14) debido a que en P1_6_35,-AI(nombre_persona_legisladora_13) no se seleccionó una categoría.";
-            CAMPOS[13] = "No se debe capturar P1_6_38,-AL(ID_persona_legisladora_15) y ,P1_6_39,-AM(nombre_persona_legisladora_15) debido a que en P1_6_37,-AK(nombre_persona_legisladora_14) no se seleccionó una categoría.";
-            CAMPOS[14] = "No se debe capturar P1_6_40,-AN(ID_persona_legisladora_16) y ,P1_6_41,-AO(nombre_persona_legisladora_16) debido a que en P1_6_39,-AM(nombre_persona_legisladora_15) no se seleccionó una categoría.";
-            CAMPOS[15] = "No se debe capturar P1_6_42,-AP(ID_persona_legisladora_17) y ,P1_6_43,-AQ(nombre_persona_legisladora_17) debido a que en P1_6_41,-AO(nombre_persona_legisladora_16) no se seleccionó una categoría.";
-            CAMPOS[16] = "No se debe capturar P1_6_44,-AR(ID_persona_legisladora_18) y ,P1_6_45,-AS(nombre_persona_legisladora_18) debido a que en P1_6_43,-AQ(nombre_persona_legisladora_17) no se seleccionó una categoría.";
-            CAMPOS[17] = "No se debe capturar P1_6_46,-AT(ID_persona_legisladora_19) y ,P1_6_47,-AU(nombre_persona_legisladora_19) debido a que en P1_6_45,-AS(nombre_persona_legisladora_18) no se seleccionó una categoría.";
-            CAMPOS[18] = "No se debe capturar P1_6_48,-AV(ID_persona_legisladora_20) y ,P1_6_49,-AW(nombre_persona_legisladora_20) debido a que en P1_6_47,-AU(nombre_persona_legisladora_19) no se seleccionó una categoría.";
+         /*   String[] CAMPOS = new String[19];
+            CAMPOS[0] = "No se debe capturar ,P1_6_12,-L(ID_persona_legisladora_2) y  ,P1_6_13,-M(nombre_persona_legisladora_2) debido a que en ,P1_6_11,-K(nombre_persona_legisladora_1) no se seleccionó una categoría.";
+            CAMPOS[1] = "No se debe capturar ,P1_6_14,-N(ID_persona_legisladora_3) y ,P1_6_15,-O(nombre_persona_legisladora_3) debido a que en ,P1_6_13,-M(nombre_persona_legisladora_2) no se seleccionó una categoría.";
+            CAMPOS[2] = "No se debe capturar ,P1_6_16,-P(ID_persona_legisladora_4) y ,P1_6_17,-Q(nombre_persona_legisladora_4) debido a que en ,P1_6_15,-O(nombre_persona_legisladora_3) no se seleccionó una categoría.";
+            CAMPOS[3] = "No se debe capturar ,P1_6_18,-R(ID_persona_legisladora_5) y ,P1_6_19,-S(nombre_persona_legisladora_5) debido a que en ,P1_6_17,-Q(nombre_persona_legisladora_4) no se seleccionó una categoría.";
+            CAMPOS[4] = "No se debe capturar ,P1_6_20,-T(ID_persona_legisladora_6) y ,P1_6_21,-U(nombre_persona_legisladora_6) debido a que en ,P1_6_19,-S(nombre_persona_legisladora_5) no se seleccionó una categoría.";
+            CAMPOS[5] = "No se debe capturar ,P1_6_22,-V(ID_persona_legisladora_7) y ,P1_6_23,-W(nombre_persona_legisladora_7) debido a que en ,P1_6_21,-U(nombre_persona_legisladora_6) no se seleccionó una categoría.";
+            CAMPOS[6] = "No se debe capturar ,P1_6_24,-X(ID_persona_legisladora_8) y ,P1_6_25,-Y(nombre_persona_legisladora_8) debido a que en ,P1_6_23,-W(nombre_persona_legisladora_7) no se seleccionó una categoría.";
+            CAMPOS[7] = "No se debe capturar ,P1_6_26,-Z(ID_persona_legisladora_9) y ,P1_6_27,-AA(nombre_persona_legisladora_9) debido a que en ,P1_6_25,-Y(nombre_persona_legisladora_8) no se seleccionó una categoría.";
+            CAMPOS[8] = "No se debe capturar ,P1_6_28,-AB(ID_persona_legisladora_10) y ,P1_6_29,-AC(nombre_persona_legisladora_10) debido a que en ,P1_6_27,-AA(nombre_persona_legisladora_9) no se seleccionó una categoría.";
+            CAMPOS[9] = "No se debe capturar ,P1_6_30,-AD(ID_persona_legisladora_11) y ,P1_6_31,-AE(nombre_persona_legisladora_11) debido a que en ,P1_6_29,-AC(nombre_persona_legisladora_10) no se seleccionó una categoría.";
+            CAMPOS[10] = "No se debe capturar ,P1_6_32,-AF(ID_persona_legisladora_12) y ,P1_6_33,-AG(nombre_persona_legisladora_12) debido a que en ,P1_6_31,-AE(nombre_persona_legisladora_11) no se seleccionó una categoría.";
+            CAMPOS[11] = "No se debe capturar ,P1_6_34,-AH(ID_persona_legisladora_13) y ,P1_6_35,-AI(nombre_persona_legisladora_13) debido a que en ,P1_6_33,-AG(nombre_persona_legisladora_12) no se seleccionó una categoría.";
+            CAMPOS[12] = "No se debe capturar ,P1_6_36,-AJ(ID_persona_legisladora_14) y ,P1_6_37,-AK(nombre_persona_legisladora_14) debido a que en ,P1_6_35,-AI(nombre_persona_legisladora_13) no se seleccionó una categoría.";
+            CAMPOS[13] = "No se debe capturar ,P1_6_38,-AL(ID_persona_legisladora_15) y ,P1_6_39,-AM(nombre_persona_legisladora_15) debido a que en ,P1_6_37,-AK(nombre_persona_legisladora_14) no se seleccionó una categoría.";
+            CAMPOS[14] = "No se debe capturar ,P1_6_40,-AN(ID_persona_legisladora_16) y ,P1_6_41,-AO(nombre_persona_legisladora_16) debido a que en ,P1_6_39,-AM(nombre_persona_legisladora_15) no se seleccionó una categoría.";
+            CAMPOS[15] = "No se debe capturar ,P1_6_42,-AP(ID_persona_legisladora_17) y ,P1_6_43,-AQ(nombre_persona_legisladora_17) debido a que en ,P1_6_41,-AO(nombre_persona_legisladora_16) no se seleccionó una categoría.";
+            CAMPOS[16] = "No se debe capturar ,P1_6_44,-AR(ID_persona_legisladora_18) y ,P1_6_45,-AS(nombre_persona_legisladora_18) debido a que en ,P1_6_43,-AQ(nombre_persona_legisladora_17) no se seleccionó una categoría.";
+            CAMPOS[17] = "No se debe capturar ,P1_6_46,-AT(ID_persona_legisladora_19) y ,P1_6_47,-AU(nombre_persona_legisladora_19) debido a que en ,P1_6_45,-AS(nombre_persona_legisladora_18) no se seleccionó una categoría.";
+            CAMPOS[18] = "No se debe capturar ,P1_6_48,-AV(ID_persona_legisladora_20) y ,P1_6_49,-AW(nombre_persona_legisladora_20) debido a que en ,P1_6_47,-AU(nombre_persona_legisladora_19) no se seleccionó una categoría.";
 
             for (int j = 0; j < CAMPOS.length; j++) {
                 String TCAMPOS = CAMPOS[j].replace("[", "").replace("]", "").replace(" 00:00:00.0", "").trim();
                 String PARTIR[] = TCAMPOS.split(",");
+                String Campo1 = PARTIR[1];
                 String DCampo1 = PARTIR[0];
                 String Campo2 = PARTIR[1];
                 String DCampo2 = PARTIR[2];
                 String Campo3 = PARTIR[3];
                 String DCampo3 = PARTIR[4];
-                String Campo1 = PARTIR[5];
-                String DCampo4 = PARTIR[6];
+               
 
                 ArrayResult = InUrg.NDCID_persona_legisladora_2(entidad, legislatura, envio, Campo1, Campo2, Campo3);
                 if (ArrayResult.size() > 0) {
@@ -28287,7 +28287,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     conDat = conDat + coni;
                     coni = 1;
                 }
-            }
+            }*/
 
             /* String[] NDCCAMPOS = new String[19];
              NDCCAMPOS[0] = "debe seleccionar una categoria en ,P1_6_12,-L(ID_persona_legisladora_2) y  ,P1_6_13,-M(nombre_persona_legisladora_2) debido a  ,P1_6_11,-K(nombre_persona_legisladora_1) selecciono una categoria.";
