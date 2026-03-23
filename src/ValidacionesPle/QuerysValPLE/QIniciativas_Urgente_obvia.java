@@ -944,7 +944,7 @@ public ArrayList fecha_resolucion_pleno_iniciativa_urgente_obvia(String ID_entid
       Array = new ArrayList();
       sql="select ID_ENTIDAD, ENTIDAD, C1_6_ID, P1_6_1, P1_6_6, P1_6_66\n" +
 "from tr_ple_meds1_6\n" +
-"where to_date (P1_6_66, 'dd/mm/yyyy') < to_date (P1_6_6, 'dd/mm/yyyy') and (ID_ENTIDAD="+ID_entidad+" AND Legislatura="+Legislatura+" AND C1_6_ID='"+Envio+"')";
+"where to_date (P1_6_66, 'dd/mm/yyyy') < to_date (P1_6_6, 'dd/mm/yyyy') and (to_date (P1_6_66, 'dd/mm/yyyy') not in '09/09/1899') and (to_date (P1_6_6, 'dd/mm/yyyy') not in '09/09/1899') and (ID_ENTIDAD="+ID_entidad+" AND Legislatura="+Legislatura+" AND C1_6_ID='"+Envio+"')";
       System.out.println(sql);
       resul=conexion.consultar(sql);
       try {
@@ -965,7 +965,7 @@ public ArrayList fecha_resolucion_pleno_iniciativa_urgente_obvia(String ID_entid
 public ArrayList sentido_resolucion_pleno_iniciativa_urgente_obvia(String ID_entidad,String Legislatura,String Envio){
      conexion.Conectar();
       Array = new ArrayList();
-      sql="select ID_ENTIDAD, ENTIDAD, C1_6_ID, P1_6_1, P1_6_3, P1_6_67 from tr_ple_meds1_6 where P1_6_3 = 1 and P1_6_67 <> 1 and (ID_ENTIDAD="+ID_entidad+" AND Legislatura="+Legislatura+" AND C1_6_ID='"+Envio+"')";
+      sql="select ID_ENTIDAD, ENTIDAD, C1_6_ID, P1_6_1, P1_6_3, P1_6_67 from tr_ple_meds1_6 where P1_6_3 = 1 and P1_6_67 <> 1 and P1_6_67 not in (-1,-2,-3) and (ID_ENTIDAD="+ID_entidad+" AND Legislatura="+Legislatura+" AND C1_6_ID='"+Envio+"')";
       System.out.println(sql);
       resul=conexion.consultar(sql);
       try {

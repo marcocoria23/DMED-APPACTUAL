@@ -247,7 +247,7 @@ public class ValPLE {
 
         progressBar.setValue(1);
 
-       Despliega_Datos_Generales(libro, hojadatos_generales, estiloCelda0, estiloCelda1, estiloCeldabordes0, Pvalida.entidad, Pvalida.legislatura, Pvalida.envio,Pvalida.envio_anterior, progressBar);
+      Despliega_Datos_Generales(libro, hojadatos_generales, estiloCelda0, estiloCelda1, estiloCeldabordes0, Pvalida.entidad, Pvalida.legislatura, Pvalida.envio,Pvalida.envio_anterior, progressBar);
        Despliega_Comisiones_legislativas(libro, hojaComision, estiloCelda0, estiloCelda1, estiloCeldabordes0, Pvalida.entidad, Pvalida.legislatura, Pvalida.envio, progressBar);
        Despliega_Personas_Legisladoras(libro, hojaPersonas_legiladoras, estiloCelda0, estiloCelda1, estiloCeldabordes0, Pvalida.entidad, Pvalida.legislatura, Pvalida.envio, progressBar);
        Despliega_Personas_Legisladoras_NN(libro, hojaPersonas_legiladoras, estiloCelda0, estiloCelda1, estiloCeldabordes0, Pvalida.entidad, Pvalida.legislatura, Pvalida.envio, progressBar);   
@@ -255,12 +255,12 @@ public class ValPLE {
        Despliega_Personal_apoyo(libro, hojaPersonal_apoyo, estiloCelda0, estiloCelda1, estiloCeldabordes0, Pvalida.entidad, Pvalida.legislatura, Pvalida.envio, progressBar);
        Despliega_Iniciativas(libro, hojaIniciativas, estiloCelda0, estiloCelda1, estiloCeldabordes0, Pvalida.entidad, Pvalida.legislatura, Pvalida.envio, Pvalida.envio_anterior, progressBar);
        Despliega_Iniciativas_extension(libro, hojaIniciativas_extension, estiloCelda0, estiloCelda1, estiloCeldabordes0, Pvalida.entidad, Pvalida.legislatura, Pvalida.envio, progressBar);
-        Despliega_Iniciativas_Urgente_Obvia(libro, hojaUrgente_obvia, estiloCelda0, estiloCelda1, estiloCeldabordes0, Pvalida.entidad, Pvalida.legislatura, Pvalida.envio, progressBar);
-        Despliega_Iniciativas_Urgente_Obvia_extension(libro, hojaUrgente_obvia_extension, estiloCelda0, estiloCelda1, estiloCeldabordes0, Pvalida.entidad, Pvalida.legislatura, Pvalida.envio, progressBar);
-        Despliega_Juicios_Politicos(libro, hojaJuicios_politicos, estiloCelda0, estiloCelda1, estiloCeldabordes0, Pvalida.entidad, Pvalida.legislatura, Pvalida.envio, progressBar);
-        Despliega_Declaraciones_Procedencia(libro, hojaDeclaraciones, estiloCelda0, estiloCelda1, estiloCeldabordes0, Pvalida.entidad, Pvalida.legislatura, Pvalida.envio, progressBar);
-        Despliega_Comparecencias(libro, hojaComparecencias, estiloCelda0, estiloCelda1, estiloCeldabordes0, Pvalida.entidad, Pvalida.legislatura, Pvalida.envio, progressBar);
-        Despliega_Comparecencias_extension(libro, hojaComparecencias_extension, estiloCelda0, estiloCelda1, estiloCeldabordes0, Pvalida.entidad, Pvalida.legislatura, Pvalida.envio, progressBar);
+       Despliega_Iniciativas_Urgente_Obvia(libro, hojaUrgente_obvia, estiloCelda0, estiloCelda1, estiloCeldabordes0, Pvalida.entidad, Pvalida.legislatura, Pvalida.envio, progressBar);
+       Despliega_Iniciativas_Urgente_Obvia_extension(libro, hojaUrgente_obvia_extension, estiloCelda0, estiloCelda1, estiloCeldabordes0, Pvalida.entidad, Pvalida.legislatura, Pvalida.envio, progressBar);
+       Despliega_Juicios_Politicos(libro, hojaJuicios_politicos, estiloCelda0, estiloCelda1, estiloCeldabordes0, Pvalida.entidad, Pvalida.legislatura, Pvalida.envio, progressBar);
+       Despliega_Declaraciones_Procedencia(libro, hojaDeclaraciones, estiloCelda0, estiloCelda1, estiloCeldabordes0, Pvalida.entidad, Pvalida.legislatura, Pvalida.envio, progressBar);
+       Despliega_Comparecencias(libro, hojaComparecencias, estiloCelda0, estiloCelda1, estiloCeldabordes0, Pvalida.entidad, Pvalida.legislatura, Pvalida.envio, progressBar);
+       Despliega_Comparecencias_extension(libro, hojaComparecencias_extension, estiloCelda0, estiloCelda1, estiloCeldabordes0, Pvalida.entidad, Pvalida.legislatura, Pvalida.envio, progressBar);
        
         SaveFileTo(libro, progressBar, f, dtf);
 
@@ -30272,7 +30272,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "En la columna P1_6_67-BO(sentido_resolucion_pleno_iniciativa_urgente_obvia) únicamante puede seleccionar \"1.Desechado\", debido a que en P1_6_3-C(estatus_iniciativa_urgente_obvia) se seleccionó \"2.Desechada o improcedente\".";
+                    String txtD2 = "En la columna P1_6_67-BO(sentido_resolucion_pleno_iniciativa_urgente_obvia) únicamente puede seleccionar \"1.Desechado\", debido a que en P1_6_3-C(estatus_iniciativa_urgente_obvia) se seleccionó \"2.Desechada o improcedente\".";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
