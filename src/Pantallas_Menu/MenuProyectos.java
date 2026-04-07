@@ -6,13 +6,7 @@
 package Pantallas_Menu;
 
 import Pantallas_PLE.Menu;
-import Pantallas_SENAP.Inicio;
-import java.sql.Connection;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import mx.org.inegi.conexion.SENAP.ConSQLServer;
-import mx.org.inegi.conexion.SENAP.ConORACLEFactory;
-import mx.org.inegi.insert_TMP_SENAP.TMP_SENAP_NOTICIACRIMINAL;
+
 
 /**
  *
@@ -48,6 +42,9 @@ public class MenuProyectos extends javax.swing.JFrame {
         PS3 = new javax.swing.JButton();
         PS4 = new javax.swing.JButton();
         jToggleButton2 = new javax.swing.JToggleButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -106,7 +103,7 @@ public class MenuProyectos extends javax.swing.JFrame {
         jPanel3.add(BTN_PLE, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, -1, 130));
 
         LABEL_MENUPRINCIPAL.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/FondoMenu2.png"))); // NOI18N
-        jPanel3.add(LABEL_MENUPRINCIPAL, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 850, 520));
+        jPanel3.add(LABEL_MENUPRINCIPAL, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -20, 850, 530));
 
         PS3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/CPF.png"))); // NOI18N
         PS3.setText("CPF");
@@ -132,6 +129,21 @@ public class MenuProyectos extends javax.swing.JFrame {
         jToggleButton2.setText("JA");
         jToggleButton2.setToolTipText("Justicia Agraria");
         jPanel3.add(jToggleButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 320, 190, 120));
+
+        jMenu1.setText("Menu");
+        jMenu1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        jMenuItem1.setText("Crear Estructura");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
+
+        jMenuBar1.add(jMenu1);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -185,7 +197,7 @@ public class MenuProyectos extends javax.swing.JFrame {
 
     private void btn_SENAPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SENAPActionPerformed
         // TODO add your handling code here:
-        Inicio In=new Inicio();
+        PcrearEstr In=new PcrearEstr();
         In.setVisible(true);
         this.setVisible(false);
  
@@ -197,6 +209,12 @@ public class MenuProyectos extends javax.swing.JFrame {
         JA.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_BTN_JAActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+      PcrearEstr PCE=new PcrearEstr();
+      PCE.setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -243,6 +261,9 @@ public class MenuProyectos extends javax.swing.JFrame {
     private javax.swing.JButton PS4;
     private javax.swing.JButton btn_SENAP;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JToggleButton jToggleButton2;
     // End of variables declaration//GEN-END:variables
