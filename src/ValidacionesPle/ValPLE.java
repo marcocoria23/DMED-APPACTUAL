@@ -11222,7 +11222,7 @@ public class ValPLE {
                     XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                     celdaD2.setCellStyle(estiloCeldabordes0);
                     celdaD2.setCellType(CellType.STRING);
-                    String txtD2 = "El valor registrado en la columna cant_reuniones_celebradas_comision_legislativa_asistidas " + CAMPO5[j] + "-" + CAMPO6[j] + "   Debe ser menor o igual al valor registrado para la misma comisión en la columna (P1_2_15 - O) (cant_reuniones_celebradas_comision_legislativa) de la TR_PLE_MEDS1_2(Tabla comisiones_legislativas). ";
+                    String txtD2 = "El valor registrado en la columna cant_reuniones_celebradas_comision_legislativa_asistidas " + CAMPO5[j] + "-" + CAMPO6[j] + "   Debe ser menor o igual al valor registrado para la misma comisión en la columna (P1_2_15 - P) (cant_reuniones_celebradas_comision_legislativa) de la TR_PLE_MEDS1_2(Tabla comisiones_legislativas). ";
                     XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                     celdaD2.setCellValue(textoD2);
 
@@ -19899,7 +19899,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                 XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                 celdaD2.setCellStyle(estiloCeldabordes0);
                 celdaD2.setCellType(CellType.STRING);
-                String txtD2 = "Se indica que la iniciativa no fue presentada en el periodo actual (cond_presentacion_iniciativa_legislatura_actual = \"No\"); sin embargo, en los envíos anteriores no se localizó registro de esta iniciativa con cond_presentacion_iniciativa_periodo = \"Sí\", por lo que no se cuenta con antecedente de su presentación en un periodo previo.";                 
+                String txtD2 = "Se indica que la iniciativa no fue presentada en el periodo actual cond_presentacion_iniciativa_legislatura_actual (B) = \"No\"); sin embargo, en los envíos anteriores no se localizó registro de esta iniciativa con cond_presentacion_iniciativa_periodo (B)= \"Sí\", por lo que no se cuenta con antecedente de su presentación en un periodo previo.";                 
                 XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                 celdaD2.setCellValue(textoD2);
 
