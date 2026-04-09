@@ -638,7 +638,7 @@ public ArrayList cond_reconocimiento_iniciativa_urgente_obvia(String ID_entidad,
 public ArrayList cond_existencia_juicio_politico(String ID_entidad,String Legislatura,String Envio){
      conexion.Conectar();
       Array = new ArrayList();
-      sql="SELECT ID_ENTIDAD,C1_1D FROM(\n" +
+      sql="SELECT ID_ENTIDAD,C1_1D_ID as envio, C1_1D as jucio_politico FROM(\n" +
 "SELECT A.ID_ENTIDAD,C1_1D,A.C1_1D_ID\n" +
 ",P1_1D_1,COUNT(B.ID_ENTIDAD)DESGLOSE\n" +
 "FROM TR_PLE_MEDS1_1D A LEFT JOIN TR_PLE_MEDS1_7 B\n" +
@@ -651,7 +651,7 @@ public ArrayList cond_existencia_juicio_politico(String ID_entidad,String Legisl
           while (resul.next()) {
               Array.add(new String[]{
                   resul.getString("ID_ENTIDAD"),
-                  resul.getString("C1_1D")
+                  resul.getString("envio")
                 });
           }
       conexion.close();
@@ -665,7 +665,7 @@ public ArrayList cond_existencia_juicio_politico(String ID_entidad,String Legisl
 public ArrayList cond_existencia_declaracion_procedencia(String ID_entidad,String Legislatura,String Envio){
      conexion.Conectar();
       Array = new ArrayList();
-      sql="SELECT * FROM(\n" +
+      sql="SELECT ID_ENTIDAD,C1_1D_ID as envio, C1_1D as cond_procedencia FROM(\n" +
 "SELECT A.ID_ENTIDAD,C1_1D,A.C1_1D_ID\n" +
 ",P1_1D_1,COUNT(B.ID_ENTIDAD)DESGLOSE\n" +
 "FROM TR_PLE_MEDS1_1D A LEFT JOIN TR_PLE_MEDS1_8 B\n" +
@@ -678,7 +678,7 @@ public ArrayList cond_existencia_declaracion_procedencia(String ID_entidad,Strin
           while (resul.next()) {
               Array.add(new String[]{
                   resul.getString("ID_ENTIDAD"),
-                  resul.getString("C1_1D")
+                  resul.getString("envio")
                 });
           }
       conexion.close();
@@ -693,7 +693,7 @@ public ArrayList cond_existencia_declaracion_procedencia(String ID_entidad,Strin
 public ArrayList cond_existencia_comparecencia(String ID_entidad,String Legislatura,String Envio){
      conexion.Conectar();
       Array = new ArrayList();
-      sql="SELECT ID_ENTIDAD,C1_1D FROM(\n" +
+      sql="SELECT C1_1D_ID as envio,ID_ENTIDAD,C1_1D as cond_comparecencia FROM(\n" +
 "SELECT A.ID_ENTIDAD,C1_1D,A.C1_1D_ID\n" +
 ",P1_1D_1,COUNT(B.ID_ENTIDAD)DESGLOSE\n" +
 "FROM TR_PLE_MEDS1_1D A LEFT JOIN TR_PLE_MEDS1_9 B\n" +
@@ -706,7 +706,7 @@ public ArrayList cond_existencia_comparecencia(String ID_entidad,String Legislat
           while (resul.next()) {
               Array.add(new String[]{
                   resul.getString("ID_ENTIDAD"),
-                  resul.getString("C1_1D")
+                  resul.getString("envio")
                 });
           }
       conexion.close();

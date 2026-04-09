@@ -1983,7 +1983,28 @@ public ArrayList DCotro_grupo_parlamentario_adscipcion_inicial_persona_legislado
     return Array;
  }
 
-
+public ArrayList adscipcion_finalNI(String ID_entidad,String Legislatura,String Envio){
+     conexion.Conectar();
+      Array = new ArrayList();
+      sql="select ID_ENTIDAD, C1_3_ID as envio,LEGISLATURA,P1_3_1,\n" +
+"P1_3_43 as adscripcion_inicial,P1_3_44 as grupo_parlamentario_inicial, P1_3_46 as adscripcion_final, P1_3_47 as grupo_parlamentario_final\n" +
+"from TR_PLE_MEDS1_3 where P1_3_46=9 and P1_3_43<>9\n" +
+               " AND ID_ENTIDAD="+ID_entidad+" AND Legislatura="+Legislatura+" AND C1_3_ID='"+Envio+"'";
+      System.out.println(sql);
+      resul=conexion.consultar(sql);
+      try {
+          while (resul.next()) {
+              Array.add(new String[]{
+                  resul.getString("ID_ENTIDAD"),
+                  resul.getString("P1_3_1")
+                });
+          }
+      conexion.close();
+     } catch (SQLException ex) {
+            Logger.getLogger(QComisiones_Legislativas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    return Array;
+ }
 //únicamente puede seleccionar la categoría "Grupo parlamentario"'1', "Legislador sin grupo parlamentario"'3' o "No identificado"'9' En caso de que haya seleccionado la categoría "Candidatura por partido único"'2' o "Candidatura por coalición"'3' en la columna P1_3_36-AK(tipo_candidatura_persona_legisladora).
 public ArrayList tipo_candidatura_persona_legisladora(String ID_entidad,String Legislatura,String Envio){
      conexion.Conectar();

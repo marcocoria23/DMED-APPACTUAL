@@ -32,6 +32,8 @@ public class ValidaPLE extends javax.swing.JFrame {
      */
     public static String entidad = "", legislatura = "", envio = "", Nomentidad = "", envio_anterior = "";
     ArrayList<String[]> ArrayEnvio;
+private boolean primeraVez = true;
+private boolean primeraVezEnvio = true; 
 
     public ValidaPLE() {
         initComponents();
@@ -298,79 +300,73 @@ public class ValidaPLE extends javax.swing.JFrame {
         }).start();
     }//GEN-LAST:event_Btn_ValidarActionPerformed
 
+    private void inicializar() {
+    QGEN dat = new QGEN();
+    asinga_NEntidad();
+    LlenaComboLeg();
+    //llenaCombo();
+}
     private void CEntidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CEntidadActionPerformed
-        // TODO add your handling code here:
-        QGEN dat = new QGEN();
-        asinga_NEntidad();
-        LlenaComboLeg();
-        llenaCombo();
+    primeraVez = true;
+    primeraVezEnvio = true;
+    inicializar();
     }//GEN-LAST:event_CEntidadActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here
-        QGEN dat = new QGEN();
-        LlenaComboLeg();
-        llenaCombo();
-        asinga_NEntidad();
+ inicializar();
     }//GEN-LAST:event_formWindowOpened
 
-    public void LlenaComboLeg() {
-        QGEN dat = new QGEN();
+public void LlenaComboLeg() {
+    QGEN dat = new QGEN();
     CLegislatura.removeAllItems();
-
     ArrayEnvio = dat.Legislatura(CEntidad.getSelectedItem().toString().trim());
 
     float mayor = Float.MIN_VALUE;
     String valorMayor = "";
 
     for (String[] item : ArrayEnvio) {
-
         String valor = Arrays.toString(item).replace("[", "").replace("]", "");
         CLegislatura.addItem(valor);
-
-        float numero = Float.parseFloat(valor); // convertir a número
-
+        float numero = Float.parseFloat(valor);
         if (numero > mayor) {
             mayor = numero;
             valorMayor = valor;
         }
     }
 
-    // seleccionar automáticamente el mayor
-    CLegislatura.setSelectedItem(valorMayor);
+    if (primeraVez) {
+        CLegislatura.setSelectedItem(valorMayor);
+        primeraVez = false;
     }
+}
 
-  public void llenaCombo() {
- QGEN dat = new QGEN();
+public void llenaCombo() {
+    QGEN dat = new QGEN();
     TEnvio.removeAllItems();
     TEnvio_anterior.removeAllItems();
-
     ArrayEnvio = dat.Envios(
-            CEntidad.getSelectedItem().toString().trim(),
-            CLegislatura.getSelectedItem().toString()
+        CEntidad.getSelectedItem().toString().trim(),
+        CLegislatura.getSelectedItem().toString()
     );
 
     float maximo = Float.MIN_VALUE;
-
     for (String[] item : ArrayEnvio) {
-
         String valorStr = Arrays.toString(item).replace("[", "").replace("]", "").trim();
-
         TEnvio.addItem(valorStr);
         TEnvio_anterior.addItem(valorStr);
-
         float valor = Float.parseFloat(valorStr);
-
         if (valor > maximo) {
             maximo = valor;
         }
     }
 
-    if (maximo != Float.MIN_VALUE) {
+    // Solo autoselecciona la primera vez
+    if (primeraVezEnvio && maximo != Float.MIN_VALUE) {
         float anterior = maximo - 1;
-
         TEnvio.setSelectedItem(String.valueOf((int) maximo));
         TEnvio_anterior.setSelectedItem(String.valueOf((int) anterior));
+        primeraVezEnvio = false;
     }
 }
 
@@ -385,7 +381,8 @@ public class ValidaPLE extends javax.swing.JFrame {
     private void CLegislaturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CLegislaturaActionPerformed
         // TODO add your handling code here:
         if (CLegislatura.getSelectedIndex() > -1) {
-            LlenaComboLeg();
+           primeraVezEnvio = true; 
+          llenaCombo();
         }
 
     }//GEN-LAST:event_CLegislaturaActionPerformed

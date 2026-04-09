@@ -1252,50 +1252,6 @@ public class ValPLE {
             coni = 1;
         }
 
-        ArrayResult = DG.cond_reconocimiento_iniciativa_urgente_obvia(entidad, legislatura, envio);
-        if (ArrayResult.size() > 0) {
-            XSSFRow filaEE1 = hojadatos_generales.createRow(conEnc);//FILA
-            XSSFCell celdaE1 = filaEE1.createCell(0);//COLUMNA
-            celdaE1.setCellStyle(estiloCelda1);
-            celdaE1.setCellType(CellType.STRING);
-            String txtE1 = "ID";
-            XSSFRichTextString textoE1 = new XSSFRichTextString(txtE1);
-            celdaE1.setCellValue(textoE1);
-
-            XSSFCell celdaE6 = filaEE1.createCell(1);//COLUMNA
-            celdaE6.setCellStyle(estiloCelda1);
-            celdaE6.setCellType(CellType.STRING);
-            String txtE6 = "OBSERVACIONES";
-            XSSFRichTextString textoE6 = new XSSFRichTextString(txtE6);
-            celdaE6.setCellValue(textoE6);
-
-            for (int i = 0; i < ArrayResult.size(); i++) {
-                XSSFRow filaEE2 = hojadatos_generales.createRow(conDat + i);
-
-                XSSFCell celdaD1 = filaEE2.createCell(0);//COLUMNA
-                celdaD1.setCellStyle(estiloCeldabordes0);
-                celdaD1.setCellType(CellType.STRING);
-                //String txtD1 = Arrays.toString(ArrayResult.get(i));
-                String txtD1 = Arrays.toString(ArrayResult.get(i));
-                txtD1 = txtD1.replace("[", "").replace("]", "").replace(" 00:00:00.0", "");
-                String[] parts = txtD1.split(",");
-                String parts1 = parts[1].trim();
-                XSSFRichTextString textoD1 = new XSSFRichTextString(parts1);
-                celdaD1.setCellValue(textoD1);
-
-                XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
-                celdaD2.setCellStyle(estiloCeldabordes0);
-                celdaD2.setCellType(CellType.STRING);
-                String txtD2 = "Cuando  P1_1D_1 (cond_reconocimiento_iniciativa_urgente_obvia)=Sí debe de haber desglose en pestaña iniciativas_urgente_obvia";
-                XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
-                celdaD2.setCellValue(textoD2);
-
-                coni++;
-            }
-            conEnc = conEnc + coni;
-            conDat = conDat + coni;
-            coni = 1;
-        }
 
         ArrayResult = DG.cond_existencia_juicio_politico(entidad, legislatura, envio);
         if (ArrayResult.size() > 0) {
@@ -7927,6 +7883,81 @@ public class ValPLE {
             coni_PL = 1;
         }
 
+         ArrayResult = PL.adscipcion_finalNI(entidad, legislatura, envio);
+        if (ArrayResult.size() > 0) {
+            XSSFRow filaEE1 = hojaPersonas_legiladoras.createRow(conEnc_PL);//FILA
+            XSSFCell celdaE1 = filaEE1.createCell(0);//COLUMNA
+            celdaE1.setCellStyle(estiloCelda1);
+            celdaE1.setCellType(CellType.STRING);
+            String txtE1 = "ID_persona_legisladora";
+            XSSFRichTextString textoE1 = new XSSFRichTextString(txtE1);
+            celdaE1.setCellValue(textoE1);
+
+            XSSFCell celdaE6 = filaEE1.createCell(1);//COLUMNA
+            celdaE6.setCellStyle(estiloCelda1);
+            celdaE6.setCellType(CellType.STRING);
+            String txtE6 = "OBSERVACIONES";
+            XSSFRichTextString textoE6 = new XSSFRichTextString(txtE6);
+            celdaE6.setCellValue(textoE6);
+
+            XSSFCell celdaE7 = filaEE1.createCell(2);//COLUMNA
+            celdaE7.setCellStyle(estiloCelda1);
+            celdaE7.setCellType(CellType.STRING);
+            String txtE7 = "ID_ENTIDAD";
+            XSSFRichTextString textoE7 = new XSSFRichTextString(txtE7);
+            celdaE7.setCellValue(textoE7);
+
+            XSSFCell celdaE8 = filaEE1.createCell(3);//COLUMNA
+            celdaE8.setCellStyle(estiloCelda1);
+            celdaE8.setCellType(CellType.STRING);
+            String txtE8 = "JUSTIFICACION";
+            XSSFRichTextString textoE8 = new XSSFRichTextString(txtE8);
+            celdaE8.setCellValue(textoE8);
+
+            for (int i = 0; i < ArrayResult.size(); i++) {
+                XSSFRow filaEE2 = hojaPersonas_legiladoras.createRow(conDat_PL + i);
+
+                XSSFCell celdaD1 = filaEE2.createCell(0);//COLUMNA
+                celdaD1.setCellStyle(estiloCeldabordes0);
+                celdaD1.setCellType(CellType.STRING);
+                //String txtD1 = Arrays.toString(ArrayResult.get(i));
+                String txtD1 = Arrays.toString(ArrayResult.get(i));
+                txtD1 = txtD1.replace("[", "").replace("]", "").replace(" 00:00:00.0", "");
+                String[] parts = txtD1.split(",");
+                String parts1 = parts[1].trim();
+                XSSFRichTextString textoD1 = new XSSFRichTextString(parts1);
+                celdaD1.setCellValue(textoD1);
+
+                XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
+                celdaD2.setCellStyle(estiloCeldabordes0);
+                celdaD2.setCellType(CellType.STRING);
+                String txtD2 = "La persona legisladora  cuenta con un dato registrado en el campo tipo_adscripcion_inicial_persona_legisladora (columna AR-P1_3_43); sin embargo, en el campo tipo_adscripcion_final_persona_legisladora (columna AU-P1_3_46) se capturó 'No identificado'. No es congruente que inicie con una adscripción definida y concluya como 'No identificado'. Favor de revisar.";                XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
+                celdaD2.setCellValue(textoD2);
+
+                XSSFCell celdaD3 = filaEE2.createCell(2);//COLUMNA
+                celdaD3.setCellStyle(estiloCeldabordes0);
+                celdaD3.setCellType(CellType.STRING);
+                String txtD3 = Arrays.toString(ArrayResult.get(i));
+                txtD3 = txtD3.replace("[", "").replace("]", "").replace(" 00:00:00.0", "");
+                String[] parts3 = txtD3.split(",");
+                String parts4 = parts3[0].trim();
+                XSSFRichTextString textoD3 = new XSSFRichTextString(parts4);
+                celdaD3.setCellValue(textoD3);
+
+                XSSFCell celdaD4 = filaEE2.createCell(3);//COLUMNA
+                celdaD4.setCellStyle(estiloCeldabordes0);
+                celdaD4.setCellType(CellType.STRING);
+                String txtD4 = "";
+                XSSFRichTextString textoD4 = new XSSFRichTextString(txtD4);
+                celdaD4.setCellValue(textoD4);
+
+                coni_PL++;
+            }
+            conEnc_PL = conEnc_PL + coni_PL;
+            conDat_PL = conDat_PL + coni_PL;
+            coni_PL = 1;
+        }
+        
         ArrayResult = PL.NCgrupo_parlamentario_adscipcion_final_persona_legisladora(entidad, legislatura, envio);
         if (ArrayResult.size() > 0) {
             XSSFRow filaEE1 = hojaPersonas_legiladoras.createRow(conEnc_PL);//FILA
