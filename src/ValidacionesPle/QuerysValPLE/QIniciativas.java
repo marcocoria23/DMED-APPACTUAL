@@ -220,6 +220,28 @@ public class QIniciativas {
 }
         return Array;
     }
+     public ArrayList Iniciativas_Duplicadas_nombre(String ID_entidad, String Legislatura, String envio) {
+        conexion.Conectar();
+        Array = new ArrayList();
+        sql = "SELECT A.ID_ENTIDAD, A.C1_5_ID AS ENVIO, A.P1_5_1 AS ID_ACTUAL, A.P1_5_12 AS NOMBRE FROM TR_PLE_MEDS1_5 A\n" +
+              "WHERE A.C1_5_ID = " + envio + "  AND A.ID_ENTIDAD = " + ID_entidad + "\n" +
+              "AND EXISTS (  SELECT 1  FROM TR_PLE_MEDS1_5 B  WHERE B.P1_5_12 = A.P1_5_12    AND B.C1_5_ID = A.C1_5_ID  AND B.ID_ENTIDAD = A.ID_ENTIDAD\n" +
+              "GROUP BY B.P1_5_12 HAVING COUNT(*) > 1)ORDER BY A.P1_5_12";
+        System.out.println(sql);
+        resul = conexion.consultar(sql);
+        try {
+            while (resul.next()) {
+                Array.add(new String[]{             
+                    resul.getString("ID_ENTIDAD"),
+                    resul.getString("ID_ACTUAL")
+                });
+            } 
+            conexion.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(QIniciativas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return Array;
+    }
 //Los campos p1_5_17-Q (ID_persona_legisladora_1) y p1_5_17-R (nombre_persona_legisladora_1) deben contner información debido a que se seleccióno: 'Personas legisladoras' en el campo p1_5_17-P(tipo_promovente_iniciativa)"
       public ArrayList TIPO_PROMOVENTE_PERSONA_LEGIS(String ID_entidad, String Legislatura, String envio) {
         conexion.Conectar();
