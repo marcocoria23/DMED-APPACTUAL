@@ -510,7 +510,7 @@ public void llenaCombo() {
                     LEntidad.setText("Zacatecas");
                     break;
                 default:
-                    JOptionPane.showMessageDialog(null, "No se Encontro Entidad", "Valida", JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "No se Encontro Entidad ", "Valida", JOptionPane.WARNING_MESSAGE);
                     JOptionPane.showMessageDialog(null, "Favor de contactar al Administrador", "Valida", JOptionPane.WARNING_MESSAGE);
             }
         }
