@@ -24191,8 +24191,19 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                 XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                 celdaD2.setCellStyle(estiloCeldabordes0);
                 celdaD2.setCellType(CellType.STRING);
-                String txtD2 = "Debe capturar P1_5_72-BT (Condición de iniciativa preferente) ya que se cumplen las siguientes condiciones: P1_5_3-C (cond_presentacion_iniciativa_periodo)='Sí',   P1_5_16-P (tipo_promovente_iniciativa)='Persona titular del Poder Ejecutivo'  y en la tabla Datos_Generales E-48 (cond_reconocimiento_iniciativa_preferente) ='Sí'";
-                XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
+               String txtD2 = "Debe capturar Condición de iniciativa preferente (P1_5_72-BT)\n\n" +
+                "1) Cuando en la pestaña de datos generales se registre:\n" +
+                "   \"Sí\" en la columna cond_reconocimiento_iniciativa_preferente (P1_1D_1-AC48),\n" +
+                "   y además, en la pestaña de iniciativas:\n" +
+                "   \"Sí\" en cond_presentacion_iniciativa_periodo (P1_5_3-C),\n" +
+                "   \"Persona titular del Poder Ejecutivo\" en tipo_promovente_iniciativa (P1_5_16-P).\n\n" +
+                "o\n\n" +
+                "2) Cuando en la pestaña de datos generales se registre:\n" +
+                "   \"Sí\" en la columna cond_reconocimiento_iniciativa_preferente (P1_1D_1-AC48),\n" +
+                "   y además, en la pestaña de iniciativas:\n" +
+                "   \"Sí\" en cond_modificacion_informacion_ingreso_periodo (P1_5_7-G),\n" +
+                "   \"Persona titular del Poder Ejecutivo\" en tipo_promovente_iniciativa (P1_5_16-P).";
+               XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                 celdaD2.setCellValue(textoD2);
 
                 XSSFCell celdaD3 = filaEE2.createCell(2);//COLUMNA
@@ -24371,7 +24382,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
             conDat = conDat + coni;
             coni = 1;
         }
-        ArrayResult = InS.cond_reconocimiento_iniciativa_preferente(entidad, legislatura, envio);
+        ArrayResult = InS.no_cond_reconocimiento_iniciativa_preferente(entidad, legislatura, envio);
         if (ArrayResult.size() > 0) {
             XSSFRow filaEE1 = hojaIniciativas.createRow(conEnc);//FILA
             XSSFCell celdaE1 = filaEE1.createCell(0);//COLUMNA
@@ -24419,7 +24430,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                 XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                 celdaD2.setCellStyle(estiloCeldabordes0);
                 celdaD2.setCellType(CellType.STRING);
-                String txtD2 = "Debe capturar (Condición de iniciativa preferente)-BT en caso de seleccionar la categoría \"Sí\" en la columna cond_reconocimiento_iniciativa_preferente de la tabla datos_generales y las categoría \"Sí\" en la columna cond_modificacion_informacion_ingreso_periodo (G) de la tabla iniciativas y \"Persona titular del Poder Ejecutivo\" en la columna tipo_promovente_iniciativa (P).";
+                String txtD2 = "No debe capturar (Condición de iniciativa preferente)-BT en caso de seleccionar la categoría \"Sí\" en la columna cond_reconocimiento_iniciativa_preferente de la tabla datos_generales y las categoría \"Sí\" en la columna cond_modificacion_informacion_ingreso_periodo (G) de la tabla iniciativas y \"Persona titular del Poder Ejecutivo\" en la columna tipo_promovente_iniciativa (P).";
                 XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                 celdaD2.setCellValue(textoD2);
 

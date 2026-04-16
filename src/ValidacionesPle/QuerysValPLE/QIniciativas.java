@@ -223,10 +223,13 @@ public class QIniciativas {
      public ArrayList Iniciativas_Duplicadas_nombre(String ID_entidad, String Legislatura, String envio) {
         conexion.Conectar();
         Array = new ArrayList();
-        sql = "SELECT A.ID_ENTIDAD, A.C1_5_ID AS ENVIO, A.P1_5_1 AS ID_ACTUAL, A.P1_5_12 AS NOMBRE FROM TR_PLE_MEDS1_5 A\n" +
-              "WHERE A.C1_5_ID = " + envio + "  AND A.ID_ENTIDAD = " + ID_entidad + "\n" +
-              "AND EXISTS (  SELECT 1  FROM TR_PLE_MEDS1_5 B  WHERE B.P1_5_12 = A.P1_5_12    AND B.C1_5_ID = A.C1_5_ID  AND B.ID_ENTIDAD = A.ID_ENTIDAD\n" +
-              "GROUP BY B.P1_5_12 HAVING COUNT(*) > 1)ORDER BY A.P1_5_12";
+        sql = "SELECT t.ID_ENTIDAD,t.C1_5_ID as envio,t.P1_5_1 as ID_ACTUAL,t.P1_5_5 as turno,t.P1_5_12 as nombre, t.P1_5_8 as estatus, t.P1_5_10 as etapa,  t.P1_5_11 as fecha_ingreso,t.P1_5_94 as tipo_iniciativa,t.P1_5_16 as tipo_promovente,t.P1_5_17 as persona_legisladora, t.P1_5_57 as grupo_parlamentario, t.P1_5_102 as fecha_resol, t.P1_5_108 as fecha_reision, t.P1_5_110 as tipo_publicacion,t.P1_5_74 as id_comision1,t.P1_5_75 as nombre_comision1,t.P1_5_76 as id_comision2,t.P1_5_77 as nombre_comision2\n" +
+               "FROM TR_PLE_MEDS1_5 t\n" +
+               "INNER JOIN ( SELECT  ID_ENTIDAD, C1_5_ID, P1_5_12, P1_5_11 FROM TR_PLE_MEDS1_5\n" +
+               "WHERE ID_ENTIDAD =" + ID_entidad + " AND C1_5_ID IN (" + envio + ")\n" +
+               "GROUP BY  ID_ENTIDAD,   C1_5_ID,  P1_5_12,P1_5_11  HAVING COUNT(*) > 1 ) dup\n" +
+               "ON t.ID_ENTIDAD = dup.ID_ENTIDAD  AND t.C1_5_ID = dup.C1_5_ID  AND t.P1_5_12 = dup.P1_5_12  AND t.P1_5_11 = dup.P1_5_11\n" +
+               "WHERE t.ID_ENTIDAD =" + ID_entidad + "   AND t.C1_5_ID IN (" + envio + ") ORDER BY t.P1_5_12";
         System.out.println(sql);
         resul = conexion.consultar(sql);
         try {
@@ -1691,17 +1694,19 @@ public class QIniciativas {
     public ArrayList DCcond_reconocimiento_iniciativa_preferente(String ID_entidad, String Legislatura, String Envio) {
         conexion.Conectar();
         Array = new ArrayList();
-        sql = "select  c.ID_ENTIDAD, c.ENTIDAD, c.C1_5_ID, c.P1_5_1, c.P1_5_3, c.P1_5_16, c.P1_5_72, ud.C1_1D, ud.P1_1D_1\n"
-                + "from TR_PLE_MEDS1_5 c left join TR_PLE_MEDS1_1D ud on ud.ID_ENTIDAD=c.ID_ENTIDAD and ud.C1_1D_ID=c.C1_5_ID\n"
-                + "where ud.C1_1D=1 and ud.P1_1D_1=1 and P1_5_16=1 and P1_5_3=1 and P1_5_72 is null "
-                + " AND c.ID_ENTIDAD=" + ID_entidad + " AND c.Legislatura=" + Legislatura + " AND C1_5_ID='" + Envio + "'";
+        sql = "SELECT   TR5.ID_ENTIDAD,  TR5.ENTIDAD, TR5.C1_5_ID AS envio, TR5.P1_5_1 AS ID_INICIATIVA,  TR5.P1_5_3 AS PRESENTACION_PERIODO, TR5.P1_5_16 AS tipo_promovente_iniciativa, TR5.P1_5_72 AS Cond_iniciativa_preferente,  TR1.C1_1D AS COND_GENERAL, TR1.P1_1D_1 AS COND_GENRAL_RESPUESTA\n" +
+        "FROM TR_PLE_MEDS1_5 TR5 LEFT JOIN TR_PLE_MEDS1_1D TR1  ON TR1.ID_ENTIDAD = TR5.ID_ENTIDAD AND TR1.C1_1D_ID = TR5.C1_5_ID\n" +
+        "WHERE TR1.C1_1D = 1 AND TR1.P1_1D_1 = 1 AND TR5.P1_5_16 = 1\n" +
+        "    AND ( TR5.P1_5_3 = 1 OR  TR5.P1_5_7 = 1 )\n" +
+        "    AND TR5.P1_5_72 IS NULL"
+                + " AND TR5.ID_ENTIDAD=" + ID_entidad + " AND TR5.Legislatura=" + Legislatura + " AND TR5.C1_5_ID='" + Envio + "'";
         System.out.println(sql);
         resul = conexion.consultar(sql);
         try {
             while (resul.next()) {
                 Array.add(new String[]{
                     resul.getString("ID_ENTIDAD"),
-                    resul.getString("P1_5_1")
+                    resul.getString("ID_INICIATIVA")
                 });
             }
             conexion.close();
@@ -1712,24 +1717,23 @@ public class QIniciativas {
     }
 
 //Debe capturar (Condición de iniciativa preferente)-BT en caso de seleccionar la categoría "Sí" en la columna cond_reconocimiento_iniciativa_preferente de la tabla datos_generales y las categoría "Sí" en la columna cond_modificacion_informacion_ingreso_periodo (G) de la tabla iniciativas y "Persona titular del Poder Ejecutivo" en la columna tipo_promovente_iniciativa (P).
-    public ArrayList cond_reconocimiento_iniciativa_preferente(String ID_entidad, String Legislatura, String Envio) {
+    public ArrayList no_cond_reconocimiento_iniciativa_preferente(String ID_entidad, String Legislatura, String Envio) {
         conexion.Conectar();
         Array = new ArrayList();
-        sql = "select  c.ID_ENTIDAD, c.ENTIDAD, c.C1_5_ID, c.P1_5_1, c.P1_5_7 as cond_modificacion_informacion_ingreso_periodo,\n" +
-"tc.descripcion as tipo_promovente_iniciativa, c.P1_5_72 as cond_iniciativa_preferente, ud.P1_1D_1 as cond_reconocimiento_iniciativa_preferente_GENERALES\n" +
-"from TR_PLE_MEDS1_5 c \n" +
-"left join TR_PLE_MEDS1_1D ud on ud.ID_ENTIDAD=c.ID_ENTIDAD and ud.C1_1D_ID=c.C1_5_ID\n" +
-"inner join TC_TIPO_PROMOVENTE tc on c.P1_5_16=tc.ID\n" +
-"where (ud.C1_1D=1 AND P1_1D_1='1')\n" +
-"and P1_5_7=1 and P1_5_16=1 and P1_5_72 is null"
-                + " AND( c.ID_ENTIDAD=" + ID_entidad + " AND c.Legislatura=" + Legislatura + " AND C1_5_ID='" + Envio + "')";
+        sql = "SELECT   TR5.ID_ENTIDAD,TR5.C1_5_ID AS envio, TR5.P1_5_1 AS ID_INICIATIVA, TR5.P1_5_72 AS Cond_iniciativa_preferente,\n" +
+        " TR5.P1_5_3 AS PRESENTACION_PERIODO,TR5.P1_5_7 AS MODIFICACION_info_PERIODO,TR5.P1_5_16 AS tipo_promovente_iniciativa, TR1.C1_1D AS COND_GENERAL, TR1.P1_1D_1 AS COND_GENRAL_RESPUESTA\n" +
+        "FROM TR_PLE_MEDS1_5 TR5 inner JOIN TR_PLE_MEDS1_1D TR1  ON TR1.ID_ENTIDAD = TR5.ID_ENTIDAD  AND TR1.C1_1D_ID = TR5.C1_5_ID\n" +
+        "WHERE   TR5.P1_5_72 IS NOT NULL AND  TR1.C1_1D = 1\n" +
+        "    AND ( TR1.P1_1D_1 != 1  OR  TR5.P1_5_16 != 1  OR (TR5.P1_5_3 != 1 AND  TR5.P1_5_7 != 1)  )\n" +
+        "and TR5.ID_ENTIDAD=10"
+                        + " AND( TR5.ID_ENTIDAD=" + ID_entidad + " AND TR5.Legislatura=" + Legislatura + " AND TR5.C1_5_ID='" + Envio + "')";
         System.out.println(sql);
         resul = conexion.consultar(sql);
         try {
             while (resul.next()) {
                 Array.add(new String[]{
                     resul.getString("ID_ENTIDAD"),
-                    resul.getString("P1_5_1")
+                    resul.getString("ID_INICIATIVA")
                 });
             }
             conexion.close();
