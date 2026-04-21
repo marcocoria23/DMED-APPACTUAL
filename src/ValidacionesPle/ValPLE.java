@@ -19930,7 +19930,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                 XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                 celdaD2.setCellStyle(estiloCeldabordes0);
                 celdaD2.setCellType(CellType.STRING);
-                String txtD2 = "Se indica que la iniciativa no fue presentada en el periodo actual cond_presentacion_iniciativa_legislatura_actual (B) = \"No\"); sin embargo, en los envíos anteriores no se localizó registro de esta iniciativa con cond_presentacion_iniciativa_periodo (B)= \"Sí\", por lo que no se cuenta con antecedente de su presentación en un periodo previo.";                 
+                String txtD2 = "Se indica que la iniciativa no fue presentada en el periodo actual cond_presentacion_iniciativa_legislatura_actual (B) = \"No\"; sin embargo, en los envíos anteriores no se localizó registro de esta iniciativa con cond_presentacion_iniciativa_periodo (B)= \"Sí\", por lo que no se cuenta con antecedente de su presentación en un periodo previo.";                 
                 XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                 celdaD2.setCellValue(textoD2);
 

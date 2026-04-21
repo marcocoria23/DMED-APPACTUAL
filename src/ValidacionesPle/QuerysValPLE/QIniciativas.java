@@ -963,21 +963,19 @@ public class QIniciativas {
     public ArrayList fecha_sesion_presentacion_iniciativa(String ID_entidad, String Legislatura, String Envio) {
         conexion.Conectar();
         Array = new ArrayList();
-        sql = "SELECT ID_ENTIDAD, ENTIDAD, \n"
-                + "C1_5_ID, P1_5_1,  to_date(P1_5_13)P1_5_13,\n"
-                + " to_date(P1_5_11)P1_5_11\n"
-                + "FROM TR_PLE_MEDS1_5\n"
-                + "WHERE \n"
-                + "    REGEXP_LIKE(P1_5_11, '^\\d{2}/\\d{2}/\\d{4}$') AND\n"
-                + "    REGEXP_LIKE(P1_5_13, '^\\d{2}/\\d{2}/\\d{4}$') AND\n"
-                + "    SUBSTR(P1_5_11, 1, 2) BETWEEN '01' AND '31' AND\n"
-                + "    SUBSTR(P1_5_11, 4, 2) BETWEEN '01' AND '12' AND\n"
-                + "    SUBSTR(P1_5_13, 1, 2) BETWEEN '01' AND '31' AND\n"
-                + "    SUBSTR(P1_5_13, 4, 2) BETWEEN '01' AND '12' AND\n"
-                + "    TO_DATE(P1_5_11, 'DD/MM/YYYY') IS NOT NULL AND\n"
-                + "    TO_DATE(P1_5_13, 'DD/MM/YYYY') IS NOT NULL\n"
-                + "    AND  to_date(p1_5_13,'DD/MM/YYYY')<to_date(P1_5_11,'DD/MM/YYYY')\n"
-                + "    and ( to_date(P1_5_13,'DD/MM/YYYY') <> '09/09/1899' AND  to_date(P1_5_13,'DD/MM/YYYY') <> '09/09/1799') "
+        sql = "SELECT ID_ENTIDAD, ENTIDAD, \n" +
+"       C1_5_ID, P1_5_1,\n" +
+"       TO_DATE(P1_5_13, 'DD/MM/YYYY') AS P1_5_13,\n" +
+"       TO_DATE(P1_5_11, 'DD/MM/YYYY') AS P1_5_11\n" +
+"FROM TR_PLE_MEDS1_5\n" +
+"WHERE \n" +
+"    VALIDATE_CONVERSION(P1_5_11 AS DATE, 'DD/MM/YYYY') = 1\n" +
+"    AND VALIDATE_CONVERSION(P1_5_13 AS DATE, 'DD/MM/YYYY') = 1\n" +
+"    AND TO_DATE(P1_5_13, 'DD/MM/YYYY') < TO_DATE(P1_5_11, 'DD/MM/YYYY')\n" +
+"    AND TO_DATE(P1_5_13, 'DD/MM/YYYY') NOT IN (\n" +
+"        DATE '1899-09-09',\n" +
+"        DATE '1799-09-09'\n" +
+"    ) "
                 + " AND ID_ENTIDAD=" + ID_entidad + " AND Legislatura=" + Legislatura + " AND C1_5_ID='" + Envio + "'";
         System.out.println(sql);
         resul = conexion.consultar(sql);
@@ -2704,25 +2702,15 @@ public ArrayList Dictamen_sentido_resolucion(String ID_entidad, String Legislatu
     }
 
 
-
 //Se indica que la iniciativa no fue presentada en la legislatura actual; sin embargo, la fecha de ingreso en oficialía de partes se encuentra dentro del periodo correspondiente a la legislatura vigente.
     public ArrayList fecha_iniciativa_legislatura_actual(String ID_entidad, String Legislatura, String Envio) {
         conexion.Conectar();
         Array = new ArrayList();
-        sql = "SELECT \n" +
-"    t1.entidad, t1.C1_1_ID as envio,\n" +
-"    t5.P1_5_1 AS id_iniciativa,\n" +
-"    TO_DATE(t1.P1_1_8,'DD/MM/YYYY') AS fecha_inicio_informacion_reportada,\n" +
-"    TO_DATE(t1.P1_1_9,'DD/MM/YYYY') AS fecha_termino_informacion_reportada,\n" +
-"    TO_DATE(t5.P1_5_11,'DD/MM/YYYY') AS fecha_ingreso_iniciativa_oficialia_partes,\n" +
-"    t5.P1_5_2 AS cond_presentacion_iniciativa_legislatura_actual\n" +
-"FROM TR_PLE_MEDS1_5 t5\n" +
-"INNER JOIN TR_PLE_MEDS1_1 t1 ON t1.ID_ENTIDAD = t5.ID_ENTIDAD\n" +
-"   AND t5.C1_5_ID = t1.C1_1_ID AND t1.LEGISLATURA = t5.LEGISLATURA\n" +
-"WHERE t5.P1_5_2 = 2  AND TO_DATE(t5.P1_5_11,'DD/MM/YYYY') \n" +
-"      BETWEEN TO_DATE(t1.P1_1_8,'DD/MM/YYYY') AND TO_DATE(t1.P1_1_9,'DD/MM/YYYY')\n" 
-                + " AND t1.ID_ENTIDAD=" + ID_entidad + " AND t1.Legislatura=" + Legislatura + " AND t5.C1_5_ID='" + Envio + "'";
-        System.out.println(sql);
+        sql = "SELECT T5.ID_ENTIDAD, T5.C1_5_ID AS ENVIO, T5.P1_5_1 as id_iniciativa, T5.P1_5_2 AS presentacion_iniciativa_legislatura_actual, TO_DATE(T5.P1_5_11, 'DD/MM/YYYY') AS fecha_ingreso_iniciativa_oficialia_partes, t1.P1_1_8 AS INICIO_LEGIS, t1.P1_1_9 AS FIN_LEGIS\n" +
+        "FROM TR_PLE_MEDS1_5 T5 INNER JOIN TR_PLE_MEDS1_1 t1 ON t1.ID_ENTIDAD = t5.ID_ENTIDAD AND t5.C1_5_ID = t1.C1_1_ID AND t1.LEGISLATURA = t5.LEGISLATURA\n" +
+        "WHERE     t5.P1_5_2 = 2 AND TO_DATE(t5.P1_5_11,'DD/MM/YYYY') BETWEEN TO_DATE(t1.P1_1_8,'DD/MM/YYYY') AND TO_DATE(t1.P1_1_9,'DD/MM/YYYY')" +
+        "    AND t5.ID_ENTIDAD = " + ID_entidad + "     AND t5.Legislatura = " + Legislatura + "     AND t5.C1_5_ID = " + Envio + "" ;
+                System.out.println(sql);
         resul = conexion.consultar(sql);
         try {
             while (resul.next()) {
@@ -2738,7 +2726,7 @@ public ArrayList Dictamen_sentido_resolucion(String ID_entidad, String Legislatu
         return Array;
     }
 
-//Se indica que la iniciativa no fue presentada en la legislatura actual; sin embargo, la fecha de ingreso en oficialía de partes se encuentra dentro del periodo correspondiente a la legislatura vigente.
+//Se indica que la iniciativa no fue presentada en EL PERIODO actual; sin embargo, la fecha de ingreso en oficialía de partes se encuentra dentro del periodo correspondiente a la legislatura vigente.
     public ArrayList fecha_iniciativa_periodo_actual(String ID_entidad, String Legislatura, String Envio) {
         conexion.Conectar();
         Array = new ArrayList();
