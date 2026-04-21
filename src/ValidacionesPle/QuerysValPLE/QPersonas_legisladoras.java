@@ -3114,7 +3114,7 @@ public ArrayList grupo_parlamentario_independiente(String ID_entidad,String Legi
       try {
           while (resul.next()) {
               Array.add(new String[]{
-                  resul.getString("ID_ENTIDAD"),
+                  resul.getString("ENTIDAD"),
                   resul.getString("ID_LEGIS")
                 });
           }
