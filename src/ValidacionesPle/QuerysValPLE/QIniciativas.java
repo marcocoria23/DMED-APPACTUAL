@@ -848,13 +848,12 @@ public class QIniciativas {
     public ArrayList Nombre_iniciativa(String ID_entidad, String Legislatura, String Envio) {
         conexion.Conectar();
         Array = new ArrayList();
-        sql = "SELECT t1.p1_5_1 AS ID_Legislatura, MIN(t1.C1_5_ID) AS C1_5_ID, MIN(t1.legislatura) AS legislatura,\n" +
-        " MIN(t1.ENTIDAD) AS ENTIDAD, MIN(TRIM(UPPER(t1.p1_5_12))) AS nombre_INICIATIVA, COUNT(*) AS total_envios\n" +
-        "  FROM TR_PLE_MEDS1_5 t1\n" +
-        "  WHERE EXISTS ( SELECT 1 FROM TR_PLE_MEDS1_5 t2 WHERE t1.p1_5_1 = t2.p1_5_1  AND LEGISLATURA= "+ Legislatura +" AND NLSSORT(TRIM(UPPER(t1.p1_5_12)), 'NLS_SORT=BINARY_AI') <> NLSSORT(TRIM(UPPER(t2.p1_5_12)), 'NLS_SORT=BINARY_AI'))\n" +
-        "    AND t1.ENTIDAD =" + ID_entidad + " AND t1.p1_5_1 IN ( SELECT DISTINCT p1_5_1 FROM TR_PLE_MEDS1_5 WHERE C1_5_ID ='" + Envio + "' AND ENTIDAD =" + ID_entidad + " AND LEGISLATURA= "+ Legislatura +")\n" +
-        "    AND t1.LEGISLATURA =" + Legislatura +
-        " GROUP BY t1.p1_5_1" ;
+        sql = "SELECT t1.p1_5_1  AS ID_INICIATIVA,  t1.ENTIDAD,  t1.LEGISLATURA AS LEGISLATURA_NUEVA, t1.C1_5_ID AS ENVIO_NUEVO,\n" +
+"    TRIM(UPPER(t1.p1_5_12)) AS NOMBRE_NUEVO, t2.LEGISLATURA AS LEGISLATURA_ANTERIOR, t2.C1_5_ID AS ENVIO_ANTERIOR, TRIM(UPPER(t2.p1_5_12)) AS NOMBRE_ANTERIOR \n" +
+"FROM TR_PLE_MEDS1_5 t1\n" +
+"JOIN TR_PLE_MEDS1_5 t2   ON  t1.p1_5_1  = t2.p1_5_1 AND t1.ENTIDAD = t2.ENTIDAD AND t2.C1_5_ID <> t1.C1_5_ID\n" +
+"WHERE   t1.C1_5_ID   = "+Envio+"     AND t1.ID_ENTIDAD = '"+ID_entidad+"'     AND t1.LEGISLATURA = "+Legislatura+" and\n" +
+"    NLSSORT(TRIM(UPPER(t1.p1_5_12)), 'NLS_SORT=BINARY_AI')   <> NLSSORT(TRIM(UPPER(t2.p1_5_12)), 'NLS_SORT=BINARY_AI') ORDER BY t1.p1_5_1, t2.C1_5_ID" ;
       
                 
         System.out.println(sql);
@@ -863,7 +862,7 @@ public class QIniciativas {
             while (resul.next()) {
                 Array.add(new String[]{
                     resul.getString("ENTIDAD"),
-                    resul.getString("ID_Legislatura")
+                    resul.getString("ID_INICIATIVA")
                 });
             }
             conexion.close();

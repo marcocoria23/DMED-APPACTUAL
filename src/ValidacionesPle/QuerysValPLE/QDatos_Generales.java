@@ -127,8 +127,8 @@ public ArrayList T1_NOT_NULL(String ID_entidad,String Legislatura,String Envio){
 "    WHEN a.rn > 1 AND a.fecha_inicio <= a.fecha_fin_anterior THEN 'ERROR: Inicio se solapa con periodo anterior'\n" +
 "    ELSE 'OK' END AS validacion\n" +
 "FROM actual a LEFT JOIN ultimo_envio_anterior u ON a.ENTIDAD = u.ENTIDAD\n" +
-"WHERE (a.rn > 1 AND a.fecha_inicio <= a.fecha_fin_anterior)\n" +
-"  OR (a.rn = 1 AND a.fecha_inicio <= u.fecha_fin)";
+"WHERE (a.rn > 1 AND a.fecha_inicio < a.fecha_fin_anterior)\n" +
+"  OR (a.rn = 1 AND a.fecha_inicio < u.fecha_fin)";
       System.out.println(sql);
       resul=conexion.consultar(sql);
       try {
