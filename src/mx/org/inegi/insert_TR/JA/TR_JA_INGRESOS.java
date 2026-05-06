@@ -49,7 +49,9 @@ public class TR_JA_INGRESOS {
         String NuevaRuta = directorio + "Ingresos.csv";
         conUTF8.Convertir_utf8_EBaseDatos(NuevaRuta);
         NuevaRuta = NuevaRuta.replace(".csv", "UTF8.csv");
-        System.out.println("Leyendo: " + NuevaRuta);
+        System.out.println("==============================");
+        System.out.println("Leyendo INGRESOS: " + NuevaRuta);
+        System.out.println("==============================");
         try ( BufferedInputStream inputStream = new BufferedInputStream(new FileInputStream(NuevaRuta))) {
             byte[] bytes = new byte[3];
             int bytesRead = inputStream.read(bytes);
@@ -59,11 +61,13 @@ public class TR_JA_INGRESOS {
                     int numeroColumnas = 0;
                     CSVRecord firstRecord = csvParser.iterator().next();
                     numeroColumnas = firstRecord.size();
-                    System.out.println("Número de columnas: " + numeroColumnas + "---->if (numeroColumnas <= 43) continúa...");
-                    if (numeroColumnas <= 44) { // Cambiar el valor según el número de columnas esperado
+                    System.out.println("Número de columnas: " + numeroColumnas + "---->if (numeroColumnas <= 45) continúa...");
+                    if (numeroColumnas <= 45) { // Cambiar el valor según el número de columnas esperado
                         for (CSVRecord record : csvParser) {
-                            if (record.get(0).isEmpty()) {
-                                break; // Ignorar registros vacíos
+                            String nombreOrgano = record.get(0).trim();                      
+                            // Saltar encabezados: solo procesar filas que sean tribunales
+                            if (nombreOrgano.isEmpty() || !nombreOrgano.toUpperCase().startsWith("TRIBUNAL")) {
+                                continue;
                             }
 
                             BeanTR_JA_INGRESOS c = new BeanTR_JA_INGRESOS();
@@ -114,6 +118,7 @@ public class TR_JA_INGRESOS {
                             ad.add(c);
                             CFilas++;
                         }
+                         System.out.println("========Total de filas leídas: " + CFilas+"========");
                         CFilas2 = CFilas;
                         if (CFilas > 0) {
                             con = OracleDAOFactoryJA.creaConexion();
@@ -147,6 +152,7 @@ public class TR_JA_INGRESOS {
                         descriptor = null;
                         if (con != null) {
                             con.close();
+                            System.out.println("Se cierra conexión");
                             con = null;
                         }
                     } catch (SQLException ex) {

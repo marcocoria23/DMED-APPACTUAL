@@ -64,6 +64,7 @@ public class IntegraJA_TR extends javax.swing.JFrame {
         Progressbar_Cargando = new javax.swing.JProgressBar();
         Label_Progressbar = new javax.swing.JLabel();
         ErroresInsert = new javax.swing.JButton();
+        AñoField = new javax.swing.JTextField();
 
         setName("Frame_JA_IntegraTR"); // NOI18N
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -136,10 +137,16 @@ public class IntegraJA_TR extends javax.swing.JFrame {
             }
         });
 
+        AñoField.setText(" ");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(ErroresInsert)
+                .addGap(39, 39, 39))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -169,12 +176,11 @@ public class IntegraJA_TR extends javax.swing.JFrame {
                                     .addComponent(Progressbar_Cargando, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(Label_Progressbar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(Button_Integrar)))
+                                .addComponent(Button_Integrar))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(AñoField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))
                         .addContainerGap())))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(ErroresInsert)
-                .addGap(39, 39, 39))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -191,7 +197,9 @@ public class IntegraJA_TR extends javax.swing.JFrame {
                 .addComponent(Button_Nota)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(ErroresInsert)
-                .addGap(40, 40, 40)
+                .addGap(12, 12, 12)
+                .addComponent(AñoField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(RutaArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Label_RutaArchivo))
@@ -222,7 +230,7 @@ public class IntegraJA_TR extends javax.swing.JFrame {
     }//GEN-LAST:event_RutaArchivoActionPerformed
 
     private void Button_IntegrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_IntegrarActionPerformed
-        // TODO add your handling code here:
+         // TODO add your handling code here:
         TR_JA_ACTOS_PROCESALES AP = new TR_JA_ACTOS_PROCESALES();
         TR_JA_ASUNTOS_HIDROCARBUROS AH = new TR_JA_ASUNTOS_HIDROCARBUROS();
         TR_JA_CONCLUSIONES CONC = new TR_JA_CONCLUSIONES();
@@ -246,33 +254,41 @@ public class IntegraJA_TR extends javax.swing.JFrame {
                     if (!RutaArchivo.getText().equals("")) {
                         muestra();
                         Button_Integrar.setEnabled(false);
-                        convert.Convierte(RutaAr); //convierte archivo XLS a CSV
+                        convert.Convierte(RutaAr); //convierte archivo XLS a CSV                        
                         Progressbar_Cargando.setValue(5);
-                        Label_Progressbar.setText("Insertando... TR_JA_ACTOS_PROCESALES_GEN");
-                        Progressbar_Cargando.setValue(18);
-                        AP.TR_JA_ACTOS_PROCESALES();
-                        Label_Progressbar.setText("Insertando... TR_JA_ASUNTOS_HIDROCARBUROS_GEN");
-                        Progressbar_Cargando.setValue(31);
-                        AH.TR_JA_ASUNTOS_HIDROCARBUROS();
-                        Label_Progressbar.setText("Insertando... TR_JA_CONCLUSIONES_GEN");
-                        Progressbar_Cargando.setValue(44);
-                        CONC.TR_JA_CONCLUSIONES();
                         Label_Progressbar.setText("Insertando... TR_JA_CONTROL_GEN");
-                        Progressbar_Cargando.setValue(57);
                         CONT.TR_JA_CONTROL();
-                        Label_Progressbar.setText("Insertando... TR_JA_CUMPLIM_EJECUTORIAS_GEN");
-                        Progressbar_Cargando.setValue(70);
-                        CE.TR_JA_CUMPLIM_EJECUTORIAS();
-                        Label_Progressbar.setText("Insertando... TR_JA_EXHORTOS_DESPACHOS_GEN");
-                        Progressbar_Cargando.setValue(83);
-                        ED.TR_JA_EXHORTOS_DESPACHOS();
-                        Label_Progressbar.setText("Insertando... TR_JA_INGRESOS_GEN");
-                        Progressbar_Cargando.setValue(96);
+                        
+                        Progressbar_Cargando.setValue(15);
+                        Label_Progressbar.setText("Insertando... TR_JA_INGRESOS_GEN");                        
                         ING.TR_JA_INGRESOS();
+                        
+                        Progressbar_Cargando.setValue(30);
                         Label_Progressbar.setText("Insertando... TR_JA_TRAMITE_GEN");
                         TRA.TR_JA_TRAMITE();
-                        Progressbar_Cargando.setValue(100);
+                        
+                        Progressbar_Cargando.setValue(45);
+                        Label_Progressbar.setText("Insertando... TR_JA_CONCLUSIONES_GEN");
+                        CONC.TR_JA_CONCLUSIONES();
+                        
+                        Progressbar_Cargando.setValue(60);
+                        Label_Progressbar.setText("Insertando... TR_JA_ACTOS_PROCESALES_GEN");                       
+                        AP.TR_JA_ACTOS_PROCESALES();
+                        
+                        Progressbar_Cargando.setValue(75);
+                        Label_Progressbar.setText("Insertando... TR_JA_CUMPLIM_EJECUTORIAS_GEN");                      
+                        CE.TR_JA_CUMPLIM_EJECUTORIAS();
+                        
+                        Progressbar_Cargando.setValue(85);
+                        Label_Progressbar.setText("Insertando... TR_JA_EXHORTOS_DESPACHOS_GEN");
+                        ED.TR_JA_EXHORTOS_DESPACHOS();
+                        
+                        Progressbar_Cargando.setValue(95);
+                        Label_Progressbar.setText("Insertando... TR_JA_ASUNTOS_HIDROCARBUROS_GEN");                       
+                        AH.TR_JA_ASUNTOS_HIDROCARBUROS();
 
+                        Progressbar_Cargando.setValue(100);
+                        
                         oculta();
 
                         JOptionPane.showMessageDialog(null, "La información se ha insertado favor de revisar Ventana Errores de insert");
@@ -371,6 +387,7 @@ public class IntegraJA_TR extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField AñoField;
     private javax.swing.JButton Button_Integrar;
     private javax.swing.JButton Button_Nota;
     private javax.swing.JButton Button_Ruta;

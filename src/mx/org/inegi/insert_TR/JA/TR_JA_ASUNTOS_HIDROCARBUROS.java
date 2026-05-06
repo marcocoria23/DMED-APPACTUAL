@@ -27,6 +27,7 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 import static Pantallas_JA.IntegraJA_TR.directorio;
+import static mx.org.inegi.insert_TR.JA.TR_JA_ACTOS_PROCESALES.CFilas2;
 
 /**
  *
@@ -51,21 +52,24 @@ public class TR_JA_ASUNTOS_HIDROCARBUROS {
         try ( BufferedInputStream inputStream = new BufferedInputStream(new FileInputStream(NuevaRuta))) {
             byte[] bytes = new byte[3];
             int bytesRead = inputStream.read(bytes);
-             System.out.println("Leyendo: " + NuevaRuta);
+            System.out.println("==============================");
+             System.out.println("Leyendo ASUNTOS HIDROCARBUROS: " + NuevaRuta);
+             System.out.println("==============================");
             if (bytesRead >= 3 && bytes[0] == (byte) 0xEF && bytes[1] == (byte) 0xBB && bytes[2] == (byte) 0xBF) {
                 try ( BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(NuevaRuta), StandardCharsets.UTF_8));  CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT)) {
                     ArrayList<BeanTR_JA_ASUNTOS_HIDROCARBUROS> ad = new ArrayList<>();
                     int numeroColumnas = 0;
                     CSVRecord firstRecord = csvParser.iterator().next();
                     numeroColumnas = firstRecord.size();
-                    System.out.println("Número de columnas: " + numeroColumnas+"---->if (numeroColumnas <= 14) continúa...");
+                    System.out.println("Número de columnas: " + numeroColumnas+"---->if (numeroColumnas <= 16) continúa...");
 
                     if (numeroColumnas <= 16) { // Cambiar el valor según el número de columnas esperado
-                        for (CSVRecord record : csvParser) {
-                            if (record.get(0).isEmpty()) {
-                                break; // Ignorar registros vacíos
+                         for (CSVRecord record : csvParser) {                                                  
+                          String nombreOrgano = record.get(0).trim();                      
+                            // Saltar encabezados: solo procesar filas que sean tribunales
+                            if (nombreOrgano.isEmpty() || !nombreOrgano.toUpperCase().startsWith("TRIBUNAL")) {
+                                continue;
                             }
-
                             BeanTR_JA_ASUNTOS_HIDROCARBUROS c = new BeanTR_JA_ASUNTOS_HIDROCARBUROS();
                             c.SetNOMBRE_ORGANO_JURIS(record.get(0));
                             c.SetCLAVE_ORGANO(record.get(1));
@@ -83,8 +87,9 @@ public class TR_JA_ASUNTOS_HIDROCARBUROS {
                             c.SetCOMENTARIOS(record.get(13));
                             ad.add(c);
                             CFilas++;
-                        }
-                        CFilas2 = CFilas;
+                        }                     
+                        System.out.println("========Total de filas leídas: " + CFilas+"========");
+                        CFilas2=CFilas;
                         if (CFilas > 0) {
                             con = OracleDAOFactoryJA.creaConexion();
                             sd = StructDescriptor.createDescriptor("OBJ_TR_JA_ASUNTOS_HIDROCARBUROS_GEN", con);
@@ -98,7 +103,7 @@ public class TR_JA_ASUNTOS_HIDROCARBUROS {
                             st.registerOutParameter(1, OracleTypes.INTEGER);
                             st.setArray(2, array_to_pass);
                             st.execute();
-                            System.out.println("Se ejecutó paquete integrador Asuntos_hidrocarburos, filas: "+CFilas+" \n");
+                            System.out.println("Se ejecutó paquete integrador Asuntos_hidrocarburos, filas: "+CFilas );
                         } else {
                             JOptionPane.showMessageDialog(null, "Pestaña Asuntos_hidrocarburos sin registros");
                         }
@@ -114,6 +119,7 @@ public class TR_JA_ASUNTOS_HIDROCARBUROS {
                         descriptor = null;
                         if (con != null) {
                             con.close();
+                            System.out.println("Se cierra conexión");
                             con = null;
                         }
                     } catch (SQLException ex) {

@@ -52,29 +52,26 @@ public class TR_JA_ACTOS_PROCESALES {
         try ( BufferedInputStream inputStream = new BufferedInputStream(new FileInputStream(NuevaRuta))) {
             byte[] bytes = new byte[3];
             int bytesRead = inputStream.read(bytes);
-            System.out.println("------------Leyendo ACTOS PROCESALES: " + NuevaRuta);
+            System.out.println("==============================");
+            System.out.println("Leyendo ACTOS PROCESALES: " + NuevaRuta);
+            System.out.println("==============================");
             if (bytesRead >= 3 && bytes[0] == (byte) 0xEF && bytes[1] == (byte) 0xBB && bytes[2] == (byte) 0xBF) {
                 try ( BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(NuevaRuta), StandardCharsets.UTF_8));  CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT)) {
                     ArrayList<BeanTR_JA_ACTOS_PROCESALES> ad = new ArrayList<>();
                     int numeroColumnas = 0;
                     CSVRecord firstRecord = csvParser.iterator().next();
                     numeroColumnas = firstRecord.size();                  
-                    System.out.println("Número de columnas en archivo CSV: " + numeroColumnas +" Número de columnas esperado: <18." );
+                    System.out.println("Número de columnas en archivo CSV ACTOS PROCESALES: " + numeroColumnas +" Número de columnas esperado: <=18." );
 
                     if (numeroColumnas <=18) { // Cambiar el valor según el número de columnas esperado
-                        for (CSVRecord record : csvParser) {                           
-                            // Saltar las primeras 6 filas
-                            if (record.getRecordNumber() < 7) {
+                        for (CSVRecord record : csvParser) {                                                  
+                          String nombreOrgano = record.get(0).trim();                      
+                            // Saltar encabezados: solo procesar filas que sean tribunales
+                            if (nombreOrgano.isEmpty() || !nombreOrgano.toUpperCase().startsWith("TRIBUNAL")) {
                                 continue;
                             }
-                            System.out.println("entró a leer fila "+record.getRecordNumber());
-
-                            if (record.get(0).isEmpty()) {                               
-                               break;
-                            }
                             BeanTR_JA_ACTOS_PROCESALES c = new BeanTR_JA_ACTOS_PROCESALES();                           
-                            c.SetNOMBRE_ORGANO_JURIS(record.get(0));
-                            
+                            c.SetNOMBRE_ORGANO_JURIS(record.get(0));                          
                             c.SetCLAVE_ORGANO(record.get(1));
                             c.SetPERIODO(record.get(2));
                             c.SetTOTAL_AUTOS(record.get(3));
@@ -93,9 +90,9 @@ public class TR_JA_ACTOS_PROCESALES {
                             c.SetCOMENTARIOS(record.get(16));
                             ad.add(c);
                             CFilas++;
-                            System.out.println("Valores capturados en Bean"+record);
                         }
-                        
+
+                        System.out.println("========Total de filas leídas: " + CFilas);
                         CFilas2=CFilas;
                         if (CFilas > 0) {
                             con = OracleDAOFactoryJA.creaConexion();
@@ -110,7 +107,8 @@ public class TR_JA_ACTOS_PROCESALES {
                             st.registerOutParameter(1, OracleTypes.INTEGER);
                             st.setArray(2, array_to_pass);
                             st.execute();
-                            System.out.println("Se ejecutó paquete integrador actos_procesales, filas: "+CFilas+" \n");
+                            int resultado = st.getInt(1);
+                            System.out.println("Se ejecutó paquete integrador actos_procesales, filas: "+CFilas+", Resultado de ejecución en BD (1=OK):"+ resultado);
                         } else {
                             JOptionPane.showMessageDialog(null, "Pestaña Actos procesales sin registros");
                             
@@ -127,6 +125,7 @@ public class TR_JA_ACTOS_PROCESALES {
                         descriptor = null;
                         if (con != null) {
                             con.close();
+                             System.out.println("Se cierra conexión");
                             con = null;
                         }
                     } catch (SQLException ex) {
@@ -142,3 +141,4 @@ public class TR_JA_ACTOS_PROCESALES {
     }
 }
 
+ 

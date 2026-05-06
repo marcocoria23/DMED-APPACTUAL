@@ -27,6 +27,7 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 import static Pantallas_JA.IntegraJA_TR.directorio;
+import static mx.org.inegi.insert_TR.JA.TR_JA_ASUNTOS_HIDROCARBUROS.CFilas2;
 
 /**
  *
@@ -49,7 +50,9 @@ public class TR_JA_CONCLUSIONES {
         String NuevaRuta = directorio + "Conclusiones.csv";
         conUTF8.Convertir_utf8_EBaseDatos(NuevaRuta);
         NuevaRuta = NuevaRuta.replace(".csv", "UTF8.csv");
-        System.out.println("Leyendo: " + NuevaRuta);
+        System.out.println("==============================");
+        System.out.println("Leyendo CONCLUSIONES: " + NuevaRuta);
+        System.out.println("==============================");
         try ( BufferedInputStream inputStream = new BufferedInputStream(new FileInputStream(NuevaRuta))) {
             byte[] bytes = new byte[3];
             int bytesRead = inputStream.read(bytes);
@@ -66,10 +69,11 @@ public class TR_JA_CONCLUSIONES {
 
                     if (numeroColumnas <= 271) { // Cambiar el valor según el número de columnas esperado
                         for (CSVRecord record : csvParser) {
-                            if (record.get(0).isEmpty()) {
-                                break; // Ignorar registros vacíos
+                           String nombreOrgano = record.get(0).trim();                      
+                            // Saltar encabezados: solo procesar filas que sean tribunales
+                            if (nombreOrgano.isEmpty() || !nombreOrgano.toUpperCase().startsWith("TRIBUNAL")) {
+                                continue;
                             }
-
                             BeanTR_JA_CONCLUSIONES c = new BeanTR_JA_CONCLUSIONES();
                             c.SetNOMBRE_ORGANO_JURIS(record.get(0));
                             c.SetCLAVE_ORGANO(record.get(1));
@@ -344,7 +348,8 @@ public class TR_JA_CONCLUSIONES {
                             ad.add(c);
                             CFilas++;
                         }
-                        CFilas2 = CFilas;
+                          System.out.println("========Total de filas leídas: " + CFilas+"========");
+                        CFilas2=CFilas;
                         if (CFilas > 0) {
                             con = OracleDAOFactoryJA.creaConexion();
                             sd = StructDescriptor.createDescriptor("OBJ_TR_JA_CONCLUSIONES_GEN", con);
@@ -377,6 +382,7 @@ public class TR_JA_CONCLUSIONES {
                         descriptor = null;
                         if (con != null) {
                             con.close();
+                            System.out.println("Se cierra conexión");
                             con = null;
                         }
                     } catch (SQLException ex) {

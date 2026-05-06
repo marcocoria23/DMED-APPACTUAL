@@ -220,6 +220,36 @@ public class QIniciativas {
 }
         return Array;
     }
+         public ArrayList Iniciativas_PuntosDeAcuerdo(String ID_entidad, String Legislatura, String envio) {
+        conexion.Conectar();
+        Array = new ArrayList();
+        sql = "SELECT ID_ENTIDAD,C1_5_ID, P1_5_1 AS ID_ACTUAL, P1_5_12 FROM TR_PLE_MEDS1_5 WHERE  (LOWER(p1_5_12) LIKE\n" +
+"'%prórroga%' OR LOWER(p1_5_12) LIKE '%prorroga%' OR LOWER(p1_5_12) LIKE '%nombramiento%' OR LOWER(p1_5_12) LIKE \n" +
+"'%puntos de acuerdo%' OR LOWER(p1_5_12) LIKE '%punto de acuerdo%' OR LOWER(p1_5_12) LIKE '%acuerdo%' OR LOWER(p1_5_12) \n" +
+"LIKE '%licencia%' OR LOWER(p1_5_12) LIKE '%permiso%' OR LOWER(p1_5_12) LIKE '%pensión%' OR LOWER(p1_5_12) LIKE '%pension%'\n" +
+" OR LOWER(p1_5_12) LIKE '%pensiones%' OR LOWER(p1_5_12) LIKE '%suspensión' OR LOWER(p1_5_12) LIKE '%suspension' OR \n" +
+" LOWER(p1_5_12) LIKE '%suspensiones de cargo%' OR LOWER(p1_5_12) LIKE '%iniciativas de acuerdo%' OR LOWER(p1_5_12) LIKE \n" +
+" '%informes de auditoría%' OR LOWER(p1_5_12) LIKE '%informes de auditoria' OR LOWER(p1_5_12) LIKE '%cuenta pública%' OR\n" +
+" LOWER(p1_5_12) LIKE '%cuenta publica%' OR LOWER(p1_5_12) LIKE '%formulación de pregunta%' OR LOWER(p1_5_12) LIKE\n" +
+" '%formulacion de pregunta%' OR LOWER(p1_5_12) LIKE '%separaciones de cargo%' OR LOWER(p1_5_12) LIKE \n" +
+" '%separacion de cargo%' OR LOWER(p1_5_12) LIKE '%separación de cargo%' OR LOWER(p1_5_12) LIKE '%oficio%' OR\n" +
+" LOWER(p1_5_12) LIKE '%renuncia%' OR LOWER(p1_5_12) LIKE '%convocatoria%' OR LOWER(p1_5_12) LIKE '%actos de dominio%') " +
+               "AND ID_ENTIDAD =" + ID_entidad + "   AND C1_5_ID IN (" + envio + ") ORDER BY P1_5_12";
+        System.out.println(sql);
+        resul = conexion.consultar(sql);
+        try {
+            while (resul.next()) {
+                Array.add(new String[]{             
+                    resul.getString("ID_ENTIDAD"),
+                    resul.getString("ID_ACTUAL")
+                });
+            } 
+            conexion.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(QIniciativas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return Array;
+    }
      public ArrayList Iniciativas_Duplicadas_nombre(String ID_entidad, String Legislatura, String envio) {
         conexion.Conectar();
         Array = new ArrayList();
@@ -228,7 +258,7 @@ public class QIniciativas {
                "INNER JOIN ( SELECT  ID_ENTIDAD, C1_5_ID, P1_5_12, P1_5_11 FROM TR_PLE_MEDS1_5\n" +
                "WHERE ID_ENTIDAD =" + ID_entidad + " AND C1_5_ID IN (" + envio + ")\n" +
                "GROUP BY  ID_ENTIDAD,   C1_5_ID,  P1_5_12,P1_5_11  HAVING COUNT(*) > 1 ) dup\n" +
-               "ON t.ID_ENTIDAD = dup.ID_ENTIDAD  AND t.C1_5_ID = dup.C1_5_ID  AND t.P1_5_12 = dup.P1_5_12  AND t.P1_5_11 = dup.P1_5_11\n" +
+               "ON t.ID_ENTIDAD = dup.ID_ENTIDAD  AND t.C1_5_ID = dup.C1_5_ID  AND t.P1_5_12 = dup.P1_5_12  AND t.P1_5_11 = dup.P1_5_11 \n" +
                "WHERE t.ID_ENTIDAD =" + ID_entidad + "   AND t.C1_5_ID IN (" + envio + ") ORDER BY t.P1_5_12";
         System.out.println(sql);
         resul = conexion.consultar(sql);

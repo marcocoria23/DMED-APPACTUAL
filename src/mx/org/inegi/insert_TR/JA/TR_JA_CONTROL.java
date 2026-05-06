@@ -48,7 +48,9 @@ public class TR_JA_CONTROL {
         String NuevaRuta = directorio+"Control.csv";
         conUTF8.Convertir_utf8_EBaseDatos(NuevaRuta);
         NuevaRuta = NuevaRuta.replace(".csv", "UTF8.csv");
-        System.out.println("Leyendo " + NuevaRuta);
+        System.out.println("==============================");
+        System.out.println("Leyendo CONTROL" + NuevaRuta);
+        System.out.println("==============================");
         try ( BufferedInputStream inputStream = new BufferedInputStream(new FileInputStream(NuevaRuta))) {
             byte[] bytes = new byte[3];
             int bytesRead = inputStream.read(bytes);
@@ -62,48 +64,57 @@ public class TR_JA_CONTROL {
 
                     if (numeroColumnas <= 15) { // Cambiar el valor según el número de columnas esperado
                         for (CSVRecord record : csvParser) {
-                            if (record.get(0).isEmpty()) {
-                                break; // Ignorar registros vacíos
+                             String nombreOrgano = record.get(1).trim();                      
+                            // Saltar encabezados: solo procesar filas que sean tribunales
+                            if (nombreOrgano.isEmpty() || !nombreOrgano.toUpperCase().startsWith("TRIBUNAL")) {
+                                continue;
                             }
-
                             BeanTR_JA_CONTROL c = new BeanTR_JA_CONTROL();
-                            c.SetNOMBRE_ORGANO_JURIS(record.get(0));
-                            c.SetCLAVE_ORGANO(record.get(1));
-                            c.SetDISTRITO(record.get(2));
-                            c.SetSEDE(record.get(3));
-                            c.SetCLAVE_AGEE(record.get(4));
-                            c.SetENTIDAD(record.get(5));
-                            c.SetCLAVE_AGEM(record.get(6));
-                            c.SetMUNICIPIO(record.get(7));
-                            c.SetPERIODO(record.get(8));
-                            c.SetTOTAL_ASUNTOS_INGRES(record.get(9));
-                            c.SetEXPEDIENTES_RECIBIDOS(record.get(10));
-                            c.SetDEMANDAS_INGRESADAS(record.get(11));
-                            c.SetTOTAL_ASUNTOS_TRAMITE(record.get(12));
-                            c.SetTOTAL_RESOLUCIONES(record.get(13));
-                            c.SetTOTAL_ASUNTOS_REACTIVADOS(record.get(14));
+                            c.SetNOMBRE_ORGANO_JURIS(record.get(1));
+                            c.SetCLAVE_ORGANO(record.get(2));
+                            c.SetDISTRITO(record.get(3));
+                            c.SetSEDE(record.get(4));
+                            c.SetCLAVE_AGEE(record.get(5));
+                            c.SetENTIDAD(record.get(6));
+                            c.SetCLAVE_AGEM(record.get(7));
+                            c.SetMUNICIPIO(record.get(8));
+                            c.SetPERIODO(record.get(9));
+                            c.SetTOTAL_ASUNTOS_INGRES(record.get(10));
+                            c.SetEXPEDIENTES_RECIBIDOS(record.get(11));
+                            c.SetDEMANDAS_INGRESADAS(record.get(12));
+                            c.SetTOTAL_ASUNTOS_TRAMITE(record.get(13));
+                            c.SetTOTAL_RESOLUCIONES(record.get(14));
                             ad.add(c);
                             CFilas++;
                         }
+                        System.out.println("========Total de filas leídas: " + CFilas+"========");
                         CFilas2 = CFilas;
                         if (CFilas > 0) {
-                            con = OracleDAOFactoryJA.creaConexion();
-                            sd = StructDescriptor.createDescriptor("OBJ_TR_JA_CONTROL_GEN", con);
-                            structs = new STRUCT[ad.size()];
+                          con = OracleDAOFactoryJA.creaConexion();
+                        sd = StructDescriptor.createDescriptor("OBJ_TR_JA_CONTROL_GEN", con);
+                        structs = new STRUCT[ad.size()];
 
-                            for (int i = 0; i < ad.size(); i++) {
-                                structs[i] = new STRUCT(sd, con, ad.get(i).toArray());
-                            }
+                        for (int i = 0; i < ad.size(); i++) {
+                            structs[i] = new STRUCT(sd, con, ad.get(i).toArray());
+                        }
 
-                            descriptor = ArrayDescriptor.createDescriptor("ARR_OBJ_TR_JA_CONTROL_GEN", con);
-                            array_to_pass = new ARRAY(descriptor, con, structs);
+                        descriptor = ArrayDescriptor.createDescriptor("ARR_OBJ_TR_JA_CONTROL_GEN", con);
+                        array_to_pass = new ARRAY(descriptor, con, structs);
 
-                            st = con.prepareCall("{? = call(PKG_INTEGRADOR_JA.TR_JA_CONTROL_GEN(?))}");
-                            st.registerOutParameter(1, OracleTypes.INTEGER);
-                            st.setArray(2, array_to_pass);
-                            st.execute();
-                            System.out.println("Se ejecutó paquete integrador Control, filas: "+CFilas+" \n");
-                        } else {
+                        st = con.prepareCall("{? = call(PKG_INTEGRADOR_JA.TR_JA_CONTROL_GEN(?))}");
+                        st.registerOutParameter(1, OracleTypes.INTEGER);
+                        st.setArray(2, array_to_pass);
+                        st.setQueryTimeout(60);
+                        st.execute();
+                        int resultado = st.getInt(1);
+                        System.out.println("Resultado paquete Control: " + resultado);
+
+                        con.commit();  // ← AGREGA ESTO antes de cerrar
+                        con.close();   // ← AGREGA ESTO aquí directamente
+                        con = null;
+                        System.out.println("Se cierra conexión Control");
+                        System.out.println("Se ejecutó paquete integrador Control, filas: " + CFilas);
+                    } else {
                             JOptionPane.showMessageDialog(null, "Pestaña Control sin registros");
                         }
                     } else {
@@ -114,22 +125,25 @@ public class TR_JA_CONTROL {
                 } finally {
                     try {
                         array_to_pass = null;
-                        structs = null;
-                        descriptor = null;
-                        if (con != null) {
-                            con.close();
-                            con = null;
-                        }
-                    } catch (SQLException ex) {
-                        throw new SQLException("[actualiza]: " + ex.getLocalizedMessage());
+                    structs = null;
+                    descriptor = null;
+                    if (con != null) {          // ← ya será null, no entra aquí
+                        con.rollback();         // ← rollback si hubo error antes del commit
+                        con.close();
+                        System.out.println("Se cierra conexión (finally)");
+                        con = null;
                     }
+                } catch (SQLException ex) {
+                    throw new SQLException("[actualiza]: " + ex.getLocalizedMessage());
+                }
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "El archivo no está en formato UTF-8");
             }
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }                             System.out.println("fin de la clase");
+
     }
 
 }
