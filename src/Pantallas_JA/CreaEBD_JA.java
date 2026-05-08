@@ -6,6 +6,7 @@ package Pantallas_JA;
 
 import Pantallas_JA.*;
 import java.awt.Color;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -166,7 +167,14 @@ public class CreaEBD_JA extends javax.swing.JFrame {
     private void Button_CrearEBDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_CrearEBDActionPerformed
         JAYear = Field_JAYear.getText();
         int existetabla = 0;
-         CreaTRDinamica_JA crea_TRDinamicaJA = new CreaTRDinamica_JA();
+         CreaTRDinamica_JA crea_TRDinamicaJA = null;
+        try {
+            crea_TRDinamicaJA = new CreaTRDinamica_JA();
+        } catch (SQLException ex) {
+            Logger.getLogger(CreaEBD_JA.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(CreaEBD_JA.class.getName()).log(Level.SEVERE, null, ex);
+        }
         int crear = JOptionPane.showConfirmDialog( // Preguntar si queremos crear tablas dinámicas
                 CreaEBD_JA.this, "¿Está seguro de crear tablas dinámicas JA " + JAYear + "?",
                 "Confirmar creación de estructura", JOptionPane.YES_NO_OPTION);

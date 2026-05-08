@@ -8,6 +8,7 @@ import Convertir_CSV.Convertir_CSV;
 import java.awt.Color;
 import java.awt.FileDialog;
 import java.io.File;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -245,6 +246,8 @@ public class IntegraJA_TR extends javax.swing.JFrame {
             elimina.EliminaBD();
         } catch (SQLException ex) {
             Logger.getLogger(IntegraJA_TR.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(IntegraJA_TR.class.getName()).log(Level.SEVERE, null, ex);
         }
         Convertir_CSV convert = new Convertir_CSV();       
         new Thread(() -> {
@@ -298,6 +301,8 @@ public class IntegraJA_TR extends javax.swing.JFrame {
                     }
                 }
             } catch (Exception ex) {
+                  ex.printStackTrace();
+                  JOptionPane.showMessageDialog(null,"ERROR:\n" + ex.getMessage() );
             }
         }).start();
     }//GEN-LAST:event_Button_IntegrarActionPerformed

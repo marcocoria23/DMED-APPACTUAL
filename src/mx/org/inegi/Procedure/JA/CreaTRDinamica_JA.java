@@ -8,6 +8,7 @@ package mx.org.inegi.Procedure.JA;
 import java.sql.CallableStatement;
 import mx.org.inegi.conexion.JA.OracleDAOFactoryJA;
 import static Pantallas_JA.CreaEBD_JA.JAYear;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,9 +21,13 @@ import javax.swing.JOptionPane;
  */
 public class CreaTRDinamica_JA {
 
-    Connection conn = OracleDAOFactoryJA.creaConexion();
+    Connection conn;
     CallableStatement callst;
     ResultSet rslset;
+
+    public CreaTRDinamica_JA() throws SQLException, IOException {
+        this.conn = OracleDAOFactoryJA.creaConexion();
+    }
 
     public boolean CreaTablas() throws SQLException {
         try {

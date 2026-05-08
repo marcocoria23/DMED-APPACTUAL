@@ -31,7 +31,6 @@ public class BeanTR_JA_CONTROL extends Bean implements SQLData {
     private String DEMANDAS_INGRESADAS;
     private String TOTAL_ASUNTOS_TRAMITE;
     private String TOTAL_RESOLUCIONES;
-    private String TOTAL_ASUNTOS_REACTIVADOS;
 
     public String GetNOMBRE_ORGANO_JURIS() {
         return NOMBRE_ORGANO_JURIS;
@@ -145,14 +144,7 @@ public class BeanTR_JA_CONTROL extends Bean implements SQLData {
         this.TOTAL_RESOLUCIONES = TOTAL_RESOLUCIONES;
     }
 
-    public String GetTOTAL_ASUNTOS_REACTIVADOS() {
-        return TOTAL_ASUNTOS_REACTIVADOS;
-    }
-
-    public void SetTOTAL_ASUNTOS_REACTIVADOS(String TOTAL_ASUNTOS_REACTIVADOS) {
-        this.TOTAL_ASUNTOS_REACTIVADOS = TOTAL_ASUNTOS_REACTIVADOS;
-    }
-
+  
     @Override
     public String getSQLTypeName() throws SQLException {
         return SQLTypeName;
@@ -190,8 +182,7 @@ public class BeanTR_JA_CONTROL extends Bean implements SQLData {
             GetEXPEDIENTES_RECIBIDOS(),
             GetDEMANDAS_INGRESADAS(),
             GetTOTAL_ASUNTOS_TRAMITE(),
-            GetTOTAL_RESOLUCIONES(),
-            GetTOTAL_ASUNTOS_REACTIVADOS()
+            GetTOTAL_RESOLUCIONES()
         };
         return array;
     }

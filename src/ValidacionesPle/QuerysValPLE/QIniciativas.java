@@ -926,8 +926,65 @@ public class QIniciativas {
         }
         return Array;
     }
-
-//Se deben de capturar los campos P1_5_11-K(fecha_ingreso_iniciativa_oficialia_partes),P1_5_12-L(nombre_iniciativa),P1_5_13-M(fecha_sesion_presentacion_iniciativa),P1_5_14-N(tipo_iniciativa),P1_5_16-P(tipo_promovente_iniciativa),P1_5_73-BU(cond_adhesion_iniciativa)  debido a que en la columna cond_modificacion_informacion_ingreso_periodo (P1_5_7) NO se capturo NO '2'
+    
+     // El campo tipo_promovente_iniciativa (P-P1_5_16) no debe estar vacío; favor de seleccionar un valor de la lista desplegable, incluso “No identificado”.
+    public ArrayList TIPO_PROMOVENTE_NN(String ID_entidad, String Legislatura, String Envio) {
+        conexion.Conectar();
+        Array = new ArrayList();
+        sql = "SELECT  ID_ENTIDAD,\n" +
+"        C1_5_ID AS ENVIO,\n" +
+"        P1_5_1 AS ID_INICIATIVA,\n" +
+"        P1_5_2 AS cond_presentacion_iniciativa_legislatura_actual,\n" +
+"        P1_5_3 AS cond_presentacion_iniciativa_periodo,\n" +
+"        P1_5_7 AS cond_modificacion_informacion_ingreso_periodo,\n" +
+"        P1_5_16 AS tipo_promovente_iniciativa\n" +
+"FROM TR_PLE_MEDS1_5 WHERE P1_5_16 IS NULL AND (P1_5_7 <> 2 OR P1_5_7 IS NULL)\n" +
+"AND ID_ENTIDAD=" + ID_entidad + " AND Legislatura=" + Legislatura + " AND C1_5_ID='" + Envio + "'";
+        System.out.println(sql);
+        resul = conexion.consultar(sql);
+        try {
+            while (resul.next()) {
+                Array.add(new String[]{
+                    resul.getString("ID_ENTIDAD"),
+                    resul.getString("ID_INICIATIVA")
+                });
+            }
+            conexion.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(QComisiones_Legislativas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return Array;
+    }
+       
+    
+    // El campo tipo_iniciativa (N-P1_5_14) no debe estar vacío; favor de seleccionar un valor de la lista desplegable, incluso “No identificado”.
+    public ArrayList TIPO_INICIATIVA_NN(String ID_entidad, String Legislatura, String Envio) {
+        conexion.Conectar();
+        Array = new ArrayList();
+        sql = "select  ID_ENTIDAD, C1_5_ID AS ENVIO, p1_5_1 as ID_INICIATIVA, \n" +
+"P1_5_2 AS cond_presentacion_iniciativa_legislatura_actual,\n" +
+"P1_5_3 AS cond_presentacion_iniciativa_periodo,\n" +
+"P1_5_7 AS cond_modificacion_informacion_ingreso_periodo,\n" +
+"P1_5_14 AS tipo_iniciativa\n" +
+"FROM TR_PLE_MEDS1_5 WHERE P1_5_2=1 AND P1_5_3=1 AND P1_5_14 IS NULL \n" +
+"AND ID_ENTIDAD=" + ID_entidad + " AND Legislatura=" + Legislatura + " AND C1_5_ID='" + Envio + "'";
+        System.out.println(sql);
+        resul = conexion.consultar(sql);
+        try {
+            while (resul.next()) {
+                Array.add(new String[]{
+                    resul.getString("ID_ENTIDAD"),
+                    resul.getString("ID_INICIATIVA")
+                });
+            }
+            conexion.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(QComisiones_Legislativas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return Array;
+    }
+    
+//Se deben de capturar los campos P1_5_11-K(fecha_ingreso_iniciativa_oficialia_partes),P1_5_12-L(nombre_iniciativa),P1_5_13-M(fecha_sesion_presentacion_iniciativa),P1_5_14-N(tipo_iniciativa),P1_5_16-P(tipo_promovente_iniciativa),P1_5_73-BU(cond_adhesion_iniciativa)  debido a que en la columna cond_modificacion_informacion_ingreso_periodo (P1_5_7) se capturó Sí '2'
     public ArrayList NDCfecha_ingreso_iniciativa_oficialia_partes(String ID_entidad, String Legislatura, String Envio) {
         conexion.Conectar();
         Array = new ArrayList();

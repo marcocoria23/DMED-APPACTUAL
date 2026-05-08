@@ -28,6 +28,7 @@ import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 import static Pantallas_JA.IntegraJA_TR.directorio;
 
+
 /**
  *
  * @author ANDREA.HERNANDEZL
@@ -90,31 +91,42 @@ public class TR_JA_CONTROL {
                         System.out.println("========Total de filas leídas: " + CFilas+"========");
                         CFilas2 = CFilas;
                         if (CFilas > 0) {
-                          con = OracleDAOFactoryJA.creaConexion();
-                        sd = StructDescriptor.createDescriptor("OBJ_TR_JA_CONTROL_GEN", con);
-                        structs = new STRUCT[ad.size()];
+                            try {
+                                con = OracleDAOFactoryJA.creaConexion();  // ← SOLO UNA VEZ
+                            } catch (SQLException ex) {
+                                JOptionPane.showMessageDialog(null,
+                                    "Error al conectar a la base de datos:\n" + ex.getMessage());
+                                return;
+                            }
 
-                        for (int i = 0; i < ad.size(); i++) {
-                            structs[i] = new STRUCT(sd, con, ad.get(i).toArray());
-                        }
+                            // A partir de aquí ya tienes 'con' válido
+                            sd = StructDescriptor.createDescriptor("OBJ_TR_JA_CONTROL_GEN", con);
+                            structs = new STRUCT[ad.size()];
 
-                        descriptor = ArrayDescriptor.createDescriptor("ARR_OBJ_TR_JA_CONTROL_GEN", con);
-                        array_to_pass = new ARRAY(descriptor, con, structs);
+                            for (int i = 0; i < ad.size(); i++) {
+                                structs[i] = new STRUCT(sd, con, ad.get(i).toArray());
+                            }
 
-                        st = con.prepareCall("{? = call(PKG_INTEGRADOR_JA.TR_JA_CONTROL_GEN(?))}");
-                        st.registerOutParameter(1, OracleTypes.INTEGER);
-                        st.setArray(2, array_to_pass);
-                        st.setQueryTimeout(60);
-                        st.execute();
-                        int resultado = st.getInt(1);
-                        System.out.println("Resultado paquete Control: " + resultado);
+                            descriptor = ArrayDescriptor.createDescriptor("ARR_OBJ_TR_JA_CONTROL_GEN", con);
+                            array_to_pass = new ARRAY(descriptor, con, structs);
 
-                        con.commit();  // ← AGREGA ESTO antes de cerrar
-                        con.close();   // ← AGREGA ESTO aquí directamente
-                        con = null;
-                        System.out.println("Se cierra conexión Control");
-                        System.out.println("Se ejecutó paquete integrador Control, filas: " + CFilas);
-                    } else {
+                            st = con.prepareCall("{? = call(PKG_INTEGRADOR_JA.TR_JA_CONTROL_GEN(?))}");
+                            st.registerOutParameter(1, OracleTypes.INTEGER);
+                            st.setArray(2, array_to_pass);
+                            st.setQueryTimeout(60);
+                            System.out.println("ANTES DE EJECUTAR PACKAGE...");
+                            st.execute();
+                            System.out.println("DESPUÉS DE EJECUTAR PACKAGE...");
+                            int resultado = st.getInt(1);
+                            System.out.println("Resultado paquete Control: " + resultado);
+
+                            con.commit();
+                            con.close();
+                            con = null;
+                            System.out.println("Se cierra conexión Control");
+                            System.out.println("Se ejecutó paquete integrador Control, filas: " + CFilas);
+
+                        } else {
                             JOptionPane.showMessageDialog(null, "Pestaña Control sin registros");
                         }
                     } else {
@@ -127,11 +139,11 @@ public class TR_JA_CONTROL {
                         array_to_pass = null;
                     structs = null;
                     descriptor = null;
-                    if (con != null) {          // ← ya será null, no entra aquí
-                        con.rollback();         // ← rollback si hubo error antes del commit
-                        con.close();
-                        System.out.println("Se cierra conexión (finally)");
-                        con = null;
+                    if (con != null) {                          
+                    if (!con.getAutoCommit()) {
+                        con.rollback();
+                    }
+                     con.close();
                     }
                 } catch (SQLException ex) {
                     throw new SQLException("[actualiza]: " + ex.getLocalizedMessage());
@@ -142,7 +154,7 @@ public class TR_JA_CONTROL {
             }
         } catch (IOException e) {
             e.printStackTrace();
-        }                             System.out.println("fin de la clase");
+        } System.out.println("fin de la clase");
 
     }
 

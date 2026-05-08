@@ -4,6 +4,7 @@
  */
 package mx.org.inegi.Procedure.JA;
 
+import java.io.IOException;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -16,7 +17,7 @@ import mx.org.inegi.conexion.JA.OracleDAOFactoryJA;
  */
 public class EliminaBDJATRGEN {
     
-    public void EliminaBD() throws SQLException {
+    public void EliminaBD() throws SQLException, IOException {
         CallableStatement st;
         Connection con = null;
         con = OracleDAOFactoryJA.creaConexion();
