@@ -65,7 +65,6 @@ public class IntegraJA_TR extends javax.swing.JFrame {
         Progressbar_Cargando = new javax.swing.JProgressBar();
         Label_Progressbar = new javax.swing.JLabel();
         ErroresInsert = new javax.swing.JButton();
-        AñoField = new javax.swing.JTextField();
 
         setName("Frame_JA_IntegraTR"); // NOI18N
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -138,8 +137,6 @@ public class IntegraJA_TR extends javax.swing.JFrame {
             }
         });
 
-        AñoField.setText(" ");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -177,10 +174,7 @@ public class IntegraJA_TR extends javax.swing.JFrame {
                                     .addComponent(Progressbar_Cargando, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(Label_Progressbar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(Button_Integrar))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(AñoField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))
+                                .addComponent(Button_Integrar)))
                         .addContainerGap())))
         );
         layout.setVerticalGroup(
@@ -198,9 +192,7 @@ public class IntegraJA_TR extends javax.swing.JFrame {
                 .addComponent(Button_Nota)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(ErroresInsert)
-                .addGap(12, 12, 12)
-                .addComponent(AñoField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(RutaArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Label_RutaArchivo))
@@ -257,7 +249,7 @@ public class IntegraJA_TR extends javax.swing.JFrame {
                     if (!RutaArchivo.getText().equals("")) {
                         muestra();
                         Button_Integrar.setEnabled(false);
-                        convert.Convierte(RutaAr); //convierte archivo XLS a CSV                        
+                      //  convert.Convierte(RutaAr); //convierte archivo XLS a CSV                        
                         Progressbar_Cargando.setValue(5);
                         Label_Progressbar.setText("Insertando... TR_JA_CONTROL_GEN");
                         CONT.TR_JA_CONTROL();
@@ -392,7 +384,6 @@ public class IntegraJA_TR extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField AñoField;
     private javax.swing.JButton Button_Integrar;
     private javax.swing.JButton Button_Nota;
     private javax.swing.JButton Button_Ruta;

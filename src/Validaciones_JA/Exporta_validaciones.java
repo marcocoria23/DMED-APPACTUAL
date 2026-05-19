@@ -12,19 +12,15 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JProgressBar;
 import javax.swing.border.Border;
-import mx.org.inegi.conexion.JA.DaoConexionJA;
 import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.FillPatternType;
@@ -48,8 +44,6 @@ public class Exporta_validaciones {
     
     
       ArrayList<String[]> ArrayResult;
-    String[] parts;
-    String parts0 = "", parts1 = "", parts2 = "", partsfechas = "";
     JFrame f = new JFrame("Progreso Exporta JA.xlsx");
 
     public void ValidacionJA() throws IOException, SQLException {
@@ -185,6 +179,17 @@ public class Exporta_validaciones {
 
 
         Despliega_Control(libro, hojaControl, estiloCeldaConteos, ResulestiloCeldaConteos, estiloCeldabordes0, progressBar);
+        
+        
+        
+        XSSFSheet hojaObs = libro.createSheet("OBSERVACIONES JA");
+        hojaObs.setColumnWidth(0, 7000);   // TABLA
+        hojaObs.setColumnWidth(1, 12000);  // NOMBRE_ORGANO_JURIS
+        hojaObs.setColumnWidth(2, 4500);   // CLAVE_ORGANO
+        hojaObs.setColumnWidth(3, 4000);   // PERIODO
+        hojaObs.setColumnWidth(4, 8000);   // CAMPO
+        hojaObs.setColumnWidth(5, 20000);  // OBSERVACIÓN
+        Despliega_Observaciones(libro, hojaObs, estiloCelda0, estiloCelda1, estiloCeldabordes0, progressBar);
         SaveFileTo(libro, progressBar, f, dtf);
 
     }
@@ -206,7 +211,7 @@ public class Exporta_validaciones {
         hojaNC.addMergedRegion(new CellRangeAddress(0, 0, 0, 2));
         celda00.setCellValue(texto00);
         row00.setHeight((short) 600);
-        Valida_Control VC = new Valida_Control();
+        Valida_JA VC = new Valida_JA();
 
         ArrayResult = VC.Control_Ingreso();
         if (ArrayResult.size() > 0) {
@@ -674,6 +679,138 @@ public class Exporta_validaciones {
         
       }
     
+      public void Despliega_Observaciones(XSSFWorkbook libro, XSSFSheet hojaObs,
+            XSSFCellStyle estiloTitulo, XSSFCellStyle estiloEncabezado,
+            XSSFCellStyle estiloDatos, JProgressBar progressBar) throws SQLException {
+        Border border = BorderFactory.createTitledBorder("Cargando...Observaciones JA");
+        progressBar.setBorder(border);
+        progressBar.setValue(10);
+        Valida_JA VC = new Valida_JA();
+        // ── Fila 0: título principal combinado A-F ──────────────────────────
+        XSSFRow rowTitulo = hojaObs.createRow(0);
+        rowTitulo.setHeight((short) 700);
+        XSSFCell celdaTitulo = rowTitulo.createCell(0);
+        celdaTitulo.setCellStyle(estiloTitulo);
+        celdaTitulo.setCellType(CellType.STRING);
+        celdaTitulo.setCellValue(new XSSFRichTextString("OBSERVACIONES JA"));
+        hojaObs.addMergedRegion(new CellRangeAddress(0, 0, 0, 5));
+        // ── Fila 1: encabezados de columnas ────────────────────────────────
+        String[] headers = {"TABLA", "NOMBRE_ORGANO_JURIS", "CLAVE_ORGANO", "PERIODO", "CAMPO", "OBSERVACIÓN"};
+        XSSFRow rowHeaders = hojaObs.createRow(1);
+        rowHeaders.setHeight((short) 600);
+        for (int col = 0; col < headers.length; col++) {
+            XSSFCell cell = rowHeaders.createCell(col);
+            cell.setCellStyle(estiloEncabezado);
+            cell.setCellType(CellType.STRING);
+            cell.setCellValue(new XSSFRichTextString(headers[col]));
+        }
+        int filaActual = 2; // empezamos a escribir datos desde la fila 3 (índice 2)
+        // ── Estructura auxiliar: nombre tabla → método NULL + mensaje Control ─
+        // Cada entrada: { nombreTabla, tablaBD, mensajeControlClave }
+        // Para filas de tipo NULL (columna vacía):  OBSERVACIÓN = "La columna se encuentra vacía. Favor de completar con dato válido."
+        // Para filas de tipo Control (clave no existe): OBSERVACIÓN = mensajeControlClave
+        // ── 1. NULOS POR TABLA ──────────────────────────────────────────────
+        // Los métodos NULL_* devuelven: [NOMBRE_ORGANO_JURIS, CLAVE_ORGANO, PERIODO, CAMPO_VACIO]
+        // 1a. ACTOS_PROCESALES
+        filaActual = escribirFilasNull(VC.NULL_ACTOS_PROCESALES(), hojaObs, estiloDatos, filaActual,
+                "ACTOS_PROCESALES", "La columna se encuentra vacía. Favor de completar con dato válido.");
+        progressBar.setValue(20);
+        // 1b. CONCLUSIONES
+        filaActual = escribirFilasNull(VC.NULL_Conclusiones(), hojaObs, estiloDatos, filaActual,
+                "CONCLUSIONES", "La columna se encuentra vacía. Favor de completar con dato válido.");
+        progressBar.setValue(30);
+        // 1c. TRAMITE
+        filaActual = escribirFilasNull(VC.NULL_TRAMITE(), hojaObs, estiloDatos, filaActual,
+                "TR_JA_TRAMITE_GEN", "La columna se encuentra vacía. Favor de completar con dato válido.");
+        progressBar.setValue(40);
+        // 1d. INGRESOS
+        filaActual = escribirFilasNull(VC.NULL_INGRESOS(), hojaObs, estiloDatos, filaActual,
+                "TR_JA_INGRESOS_GEN", "La columna se encuentra vacía. Favor de completar con dato válido.");
+        progressBar.setValue(50);
+        // 1e. ASUNTOS HIDROCARBUROS
+        filaActual = escribirFilasNull(VC.ASUNTOS_HIDROCARBUROS(), hojaObs, estiloDatos, filaActual,
+                "TR_JA_ASUNTOS_HIDROCARBUROS_GEN", "La columna se encuentra vacía. Favor de completar con dato válido.");
+        progressBar.setValue(60);
+        // ── 2. ERRORES DE CLAVE_ORGANO (Control_*) ─────────────────────────
+        // Los métodos Control_* devuelven: [CLAVE_ORGANO, COMENTARIOS]
+        // Para estas filas: NOMBRE_ORGANO_JURIS = "" (no disponible en el query),
+        // CAMPO = "CLAVE_ORGANO",
+        // OBSERVACIÓN = "Registro Clave_organo en tabla <TABLA> no existe en tabla TR_JA_CONTROL_GEN"
+        filaActual = escribirFilasControl(VC.Control_Ingreso(), hojaObs, estiloDatos, filaActual,
+                "TR_JA_INGRESOS_GEN",
+                "Registro Clave_organo en tabla TR_JA_INGRESOS_GEN no existe en tabla TR_JA_CONTROL_GEN");
+        progressBar.setValue(70);
+        filaActual = escribirFilasControl(VC.Control_Tramite(), hojaObs, estiloDatos, filaActual,
+                "TR_JA_TRAMITE_GEN",
+                "Registro Clave_organo en tabla TR_JA_TRAMITE_GEN no existe en tabla TR_JA_CONTROL_GEN");
+        filaActual = escribirFilasControl(VC.Control_Conclusiones(), hojaObs, estiloDatos, filaActual,
+                "TR_JA_CONCLUSIONES_GEN",
+                "Registro Clave_organo en tabla TR_JA_CONCLUSIONES_GEN no existe en tabla TR_JA_CONTROL_GEN");
+        filaActual = escribirFilasControl(VC.Control_Actos_Procesales(), hojaObs, estiloDatos, filaActual,
+                "ACTOS_PROCESALES",
+                "Registro Clave_organo en tabla TR_JA_ACTOS_PROCESALES_GEN no existe en tabla TR_JA_CONTROL_GEN");
+        progressBar.setValue(80);
+        filaActual = escribirFilasControl(VC.Control_Cumplim_Ejecutorias(), hojaObs, estiloDatos, filaActual,
+                "TR_JA_CUMPLIM_EJECUTORIAS",
+                "Registro Clave_organo en tabla TR_JA_CUMPLIM_EJECUTORIAS_GEN no existe en tabla TR_JA_CONTROL_GEN");
+        filaActual = escribirFilasControl(VC.Control_Exhorto(), hojaObs, estiloDatos, filaActual,
+                "TR_JA_EXHORTOS_DESPACHOS_GEN",
+                "Registro Clave_organo en tabla TR_JA_EXHORTOS_DESPACHOS_GEN no existe en tabla TR_JA_CONTROL_GEN");
+        filaActual = escribirFilasControl(VC.Control_Asuntos_Hidrocarburos(), hojaObs, estiloDatos, filaActual,
+                "TR_JA_ASUNTOS_HIDROCARBUROS_GEN",
+                "Registro Clave_organo en tabla TR_JA_ASUNTOS_HIDROCARBUROS_GEN no existe en tabla TR_JA_CONTROL_GEN");
+        progressBar.setValue(90);
+    }
+    // ── Helper: escribe una fila por cada registro NULL ──────────────────────
+    // datos: [NOMBRE_ORGANO_JURIS, CLAVE_ORGANO, PERIODO, CAMPO_VACIO]
+    private int escribirFilasNull(ArrayList<String[]> datos, XSSFSheet hoja,
+            XSSFCellStyle estilo, int filaInicio, String nombreTabla, String observacion) {
+        int fila = filaInicio;
+        for (String[] registro : datos) {
+            String nombreOrgano = registro[0] != null ? registro[0] : "";
+            String claveOrgano  = registro[1] != null ? registro[1] : "";
+            String periodo      = registro[2] != null ? registro[2] : "";
+            String campo        = registro[3] != null ? registro[3] : "";
+            XSSFRow row = hoja.createRow(fila++);
+            row.setHeight((short) 400);
+            crearCelda(row, 0, nombreTabla, estilo);
+            crearCelda(row, 1, nombreOrgano, estilo);
+            crearCelda(row, 2, claveOrgano, estilo);
+            crearCelda(row, 3, periodo, estilo);
+            crearCelda(row, 4, campo, estilo);
+            crearCelda(row, 5, observacion, estilo);
+        }
+        return fila;
+    }
+    // ── Helper: escribe una fila por cada error de CLAVE_ORGANO ─────────────
+    // datos: [CLAVE_ORGANO, COMENTARIOS]  (resultado de Control_*)
+    private int escribirFilasControl(ArrayList<String[]> datos, XSSFSheet hoja,
+            XSSFCellStyle estilo, int filaInicio, String nombreTabla, String observacion) {
+        int fila = filaInicio;
+        for (String[] registro : datos) {
+            // Parsea el array String[] que viene de Arrays.toString(...)
+            String txtD = Arrays.toString(registro)
+                    .replace("[", "").replace("]", "").replace(" 00:00:00.0", "");
+            String[] parts = txtD.split(",");
+            String claveOrgano = parts.length > 0 ? parts[0].trim() : "";
+           XSSFRow row = hoja.createRow(fila++);
+            row.setHeight((short) 400);
+            crearCelda(row, 0, nombreTabla, estilo);
+            crearCelda(row, 1, "", estilo);          // NOMBRE_ORGANO_JURIS no disponible en Control_*
+            crearCelda(row, 2, claveOrgano, estilo);
+            crearCelda(row, 3, "", estilo);          // PERIODO no disponible en Control_*
+            crearCelda(row, 4, "CLAVE_ORGANO", estilo);
+            crearCelda(row, 5, observacion, estilo);
+        }
+        return fila;
+    }
+    // ── Helper: crea una celda con texto y estilo ────────────────────────────
+    private void crearCelda(XSSFRow row, int col, String valor, XSSFCellStyle estilo) {
+        XSSFCell cell = row.createCell(col);
+        cell.setCellStyle(estilo);
+        cell.setCellType(CellType.STRING);
+        cell.setCellValue(new XSSFRichTextString(valor != null ? valor : ""));
+    }
      public static void SaveFileTo(XSSFWorkbook libro, JProgressBar progressBar, JFrame frame, DateTimeFormatter dtf) throws FileNotFoundException, IOException {
 
         DataOutputStream h = null;

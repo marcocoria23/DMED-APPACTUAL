@@ -4,136 +4,158 @@
  */
 package mx.org.inegi.insert_TR.JA;
 
-import Convertir_UTF8.Conver_Utf8;
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
+import static Pantallas_JA.IntegraJA_TR.RutaAr;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
-import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import mx.org.inegi.bean.JA_TR.BeanTR_JA_EXHORTOS_DESPACHOS;
 import mx.org.inegi.conexion.JA.OracleDAOFactoryJA;
-import oracle.jdbc.OracleTypes;
 import oracle.sql.ARRAY;
 import oracle.sql.ArrayDescriptor;
 import oracle.sql.STRUCT;
 import oracle.sql.StructDescriptor;
-import org.apache.commons.csv.CSVFormat;
-import org.apache.commons.csv.CSVParser;
-import org.apache.commons.csv.CSVRecord;
-import static Pantallas_JA.IntegraJA_TR.directorio;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.DataFormatter;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import java.sql.CallableStatement;
 
 /**
  *
  * @author ANDREA.HERNANDEZL
  */
 public class TR_JA_EXHORTOS_DESPACHOS {
-    public static int CFilas2 =0;
+    
+    public static int CFilas2 = 0;
 
-    public void TR_JA_EXHORTOS_DESPACHOS() throws Exception {
+public void TR_JA_EXHORTOS_DESPACHOS() throws Exception {
 
-        ARRAY array_to_pass;
-        CallableStatement st;
-        Connection con = null;
-        STRUCT[] structs;
-        StructDescriptor sd;
-        ArrayDescriptor descriptor;
-        int CFilas = 0;
-        Conver_Utf8 conUTF8 = new Conver_Utf8();
-        String NuevaRuta = directorio+"Exhortos_despachos.csv";
-        conUTF8.Convertir_utf8_EBaseDatos(NuevaRuta);
-        NuevaRuta = NuevaRuta.replace(".csv", "UTF8.csv");
-        System.out.println("==============================");
-        System.out.println("Leyendo EXHORTOS DESPACHOS: " + NuevaRuta);
-        System.out.println("==============================");
-        try ( BufferedInputStream inputStream = new BufferedInputStream(new FileInputStream(NuevaRuta))) {
-            byte[] bytes = new byte[3];
-            int bytesRead = inputStream.read(bytes);
-            if (bytesRead >= 3 && bytes[0] == (byte) 0xEF && bytes[1] == (byte) 0xBB && bytes[2] == (byte) 0xBF) {
-                try ( BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(NuevaRuta), StandardCharsets.UTF_8));  CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT)) {
-                    ArrayList<BeanTR_JA_EXHORTOS_DESPACHOS> ad = new ArrayList<>();
-                    int numeroColumnas = 0;
-                    CSVRecord firstRecord = csvParser.iterator().next();
-                    numeroColumnas = firstRecord.size();
-                    System.out.println("Número de columnas: " + numeroColumnas+ " ---->if (numeroColumnas <= 15) continua... ");
-                    if (numeroColumnas <= 15) { // Cambiar el valor según el número de columnas esperado
-                        for (CSVRecord record : csvParser) {
-                            String nombreOrgano = record.get(0).trim();                      
-                            // Saltar encabezados: solo procesar filas que sean tribunales
-                            if (nombreOrgano.isEmpty() || !nombreOrgano.toUpperCase().startsWith("TRIBUNAL")) {
-                                continue;
-                            }
+    Connection con = null;
+    int CFilas = 0;
 
-                            BeanTR_JA_EXHORTOS_DESPACHOS c = new BeanTR_JA_EXHORTOS_DESPACHOS();
-                            c.SetNOMBRE_ORGANO_JURIS(record.get(0));
-                            c.SetCLAVE_ORGANO(record.get(1));
-                            c.SetPERIODO(record.get(2));
-                            c.SetEXH_RECIBIDOS(record.get(3));
-                            c.SetEXH_DILIGENCIADOS(record.get(4));
-                            c.SetEXH_FORMULADOS(record.get(5));
-                            c.SetEXH_DILIG_RECIBIDOS(record.get(6));
-                            c.SetDESPACH_RECIB_NOTI(record.get(7));
-                            c.SetDESPACH_RECIB_EJEC(record.get(8));
-                            c.SetDESPACH_RECIB_OTRAS(record.get(9));
-                            c.SetDESPACH_DILIG_NOTI(record.get(10));
-                            c.SetDESPACH_DILIG_EJEC(record.get(11));
-                            c.SetDESPACH_DILIG_OTRAS(record.get(12));
-                            c.SetCOMENTARIOS(record.get(13));
-                            ad.add(c);
-                            CFilas++;
-                        }
-                        System.out.println("========Total de filas leídas: " + CFilas+"========");  
-                        CFilas2 = CFilas;
-                        if (CFilas > 0) {
-                            con = OracleDAOFactoryJA.creaConexion();
-                            sd = StructDescriptor.createDescriptor("OBJ_TR_JA_EXHORTOS_DESPACHOS_GEN", con);
-                            structs = new STRUCT[ad.size()];
+    System.out.println("==============================");
+    System.out.println("Leyendo EXHORTOS_DESPACHOS: " + RutaAr);
+    System.out.println("==============================");
 
-                            for (int i = 0; i < ad.size(); i++) {
-                                structs[i] = new STRUCT(sd, con, ad.get(i).toArray());
-                            }
+    ArrayList<BeanTR_JA_EXHORTOS_DESPACHOS> ad = new ArrayList<>();
+    DataFormatter formatter = new DataFormatter();
 
-                            descriptor = ArrayDescriptor.createDescriptor("ARR_OBJ_TR_JA_EXHORTOS_DESPACHOS_GEN", con);
-                            array_to_pass = new ARRAY(descriptor, con, structs);
-
-                            st = con.prepareCall("{? = call(PKG_INTEGRADOR_JA.TR_JA_EXHORTOS_DESPACHOS_GEN(?))}");
-                            st.registerOutParameter(1, OracleTypes.INTEGER);
-                            st.setArray(2, array_to_pass);
-                            st.execute();
-                            System.out.println("Se ejecutó paquete integrador Exhortos_despachos, filas: "+CFilas+" \n");
-                        } else {
-                            JOptionPane.showMessageDialog(null, "Pestaña Exhortos_despachos sin registros");
-                        }
-                    } else {
-                        JOptionPane.showMessageDialog(null, "El número de columnas en la pestaña Exhortos_despachos no es el esperado.");
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } finally {
-                    try {
-                        array_to_pass = null;
-                        structs = null;
-                        descriptor = null;
-                        if (con != null) {
-                            con.close();
-                            System.out.println("Se cierra conexión");
-                            con = null;
-                        }
-                    } catch (SQLException ex) {
-                        throw new SQLException("[actualiza]: " + ex.getLocalizedMessage());
-                    }
-                }
-            } else {
-                JOptionPane.showMessageDialog(null, "El archivo no está en formato UTF-8");
+    try (FileInputStream fis = new FileInputStream(RutaAr);
+         Workbook workbook = new XSSFWorkbook(fis)) {
+        con = OracleDAOFactoryJA.creaConexion();
+        Sheet sheet = workbook.getSheet("Exhortos_despachos");
+        if (sheet == null) {
+            JOptionPane.showMessageDialog( null, "No existe la hoja EXHORTOS_DESPACHOS");
+            return;
+        }
+        boolean datosEncontrados = false;
+        for (Row row : sheet) {Cell nombreCell = row.getCell(0);if (nombreCell == null) {
+                continue;
+            }String nombreOrgano = formatter.formatCellValue(nombreCell).trim();// Empezar cuando encuentre "TRIBUNAL"
+            if (!datosEncontrados && nombreOrgano.toUpperCase().startsWith("TRIBUNAL")) {   
+                datosEncontrados = true;    
+                System.out.println( "Datos encontrados. Iniciando lectura desde fila: " + row.getRowNum());
+            }// Si aún no encuentra TRIBUNAL
+            if (!datosEncontrados) {
+                continue;
+            }// Saltar filas vacías
+            if (nombreOrgano.isEmpty() || !nombreOrgano.toUpperCase().startsWith("TRIBUNAL")) {    
+                continue;
             }
-        } catch (IOException e) {
+            BeanTR_JA_EXHORTOS_DESPACHOS c = new BeanTR_JA_EXHORTOS_DESPACHOS();
+            c.SetNOMBRE_ORGANO_JURIS( formatter.formatCellValue(row.getCell(0)));
+            c.SetCLAVE_ORGANO(  formatter.formatCellValue(row.getCell(1)));
+            c.SetPERIODO( formatter.formatCellValue(row.getCell(2)));
+            c.SetEXH_RECIBIDOS( formatter.formatCellValue(row.getCell(3)));
+            c.SetEXH_DILIGENCIADOS(  formatter.formatCellValue(row.getCell(4)));
+            c.SetEXH_FORMULADOS( formatter.formatCellValue(row.getCell(5)));
+            c.SetEXH_DILIG_RECIBIDOS( formatter.formatCellValue(row.getCell(6)));
+            c.SetDESPACH_RECIB_NOTI( formatter.formatCellValue(row.getCell(7)));
+            c.SetDESPACH_RECIB_EJEC( formatter.formatCellValue(row.getCell(8)));
+            c.SetDESPACH_RECIB_OTRAS( formatter.formatCellValue(row.getCell(9)));
+            c.SetDESPACH_DILIG_NOTI( formatter.formatCellValue(row.getCell(10)));
+            c.SetDESPACH_DILIG_EJEC( formatter.formatCellValue(row.getCell(11)));
+            c.SetDESPACH_DILIG_OTRAS( formatter.formatCellValue(row.getCell(12)));
+            c.SetCOMENTARIOS( formatter.formatCellValue(row.getCell(13)));
+            ad.add(c);
+            CFilas++;
+        }
+
+        System.out.println( "========Total de filas leídas: " + CFilas + "========");
+        CFilas2 = CFilas;
+
+        if (!ad.isEmpty()) {
+            sendToOracle(ad);
+        } else {
+            JOptionPane.showMessageDialog( null, "Pestaña Exhortos_despachos sin registros");
+        }
+
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+}
+    private void sendToOracle(ArrayList<BeanTR_JA_EXHORTOS_DESPACHOS> datos) throws SQLException, IOException {
+        Connection con = null;
+        CallableStatement st = null;
+        try {
+            System.out.println("=== INICIANDO INSERCIÓN ===");
+            System.out.println("Registros a insertar: " + datos.size());
+            
+            con = OracleDAOFactoryJA.creaConexion();
+            
+            // Imprimir primer registro para verificar datos
+            if (datos.size() > 0) {
+                BeanTR_JA_EXHORTOS_DESPACHOS primerBean = datos.get(0);
+                System.out.println("Primer registro:");
+                System.out.println("  CLAVE_ORGANO: " + primerBean.GetCLAVE_ORGANO());
+                System.out.println("  NOMBRE: " + primerBean.GetNOMBRE_ORGANO_JURIS());
+                System.out.println("  PERIODO: " + primerBean.GetPERIODO());
+            }
+            
+            STRUCT[] structs = new STRUCT[datos.size()];
+            StructDescriptor sd = StructDescriptor.createDescriptor(
+                "RAF_2022.OBJ_TR_JA_EXHORTOS_DESPACHOS_GEN", con
+            );
+            
+            for (int i = 0; i < datos.size(); i++) {
+                BeanTR_JA_EXHORTOS_DESPACHOS bean = datos.get(i);
+                Object[] obj = bean.toArray();
+                structs[i] = new STRUCT(sd, con, obj);
+            }
+            
+            ArrayDescriptor descriptor = ArrayDescriptor.createDescriptor(
+                "RAF_2022.ARR_OBJ_TR_JA_EXHORTOS_DESPACHOS_GEN", con
+            );
+            ARRAY array_to_pass = new ARRAY(descriptor, con, structs);
+            
+            st = con.prepareCall("{? = call RAF_2022.PKG_INTEGRADOR_JA.TR_JA_EXHORTOS_DESPACHOS_GEN(?)}");
+            st.registerOutParameter(1, java.sql.Types.INTEGER);
+            st.setArray(2, array_to_pass);
+            st.execute();
+            
+            int resultado = st.getInt(1);
+            System.out.println("✓ Función retornó: " + resultado);
+            System.out.println("✓ " + datos.size() + " registros procesados");
+            System.out.println("=== INSERCIÓN COMPLETADA ===");
+            
+        } catch (SQLException e) {
+            System.err.println("Error en sendToOracle: " + e.getMessage());
             e.printStackTrace();
+            throw e;
+        } finally {
+            if (st != null) st.close();
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
-
 }

@@ -22,7 +22,7 @@ public class BeanTR_JA_CONTROL extends Bean implements SQLData {
     private String DISTRITO;
     private String SEDE;
     private String CLAVE_AGEE;
-    private String ENTIDAD;
+    private String ENTIDAD_FEDERATIVA;
     private String CLAVE_AGEM;
     private String MUNICIPIO;
     private String PERIODO;
@@ -72,12 +72,12 @@ public class BeanTR_JA_CONTROL extends Bean implements SQLData {
         this.CLAVE_AGEE = CLAVE_AGEE;
     }
 
-    public String GetENTIDAD() {
-        return ENTIDAD;
+    public String GetENTIDAD_FEDERATIVA() {
+        return ENTIDAD_FEDERATIVA;
     }
 
-    public void SetENTIDAD(String ENTIDAD) {
-        this.ENTIDAD = ENTIDAD;
+    public void SetENTIDAD_FEDERATIVA(String ENTIDAD_FEDERATIVA) {
+        this.ENTIDAD_FEDERATIVA= ENTIDAD_FEDERATIVA;
     }
 
     public String GetCLAVE_AGEM() {
@@ -89,11 +89,11 @@ public class BeanTR_JA_CONTROL extends Bean implements SQLData {
     }
 
     public String GetMUNICIPIO() {
-        return MUNICIPIO;
+        return MUNICIPIO ;
     }
 
-    public void SetMUNICIPIO(String MUNICIPIO) {
-        this.MUNICIPIO = MUNICIPIO;
+    public void SetMUNICIPIO_NOMBRE(String MUNICIPIO ) {
+        this.MUNICIPIO  = MUNICIPIO ;
     }
 
     public String GetPERIODO() {
@@ -174,7 +174,7 @@ public class BeanTR_JA_CONTROL extends Bean implements SQLData {
             GetDISTRITO(),
             GetSEDE(),
             GetCLAVE_AGEE(),
-            GetENTIDAD(),
+            GetENTIDAD_FEDERATIVA(),
             GetCLAVE_AGEM(),
             GetMUNICIPIO(),
             GetPERIODO(),

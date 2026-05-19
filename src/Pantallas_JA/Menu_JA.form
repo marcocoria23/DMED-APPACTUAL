@@ -14,23 +14,12 @@
             <Property name="text" type="java.lang.String" value="Men&#xfa;"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="Crea_EBD">
-              <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/Imagenes/CreaEBD_JA.jpg"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Crea EBD"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Crea_EBDActionPerformed"/>
-              </Events>
-            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="Integra_TR">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/Imagenes/InsertaTR_JA.jpg"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Integra TR"/>
+                <Property name="text" type="java.lang.String" value="Integrar datos"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Integra_TRActionPerformed"/>
@@ -41,10 +30,21 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/Imagenes/BValidar.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Validar"/>
+                <Property name="text" type="java.lang.String" value="Validar datos"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ValidaActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="Crea_EBD">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/Imagenes/CreaEBD_JA.jpg"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Integrar datos a TR"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Crea_EBDActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
