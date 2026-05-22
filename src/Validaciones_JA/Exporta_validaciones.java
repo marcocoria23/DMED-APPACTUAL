@@ -170,7 +170,7 @@ public class Exporta_validaciones {
         ResulestiloCeldaConteos.setTopBorderColor(IndexedColors.BLACK.getIndex());
 
         
-        XSSFSheet hojaControl = libro.createSheet("Control"); // Crea una nueva hoja 
+        XSSFSheet hojaControl = libro.createSheet("Observaciones Control"); // Crea una nueva hoja 
         hojaControl.setColumnWidth(0, 4000); // Anchi de las columnas 
         hojaControl.setColumnWidth(1, 40000);
         hojaControl.setColumnWidth(2, 4000);
@@ -182,7 +182,7 @@ public class Exporta_validaciones {
         
         
         
-        XSSFSheet hojaObs = libro.createSheet("OBSERVACIONES JA");
+        XSSFSheet hojaObs = libro.createSheet("Observaciones Campos vacíos");
         hojaObs.setColumnWidth(0, 7000);   // TABLA
         hojaObs.setColumnWidth(1, 12000);  // NOMBRE_ORGANO_JURIS
         hojaObs.setColumnWidth(2, 4500);   // CLAVE_ORGANO

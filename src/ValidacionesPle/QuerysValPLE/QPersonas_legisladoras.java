@@ -42,6 +42,38 @@ public ArrayList FORMATO_FECHA_P1_3_8(String ID_entidad,String Legislatura,Strin
         }
     return Array;
  }
+
+  public ArrayList Conteo_iniciativas_por_legislador(String ID_entidad,String Legislatura,String Envio) {
+        conexion.Conectar();
+        Array = new ArrayList();
+        sql = "SELECT * FROM (SELECT CUENTA_IDLEGISLADOR_TABLA5,P1_3_66 AS cant_iniciativas_presentadas,ID_LEGISLADOR,P.ID_ENTIDAD,C1_5_ID as ENVIO,LEGISLATURA\n" +
+"    FROM ( SELECT COUNT(ID_LEGISLADOR) AS CUENTA_IDLEGISLADOR_TABLA5, ID_ENTIDAD,C1_5_ID,ID_LEGISLADOR FROM (\n" +
+"SELECT ID_ENTIDAD,C1_5_ID,P1_5_1,P1_5_16,LEGISLATURA,LEGISLADOR,VALOR AS ID_LEGISLADOR\n" +
+"FROM ( SELECT ID_ENTIDAD,C1_5_ID,P1_5_1,P1_5_16,P1_5_17,P1_5_19,P1_5_21,P1_5_23,P1_5_25,P1_5_27,P1_5_29,P1_5_31,P1_5_33,P1_5_35,P1_5_37,P1_5_39,P1_5_41,P1_5_43,P1_5_45,P1_5_47,P1_5_49,P1_5_51,P1_5_53,P1_5_55,LEGISLATURA\n" +
+"FROM TR_PLE_MEDS1_5 WHERE P1_5_16 = 3 AND P1_5_2 = 1 AND P1_5_3 = 1)\n" +
+"UNPIVOT ( VALOR FOR LEGISLADOR IN (\n" +
+"P1_5_17 AS 'ID_LEGISLADOR1',P1_5_19 AS 'ID_LEGISLADOR2',P1_5_21 AS 'ID_LEGISLADOR3',P1_5_23 AS 'ID_LEGISLADOR4',P1_5_25 AS 'ID_LEGISLADOR5',P1_5_27 AS 'ID_LEGISLADOR6',P1_5_29 AS 'ID_LEGISLADOR7',P1_5_31 AS 'ID_LEGISLADOR8',P1_5_33 AS 'ID_LEGISLADOR9',P1_5_35 AS 'ID_LEGISLADOR10',P1_5_37 AS 'ID_LEGISLADOR11',P1_5_39 AS 'ID_LEGISLADOR12',P1_5_41 AS 'ID_LEGISLADOR13',P1_5_43 AS 'ID_LEGISLADOR14',P1_5_45 AS 'ID_LEGISLADOR15',P1_5_47 AS 'ID_LEGISLADOR16',P1_5_49 AS 'ID_LEGISLADOR17',P1_5_51 AS 'ID_LEGISLADOR18',P1_5_53 AS 'ID_LEGISLADOR19',P1_5_55 AS 'ID_LEGISLADOR20')))\n" +
+"GROUP BY ID_ENTIDAD,C1_5_ID,ID_LEGISLADOR  ) P\n" +
+"    INNER JOIN TR_PLE_MEDS1_3 S ON P.ID_ENTIDAD = S.ID_ENTIDAD AND P.C1_5_ID = S.C1_3_ID AND P.ID_LEGISLADOR = P1_3_1)\n" +
+"WHERE NVL(CUENTA_IDLEGISLADOR_TABLA5,0) <> NVL(cant_iniciativas_presentadas,0)\n" +
+"AND (ID_ENTIDAD='" + ID_entidad + "'  AND ENVIO='" + Envio + "' AND LEGISLATURA='" + Legislatura + "') ";
+        System.out.println(sql);
+        resul = conexion.consultar(sql);
+        try {
+            while (resul.next()) {
+                Array.add(new String[]{   
+                    resul.getString("ID_ENTIDAD"),
+                    resul.getString("ID_LEGISLADOR")
+                    
+                });
+            } 
+            conexion.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(QIniciativas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return Array;
+    }
+        
 //--------------------NOT NULL---------------------------------------
 // Se debe capturar P1_3_1-B(ID_persona_legisladora) debido a que no puede venir vacío.
 public ArrayList PL_NOTNULL_P1_3_1(String ID_entidad,String Legislatura,String Envio){

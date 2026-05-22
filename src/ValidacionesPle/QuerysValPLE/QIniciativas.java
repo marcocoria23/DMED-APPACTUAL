@@ -219,7 +219,7 @@ public class QIniciativas {
         }
 }
         return Array;
-    }
+    }        
          public ArrayList Iniciativas_PuntosDeAcuerdo(String ID_entidad, String Legislatura, String envio) {
         conexion.Conectar();
         Array = new ArrayList();
