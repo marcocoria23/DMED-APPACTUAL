@@ -525,7 +525,7 @@ public class Integrar_TMP extends javax.swing.JFrame {
 
 
     private void Button_Insertar(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_Insertar
-     String TABLA_SELECCIONADA = Combobox_proceso.getSelectedItem().toString();
+      String TABLA_SELECCIONADA = Combobox_proceso.getSelectedItem().toString();
     List<Periodo> listaPeriodos = new ArrayList<>();
     ItemCombo seleccionado = (ItemCombo) CAño.getSelectedItem();
     int año_seleccionado = seleccionado.getValor();
@@ -538,7 +538,7 @@ public class Integrar_TMP extends javax.swing.JFrame {
     if (CheckBox_3PO.isSelected()) listaPeriodos.add(Periodo.TERCER_ORDINARIO);
     if (CheckBox_3PR.isSelected()) listaPeriodos.add(Periodo.TERCER_RECESO);
 
-    // Validaciones en ED (antes de insertar a TMP)
+    // ===== VALIDACIONES =====
     if (listaPeriodos.isEmpty()) {
         JOptionPane.showMessageDialog(null, "Debe seleccionar al menos un periodo");
         return;
@@ -556,6 +556,37 @@ public class Integrar_TMP extends javax.swing.JFrame {
         return;
     }
 
+    String tipo = RadioButtonCsv.isSelected() ? "CSV" : "XLSX";
+
+    // ✅ PARCHE: SI ES CSV, SALTA VALIDACIÓN Y VA DIRECTO A INSERTAR
+    if (tipo.equals("CSV")) {
+        System.out.println("✓ CSV detectado - SALTANDO validación general");
+        Label_Progressline.setText("Progreso de carga de datos");
+        Label_Progressline.setVisible(true);
+        ProgressBar_PLE_TMP.setIndeterminate(false);
+        ProgressBar_PLE_TMP.setValue(0);
+        ProgressBar_PLE_TMP.setVisible(true);
+        EnableFalse();
+        
+        Thread thread = new Thread(() -> {
+            try {
+                procesarCSV(TABLA_SELECCIONADA);
+            } catch (Exception ex) {
+                Logger.getLogger(Integrar_TMP.class.getName()).log(Level.SEVERE, null, ex);
+                javax.swing.SwingUtilities.invokeLater(() -> {
+                    JOptionPane.showMessageDialog(null, "Error durante el procesamiento: " + ex.getMessage());
+                    EnableTrue();
+                    ProgressBar_PLE_TMP.setVisible(false);
+                    Progressline.setVisible(false);
+                    Label_Progressline.setVisible(false);
+                });
+            }
+        });
+        thread.start();
+        return; // ← SALE DEL MÉTODO, NO CONTINÚA
+    }
+
+    // ===== PARA XLSX: SÍ HACE LA VALIDACIÓN =====
     Querys Q = new Querys();
     Estatus = Q.Estatus(Entidad, Legislatura, Envio);
     if (Estatus.equals("Liberado")) {
@@ -565,38 +596,26 @@ public class Integrar_TMP extends javax.swing.JFrame {
 
     Label_Progressline.setText("<html><b>ESPERE UN MOMENTO, SE ESTÁ VALIDANDO INFORMACIÓN GENERAL</b></html>");
     Label_Progressline.setVisible(true);
-    ProgressBar_PLE_TMP.setIndeterminate(true); // barra animada mientras valida
+    ProgressBar_PLE_TMP.setIndeterminate(true);
     ProgressBar_PLE_TMP.setVisible(true);
     EnableFalse();
 
-    String tipo = RadioButtonCsv.isSelected() ? "CSV" : "XLSX";
-
-   Thread thread = new Thread(() -> {
+    Thread thread = new Thread(() -> {
         try {
             valida_info_correcta_Generales valida_gral = new valida_info_correcta_Generales();
             boolean valido = valida_gral.valida_info_correcta_Generales(año_seleccionado, listaPeriodos, RutaAr, tipo);
 
             if (!valido) {
-                // Volver al EDT para mostrar mensajes de error
                 javax.swing.SwingUtilities.invokeLater(() -> {
                     ProgressBar_PLE_TMP.setIndeterminate(false);
                     ProgressBar_PLE_TMP.setVisible(false);
                     Label_Progressline.setText("<html><font color='red'><b>Favor de revisar datos antes de continuar.</b></font></html>");
-                    if (tipo.equals("CSV")) {
-                        JOptionPane.showMessageDialog(null, "Año, legislatura y/o periodo no coinciden con el archivo. FAVOR DE REVISAR");
-                    } else {
-                        if (!valida_gral.EntidadOk)  JOptionPane.showMessageDialog(null, "<html><b>La ENTIDAD capturada no coincide</b> con el archivo de Excel.</html>");
-                        if (!valida_gral.LegisOk)    JOptionPane.showMessageDialog(null, "<html><b>La LEGISLATURA capturada no coincide</b> con el archivo de Excel.</html>");
-                        if (!valida_gral.AñoOk)      JOptionPane.showMessageDialog(null, "<html><b>El AÑO capturado no coincide</b> con el archivo de Excel.</html>");
-                        if (!valida_gral.PeriodosOk) JOptionPane.showMessageDialog(null, "<html><b>Los PERIODOS capturados no coinciden</b> con el archivo de Excel.</html>");
-                        //
-                    }
                     EnableTrue();
                 });
                 return;
             }
 
-            // Validación OK → inserción
+            // ✅ XLSX: Validación OK → Inserción
             javax.swing.SwingUtilities.invokeLater(() -> {
                 ProgressBar_PLE_TMP.setIndeterminate(false);
                 ProgressBar_PLE_TMP.setValue(0);
@@ -604,314 +623,231 @@ public class Integrar_TMP extends javax.swing.JFrame {
                 Progressline.setVisible(true);
             });
 
-            // --- aquí va todo tu bloque de inserción CSV o XLSX ---
-            if (tipo.equals("CSV")) {
-                    System.out.println("botón csv");
-                    if (TABLA_SELECCIONADA.equals("ALL_TABLES")) {
-                        EliminaTMP Elimina = new EliminaTMP();
-                        Elimina.EliminaTMP(Entidad, Envio, Legislatura, "ALL_TABLES");
-                        Tmp_ple_meds1_1_CSV meds1_1 = new Tmp_ple_meds1_1_CSV();
-                        Tmp_ple_meds1_2_CSV meds1_2 = new Tmp_ple_meds1_2_CSV();
-                        Tmp_ple_meds1_3_CSV meds1_3 = new Tmp_ple_meds1_3_CSV();
-                        Tmp_ple_meds1_4_CSV meds1_4 = new Tmp_ple_meds1_4_CSV();
-                        Tmp_ple_meds1_5_CSV meds1_5 = new Tmp_ple_meds1_5_CSV();
-                        Tmp_ple_meds1_6_CSV meds1_6 = new Tmp_ple_meds1_6_CSV();
-                        Tmp_ple_meds1_7_CSV meds1_7 = new Tmp_ple_meds1_7_CSV();
-                        Tmp_ple_meds1_8_CSV meds1_8 = new Tmp_ple_meds1_8_CSV();
-                        Tmp_ple_meds1_9_CSV meds1_9 = new Tmp_ple_meds1_9_CSV();
-                        try {
-                            Label_Progressline.setText("Progreso de carga de datos");
-                            Progressline.setText("");
-                            ProgressBar_PLE_TMP.setValue(3);
-                            Progressline.setText("TMP_PLE_MEDS1_1");
-                            meds1_1.Meds1_1_CSV(directorio + "BD_datos_generales.csv", Entidad, Envio, Legislatura, Estatus);
-                            ProgressBar_PLE_TMP.setValue(34);
-                            Progressline.setText("TMP_PLE_MEDS1_2");
-                            meds1_2.Meds1_2_CSV(directorio + "BD_comisiones_legislativas.csv", Entidad, Envio, Legislatura, Estatus);
-                            ProgressBar_PLE_TMP.setValue(41);
-                            Progressline.setText("TMP_PLE_MEDS1_3");
-                            meds1_3.Meds1_3_CSV(directorio + "BD_personas_legisladoras.csv", Entidad, Envio, Legislatura, Estatus);
-                            ProgressBar_PLE_TMP.setValue(48);
-                            Progressline.setText("TMP_PLE_MEDS1_4");
-                            meds1_4.Meds1_4_CSV(directorio + "BD_personal_apoyo.csv", Entidad, Envio, Legislatura, Estatus);
-                            ProgressBar_PLE_TMP.setValue(56);
-                            Progressline.setText("TMP_PLE_MEDS1_5");
-                            meds1_5.Meds1_5_CSV(directorio + "BD_iniciativas.csv", Entidad, Envio, Legislatura, Estatus);
-                            Progressline.setText("TMP_PLE_MEDS1_6");
-                            ProgressBar_PLE_TMP.setValue(65);
-                            meds1_6.Meds1_6_CSV(directorio + "BD_iniciativas_urgente_obvia.csv", Entidad, Envio, Legislatura, Estatus);
-                            ProgressBar_PLE_TMP.setValue(72);
-                            Progressline.setText("TMP_PLE_MEDS1_7");
-                            meds1_7.Meds1_7_CSV(directorio + "BD_juicios_politicos.csv", Entidad, Envio, Legislatura, Estatus);
-                            ProgressBar_PLE_TMP.setValue(80);
-                            Progressline.setText("TMP_PLE_MEDS1_8");
-                            meds1_8.Meds1_8_CSV(directorio + "BD_declaraciones_procedencias.csv", Entidad, Envio, Legislatura, Estatus);
-                            ProgressBar_PLE_TMP.setValue(90);
-                            Progressline.setText("TMP_PLE_MEDS1_9");
-                            meds1_9.Meds1_9_CSV(directorio + "BD_comparecencias.csv", Entidad, Envio, Legislatura, Estatus);
-                            ProgressBar_PLE_TMP.setValue(100);
-                            JOptionPane.showMessageDialog(null, "Información insertada a TMP, favor de revisar pantalla errores de insert");
-                        } catch (Exception ex) {
-                            Logger.getLogger(Integrar_TMP.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    }
-                    if (!"ALL_TABLES".equals(TABLA_SELECCIONADA)) {
-                        try {
-                            EliminaTMP elimina = new EliminaTMP();
-                            elimina.EliminaTMP(Entidad, Envio, Legislatura, TABLA_SELECCIONADA);
+            procesarXLSX(TABLA_SELECCIONADA);
 
-                            Progressline.setText("");
-                            ProgressBar_PLE_TMP.setValue(1);
-                            Progressline.setText(TABLA_SELECCIONADA);
-
-                            switch (TABLA_SELECCIONADA) {
-
-                                case "TMP_PLE_MEDS1_1":
-                                    new Tmp_ple_meds1_1_CSV().Meds1_1_CSV(directorio + "BD_datos_generales.csv", Entidad, Envio, Legislatura, Estatus);
-                                    break;
-
-                                case "TMP_PLE_MEDS1_2":
-                                    new Tmp_ple_meds1_2_CSV().Meds1_2_CSV(directorio + "BD_comisiones_legislativas.csv", Entidad, Envio, Legislatura, Estatus);
-                                    break;
-
-                                case "TMP_PLE_MEDS1_3":
-                                    new Tmp_ple_meds1_3_CSV().Meds1_3_CSV(directorio + "BD_personas_legisladoras.csv", Entidad, Envio, Legislatura, Estatus);
-                                    break;
-                                case "TMP_PLE_MEDS1_4":
-                                    new Tmp_ple_meds1_4_CSV().Meds1_4_CSV(directorio + "BD_personal_apoyo.csv", Entidad, Envio, Legislatura, Estatus);
-                                    break;
-
-                                case "TMP_PLE_MEDS1_5":
-                                    new Tmp_ple_meds1_5_CSV().Meds1_5_CSV(directorio + "BD_iniciativas.csv", Entidad, Envio, Legislatura, Estatus);
-                                    break;
-
-                                case "TMP_PLE_MEDS1_6":
-                                    new Tmp_ple_meds1_6_CSV().Meds1_6_CSV(directorio + "BD_iniciativas_urgente_obvia.csv", Entidad, Envio, Legislatura, Estatus);
-                                    break;
-
-                                case "TMP_PLE_MEDS1_7":
-                                    new Tmp_ple_meds1_7_CSV().Meds1_7_CSV(directorio + "BD_juicios_politicos.csv", Entidad, Envio, Legislatura, Estatus);
-                                    break;
-
-                                case "TMP_PLE_MEDS1_8":
-                                    new Tmp_ple_meds1_8_CSV().Meds1_8_CSV(directorio + "BD_declaraciones_procedencias.csv", Entidad, Envio, Legislatura, Estatus);
-                                    break;
-
-                                case "TMP_PLE_MEDS1_9":
-                                    new Tmp_ple_meds1_9_CSV().Meds1_9_CSV(directorio + "BD_comparecencias.csv", Entidad, Envio, Legislatura, Estatus);
-                                    break;
-
-                                default:
-                                    JOptionPane.showMessageDialog(null,
-                                            "Tabla no soportada: " + TABLA_SELECCIONADA);
-                                    return;
-                            }
-                            ProgressBar_PLE_TMP.setValue(100);
-                            JOptionPane.showMessageDialog(null, "Información insertada a TMP, favor de revisar pantalla errores de insert");
-                        } catch (SQLException ex) {
-                            Logger.getLogger(Integrar_TMP.class.getName()).log(Level.SEVERE, "Error al eliminar TMP", ex);
-                        } catch (Exception ex) {
-                            Logger.getLogger(Integrar_TMP.class.getName()).log(Level.SEVERE, "Error al procesar CSV", ex);
-                        } finally {
-                            EnableTrue();
-                            ProgressBar_PLE_TMP.setVisible(false);
-                            Progressline.setVisible(false);
-                            Label_Progressline.setVisible(false);
-                        }
-                    }
-
-                } else {
-                    System.out.println("botón xlsx");                 
-                    EnableFalse();
-                    Tmp_ple_meds1_1 ple_meds1_1 = new Tmp_ple_meds1_1();
-                    Tmp_ple_meds1_1A ple_meds1_1A = new Tmp_ple_meds1_1A();
-                    Tmp_ple_meds1_1B ple_meds1_1B = new Tmp_ple_meds1_1B();
-                    Tmp_ple_meds1_1C ple_meds1_1C = new Tmp_ple_meds1_1C();
-                    Tmp_ple_meds1_1D ple_meds1_1D = new Tmp_ple_meds1_1D();
-                    Tmp_ple_meds1_2 ple_meds1_2 = new Tmp_ple_meds1_2();
-                    Tmp_ple_meds1_3 ple_meds1_3 = new Tmp_ple_meds1_3();
-                    Tmp_ple_meds1_4 ple_meds1_4 = new Tmp_ple_meds1_4();
-                    Tmp_ple_meds1_5 ple_meds1_5 = new Tmp_ple_meds1_5();
-                    Tmp_ple_meds1_6 ple_meds1_6 = new Tmp_ple_meds1_6();
-                    Tmp_ple_meds1_7 ple_meds1_7 = new Tmp_ple_meds1_7();
-                    Tmp_ple_meds1_8 ple_meds1_8 = new Tmp_ple_meds1_8();
-                    Tmp_ple_meds1_9 ple_meds1_9 = new Tmp_ple_meds1_9();
-
-                    try {
-
-                        if (Procedure.equals("ALL_TABLES")) {
-                            EliminaTMP Elimina = new EliminaTMP();
-                            Elimina.EliminaTMP(Entidad, Envio, Legislatura, "ALL_TABLES");
-                            Label_Progressline.setText("Progreso de carga de datos");
-                            Progressline.setText("");
-                            ProgressBar_PLE_TMP.setValue(3);
-                            Progressline.setText("TMP_PLE_MEDS1_1");
-                            ple_meds1_1.In_Tmp_ple_meds1_1(Entidad, Envio, Legislatura, CEstatus.getSelectedItem().toString());
-                            ProgressBar_PLE_TMP.setValue(7);
-                            Progressline.setText("TMP_PLE_MEDS1_1A");
-                            ple_meds1_1A.in_Tmp_ple_meds1_1A(Entidad, Envio, Legislatura);
-                            ProgressBar_PLE_TMP.setValue(14);
-                            Progressline.setText("TMP_PLE_MEDS1_1B");
-                            ple_meds1_1B.Tmp_ple_meds1_1B(Entidad, Envio, Legislatura);
-                            ProgressBar_PLE_TMP.setValue(21);
-                            Progressline.setText("TMP_PLE_MEDS1_1C");
-                            ple_meds1_1C.Tmp_ple_meds1_1C(Entidad, Envio, Legislatura);
-                            ProgressBar_PLE_TMP.setValue(27);
-                            Progressline.setText("TMP_PLE_MEDS1_1D");
-                            ple_meds1_1D.Tmp_ple_meds1_1D(Entidad, Envio, Legislatura);
-                            ProgressBar_PLE_TMP.setValue(34);
-                            Progressline.setText("TMP_PLE_MEDS1_2");
-                            ple_meds1_2.Tmp_ple_meds1_2(Entidad, Envio, Legislatura);
-                            ProgressBar_PLE_TMP.setValue(41);
-                            Progressline.setText("TMP_PLE_MEDS1_3");
-                            ple_meds1_3.Tmp_ple_meds1_3(Entidad, Envio, Legislatura);
-                            ProgressBar_PLE_TMP.setValue(48);
-                            Progressline.setText("TMP_PLE_MEDS1_4");
-                            ple_meds1_4.Tmp_ple_meds1_4(Entidad, Envio, Legislatura);
-                            ProgressBar_PLE_TMP.setValue(56);
-                            Progressline.setText("TMP_PLE_MEDS1_5");
-                            ple_meds1_5.Tmp_ple_meds1_5(Entidad, Envio, Legislatura);
-                            ProgressBar_PLE_TMP.setValue(64);
-                            Progressline.setText("TMP_PLE_MEDS1_6");
-                            ple_meds1_6.Tmp_ple_meds1_6(Entidad, Envio, Legislatura);
-                            ProgressBar_PLE_TMP.setValue(72);
-                            Progressline.setText("TMP_PLE_MEDS1_7");
-                            ple_meds1_7.Tmp_ple_meds1_7(Entidad, Envio, Legislatura);
-                            ProgressBar_PLE_TMP.setValue(80);
-                            Progressline.setText("TMP_PLE_MEDS1_8");
-                            ple_meds1_8.Tmp_ple_meds1_8(Entidad, Envio, Legislatura);
-                            ProgressBar_PLE_TMP.setValue(90);
-                            Progressline.setText("TMP_PLE_MEDS1_9");
-                            ple_meds1_9.Tmp_ple_meds1_9(Entidad, Envio, Legislatura);
-                            ProgressBar_PLE_TMP.setValue(100);
-                            JOptionPane.showMessageDialog(null, "Información insertada a TMP, favor de revisar pantalla errores de insert");
-
-                        }
-                        if (Procedure.equals("TMP_PLE_MEDS1_1")) {
-                            EliminaTMP Elimina = new EliminaTMP();
-                            Elimina.EliminaTMP(Entidad, Envio, Legislatura, "TMP_PLE_MEDS1_1");
-                            ProgressBar_PLE_TMP.setValue(15);
-                            ple_meds1_1.In_Tmp_ple_meds1_1(Entidad, Envio, Legislatura, CEstatus.getSelectedItem().toString());
-                            ProgressBar_PLE_TMP.setValue(100);
-                            JOptionPane.showMessageDialog(null, "Información insertada, favor de revisar pantalla errores de insert");
-                        }
-                        if (Procedure.equals("TMP_PLE_MEDS1_1A")) {
-                            EliminaTMP Elimina = new EliminaTMP();
-                            Elimina.EliminaTMP(Entidad, Envio, Legislatura, "TMP_PLE_MEDS1_1A");
-                            ProgressBar_PLE_TMP.setValue(15);
-                            ple_meds1_1A.in_Tmp_ple_meds1_1A(Entidad, Envio, Legislatura);
-                            ProgressBar_PLE_TMP.setValue(100);
-                            JOptionPane.showMessageDialog(null, "Información insertada, favor de revisar pantalla errores de insert");
-                        }
-                        if (Procedure.equals("TMP_PLE_MEDS1_1B")) {
-                            EliminaTMP Elimina = new EliminaTMP();
-                            Elimina.EliminaTMP(Entidad, Envio, Legislatura, "TMP_PLE_MEDS1_1B");
-                            ProgressBar_PLE_TMP.setValue(15);
-                            ple_meds1_1B.Tmp_ple_meds1_1B(Entidad, Envio, Legislatura);
-                            ProgressBar_PLE_TMP.setValue(100);
-                            JOptionPane.showMessageDialog(null, "Información insertada, favor de revisar pantalla errores de insert");
-                        }
-                        if (Procedure.equals("TMP_PLE_MEDS1_1C")) {
-                            EliminaTMP Elimina = new EliminaTMP();
-                            Elimina.EliminaTMP(Entidad, Envio, Legislatura, "TMP_PLE_MEDS1_1C");
-                            ProgressBar_PLE_TMP.setValue(15);
-                            ple_meds1_1C.Tmp_ple_meds1_1C(Entidad, Envio, Legislatura);
-                            ProgressBar_PLE_TMP.setValue(100);
-                            JOptionPane.showMessageDialog(null, "Información insertada, favor de revisar pantalla errores de insert");
-                        }
-                        if (Procedure.equals("TMP_PLE_MEDS1_1D")) {
-                            EliminaTMP Elimina = new EliminaTMP();
-                            Elimina.EliminaTMP(Entidad, Envio, Legislatura, "TMP_PLE_MEDS1_1D");
-                            ProgressBar_PLE_TMP.setValue(15);
-                            ple_meds1_1D.Tmp_ple_meds1_1D(Entidad, Envio, Legislatura);
-                            ProgressBar_PLE_TMP.setValue(100);
-                            JOptionPane.showMessageDialog(null, "Información insertada, favor de revisar pantalla errores de insert");
-                        }
-                        if (Procedure.equals("TMP_PLE_MEDS1_2")) {
-                            EliminaTMP Elimina = new EliminaTMP();
-                            Elimina.EliminaTMP(Entidad, Envio, Legislatura, "TMP_PLE_MEDS1_2");
-                            ProgressBar_PLE_TMP.setValue(15);
-                            ple_meds1_2.Tmp_ple_meds1_2(Entidad, Envio, Legislatura);
-                            ProgressBar_PLE_TMP.setValue(100);
-                            JOptionPane.showMessageDialog(null, "Información insertada, favor de revisar pantalla errores de insert");
-                        }
-                        if (Procedure.equals("TMP_PLE_MEDS1_3")) {
-                            EliminaTMP Elimina = new EliminaTMP();
-                            Elimina.EliminaTMP(Entidad, Envio, Legislatura, "TMP_PLE_MEDS1_3");
-                            ProgressBar_PLE_TMP.setValue(15);
-                            ple_meds1_3.Tmp_ple_meds1_3(Entidad, Envio, Legislatura);
-                            ProgressBar_PLE_TMP.setValue(100);
-                            JOptionPane.showMessageDialog(null, "Información insertada, favor de revisar pantalla errores de insert");
-                        }
-                        if (Procedure.equals("TMP_PLE_MEDS1_4")) {
-                            EliminaTMP Elimina = new EliminaTMP();
-                            Elimina.EliminaTMP(Entidad, Envio, Legislatura, "TMP_PLE_MEDS1_4");
-                            ProgressBar_PLE_TMP.setValue(15);
-                            ple_meds1_4.Tmp_ple_meds1_4(Entidad, Envio, Legislatura);
-                            ProgressBar_PLE_TMP.setValue(100);
-                            JOptionPane.showMessageDialog(null, "Información insertada, favor de revisar pantalla errores de insert");
-                        }
-                        if (Procedure.equals("TMP_PLE_MEDS1_5")) {
-                            EliminaTMP Elimina = new EliminaTMP();
-                            Elimina.EliminaTMP(Entidad, Envio, Legislatura, "TMP_PLE_MEDS1_5");
-                            ProgressBar_PLE_TMP.setValue(15);
-                            ple_meds1_5.Tmp_ple_meds1_5(Entidad, Envio, Legislatura);
-                            ProgressBar_PLE_TMP.setValue(100);
-                            JOptionPane.showMessageDialog(null, "Información insertada, favor de revisar pantalla errores de insert");
-                        }
-                        if (Procedure.equals("TMP_PLE_MEDS1_6")) {
-                            EliminaTMP Elimina = new EliminaTMP();
-                            Elimina.EliminaTMP(Entidad, Envio, Legislatura, "TMP_PLE_MEDS1_6");
-                            ProgressBar_PLE_TMP.setValue(15);
-                            ple_meds1_6.Tmp_ple_meds1_6(Entidad, Envio, Legislatura);
-                            ProgressBar_PLE_TMP.setValue(100);
-                            JOptionPane.showMessageDialog(null, "Información insertada, favor de revisar pantalla errores de insert");
-                        }
-                        if (Procedure.equals("TMP_PLE_MEDS1_7")) {
-                            EliminaTMP Elimina = new EliminaTMP();
-                            Elimina.EliminaTMP(Entidad, Envio, Legislatura, "TMP_PLE_MEDS1_7");
-                            ProgressBar_PLE_TMP.setValue(15);
-                            ple_meds1_7.Tmp_ple_meds1_7(Entidad, Envio, Legislatura);
-                            ProgressBar_PLE_TMP.setValue(100);
-                            JOptionPane.showMessageDialog(null, "Información insertada, favor de revisar pantalla errores de insert");
-                        }
-                        if (Procedure.equals("TMP_PLE_MEDS1_8")) {
-                            EliminaTMP Elimina = new EliminaTMP();
-                            Elimina.EliminaTMP(Entidad, Envio, Legislatura, "TMP_PLE_MEDS1_8");
-                            ProgressBar_PLE_TMP.setValue(15);
-                            ple_meds1_8.Tmp_ple_meds1_8(Entidad, Envio, Legislatura);
-                            ProgressBar_PLE_TMP.setValue(100);
-                            JOptionPane.showMessageDialog(null, "Información insertada, favor de revisar pantalla errores de insert");
-                        }
-                        if (Procedure.equals("TMP_PLE_MEDS1_9")) {
-                            EliminaTMP Elimina = new EliminaTMP();
-                            Elimina.EliminaTMP(Entidad, Envio, Legislatura, "TMP_PLE_MEDS1_9");
-                            ProgressBar_PLE_TMP.setValue(15);
-                            ple_meds1_9.Tmp_ple_meds1_9(Entidad, Envio, Legislatura);
-                            ProgressBar_PLE_TMP.setValue(100);
-                            JOptionPane.showMessageDialog(null, "Información insertada, favor de revisar pantalla errores de insert");
-                        }
-                        Label_Progressline.setVisible(false);
-                        ProgressBar_PLE_TMP.setVisible(false);
-                        Progressline.setVisible(false);
-                        EnableTrue();
-                    } catch (Exception ex) {
-                        Logger.getLogger(Integrar_TMP.class.getName()).log(Level.SEVERE, null, ex);
-                    } finally {
-                          javax.swing.SwingUtilities.invokeLater(() -> {
+        } catch (Exception ex) {
+            Logger.getLogger(Integrar_TMP.class.getName()).log(Level.SEVERE, null, ex);
+            javax.swing.SwingUtilities.invokeLater(() -> {
+                JOptionPane.showMessageDialog(null, "Error durante el procesamiento: " + ex.getMessage());
                 EnableTrue();
                 ProgressBar_PLE_TMP.setVisible(false);
                 Progressline.setVisible(false);
-                Label_Progressline.setVisible(false); });
-                    }
-                }
-            } catch (Exception ex) {
-                Logger.getLogger(Integrar_TMP.class.getName()).log(Level.SEVERE, null, ex);
-            }
+                Label_Progressline.setVisible(false);
+            });
+        }
+    });
+
+    thread.start();
+}
+
+// ===== PROCESAR CSV =====
+private void procesarCSV(String TABLA_SELECCIONADA) throws Exception {
+    System.out.println("📁 Procesando CSV - Tabla: " + TABLA_SELECCIONADA);
+    
+    try {
+        if (TABLA_SELECCIONADA.equals("ALL_TABLES")) {
+            procesarTodosLosArchivosCSV();
+        } else {
+            procesarArchivoCSVIndividual(TABLA_SELECCIONADA);
+        }
+    } finally {
+        finalizarProceso();
+    }
+}
+
+// ===== PROCESAR TODOS LOS ARCHIVOS CSV =====
+private void procesarTodosLosArchivosCSV() throws Exception {
+    EliminaTMP Elimina = new EliminaTMP();
+    Elimina.EliminaTMP(Entidad, Envio, Legislatura, "ALL_TABLES");
+    
+    int progreso = 3;
+    int incremento = 97 / 9;
+    
+    procesarYActualizarCSV("TMP_PLE_MEDS1_1", "BD_datos_generales.csv", progreso);
+    progreso += incremento;
+    
+    procesarYActualizarCSV("TMP_PLE_MEDS1_2", "BD_comisiones_legislativas.csv", progreso);
+    progreso += incremento;
+    
+    procesarYActualizarCSV("TMP_PLE_MEDS1_3", "BD_personas_legisladoras.csv", progreso);
+    progreso += incremento;
+    
+    procesarYActualizarCSV("TMP_PLE_MEDS1_4", "BD_personal_apoyo.csv", progreso);
+    progreso += incremento;
+    
+    procesarYActualizarCSV("TMP_PLE_MEDS1_5", "BD_iniciativas.csv", progreso);
+    progreso += incremento;
+    
+    procesarYActualizarCSV("TMP_PLE_MEDS1_6", "BD_iniciativas_urgente_obvia.csv", progreso);
+    progreso += incremento;
+    
+    procesarYActualizarCSV("TMP_PLE_MEDS1_7", "BD_juicios_politicos.csv", progreso);
+    progreso += incremento;
+    
+    procesarYActualizarCSV("TMP_PLE_MEDS1_8", "BD_declaraciones_procedencias.csv", progreso);
+    progreso += incremento;
+    
+    procesarYActualizarCSV("TMP_PLE_MEDS1_9", "BD_comparecencias.csv", 100);
+    
+    javax.swing.SwingUtilities.invokeLater(() -> {
+        ProgressBar_PLE_TMP.setValue(100);
+        JOptionPane.showMessageDialog(null, "✓ Información insertada a TMP, favor de revisar pantalla errores de insert");
+    });
+}
+
+// ===== PROCESAR UN ARCHIVO CSV INDIVIDUAL =====
+private void procesarArchivoCSVIndividual(String TABLA_SELECCIONADA) throws Exception {
+    EliminaTMP elimina = new EliminaTMP();
+    elimina.EliminaTMP(Entidad, Envio, Legislatura, TABLA_SELECCIONADA);
+    
+    javax.swing.SwingUtilities.invokeLater(() -> {
+        Progressline.setText("");
+        ProgressBar_PLE_TMP.setValue(1);
+        Progressline.setText(TABLA_SELECCIONADA);
+    });
+
+    switch (TABLA_SELECCIONADA) {
+        case "TMP_PLE_MEDS1_1":
+            new Tmp_ple_meds1_1_CSV().Meds1_1_CSV(directorio + "BD_datos_generales.csv", Entidad, Envio, Legislatura, Estatus);
+            break;
+        case "TMP_PLE_MEDS1_2":
+            new Tmp_ple_meds1_2_CSV().Meds1_2_CSV(directorio + "BD_comisiones_legislativas.csv", Entidad, Envio, Legislatura, Estatus);
+            break;
+        case "TMP_PLE_MEDS1_3":
+            new Tmp_ple_meds1_3_CSV().Meds1_3_CSV(directorio + "BD_personas_legisladoras.csv", Entidad, Envio, Legislatura, Estatus);
+            break;
+        case "TMP_PLE_MEDS1_4":
+            new Tmp_ple_meds1_4_CSV().Meds1_4_CSV(directorio + "BD_personal_apoyo.csv", Entidad, Envio, Legislatura, Estatus);
+            break;
+        case "TMP_PLE_MEDS1_5":
+            new Tmp_ple_meds1_5_CSV().Meds1_5_CSV(directorio + "BD_iniciativas.csv", Entidad, Envio, Legislatura, Estatus);
+            break;
+        case "TMP_PLE_MEDS1_6":
+            new Tmp_ple_meds1_6_CSV().Meds1_6_CSV(directorio + "BD_iniciativas_urgente_obvia.csv", Entidad, Envio, Legislatura, Estatus);
+            break;
+        case "TMP_PLE_MEDS1_7":
+            new Tmp_ple_meds1_7_CSV().Meds1_7_CSV(directorio + "BD_juicios_politicos.csv", Entidad, Envio, Legislatura, Estatus);
+            break;
+        case "TMP_PLE_MEDS1_8":
+            new Tmp_ple_meds1_8_CSV().Meds1_8_CSV(directorio + "BD_declaraciones_procedencias.csv", Entidad, Envio, Legislatura, Estatus);
+            break;
+        case "TMP_PLE_MEDS1_9":
+            new Tmp_ple_meds1_9_CSV().Meds1_9_CSV(directorio + "BD_comparecencias.csv", Entidad, Envio, Legislatura, Estatus);
+            break;
+        default:
+            throw new IllegalArgumentException("Tabla no soportada: " + TABLA_SELECCIONADA);
+    }
+    
+    javax.swing.SwingUtilities.invokeLater(() -> {
+        ProgressBar_PLE_TMP.setValue(100);
+        JOptionPane.showMessageDialog(null, "✓ Información insertada a TMP, favor de revisar pantalla errores de insert");
+    });
+}
+
+// ===== AUXILIAR: PROCESAR Y ACTUALIZAR CSV =====
+private void procesarYActualizarCSV(String tabla, String archivo, int progreso) throws Exception {
+    javax.swing.SwingUtilities.invokeLater(() -> {
+        Progressline.setText(tabla);
+        ProgressBar_PLE_TMP.setValue(progreso);
+    });
+    
+    switch (tabla) {
+        case "TMP_PLE_MEDS1_1": new Tmp_ple_meds1_1_CSV().Meds1_1_CSV(directorio + archivo, Entidad, Envio, Legislatura, Estatus); break;
+        case "TMP_PLE_MEDS1_2": new Tmp_ple_meds1_2_CSV().Meds1_2_CSV(directorio + archivo, Entidad, Envio, Legislatura, Estatus); break;
+        case "TMP_PLE_MEDS1_3": new Tmp_ple_meds1_3_CSV().Meds1_3_CSV(directorio + archivo, Entidad, Envio, Legislatura, Estatus); break;
+        case "TMP_PLE_MEDS1_4": new Tmp_ple_meds1_4_CSV().Meds1_4_CSV(directorio + archivo, Entidad, Envio, Legislatura, Estatus); break;
+        case "TMP_PLE_MEDS1_5": new Tmp_ple_meds1_5_CSV().Meds1_5_CSV(directorio + archivo, Entidad, Envio, Legislatura, Estatus); break;
+        case "TMP_PLE_MEDS1_6": new Tmp_ple_meds1_6_CSV().Meds1_6_CSV(directorio + archivo, Entidad, Envio, Legislatura, Estatus); break;
+        case "TMP_PLE_MEDS1_7": new Tmp_ple_meds1_7_CSV().Meds1_7_CSV(directorio + archivo, Entidad, Envio, Legislatura, Estatus); break;
+        case "TMP_PLE_MEDS1_8": new Tmp_ple_meds1_8_CSV().Meds1_8_CSV(directorio + archivo, Entidad, Envio, Legislatura, Estatus); break;
+        case "TMP_PLE_MEDS1_9": new Tmp_ple_meds1_9_CSV().Meds1_9_CSV(directorio + archivo, Entidad, Envio, Legislatura, Estatus); break;
+    }
+}
+
+// ===== PROCESAR XLSX (MANTIENE LA VALIDACIÓN) =====
+private void procesarXLSX(String TABLA_SELECCIONADA) throws Exception {
+    System.out.println("📊 Procesando XLSX - Tabla: " + TABLA_SELECCIONADA);
+    
+    try {
+        if (TABLA_SELECCIONADA.equals("ALL_TABLES")) {
+            procesarTodosLosArchivosXLSX();
+        } else {
+            procesarArchivoXLSXIndividual(TABLA_SELECCIONADA);
+        }
+    } finally {
+        finalizarProceso();
+    }
+}
+
+// ===== PROCESAR TODOS LOS ARCHIVOS XLSX =====
+private void procesarTodosLosArchivosXLSX() throws Exception {
+    EliminaTMP Elimina = new EliminaTMP();
+    Elimina.EliminaTMP(Entidad, Envio, Legislatura, "ALL_TABLES");
+    
+    int[] progresos = {3, 7, 14, 21, 27, 34, 41, 48, 56, 64, 72, 80, 90};
+    String[] tablas = {
+        "TMP_PLE_MEDS1_1", "TMP_PLE_MEDS1_1A", "TMP_PLE_MEDS1_1B", "TMP_PLE_MEDS1_1C", 
+        "TMP_PLE_MEDS1_1D", "TMP_PLE_MEDS1_2", "TMP_PLE_MEDS1_3", "TMP_PLE_MEDS1_4", 
+        "TMP_PLE_MEDS1_5", "TMP_PLE_MEDS1_6", "TMP_PLE_MEDS1_7", "TMP_PLE_MEDS1_8", "TMP_PLE_MEDS1_9"
+    };
+    
+    for (int i = 0; i < tablas.length; i++) {
+        final int idx = i;
+        javax.swing.SwingUtilities.invokeLater(() -> {
+            Progressline.setText(tablas[idx]);
+            ProgressBar_PLE_TMP.setValue(progresos[idx]);
         });
+        procesarTablaXLSX(tablas[i]);
+    }
+    
+    javax.swing.SwingUtilities.invokeLater(() -> {
+        ProgressBar_PLE_TMP.setValue(100);
+        JOptionPane.showMessageDialog(null, "✓ Información insertada a TMP, favor de revisar pantalla errores de insert");
+    });
+}
 
-        thread.start();
+// ===== PROCESAR UN ARCHIVO XLSX INDIVIDUAL =====
+private void procesarArchivoXLSXIndividual(String TABLA_SELECCIONADA) throws Exception {
+    EliminaTMP Elimina = new EliminaTMP();
+    Elimina.EliminaTMP(Entidad, Envio, Legislatura, TABLA_SELECCIONADA);
+    
+    javax.swing.SwingUtilities.invokeLater(() -> ProgressBar_PLE_TMP.setValue(15));
+    
+    procesarTablaXLSX(TABLA_SELECCIONADA);
+    
+    javax.swing.SwingUtilities.invokeLater(() -> {
+        ProgressBar_PLE_TMP.setValue(100);
+        JOptionPane.showMessageDialog(null, "✓ Información insertada, favor de revisar pantalla errores de insert");
+    });
+}
 
+// ===== PROCESAR TABLA XLSX =====
+private void procesarTablaXLSX(String tabla) throws Exception {
+    switch (tabla) {
+        case "TMP_PLE_MEDS1_1": new Tmp_ple_meds1_1().In_Tmp_ple_meds1_1(Entidad, Envio, Legislatura, CEstatus.getSelectedItem().toString()); break;
+        case "TMP_PLE_MEDS1_1A": new Tmp_ple_meds1_1A().in_Tmp_ple_meds1_1A(Entidad, Envio, Legislatura); break;
+        case "TMP_PLE_MEDS1_1B": new Tmp_ple_meds1_1B().Tmp_ple_meds1_1B(Entidad, Envio, Legislatura); break;
+        case "TMP_PLE_MEDS1_1C": new Tmp_ple_meds1_1C().Tmp_ple_meds1_1C(Entidad, Envio, Legislatura); break;
+        case "TMP_PLE_MEDS1_1D": new Tmp_ple_meds1_1D().Tmp_ple_meds1_1D(Entidad, Envio, Legislatura); break;
+        case "TMP_PLE_MEDS1_2": new Tmp_ple_meds1_2().Tmp_ple_meds1_2(Entidad, Envio, Legislatura); break;
+        case "TMP_PLE_MEDS1_3": new Tmp_ple_meds1_3().Tmp_ple_meds1_3(Entidad, Envio, Legislatura); break;
+        case "TMP_PLE_MEDS1_4": new Tmp_ple_meds1_4().Tmp_ple_meds1_4(Entidad, Envio, Legislatura); break;
+        case "TMP_PLE_MEDS1_5": new Tmp_ple_meds1_5().Tmp_ple_meds1_5(Entidad, Envio, Legislatura); break;
+        case "TMP_PLE_MEDS1_6": new Tmp_ple_meds1_6().Tmp_ple_meds1_6(Entidad, Envio, Legislatura); break;
+        case "TMP_PLE_MEDS1_7": new Tmp_ple_meds1_7().Tmp_ple_meds1_7(Entidad, Envio, Legislatura); break;
+        case "TMP_PLE_MEDS1_8": new Tmp_ple_meds1_8().Tmp_ple_meds1_8(Entidad, Envio, Legislatura); break;
+        case "TMP_PLE_MEDS1_9": new Tmp_ple_meds1_9().Tmp_ple_meds1_9(Entidad, Envio, Legislatura); break;
+    }
+}
+
+// ===== FINALIZAR PROCESO =====
+private void finalizarProceso() {
+    javax.swing.SwingUtilities.invokeLater(() -> {
+        EnableTrue();
+        ProgressBar_PLE_TMP.setVisible(false);
+        Progressline.setVisible(false);
+        Label_Progressline.setVisible(false);
+    });
 
     }//GEN-LAST:event_Button_Insertar
 

@@ -40,9 +40,8 @@ public class valida_info_correcta_Generales {
         // ✅ FIX 1: usar .equals() en lugar de == para comparar Strings
         if (tipo_archivo.equals("XLSX")) {
             leerXLSX();
-        } else if (tipo_archivo.equals("CSV")) {
-            leerCSV(rutaExcel);
-        }
+       } //else if (tipo_archivo.equals("CSV")) leerCSV(rutaExcel);
+        
         // Validar Legilsatura
         LegisOk = (legislatura == Integer.parseInt(Integrar_TMP.Legislatura));
         System.out.println("Legislatura excel: " + legislatura
