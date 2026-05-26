@@ -4,9 +4,9 @@
  * and open the template in the editor.
  */
 package Pantallas_PLE;
-
+import java.util.Map;
+import java.util.LinkedHashMap;
 import java.awt.FileDialog;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -36,7 +36,6 @@ import mx.org.inegi.insert_TMP.PLE.Tmp_ple_meds1_6;
 import mx.org.inegi.insert_TMP.PLE.Tmp_ple_meds1_7;
 import mx.org.inegi.insert_TMP.PLE.Tmp_ple_meds1_8;
 import mx.org.inegi.insert_TMP.PLE.Tmp_ple_meds1_9;
-import mx.org.inegi.insert_TMP.PLE.valida_info_correcta_Generales.*;
 import mx.org.inegi.insert_TMP.PLE.Periodo;
 import mx.org.inegi.insert_TMP.PLE.valida_info_correcta_Generales;
 
@@ -46,13 +45,18 @@ import mx.org.inegi.insert_TMP.PLE.valida_info_correcta_Generales;
  */
 public class Integrar_TMP extends javax.swing.JFrame {
 
-    public static String RutaAr = "", Entidad = "", Envio = "", Legislatura = "", Procedure = "";
+    public static String RutaAr = "", Entidad = "", Envio = "", Legislatura = "", Procedure = "",Estatus = "", directorio = "";
     public static boolean ventanaAbierta = false;
-    public static String Estatus = "", directorio = "";
 
-    /**
-     * Creates new form Integrar_TMP
-     */
+   public static void setDirectorio(String dir) {
+    if (dir != null && !dir.isEmpty()) {
+        directorio = dir;
+    }
+}
+public static String getDirectorio() {
+    return directorio;
+}
+    
     public Integrar_TMP() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -525,12 +529,13 @@ public class Integrar_TMP extends javax.swing.JFrame {
 
 
     private void Button_Insertar(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_Insertar
-      String TABLA_SELECCIONADA = Combobox_proceso.getSelectedItem().toString();
+    String TABLA_SELECCIONADA = Combobox_proceso.getSelectedItem().toString();
     List<Periodo> listaPeriodos = new ArrayList<>();
     ItemCombo seleccionado = (ItemCombo) CAño.getSelectedItem();
     int año_seleccionado = seleccionado.getValor();
     Valores();
 
+    // Coleccionar períodos seleccionados
     if (CheckBox_1PO.isSelected()) listaPeriodos.add(Periodo.PRIMER_ORDINARIO);
     if (CheckBox_1PR.isSelected()) listaPeriodos.add(Periodo.PRIMER_RECESO);
     if (CheckBox_2PO.isSelected()) listaPeriodos.add(Periodo.SEGUNDO_ORDINARIO);
@@ -538,62 +543,50 @@ public class Integrar_TMP extends javax.swing.JFrame {
     if (CheckBox_3PO.isSelected()) listaPeriodos.add(Periodo.TERCER_ORDINARIO);
     if (CheckBox_3PR.isSelected()) listaPeriodos.add(Periodo.TERCER_RECESO);
 
-    // ===== VALIDACIONES =====
-    if (listaPeriodos.isEmpty()) {
-        JOptionPane.showMessageDialog(null, "Debe seleccionar al menos un periodo");
-        return;
-    }
-    if (!RadioButtonCsv.isSelected() && !RadioButtonXlsx.isSelected()) {
-        JOptionPane.showMessageDialog(null, "<html>FAVOR DE SELECCIONAR EL FORMATO DEL ARCHIVO (<b>CSV</b> O <b>XLSX</b>).</html>", "Formato requerido", JOptionPane.WARNING_MESSAGE);
-        return;
-    }
-    if (RutaArchivo.getText().isEmpty()) {
-        JOptionPane.showMessageDialog(null, "Favor de seleccionar archivo");
-        return;
-    }
-    if (Envio.isEmpty() || Legislatura.isEmpty()) {
-        JOptionPane.showMessageDialog(null, "Favor de capturar Envío y Legislatura");
-        return;
-    }
+    // ===== VALIDACIONES PRE-INSERCIÓN =====
+    if (!validarPreInsertacion(listaPeriodos)) return;
 
     String tipo = RadioButtonCsv.isSelected() ? "CSV" : "XLSX";
 
-    // ✅ PARCHE: SI ES CSV, SALTA VALIDACIÓN Y VA DIRECTO A INSERTAR
-    if (tipo.equals("CSV")) {
-        System.out.println("✓ CSV detectado - SALTANDO validación general");
-        Label_Progressline.setText("Progreso de carga de datos");
-        Label_Progressline.setVisible(true);
-        ProgressBar_PLE_TMP.setIndeterminate(false);
-        ProgressBar_PLE_TMP.setValue(0);
-        ProgressBar_PLE_TMP.setVisible(true);
-        EnableFalse();
-        
-        Thread thread = new Thread(() -> {
-            try {
-                procesarCSV(TABLA_SELECCIONADA);
-            } catch (Exception ex) {
-                Logger.getLogger(Integrar_TMP.class.getName()).log(Level.SEVERE, null, ex);
-                javax.swing.SwingUtilities.invokeLater(() -> {
-                    JOptionPane.showMessageDialog(null, "Error durante el procesamiento: " + ex.getMessage());
-                    EnableTrue();
-                    ProgressBar_PLE_TMP.setVisible(false);
-                    Progressline.setVisible(false);
-                    Label_Progressline.setVisible(false);
-                });
-            }
-        });
-        thread.start();
-        return; // ← SALE DEL MÉTODO, NO CONTINÚA
+    // ===== INICIAR PROCESO EN THREAD =====
+    iniciarProceso(tipo, TABLA_SELECCIONADA, año_seleccionado, listaPeriodos);
+}
+
+// ===== VALIDAR ANTES DE INSERTAR =====
+private boolean validarPreInsertacion(List<Periodo> listaPeriodos) {
+    if (listaPeriodos.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "Debe seleccionar al menos un periodo");
+        return false;
+    }
+    if (!RadioButtonCsv.isSelected() && !RadioButtonXlsx.isSelected()) {
+        JOptionPane.showMessageDialog(null, 
+            "<html>FAVOR DE SELECCIONAR EL FORMATO DEL ARCHIVO (<b>CSV</b> O <b>XLSX</b>).</html>", 
+            "Formato requerido", JOptionPane.WARNING_MESSAGE);
+        return false;
+    }
+    if (RutaArchivo.getText().isEmpty()) {
+        JOptionPane.showMessageDialog(null, "Favor de seleccionar archivo");
+        return false;
+    }
+    if (Envio.isEmpty() || Legislatura.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "Favor de capturar Envío y Legislatura");
+        return false;
     }
 
-    // ===== PARA XLSX: SÍ HACE LA VALIDACIÓN =====
+    // Validar estatus
     Querys Q = new Querys();
     Estatus = Q.Estatus(Entidad, Legislatura, Envio);
     if (Estatus.equals("Liberado")) {
-        JOptionPane.showMessageDialog(null, "La información se encuentra en estatus liberado\nEntidad: " + Entidad + " Leg: " + Legislatura + " Envío: " + Envio);
-        return;
+        JOptionPane.showMessageDialog(null, 
+            "La información se encuentra en estatus liberado\nEntidad: " + Entidad + 
+            " Leg: " + Legislatura + " Envío: " + Envio);
+        return false;
     }
+    return true;
+}
 
+// ===== INICIAR PROCESO EN THREAD =====
+private void iniciarProceso(String tipo, String TABLA_SELECCIONADA, int año_seleccionado, List<Periodo> listaPeriodos) {
     Label_Progressline.setText("<html><b>ESPERE UN MOMENTO, SE ESTÁ VALIDANDO INFORMACIÓN GENERAL</b></html>");
     Label_Progressline.setVisible(true);
     ProgressBar_PLE_TMP.setIndeterminate(true);
@@ -602,111 +595,112 @@ public class Integrar_TMP extends javax.swing.JFrame {
 
     Thread thread = new Thread(() -> {
         try {
-            valida_info_correcta_Generales valida_gral = new valida_info_correcta_Generales();
-            boolean valido = valida_gral.valida_info_correcta_Generales(año_seleccionado, listaPeriodos, RutaAr, tipo);
+            
+                System.out.println(tipo+": - VALIDANDO antes de insertar");
+                valida_info_correcta_Generales valida_gral = new valida_info_correcta_Generales();
+                boolean valido = valida_gral.valida_info_correcta_Generales(año_seleccionado, listaPeriodos, RutaAr, tipo);
 
-            if (!valido) {
-                javax.swing.SwingUtilities.invokeLater(() -> {
-                    ProgressBar_PLE_TMP.setIndeterminate(false);
-                    ProgressBar_PLE_TMP.setVisible(false);
-                    Label_Progressline.setText("<html><font color='red'><b>Favor de revisar datos antes de continuar.</b></font></html>");
-                    EnableTrue();
-                });
-                return;
-            }
-
-            // ✅ XLSX: Validación OK → Inserción
-            javax.swing.SwingUtilities.invokeLater(() -> {
-                ProgressBar_PLE_TMP.setIndeterminate(false);
-                ProgressBar_PLE_TMP.setValue(0);
-                Label_Progressline.setText("Progreso de carga de datos");
-                Progressline.setVisible(true);
-            });
-
-            procesarXLSX(TABLA_SELECCIONADA);
-
+                if (!valido) {
+                    mostrarErroresValidacion(valida_gral);
+                    return;
+                }
+if (tipo.equals("CSV")) {
+    actualizarUIParaInsercion();
+                procesarCSV(TABLA_SELECCIONADA);
+                }
+else{
+actualizarUIParaInsercion();
+                procesarXLSX(TABLA_SELECCIONADA);
+}
+            
         } catch (Exception ex) {
             Logger.getLogger(Integrar_TMP.class.getName()).log(Level.SEVERE, null, ex);
-            javax.swing.SwingUtilities.invokeLater(() -> {
-                JOptionPane.showMessageDialog(null, "Error durante el procesamiento: " + ex.getMessage());
-                EnableTrue();
-                ProgressBar_PLE_TMP.setVisible(false);
-                Progressline.setVisible(false);
-                Label_Progressline.setVisible(false);
-            });
+            mostrarError("Error durante el procesamiento: " + ex.getMessage());
+        } finally {
+            finalizarProceso();
         }
     });
 
     thread.start();
 }
 
+// ===== MOSTRAR ERRORES DE VALIDACIÓN =====
+private void mostrarErroresValidacion(valida_info_correcta_Generales valida_gral) {
+    javax.swing.SwingUtilities.invokeLater(() -> {
+        ProgressBar_PLE_TMP.setIndeterminate(false);
+        ProgressBar_PLE_TMP.setVisible(false);
+        Label_Progressline.setText("<html><font color='red'><b>Favor de revisar datos antes de continuar.</b></font></html>");
+
+        if (!valida_gral.EntidadOk) JOptionPane.showMessageDialog(null, "<html><b>La ENTIDAD capturada no coincide</b> con el archivo de Excel.</html>");
+        if (!valida_gral.LegisOk) JOptionPane.showMessageDialog(null, "<html><b>La LEGISLATURA capturada no coincide</b> con el archivo de Excel.</html>");
+        if (!valida_gral.AñoOk) JOptionPane.showMessageDialog(null, "<html><b>El AÑO capturado no coincide</b> con el archivo de Excel.</html>");
+        if (!valida_gral.PeriodosOk) JOptionPane.showMessageDialog(null, "<html><b>Los PERIODOS capturados no coinciden</b> con el archivo de Excel.</html>");
+        EnableTrue();
+    });
+}
+
+// ===== ACTUALIZAR UI PARA INSERCIÓN =====
+private void actualizarUIParaInsercion() {
+    javax.swing.SwingUtilities.invokeLater(() -> {
+        ProgressBar_PLE_TMP.setIndeterminate(false);
+        ProgressBar_PLE_TMP.setValue(0);
+        Label_Progressline.setText("Progreso de carga de datos");
+        Progressline.setVisible(true); });
+}
+
 // ===== PROCESAR CSV =====
 private void procesarCSV(String TABLA_SELECCIONADA) throws Exception {
-    System.out.println("📁 Procesando CSV - Tabla: " + TABLA_SELECCIONADA);
-    
-    try {
-        if (TABLA_SELECCIONADA.equals("ALL_TABLES")) {
-            procesarTodosLosArchivosCSV();
-        } else {
-            procesarArchivoCSVIndividual(TABLA_SELECCIONADA);
-        }
-    } finally {
-        finalizarProceso();
-    }
+    System.out.println("📁 Procesando CSV");
+    if (TABLA_SELECCIONADA.equals("ALL_TABLES")) {
+        procesarTodosArchivosCSV();
+    } else  procesarArchivoCSVIndividual(TABLA_SELECCIONADA);   
 }
 
 // ===== PROCESAR TODOS LOS ARCHIVOS CSV =====
-private void procesarTodosLosArchivosCSV() throws Exception {
+private void procesarTodosArchivosCSV() throws Exception {
     EliminaTMP Elimina = new EliminaTMP();
     Elimina.EliminaTMP(Entidad, Envio, Legislatura, "ALL_TABLES");
-    
+
+    Map<String, String> archivosCSV = new LinkedHashMap<>();
+    archivosCSV.put("TMP_PLE_MEDS1_1", "BD_datos_generales.csv");
+    archivosCSV.put("TMP_PLE_MEDS1_2", "BD_comisiones_legislativas.csv");
+    archivosCSV.put("TMP_PLE_MEDS1_3", "BD_personas_legisladoras.csv");
+    archivosCSV.put("TMP_PLE_MEDS1_4", "BD_personal_apoyo.csv");
+    archivosCSV.put("TMP_PLE_MEDS1_5", "BD_iniciativas.csv");
+    archivosCSV.put("TMP_PLE_MEDS1_6", "BD_iniciativas_urgente_obvia.csv");
+    archivosCSV.put("TMP_PLE_MEDS1_7", "BD_juicios_politicos.csv");
+    archivosCSV.put("TMP_PLE_MEDS1_8", "BD_declaraciones_procedencias.csv");
+    archivosCSV.put("TMP_PLE_MEDS1_9", "BD_comparecencias.csv");
+    int totalTablas = archivosCSV.size();
     int progreso = 3;
-    int incremento = 97 / 9;
-    
-    procesarYActualizarCSV("TMP_PLE_MEDS1_1", "BD_datos_generales.csv", progreso);
-    progreso += incremento;
-    
-    procesarYActualizarCSV("TMP_PLE_MEDS1_2", "BD_comisiones_legislativas.csv", progreso);
-    progreso += incremento;
-    
-    procesarYActualizarCSV("TMP_PLE_MEDS1_3", "BD_personas_legisladoras.csv", progreso);
-    progreso += incremento;
-    
-    procesarYActualizarCSV("TMP_PLE_MEDS1_4", "BD_personal_apoyo.csv", progreso);
-    progreso += incremento;
-    
-    procesarYActualizarCSV("TMP_PLE_MEDS1_5", "BD_iniciativas.csv", progreso);
-    progreso += incremento;
-    
-    procesarYActualizarCSV("TMP_PLE_MEDS1_6", "BD_iniciativas_urgente_obvia.csv", progreso);
-    progreso += incremento;
-    
-    procesarYActualizarCSV("TMP_PLE_MEDS1_7", "BD_juicios_politicos.csv", progreso);
-    progreso += incremento;
-    
-    procesarYActualizarCSV("TMP_PLE_MEDS1_8", "BD_declaraciones_procedencias.csv", progreso);
-    progreso += incremento;
-    
-    procesarYActualizarCSV("TMP_PLE_MEDS1_9", "BD_comparecencias.csv", 100);
-    
-    javax.swing.SwingUtilities.invokeLater(() -> {
-        ProgressBar_PLE_TMP.setValue(100);
-        JOptionPane.showMessageDialog(null, "✓ Información insertada a TMP, favor de revisar pantalla errores de insert");
-    });
+    int incremento = 97 / totalTablas;
+    for (Map.Entry<String, String> entry : archivosCSV.entrySet()) {
+        procesarYActualizarCSV(entry.getKey(), entry.getValue(), progreso);
+        progreso += incremento;
+    }
+    ProgressBar_PLE_TMP.setValue(100);
+    mostrarExito("Información insertada a TMP, favor de revisar pantalla errores de insert");
 }
 
 // ===== PROCESAR UN ARCHIVO CSV INDIVIDUAL =====
 private void procesarArchivoCSVIndividual(String TABLA_SELECCIONADA) throws Exception {
     EliminaTMP elimina = new EliminaTMP();
     elimina.EliminaTMP(Entidad, Envio, Legislatura, TABLA_SELECCIONADA);
-    
-    javax.swing.SwingUtilities.invokeLater(() -> {
-        Progressline.setText("");
-        ProgressBar_PLE_TMP.setValue(1);
-        Progressline.setText(TABLA_SELECCIONADA);
-    });
+    actualizarProgress(TABLA_SELECCIONADA, 1);
+    ejecutarCSV(TABLA_SELECCIONADA);
+    ProgressBar_PLE_TMP.setValue(100);
+    mostrarExito("Información insertada a TMP, favor de revisar pantalla errores de insert");
+}
 
-    switch (TABLA_SELECCIONADA) {
+// ===== PROCESAR Y ACTUALIZAR CSV =====
+private void procesarYActualizarCSV(String tabla, String archivo, int progreso) throws Exception {
+    actualizarProgress(tabla, progreso);
+    ejecutarCSV(tabla);
+}
+
+// ===== EJECUTAR CSV POR TABLA =====
+private void ejecutarCSV(String tabla) throws Exception {
+    switch (tabla) {
         case "TMP_PLE_MEDS1_1":
             new Tmp_ple_meds1_1_CSV().Meds1_1_CSV(directorio + "BD_datos_generales.csv", Entidad, Envio, Legislatura, Estatus);
             break;
@@ -735,49 +729,127 @@ private void procesarArchivoCSVIndividual(String TABLA_SELECCIONADA) throws Exce
             new Tmp_ple_meds1_9_CSV().Meds1_9_CSV(directorio + "BD_comparecencias.csv", Entidad, Envio, Legislatura, Estatus);
             break;
         default:
-            throw new IllegalArgumentException("Tabla no soportada: " + TABLA_SELECCIONADA);
+            throw new IllegalArgumentException("Tabla no soportada: " + Combobox_proceso.getSelectedItem().toString());
     }
-    
-    javax.swing.SwingUtilities.invokeLater(() -> {
-        ProgressBar_PLE_TMP.setValue(100);
-        JOptionPane.showMessageDialog(null, "✓ Información insertada a TMP, favor de revisar pantalla errores de insert");
-    });
 }
 
-// ===== AUXILIAR: PROCESAR Y ACTUALIZAR CSV =====
-private void procesarYActualizarCSV(String tabla, String archivo, int progreso) throws Exception {
+// ===== PROCESAR XLSX =====
+private void procesarXLSX(String TABLA_SELECCIONADA) throws Exception {
+    System.out.println("📊 Procesando XLSX");
+
+    if (TABLA_SELECCIONADA.equals("ALL_TABLES")) {
+        procesarTodosArchivosXLSX();
+    } else {
+        procesarArchivoXLSXIndividual(TABLA_SELECCIONADA);
+    }
+}
+
+// ===== PROCESAR TODOS LOS ARCHIVOS XLSX =====
+private void procesarTodosArchivosXLSX() throws Exception {
+    EliminaTMP Elimina = new EliminaTMP();
+    Elimina.EliminaTMP(Entidad, Envio, Legislatura, "ALL_TABLES");
+
+    String[] tablas = {
+        "TMP_PLE_MEDS1_1", "TMP_PLE_MEDS1_1A", "TMP_PLE_MEDS1_1B", "TMP_PLE_MEDS1_1C", 
+        "TMP_PLE_MEDS1_1D", "TMP_PLE_MEDS1_2", "TMP_PLE_MEDS1_3", "TMP_PLE_MEDS1_4", 
+        "TMP_PLE_MEDS1_5", "TMP_PLE_MEDS1_6", "TMP_PLE_MEDS1_7", "TMP_PLE_MEDS1_8", "TMP_PLE_MEDS1_9"
+    };
+    int[] progresos = {3, 7, 14, 21, 27, 34, 41, 48, 56, 64, 72, 80, 90};
+
+    for (int i = 0; i < tablas.length; i++) {
+        actualizarProgress(tablas[i], progresos[i]);
+        ejecutarXLSX(tablas[i]);
+    }
+
+    ProgressBar_PLE_TMP.setValue(100);
+    mostrarExito("Información insertada a TMP, favor de revisar pantalla errores de insert");
+}
+
+// ===== PROCESAR UN ARCHIVO XLSX INDIVIDUAL =====
+private void procesarArchivoXLSXIndividual(String TABLA_SELECCIONADA) throws Exception {
+    EliminaTMP Elimina = new EliminaTMP();
+    Elimina.EliminaTMP(Entidad, Envio, Legislatura, TABLA_SELECCIONADA);
+
+    actualizarProgress(TABLA_SELECCIONADA, 15);
+    ejecutarXLSX(TABLA_SELECCIONADA);
+
+    ProgressBar_PLE_TMP.setValue(100);
+    mostrarExito("Información insertada, favor de revisar pantalla errores de insert");
+}
+
+// ===== EJECUTAR XLSX POR TABLA =====
+private void ejecutarXLSX(String tabla) throws Exception {
+    switch (tabla) {
+        case "TMP_PLE_MEDS1_1":
+            new Tmp_ple_meds1_1().In_Tmp_ple_meds1_1(Entidad, Envio, Legislatura, CEstatus.getSelectedItem().toString());
+            break;
+        case "TMP_PLE_MEDS1_1A":
+            new Tmp_ple_meds1_1A().in_Tmp_ple_meds1_1A(Entidad, Envio, Legislatura);
+            break;
+        case "TMP_PLE_MEDS1_1B":
+            new Tmp_ple_meds1_1B().Tmp_ple_meds1_1B(Entidad, Envio, Legislatura);
+            break;
+        case "TMP_PLE_MEDS1_1C":
+            new Tmp_ple_meds1_1C().Tmp_ple_meds1_1C(Entidad, Envio, Legislatura);
+            break;
+        case "TMP_PLE_MEDS1_1D":
+            new Tmp_ple_meds1_1D().Tmp_ple_meds1_1D(Entidad, Envio, Legislatura);
+            break;
+        case "TMP_PLE_MEDS1_2":
+            new Tmp_ple_meds1_2().Tmp_ple_meds1_2(Entidad, Envio, Legislatura);
+            break;
+        case "TMP_PLE_MEDS1_3":
+            new Tmp_ple_meds1_3().Tmp_ple_meds1_3(Entidad, Envio, Legislatura);
+            break;
+        case "TMP_PLE_MEDS1_4":
+            new Tmp_ple_meds1_4().Tmp_ple_meds1_4(Entidad, Envio, Legislatura);
+            break;
+        case "TMP_PLE_MEDS1_5":
+            new Tmp_ple_meds1_5().Tmp_ple_meds1_5(Entidad, Envio, Legislatura);
+            break;
+        case "TMP_PLE_MEDS1_6":
+            new Tmp_ple_meds1_6().Tmp_ple_meds1_6(Entidad, Envio, Legislatura);
+            break;
+        case "TMP_PLE_MEDS1_7":
+            new Tmp_ple_meds1_7().Tmp_ple_meds1_7(Entidad, Envio, Legislatura);
+            break;
+        case "TMP_PLE_MEDS1_8":
+            new Tmp_ple_meds1_8().Tmp_ple_meds1_8(Entidad, Envio, Legislatura);
+            break;
+        case "TMP_PLE_MEDS1_9":
+            new Tmp_ple_meds1_9().Tmp_ple_meds1_9(Entidad, Envio, Legislatura);
+            break;
+        default:
+            throw new IllegalArgumentException("Tabla no soportada: " + tabla);
+    }
+}
+
+// ===== ACTUALIZAR PROGRESS =====
+private void actualizarProgress(String tabla, int progreso) {
     javax.swing.SwingUtilities.invokeLater(() -> {
         Progressline.setText(tabla);
         ProgressBar_PLE_TMP.setValue(progreso);
     });
-    
-    switch (tabla) {
-        case "TMP_PLE_MEDS1_1": new Tmp_ple_meds1_1_CSV().Meds1_1_CSV(directorio + archivo, Entidad, Envio, Legislatura, Estatus); break;
-        case "TMP_PLE_MEDS1_2": new Tmp_ple_meds1_2_CSV().Meds1_2_CSV(directorio + archivo, Entidad, Envio, Legislatura, Estatus); break;
-        case "TMP_PLE_MEDS1_3": new Tmp_ple_meds1_3_CSV().Meds1_3_CSV(directorio + archivo, Entidad, Envio, Legislatura, Estatus); break;
-        case "TMP_PLE_MEDS1_4": new Tmp_ple_meds1_4_CSV().Meds1_4_CSV(directorio + archivo, Entidad, Envio, Legislatura, Estatus); break;
-        case "TMP_PLE_MEDS1_5": new Tmp_ple_meds1_5_CSV().Meds1_5_CSV(directorio + archivo, Entidad, Envio, Legislatura, Estatus); break;
-        case "TMP_PLE_MEDS1_6": new Tmp_ple_meds1_6_CSV().Meds1_6_CSV(directorio + archivo, Entidad, Envio, Legislatura, Estatus); break;
-        case "TMP_PLE_MEDS1_7": new Tmp_ple_meds1_7_CSV().Meds1_7_CSV(directorio + archivo, Entidad, Envio, Legislatura, Estatus); break;
-        case "TMP_PLE_MEDS1_8": new Tmp_ple_meds1_8_CSV().Meds1_8_CSV(directorio + archivo, Entidad, Envio, Legislatura, Estatus); break;
-        case "TMP_PLE_MEDS1_9": new Tmp_ple_meds1_9_CSV().Meds1_9_CSV(directorio + archivo, Entidad, Envio, Legislatura, Estatus); break;
-    }
 }
 
-// ===== PROCESAR XLSX (MANTIENE LA VALIDACIÓN) =====
-private void procesarXLSX(String TABLA_SELECCIONADA) throws Exception {
-    System.out.println("📊 Procesando XLSX - Tabla: " + TABLA_SELECCIONADA);
-    
-    try {
-        if (TABLA_SELECCIONADA.equals("ALL_TABLES")) {
-            procesarTodosLosArchivosXLSX();
-        } else {
-            procesarArchivoXLSXIndividual(TABLA_SELECCIONADA);
-        }
-    } finally {
-        finalizarProceso();
-    }
+// ===== MOSTRAR ÉXITO =====
+private void mostrarExito(String mensaje) {
+    javax.swing.SwingUtilities.invokeLater(() -> 
+        JOptionPane.showMessageDialog(null, mensaje)
+    );
 }
+
+// ===== MOSTRAR ERROR =====
+private void mostrarError(String mensaje) {
+    javax.swing.SwingUtilities.invokeLater(() -> {
+        JOptionPane.showMessageDialog(null, mensaje);
+        EnableTrue();
+        ProgressBar_PLE_TMP.setVisible(false);
+        Progressline.setVisible(false);
+        Label_Progressline.setVisible(false);
+    });
+}
+
 
 // ===== PROCESAR TODOS LOS ARCHIVOS XLSX =====
 private void procesarTodosLosArchivosXLSX() throws Exception {
@@ -806,20 +878,7 @@ private void procesarTodosLosArchivosXLSX() throws Exception {
     });
 }
 
-// ===== PROCESAR UN ARCHIVO XLSX INDIVIDUAL =====
-private void procesarArchivoXLSXIndividual(String TABLA_SELECCIONADA) throws Exception {
-    EliminaTMP Elimina = new EliminaTMP();
-    Elimina.EliminaTMP(Entidad, Envio, Legislatura, TABLA_SELECCIONADA);
-    
-    javax.swing.SwingUtilities.invokeLater(() -> ProgressBar_PLE_TMP.setValue(15));
-    
-    procesarTablaXLSX(TABLA_SELECCIONADA);
-    
-    javax.swing.SwingUtilities.invokeLater(() -> {
-        ProgressBar_PLE_TMP.setValue(100);
-        JOptionPane.showMessageDialog(null, "✓ Información insertada, favor de revisar pantalla errores de insert");
-    });
-}
+
 
 // ===== PROCESAR TABLA XLSX =====
 private void procesarTablaXLSX(String tabla) throws Exception {
@@ -842,13 +901,12 @@ private void procesarTablaXLSX(String tabla) throws Exception {
 
 // ===== FINALIZAR PROCESO =====
 private void finalizarProceso() {
-    javax.swing.SwingUtilities.invokeLater(() -> {
+      javax.swing.SwingUtilities.invokeLater(() -> {
         EnableTrue();
         ProgressBar_PLE_TMP.setVisible(false);
         Progressline.setVisible(false);
         Label_Progressline.setVisible(false);
     });
-
     }//GEN-LAST:event_Button_Insertar
 
     private void botón_log_tablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botón_log_tablaActionPerformed
@@ -860,14 +918,9 @@ private void finalizarProceso() {
                 Errores_InsertTMP Errores = new Errores_InsertTMP();
                 Errores.setVisible(true);
 
-            } else {
-                JOptionPane.showMessageDialog(null, "Ventana Errores de insert abierta");
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "Favor de capturar Entidad,Envío y Legislatura");
-        }
-
-
+            } else JOptionPane.showMessageDialog(null, "Ventana Errores de insert abierta");
+            
+        } else JOptionPane.showMessageDialog(null, "Favor de capturar Entidad,Envío y Legislatura");        
     }//GEN-LAST:event_botón_log_tablaActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
