@@ -4,14 +4,12 @@
  */
 package Pantallas_JA;
 
-import Pantallas_JA.*;
+
 import java.awt.Color;
 import java.io.IOException;
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.Year;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;

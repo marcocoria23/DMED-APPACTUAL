@@ -3273,7 +3273,7 @@ public class ValPLE {
                 XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                 celdaD2.setCellStyle(estiloCeldabordes0);
                 celdaD2.setCellType(CellType.STRING);
-                String txtD2 = "No se debe de capturar el campo P1_2_16-P(cond_transmision_reuniones_celebradas_comision_legislativa)	ya que P1_2_13-M(cond_celebracion_reuniones_comision_legislativa) tiene el valor diferente de SI (1) ";
+                String txtD2 = "No se debe de capturar el campo P1_2_16-P(cond_transmision_reuniones_celebradas_comision_legislativa)   ya que P1_2_13-M(cond_celebracion_reuniones_comision_legislativa) tiene el valor diferente de SI (1) ";
                 XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                 celdaD2.setCellValue(textoD2);
 
@@ -4083,81 +4083,7 @@ public class ValPLE {
             coni_PL = 1;
         }
 
-         ArrayResult = PL.Conteo_iniciativas_por_legislador(entidad, legislatura, envio);
-        if (ArrayResult.size() > 0) {
-            XSSFRow filaEE1 = hojaPersonas_legiladoras.createRow(conEnc_PL);//FILA
-            XSSFCell celdaE1 = filaEE1.createCell(0);//COLUMNA
-            celdaE1.setCellStyle(estiloCelda1);
-            celdaE1.setCellType(CellType.STRING);
-            String txtE1 = "ID_persona_legisladora";
-            XSSFRichTextString textoE1 = new XSSFRichTextString(txtE1);
-            celdaE1.setCellValue(textoE1);
-
-            XSSFCell celdaE6 = filaEE1.createCell(1);//COLUMNA
-            celdaE6.setCellStyle(estiloCelda1);
-            celdaE6.setCellType(CellType.STRING);
-            String txtE6 = "OBSERVACIONES";
-            XSSFRichTextString textoE6 = new XSSFRichTextString(txtE6);
-            celdaE6.setCellValue(textoE6);
-
-            XSSFCell celdaE7 = filaEE1.createCell(2);//COLUMNA
-            celdaE7.setCellStyle(estiloCelda1);
-            celdaE7.setCellType(CellType.STRING);
-            String txtE7 = "ID_ENTIDAD";
-            XSSFRichTextString textoE7 = new XSSFRichTextString(txtE7);
-            celdaE7.setCellValue(textoE7);
-
-            XSSFCell celdaE8 = filaEE1.createCell(3);//COLUMNA
-            celdaE8.setCellStyle(estiloCelda1);
-            celdaE8.setCellType(CellType.STRING);
-            String txtE8 = "JUSTIFICACION";
-            XSSFRichTextString textoE8 = new XSSFRichTextString(txtE8);
-            celdaE8.setCellValue(textoE8);
-
-            for (int i = 0; i < ArrayResult.size(); i++) {
-                XSSFRow filaEE2 = hojaPersonas_legiladoras.createRow(conDat_PL + i);
-
-                XSSFCell celdaD1 = filaEE2.createCell(0);//COLUMNA
-                celdaD1.setCellStyle(estiloCeldabordes0);
-                celdaD1.setCellType(CellType.STRING);
-                //String txtD1 = Arrays.toString(ArrayResult.get(i));
-                String txtD1 = Arrays.toString(ArrayResult.get(i));
-                txtD1 = txtD1.replace("[", "").replace("]", "").replace(" 00:00:00.0", "");
-                String[] parts = txtD1.split(",");
-                String parts1 = parts[1].trim();
-                XSSFRichTextString textoD1 = new XSSFRichTextString(parts1);
-                celdaD1.setCellValue(textoD1);
-
-                XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
-                celdaD2.setCellStyle(estiloCeldabordes0);
-                celdaD2.setCellType(CellType.STRING);
-                String txtD2 = "El número de iniciativas registradas en el campo cant_iniciativas_presentadas_persona_legisladora (BO-P1_3_66) en la pestaña \"personas_legisladores\" no coincide con el conteo de iniciativas asociado al mismo ID de legislador de la sección personas_legisladoras_promoventes_iniciativa (celdas de la Q-P1_5_17 a la BD-P1_5_55) de la pestaña \"iniciativas\". ";
-                XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
-                celdaD2.setCellValue(textoD2);
-                XSSFCell celdaD3 = filaEE2.createCell(2);//COLU
-                celdaD3.setCellStyle(estiloCeldabordes0);
-                celdaD3.setCellType(CellType.STRING);
-                String txtD3 = Arrays.toString(ArrayResult.get(i));
-                txtD3 = txtD3.replace("[", "").replace("]", "").replace(" 00:00:00.0", "");
-                String[] parts3 = txtD3.split(",");
-                String parts4 = parts3[0].trim();
-                XSSFRichTextString textoD3 = new XSSFRichTextString(parts4);
-                celdaD3.setCellValue(textoD3);
-
-                XSSFCell celdaD4 = filaEE2.createCell(3);//COLUMNA
-                celdaD4.setCellStyle(estiloCeldabordes0);
-                celdaD4.setCellType(CellType.STRING);
-                String txtD4 = "";
-                XSSFRichTextString textoD4 = new XSSFRichTextString(txtD4);
-                celdaD4.setCellValue(textoD4);
-
-                coni_PL++;
-            }
-            conEnc_PL = conEnc_PL + coni_PL;
-            conDat_PL = conDat_PL + coni_PL;
-            coni_PL = 1;
-        }
-
+      
         
         ArrayResult = PL.DBotro_estatus_persona_legisladora_especifique(entidad, legislatura, envio);
         if (ArrayResult.size() > 0) {

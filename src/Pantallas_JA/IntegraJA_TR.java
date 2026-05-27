@@ -7,7 +7,6 @@ package Pantallas_JA;
 import Convertir_CSV.Convertir_CSV;
 import java.awt.Color;
 import java.awt.FileDialog;
-import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -25,7 +24,7 @@ import mx.org.inegi.insert_TR.JA.TR_JA_TRAMITE;
 
 /**
  *
- * @author ANDREA.HERNANDEZL
+ * @author LAURA.MEDINAJ
  */
 public class IntegraJA_TR extends javax.swing.JFrame {
 
