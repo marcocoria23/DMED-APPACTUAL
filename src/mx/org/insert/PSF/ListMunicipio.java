@@ -1929,6 +1929,7 @@ public class ListMunicipio {
         Array.add("24056");
         Array.add("24057");
         Array.add("24058");
+        Array.add("24059");
         Array.add("24999");
         Array.add("25001");
         Array.add("25002");
@@ -1948,6 +1949,8 @@ public class ListMunicipio {
         Array.add("25016");
         Array.add("25017");
         Array.add("25018");
+        Array.add("25019");
+        Array.add("25020");
         Array.add("25999");
         Array.add("26001");
         Array.add("26002");
@@ -4443,6 +4446,7 @@ public class ListMunicipio {
         Array.add("Villa de Arista");
         Array.add("Matlapa");
         Array.add("El Naranjo");
+         Array.add("Villa de Pozos");
         Array.add("San Luis Potosí - No identificado");
         Array.add("Ahome");
         Array.add("Angostura");
@@ -4462,6 +4466,8 @@ public class ListMunicipio {
         Array.add("San Ignacio");
         Array.add("Sinaloa");
         Array.add("Navolato");
+        Array.add("Eldorado");
+        Array.add("Juan José Ríos");
         Array.add("Sinaloa - No identificado");
         Array.add("Aconchi");
         Array.add("Agua Prieta");

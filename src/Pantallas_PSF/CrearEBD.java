@@ -39,12 +39,12 @@ public class CrearEBD extends javax.swing.JFrame {
 
         jDialog1 = new javax.swing.JDialog();
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        Logo = new javax.swing.JLabel();
+        Titulo1 = new javax.swing.JLabel();
+        titulo2 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        Label_año = new javax.swing.JLabel();
+        Button_creaEBD = new javax.swing.JButton();
         InsertaAnio = new javax.swing.JComboBox<>();
 
         javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
@@ -70,13 +70,13 @@ public class CrearEBD extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Logo CNG.png"))); // NOI18N
+        Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Logo CNG.png"))); // NOI18N
 
-        jLabel2.setFont(new java.awt.Font("Cambria", 0, 18)); // NOI18N
-        jLabel2.setText("Programas Sociales Federal Y ");
+        Titulo1.setFont(new java.awt.Font("Cambria", 0, 18)); // NOI18N
+        Titulo1.setText("Programas Sociales Federal Y ");
 
-        jLabel3.setFont(new java.awt.Font("Cambria", 0, 18)); // NOI18N
-        jLabel3.setText("Contrataciones Publicas Federal");
+        titulo2.setFont(new java.awt.Font("Cambria", 0, 18)); // NOI18N
+        titulo2.setText("Contrataciones Publicas Federal");
 
         jPanel2.setBackground(new java.awt.Color(204, 204, 0));
 
@@ -91,20 +91,17 @@ public class CrearEBD extends javax.swing.JFrame {
             .addGap(0, 17, Short.MAX_VALUE)
         );
 
-        jLabel4.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
-        jLabel4.setText("Año:");
+        Label_año.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
+        Label_año.setText("Año:");
 
-        jButton1.setBackground(new java.awt.Color(255, 255, 255));
-        jButton1.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon("C:\\Users\\andrea.hernandezl\\Desktop\\AppMED_DEFINITIV2\\AppMED\\Imagenes\\CrearEBD.jpg")); // NOI18N
-        jButton1.setText("Crear EBD");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        Button_creaEBD.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
+        Button_creaEBD.setText("Crear EBD");
+        Button_creaEBD.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                Button_creaEBDActionPerformed(evt);
             }
         });
 
-        InsertaAnio.setBackground(new java.awt.Color(255, 255, 255));
         InsertaAnio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 InsertaAnioActionPerformed(evt);
@@ -119,13 +116,13 @@ public class CrearEBD extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(117, 117, 117)
-                        .addComponent(jLabel2)
+                        .addComponent(Titulo1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel3)
+                        .addComponent(titulo2)
                         .addGap(72, 72, 72)))
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Logo, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
@@ -133,13 +130,13 @@ public class CrearEBD extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(28, 28, 28)
-                .addComponent(jLabel4)
+                .addComponent(Label_año)
                 .addGap(18, 18, 18)
                 .addComponent(InsertaAnio, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(Button_creaEBD)
                 .addGap(28, 28, 28))
         );
         jPanel1Layout.setVerticalGroup(
@@ -148,18 +145,18 @@ public class CrearEBD extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
+                        .addComponent(Titulo1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel3))
-                    .addComponent(jLabel1))
+                        .addComponent(titulo2))
+                    .addComponent(Logo))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
+                    .addComponent(Label_año)
                     .addComponent(InsertaAnio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(Button_creaEBD)
                 .addGap(42, 42, 42))
         );
 
@@ -199,7 +196,7 @@ public class CrearEBD extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_InsertaAnioActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void Button_creaEBDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_creaEBDActionPerformed
         // TODO add your handling code here:
         BarraInsert BI = new BarraInsert();
         Querys Q = new Querys();
@@ -207,7 +204,7 @@ public class CrearEBD extends javax.swing.JFrame {
         ProcCreaLlaves PLL = new ProcCreaLlaves();
         new Thread(() -> {
             try {
-                int respuesta = JOptionPane.showConfirmDialog(null, "¿Estas seguro de crear la Estructura de la BD?", "Pregunta", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                int respuesta = JOptionPane.showConfirmDialog(null, "¿Estás seguro de crear la Estructura de la BD?", "Pregunta", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                 if (respuesta == JOptionPane.YES_OPTION) {
                     BI.setVisible(true);
                     Q.ValCreaTablas(InsertaAnio.getSelectedItem().toString());
@@ -220,10 +217,10 @@ public class CrearEBD extends javax.swing.JFrame {
                         Integer Anio = Integer.valueOf(selectedItem);
                         PC.CreaTabDinamica(Anio);
                         PLL.CreaLlaves(Anio);
-                        jButton1.setVisible(false);
+                        Button_creaEBD.setVisible(false);
                         JOptionPane.showMessageDialog(null, "La información se ha creado");
                         BI.setVisible(false);
-                        jButton1.setVisible(true);
+                        Button_creaEBD.setVisible(true);
                     }
 
                 }
@@ -231,7 +228,7 @@ public class CrearEBD extends javax.swing.JFrame {
                 Logger.getLogger(CrearEBD.class.getName()).log(Level.SEVERE, null, ex);
             }
         }).start();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_Button_creaEBDActionPerformed
 
     /**
      * @param args the command line arguments
@@ -269,14 +266,14 @@ public class CrearEBD extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Button_creaEBD;
     private javax.swing.JComboBox<String> InsertaAnio;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel Label_año;
+    private javax.swing.JLabel Logo;
+    private javax.swing.JLabel Titulo1;
     private javax.swing.JDialog jDialog1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel titulo2;
     // End of variables declaration//GEN-END:variables
 }

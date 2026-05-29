@@ -33,8 +33,8 @@ public class IntegraPSF_TMP extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.getContentPane().setBackground(Color.WHITE);
-        jLabel5.setVisible(false);
-        jProgressBar1.setVisible(false);
+        Label_Progress.setVisible(false);
+        ProgressBar_PSF.setVisible(false);
         Ttabla.setVisible(false);
     }
 
@@ -47,19 +47,19 @@ public class IntegraPSF_TMP extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel2 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
+        Titulo_1 = new javax.swing.JLabel();
+        Logo = new javax.swing.JLabel();
+        Border_PSF = new javax.swing.JPanel();
+        Label_ruta_archivo = new javax.swing.JLabel();
         RutaArchivo = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
-        jProgressBar1 = new javax.swing.JProgressBar();
+        button_directorio = new javax.swing.JButton();
+        Button_insert = new javax.swing.JButton();
+        Label_Progress = new javax.swing.JLabel();
+        ProgressBar_PSF = new javax.swing.JProgressBar();
         Ttabla = new javax.swing.JLabel();
-        jToggleButton2 = new javax.swing.JToggleButton();
-        jButton3 = new javax.swing.JButton();
-        jLabel6 = new javax.swing.JLabel();
+        Btn_Nota = new javax.swing.JToggleButton();
+        Btn_errores = new javax.swing.JButton();
+        Titulo_2 = new javax.swing.JLabel();
 
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -67,66 +67,66 @@ public class IntegraPSF_TMP extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setBackground(new java.awt.Color(0, 0, 102));
-        jLabel2.setFont(new java.awt.Font("Cambria", 0, 18)); // NOI18N
-        jLabel2.setText("Programas Sociales Federal Y ");
+        Titulo_1.setBackground(new java.awt.Color(0, 0, 102));
+        Titulo_1.setFont(new java.awt.Font("Cambria", 0, 18)); // NOI18N
+        Titulo_1.setText("Programas Sociales Federal Y ");
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Logo CNG.png"))); // NOI18N
+        Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Logo CNG.png"))); // NOI18N
 
-        jPanel2.setBackground(new java.awt.Color(204, 204, 0));
+        Border_PSF.setBackground(new java.awt.Color(204, 204, 0));
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout Border_PSFLayout = new javax.swing.GroupLayout(Border_PSF);
+        Border_PSF.setLayout(Border_PSFLayout);
+        Border_PSFLayout.setHorizontalGroup(
+            Border_PSFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 532, Short.MAX_VALUE)
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        Border_PSFLayout.setVerticalGroup(
+            Border_PSFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 11, Short.MAX_VALUE)
         );
 
-        jLabel4.setText("Ruta archivo:");
+        Label_ruta_archivo.setText("Ruta archivo:");
 
         RutaArchivo.setEnabled(false);
 
-        jButton1.setText("....");
-        jButton1.setToolTipText("Seleccionar Archivo");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        button_directorio.setText("....");
+        button_directorio.setToolTipText("Seleccionar Archivo");
+        button_directorio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                button_directorioActionPerformed(evt);
             }
         });
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Insertar.png"))); // NOI18N
-        jButton2.setText("Insertar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        Button_insert.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Insertar.png"))); // NOI18N
+        Button_insert.setText("Insertar");
+        Button_insert.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                Button_insertActionPerformed(evt);
             }
         });
 
-        jLabel5.setText("Progreso...");
+        Label_Progress.setText("Progreso...");
 
-        jToggleButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Nota.png"))); // NOI18N
-        jToggleButton2.setText("Nota");
-        jToggleButton2.addActionListener(new java.awt.event.ActionListener() {
+        Btn_Nota.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Nota.png"))); // NOI18N
+        Btn_Nota.setText("Nota");
+        Btn_Nota.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton2ActionPerformed(evt);
+                Btn_NotaActionPerformed(evt);
             }
         });
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/errorins.png"))); // NOI18N
-        jButton3.setToolTipText("Errores de Insert");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        Btn_errores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/errorins.png"))); // NOI18N
+        Btn_errores.setToolTipText("Errores de Insert");
+        Btn_errores.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                Btn_erroresActionPerformed(evt);
             }
         });
 
-        jLabel6.setBackground(new java.awt.Color(0, 0, 102));
-        jLabel6.setFont(new java.awt.Font("Cambria", 0, 18)); // NOI18N
-        jLabel6.setText("Contrataciones Publicas Federal");
+        Titulo_2.setBackground(new java.awt.Color(0, 0, 102));
+        Titulo_2.setFont(new java.awt.Font("Cambria", 0, 18)); // NOI18N
+        Titulo_2.setText("Contrataciones Publicas Federal");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -135,40 +135,40 @@ public class IntegraPSF_TMP extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ProgressBar_PSF, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Label_Progress, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Ttabla, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(13, 13, 13)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Border_PSF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 12, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(button_directorio, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4)
+                                .addComponent(Label_ruta_archivo)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(RutaArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, 396, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jButton2))
+                            .addComponent(Button_insert))
                         .addGap(32, 32, 32))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jToggleButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(Btn_Nota, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Btn_errores, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(24, 24, 24))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(112, 112, 112)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel6))
+                    .addComponent(Titulo_1)
+                    .addComponent(Titulo_2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Logo, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30))
         );
         layout.setVerticalGroup(
@@ -176,40 +176,40 @@ public class IntegraPSF_TMP extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
+                    .addComponent(Logo)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(12, 12, 12)
-                        .addComponent(jLabel2)
+                        .addComponent(Titulo_1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel6)))
+                        .addComponent(Titulo_2)))
                 .addGap(19, 19, 19)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Border_PSF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jToggleButton2)
+                .addComponent(Btn_Nota)
                 .addGap(10, 10, 10)
-                .addComponent(jButton3)
+                .addComponent(Btn_errores)
                 .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Label_ruta_archivo, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(RutaArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
+                .addComponent(button_directorio)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Button_insert, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(Ttabla, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel5)
+                        .addComponent(Label_Progress)
                         .addGap(7, 7, 7)
-                        .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(ProgressBar_PSF, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void button_directorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_directorioActionPerformed
         // TODO add your handling code here:
         RutaArchivo.setText("");
         FileDialog dialogoArchivo;
@@ -223,27 +223,27 @@ public class IntegraPSF_TMP extends javax.swing.JFrame {
             RutaAr = directorio + nombreArchivo;
         }
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_button_directorioActionPerformed
 
     public void muestra() {
-        jButton2.setVisible(false);
-        jLabel5.setVisible(true);
-        jProgressBar1.setVisible(true);
+        Button_insert.setVisible(false);
+        Label_Progress.setVisible(true);
+        ProgressBar_PSF.setVisible(true);
         Ttabla.setVisible(true);
-        jButton1.setEnabled(false);
-        jButton2.setEnabled(false);
+        button_directorio.setEnabled(false);
+        Button_insert.setEnabled(false);
     }
 
     public void oculta() {
-        jButton2.setVisible(true);
-        jLabel5.setVisible(false);
-        jProgressBar1.setVisible(false);
+        Button_insert.setVisible(true);
+        Label_Progress.setVisible(false);
+        ProgressBar_PSF.setVisible(false);
         Ttabla.setVisible(false);
-        jButton1.setEnabled(true);
-        jButton2.setEnabled(true);
+        button_directorio.setEnabled(true);
+        Button_insert.setEnabled(true);
     }
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void Button_insertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_insertActionPerformed
         // TODO add your handling code here:
 
         TR_GF_POBLACION_ATEND_MPIO GF_PO = new TR_GF_POBLACION_ATEND_MPIO();
@@ -253,24 +253,24 @@ public class IntegraPSF_TMP extends javax.swing.JFrame {
         EliminaBDPSFTMP Elim = new EliminaBDPSFTMP();
         new Thread(() -> {
             try {
-                int respuesta = JOptionPane.showConfirmDialog(null, "¿Estas seguro de insertar a TMP?", "Pregunta", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                int respuesta = JOptionPane.showConfirmDialog(null, "¿Estás seguro de insertar a TMP?", "Pregunta", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                 if (respuesta == JOptionPane.YES_OPTION) {
                     if (!RutaArchivo.getText().equals("")) {
                         muestra();
                         Elim.EliminaBD();
-                        jProgressBar1.setValue(5);
+                        ProgressBar_PSF.setValue(5);
                         Ttabla.setText("TMP_GF_PROGRAMAS_SOCIALES_GEN");
                         GF_PS.TR_GF_PROGRAMAS_SOCIALES(directorio + "programas_sociales.csv");
-                        jProgressBar1.setValue(50);
+                        ProgressBar_PSF.setValue(50);
                         Ttabla.setText("TMP_GF_POBLACION_ATEND_MPIO_GEN");
                         GF_PO.TR_GF_POBLACION_ATEND_MPIO(directorio + "poblacion_atendida_municipio.csv");
-                        jProgressBar1.setValue(75);
+                        ProgressBar_PSF.setValue(75);
                         Ttabla.setText("TMP_GF_CONTRATACIONES_PUBLICAS_GEN");
                         GF_CON.TR_GF_CONTRATACIONES_PUBLICAS(directorio + "contratos.csv");
-                        jProgressBar1.setValue(100);
+                        ProgressBar_PSF.setValue(100);
                         oculta();
-                        JOptionPane.showMessageDialog(null, "Informacion insertada,favor de revisar Tabla TR_PSF_OBSERVACIONES");
-                        jButton2.setVisible(true);
+                        JOptionPane.showMessageDialog(null, "Información insertada,favor de revisar Tabla TR_PSF_OBSERVACIONES");
+                        Button_insert.setVisible(true);
                     } else {
                         JOptionPane.showMessageDialog(null, "Favor de seleccionar archivo");
                     }
@@ -281,16 +281,16 @@ public class IntegraPSF_TMP extends javax.swing.JFrame {
             }
 
         }).start();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_Button_insertActionPerformed
 
-    private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
+    private void Btn_NotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_NotaActionPerformed
         // TODO add your handling code here:
         Nota nota = new Nota();
         nota.setVisible(true);
-    }//GEN-LAST:event_jToggleButton2ActionPerformed
+    }//GEN-LAST:event_Btn_NotaActionPerformed
 
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void Btn_erroresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_erroresActionPerformed
         // TODO add your handling code here:
 
         if (!ventanaAbierta) {
@@ -302,7 +302,7 @@ public class IntegraPSF_TMP extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Ventana Errores de insert abierta");
         }
 
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_Btn_erroresActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // TODO add your handling code here:
@@ -349,18 +349,18 @@ public class IntegraPSF_TMP extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel Border_PSF;
+    private javax.swing.JToggleButton Btn_Nota;
+    private javax.swing.JButton Btn_errores;
+    private javax.swing.JButton Button_insert;
+    private javax.swing.JLabel Label_Progress;
+    private javax.swing.JLabel Label_ruta_archivo;
+    private javax.swing.JLabel Logo;
+    private javax.swing.JProgressBar ProgressBar_PSF;
     private javax.swing.JTextField RutaArchivo;
+    private javax.swing.JLabel Titulo_1;
+    private javax.swing.JLabel Titulo_2;
     private javax.swing.JLabel Ttabla;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JProgressBar jProgressBar1;
-    private javax.swing.JToggleButton jToggleButton2;
+    private javax.swing.JButton button_directorio;
     // End of variables declaration//GEN-END:variables
 }

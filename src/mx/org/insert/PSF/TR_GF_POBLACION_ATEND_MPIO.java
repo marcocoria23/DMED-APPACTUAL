@@ -19,7 +19,6 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import mx.org.inegi.bean.PSF_TR.BeanTR_GF_POBLACION_ATEND_MPIO;
 import mx.org.inegi.conexion.PSF.OracleDAOFactoryPSF;
-import mx.org.inegi.xlsm.Array_xlsmPSF;
 import oracle.jdbc.OracleTypes;
 import oracle.sql.ARRAY;
 import oracle.sql.ArrayDescriptor;
@@ -65,7 +64,7 @@ public class TR_GF_POBLACION_ATEND_MPIO {
                     int numeroColumnas = 0;
                     CSVRecord firstRecord = csvParser.iterator().next();
                     numeroColumnas = firstRecord.size();
-                    System.out.println("numero de columnas: " + numeroColumnas);
+                    System.out.println("número de columnas: " + numeroColumnas);
 
                     if (numeroColumnas >= 6) { // Cambiar el valor según el número de columnas esperado
                         for (CSVRecord record : csvParser) {

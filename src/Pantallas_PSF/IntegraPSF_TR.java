@@ -10,7 +10,6 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import mx.org.inegi.Procedure.PSF.EliminaBDPSFTR;
 import mx.org.inegi.insert_TR.CPF.Insert_TR_GF_CONTRATACIONES_PUBLICAS;
-import mx.org.inegi.insert_TR.PSF.InsertTRPSF;
 import mx.org.inegi.insert_TR.PSF.Insert_TR_GF_POBLACION_ATEND_MPIO;
 import mx.org.inegi.insert_TR.PSF.Insert_TR_GF_PROGRAMAS_SOCIALES;
 
@@ -42,11 +41,11 @@ import mx.org.inegi.insert_TR.PSF.Insert_TR_GF_PROGRAMAS_SOCIALES;
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel2 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        jButton3 = new javax.swing.JButton();
+        Titulo_1 = new javax.swing.JLabel();
+        Titulo_2 = new javax.swing.JLabel();
+        Logo = new javax.swing.JLabel();
+        Barra = new javax.swing.JPanel();
+        Button_errores = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         LTexto = new javax.swing.JLabel();
         PCargando = new javax.swing.JProgressBar();
@@ -57,34 +56,34 @@ import mx.org.inegi.insert_TR.PSF.Insert_TR_GF_PROGRAMAS_SOCIALES;
             }
         });
 
-        jLabel2.setBackground(new java.awt.Color(0, 0, 102));
-        jLabel2.setFont(new java.awt.Font("Cambria", 0, 18)); // NOI18N
-        jLabel2.setText("Programas Sociales Federal Y ");
+        Titulo_1.setBackground(new java.awt.Color(0, 0, 102));
+        Titulo_1.setFont(new java.awt.Font("Cambria", 0, 18)); // NOI18N
+        Titulo_1.setText("Programas Sociales Federal Y ");
 
-        jLabel6.setBackground(new java.awt.Color(0, 0, 102));
-        jLabel6.setFont(new java.awt.Font("Cambria", 0, 18)); // NOI18N
-        jLabel6.setText("Contrataciones Publicas Federal");
+        Titulo_2.setBackground(new java.awt.Color(0, 0, 102));
+        Titulo_2.setFont(new java.awt.Font("Cambria", 0, 18)); // NOI18N
+        Titulo_2.setText("Contrataciones Publicas Federal");
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Logo CNG.png"))); // NOI18N
+        Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Logo CNG.png"))); // NOI18N
 
-        jPanel2.setBackground(new java.awt.Color(204, 204, 0));
+        Barra.setBackground(new java.awt.Color(204, 204, 0));
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout BarraLayout = new javax.swing.GroupLayout(Barra);
+        Barra.setLayout(BarraLayout);
+        BarraLayout.setHorizontalGroup(
+            BarraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 532, Short.MAX_VALUE)
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        BarraLayout.setVerticalGroup(
+            BarraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 11, Short.MAX_VALUE)
         );
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/errorins.png"))); // NOI18N
-        jButton3.setToolTipText("Errores de Insert");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        Button_errores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/errorins.png"))); // NOI18N
+        Button_errores.setToolTipText("Errores de Insert");
+        Button_errores.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                Button_erroresActionPerformed(evt);
             }
         });
 
@@ -105,14 +104,14 @@ import mx.org.inegi.insert_TR.PSF.Insert_TR_GF_PROGRAMAS_SOCIALES;
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Barra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGap(112, 112, 112)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel6))
+                                    .addComponent(Titulo_1)
+                                    .addComponent(Titulo_2))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 102, Short.MAX_VALUE)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(Logo, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)))
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -121,7 +120,7 @@ import mx.org.inegi.insert_TR.PSF.Insert_TR_GF_PROGRAMAS_SOCIALES;
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(LTexto)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(Button_errores, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(PCargando, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -132,16 +131,16 @@ import mx.org.inegi.insert_TR.PSF.Insert_TR_GF_PROGRAMAS_SOCIALES;
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
+                    .addComponent(Logo)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(12, 12, 12)
-                        .addComponent(jLabel2)
+                        .addComponent(Titulo_1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel6)))
+                        .addComponent(Titulo_2)))
                 .addGap(19, 19, 19)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Barra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29)
-                .addComponent(jButton3)
+                .addComponent(Button_errores)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 124, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
@@ -158,7 +157,7 @@ import mx.org.inegi.insert_TR.PSF.Insert_TR_GF_PROGRAMAS_SOCIALES;
     
     
      
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void Button_erroresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_erroresActionPerformed
         // TODO add your handling code here:
 
 
@@ -171,7 +170,7 @@ import mx.org.inegi.insert_TR.PSF.Insert_TR_GF_PROGRAMAS_SOCIALES;
             JOptionPane.showMessageDialog(null, "Ventana Errores de insert abierta");
         }
 
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_Button_erroresActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
@@ -255,13 +254,13 @@ import mx.org.inegi.insert_TR.PSF.Insert_TR_GF_PROGRAMAS_SOCIALES;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel Barra;
+    private javax.swing.JButton Button_errores;
     private javax.swing.JLabel LTexto;
+    private javax.swing.JLabel Logo;
     private javax.swing.JProgressBar PCargando;
+    private javax.swing.JLabel Titulo_1;
+    private javax.swing.JLabel Titulo_2;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
 }
