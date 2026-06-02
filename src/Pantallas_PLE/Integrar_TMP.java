@@ -576,12 +576,12 @@ private boolean validarPreInsertacion(List<Periodo> listaPeriodos) {
     // Validar estatus
     Querys Q = new Querys();
     Estatus = Q.Estatus(Entidad, Legislatura, Envio);
-    if (Estatus.equals("Liberado")) {
-        JOptionPane.showMessageDialog(null, 
-            "La información se encuentra en estatus liberado\nEntidad: " + Entidad + 
-            " Leg: " + Legislatura + " Envío: " + Envio);
-        return false;
-    }
+    if (Estatus != null && Estatus.equals("Liberado")) {
+    JOptionPane.showMessageDialog(null, 
+        "La información se encuentra en estatus liberado\nEntidad: " + Entidad + 
+        " Leg: " + Legislatura + " Envío: " + Envio);
+    return false;
+}
     return true;
 }
 
