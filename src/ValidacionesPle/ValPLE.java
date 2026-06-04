@@ -1241,7 +1241,7 @@ public class ValPLE {
                 XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                 celdaD2.setCellStyle(estiloCeldabordes0);
                 celdaD2.setCellType(CellType.STRING);
-                String txtD2 = "Favor de seleccionar respuesta Si o No, ya que no puede estar vacio";
+                String txtD2 = "Favor de seleccionar respuesta Sí o No, ya que las celdas AC48, AC50, AC52,AC54 Y AC56 no pueden estar vacías";
                 XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                 celdaD2.setCellValue(textoD2);
 
@@ -10287,7 +10287,7 @@ public class ValPLE {
                 XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                 celdaD2.setCellStyle(estiloCeldabordes0);
                 celdaD2.setCellType(CellType.STRING);
-                String txtD2 = "Se debe de capturar el campo P1_3_75-BX(cargo_jucopo) debido a que en la columna P1_3_74-BW(cond_integrante_jucopo) se selecciono SI'1'";
+                String txtD2 = "Se debe de capturar el campo P1_3_75-BX(cargo_jucopo) debido a que en la columna P1_3_74-BW(cond_integrante_jucopo) se seleccionó 1.Sí";
                 XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                 celdaD2.setCellValue(textoD2);
 
