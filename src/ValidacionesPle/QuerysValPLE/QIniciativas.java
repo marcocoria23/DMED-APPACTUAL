@@ -223,17 +223,9 @@ public class QIniciativas {
          public ArrayList Iniciativas_PuntosDeAcuerdo(String ID_entidad, String Legislatura, String envio) {
         conexion.Conectar();
         Array = new ArrayList();
-        sql = "SELECT ID_ENTIDAD,C1_5_ID, P1_5_1 AS ID_ACTUAL, P1_5_12 FROM TR_PLE_MEDS1_5 WHERE  (LOWER(p1_5_12) LIKE\n" +
-"'%prórroga%' OR LOWER(p1_5_12) LIKE '%prorroga%' OR LOWER(p1_5_12) LIKE '%nombramiento%' OR LOWER(p1_5_12) LIKE \n" +
-"'%puntos de acuerdo%' OR LOWER(p1_5_12) LIKE '%punto de acuerdo%' OR LOWER(p1_5_12) LIKE '%acuerdo%' OR LOWER(p1_5_12) \n" +
-"LIKE '%licencia%' OR LOWER(p1_5_12) LIKE '%permiso%' OR LOWER(p1_5_12) LIKE '%pensión%' OR LOWER(p1_5_12) LIKE '%pension%'\n" +
-" OR LOWER(p1_5_12) LIKE '%pensiones%' OR LOWER(p1_5_12) LIKE '%suspensión' OR LOWER(p1_5_12) LIKE '%suspension' OR \n" +
-" LOWER(p1_5_12) LIKE '%suspensiones de cargo%' OR LOWER(p1_5_12) LIKE '%iniciativas de acuerdo%' OR LOWER(p1_5_12) LIKE \n" +
-" '%informes de auditoría%' OR LOWER(p1_5_12) LIKE '%informes de auditoria' OR LOWER(p1_5_12) LIKE '%cuenta pública%' OR\n" +
-" LOWER(p1_5_12) LIKE '%cuenta publica%' OR LOWER(p1_5_12) LIKE '%formulación de pregunta%' OR LOWER(p1_5_12) LIKE\n" +
-" '%formulacion de pregunta%' OR LOWER(p1_5_12) LIKE '%separaciones de cargo%' OR LOWER(p1_5_12) LIKE \n" +
-" '%separacion de cargo%' OR LOWER(p1_5_12) LIKE '%separación de cargo%' OR LOWER(p1_5_12) LIKE '%oficio%' OR\n" +
-" LOWER(p1_5_12) LIKE '%renuncia%' OR LOWER(p1_5_12) LIKE '%convocatoria%' OR LOWER(p1_5_12) LIKE '%actos de dominio%') " +
+        sql = "SELECT ID_ENTIDAD,C1_5_ID, P1_5_1 AS ID_ACTUAL, P1_5_12 FROM TR_PLE_MEDS1_5 \n" +
+        "WHERE  (LOWER(p1_5_12) LIKE '%puntos de acuerdo%' OR LOWER(p1_5_12) LIKE '%punto de acuerdo%' \n" +
+        "OR LOWER(p1_5_12) LIKE '%acuerdo%' OR LOWER(p1_5_12) LIKE '%acuerdos%') \n" +
                "AND ID_ENTIDAD =" + ID_entidad + "   AND C1_5_ID IN (" + envio + ") ORDER BY P1_5_12";
         System.out.println(sql);
         resul = conexion.consultar(sql);

@@ -27309,8 +27309,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                 XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                 celdaD2.setCellStyle(estiloCeldabordes0);
                 celdaD2.setCellType(CellType.STRING);
-                String txtD2 = "--¡OJO!. OBSERVACIÓN PARA REVISIÓN INTERNA----Favor de verificar que este registro corresponda efectivamente a una iniciativa, ya que el nombre sugiere que podría tratarse de otra figura (p. ej., punto de acuerdo, oficio, convocatoria, etc.).\n" +
-                "En particular, se solicita confirmar que tenga por objeto reformar, adicionar, derogar o abrogar alguna disposición normativa; de no ser así, realizar la reclasificación correspondiente.";
+                String txtD2 = "Favor de verificar que este registro corresponda efectivamente a una iniciativa, ya que el nombre sugiere que podría tratarse de un punto de acuerdo.";
                 XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                 celdaD2.setCellValue(textoD2);
 
