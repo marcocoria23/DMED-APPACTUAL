@@ -2,14 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package mx.org.inegi.insert_TR.PSF;
+package mx.org.inegi.insert_TMP.PSF;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import mx.org.inegi.LeeOracleTR_PSF.QueryTR_PSF;
-import mx.org.inegi.bean.PSF_TR.BeanTR_GF_POBLACION_ATEND_MPIO;
+import mx.org.inegi.bean.PSF_TR.BeanTMP_GF_POBLACION_ATEND_MPIO;
 import mx.org.inegi.conexion.PSF.OracleDAOFactoryPSF;
 import oracle.jdbc.OracleTypes;
 import oracle.sql.ARRAY;
@@ -21,7 +21,7 @@ import oracle.sql.StructDescriptor;
  *
  * @author ANDREA.HERNANDEZL
  */
-public class Insert_TR_GF_POBLACION_ATEND_MPIO {
+public class Insert_TMP_GF_POBLACION_ATEND_MPIO {
 
     public void TR_GF_POBLACION_ATEND_MPIO() throws Exception {
 
@@ -36,12 +36,12 @@ public class Insert_TR_GF_POBLACION_ATEND_MPIO {
         int CFilas = 0;
 
         try {
-            ArrayList<BeanTR_GF_POBLACION_ATEND_MPIO> ad = new ArrayList<>();
+            ArrayList<BeanTMP_GF_POBLACION_ATEND_MPIO> ad = new ArrayList<>();
             QueryTR_PSF DBOData = new QueryTR_PSF();
-            fila = DBOData.TR_GF_POBLACION_ATEND_MPIO();
+            fila = DBOData.TMP_GF_POBLACION_ATEND_MPIO();
 
             for (int i = 0; i < fila.size(); i++) {
-                BeanTR_GF_POBLACION_ATEND_MPIO c = new BeanTR_GF_POBLACION_ATEND_MPIO();
+                BeanTMP_GF_POBLACION_ATEND_MPIO c = new BeanTMP_GF_POBLACION_ATEND_MPIO();
                 ArrayList<String> filaActual = fila.get(i);
                 c.SetID_PROGRAMA_SOCIAL(filaActual.get(0));
                 c.SetID_MUNICIPIO(filaActual.get(1));

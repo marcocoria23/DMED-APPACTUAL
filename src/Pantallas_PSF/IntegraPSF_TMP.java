@@ -11,9 +11,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import mx.org.inegi.Procedure.PSF.EliminaBDPSFTMP;
-import mx.org.insert.CPF.TR_GF_CONTRATACIONES_PUBLICAS;
-import mx.org.insert.PSF.TR_GF_POBLACION_ATEND_MPIO;
-import mx.org.insert.PSF.TR_GF_PROGRAMAS_SOCIALES;
+import mx.org.insert.CPF.TMP_GF_CONTRATACIONES_PUBLICAS;
+import mx.org.insert.PSF.TMP_GF_POBLACION_ATEND_MPIO;
+import mx.org.insert.PSF.TMP_GF_PROGRAMAS_SOCIALES;
 
 /**
  *
@@ -246,9 +246,9 @@ public class IntegraPSF_TMP extends javax.swing.JFrame {
     private void Button_insertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_insertActionPerformed
         // TODO add your handling code here:
 
-        TR_GF_POBLACION_ATEND_MPIO GF_PO = new TR_GF_POBLACION_ATEND_MPIO();
-        TR_GF_PROGRAMAS_SOCIALES GF_PS = new TR_GF_PROGRAMAS_SOCIALES();
-        TR_GF_CONTRATACIONES_PUBLICAS GF_CON = new TR_GF_CONTRATACIONES_PUBLICAS();
+        TMP_GF_POBLACION_ATEND_MPIO GF_PO = new TMP_GF_POBLACION_ATEND_MPIO();
+        TMP_GF_PROGRAMAS_SOCIALES GF_PS = new TMP_GF_PROGRAMAS_SOCIALES();
+        TMP_GF_CONTRATACIONES_PUBLICAS GF_CON = new TMP_GF_CONTRATACIONES_PUBLICAS();
 
         EliminaBDPSFTMP Elim = new EliminaBDPSFTMP();
         new Thread(() -> {
@@ -260,13 +260,13 @@ public class IntegraPSF_TMP extends javax.swing.JFrame {
                         Elim.EliminaBD();
                         ProgressBar_PSF.setValue(5);
                         Ttabla.setText("TMP_GF_PROGRAMAS_SOCIALES_GEN");
-                        GF_PS.TR_GF_PROGRAMAS_SOCIALES(directorio + "programas_sociales.csv");
+                        GF_PS.TMP_GF_PROGRAMAS_SOCIALES(directorio + "programas_sociales.csv");
                         ProgressBar_PSF.setValue(50);
                         Ttabla.setText("TMP_GF_POBLACION_ATEND_MPIO_GEN");
-                        GF_PO.TR_GF_POBLACION_ATEND_MPIO(directorio + "poblacion_atendida_municipio.csv");
+                        GF_PO.TMP_GF_POBLACION_ATEND_MPIO(directorio + "poblacion_atendida_municipio.csv");
                         ProgressBar_PSF.setValue(75);
                         Ttabla.setText("TMP_GF_CONTRATACIONES_PUBLICAS_GEN");
-                        GF_CON.TR_GF_CONTRATACIONES_PUBLICAS(directorio + "contratos.csv");
+                        GF_CON.TMP_GF_CONTRATACIONES_PUBLICAS(directorio + "contratos.csv");
                         ProgressBar_PSF.setValue(100);
                         oculta();
                         JOptionPane.showMessageDialog(null, "Información insertada,favor de revisar Tabla TR_PSF_OBSERVACIONES");

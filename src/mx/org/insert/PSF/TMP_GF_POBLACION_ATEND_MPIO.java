@@ -17,7 +17,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
-import mx.org.inegi.bean.PSF_TR.BeanTR_GF_POBLACION_ATEND_MPIO;
+import mx.org.inegi.bean.PSF_TR.BeanTMP_GF_POBLACION_ATEND_MPIO;
 import mx.org.inegi.conexion.PSF.OracleDAOFactoryPSF;
 import oracle.jdbc.OracleTypes;
 import oracle.sql.ARRAY;
@@ -32,9 +32,9 @@ import org.apache.commons.csv.CSVRecord;
  *
  * @author ANTONIO.CORIA
  */
-public class TR_GF_POBLACION_ATEND_MPIO {
+public class TMP_GF_POBLACION_ATEND_MPIO {
 
-    public void TR_GF_POBLACION_ATEND_MPIO(String Ruta) throws Exception {
+    public void TMP_GF_POBLACION_ATEND_MPIO(String Ruta) throws Exception {
 
         ARRAY array_to_pass;
         CallableStatement st;
@@ -57,7 +57,7 @@ public class TR_GF_POBLACION_ATEND_MPIO {
                 System.out.println("El archivo parece estar en UTF-8.");
                 try ( BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(NuevaRuta), StandardCharsets.UTF_8));  CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT)) {
 
-                    ArrayList<BeanTR_GF_POBLACION_ATEND_MPIO> ad = new ArrayList<>();
+                    ArrayList<BeanTMP_GF_POBLACION_ATEND_MPIO> ad = new ArrayList<>();
                     ArrayList<String> Lista_ID_mun = new ListMunicipio().ID_MUNICIPIO();
                     ArrayList<String> Lista_ID_nombre_mun = new ListMunicipio().NOMBRE_MUNICIPIO();
 
@@ -73,12 +73,12 @@ public class TR_GF_POBLACION_ATEND_MPIO {
                             }
 
                             for (int m = 0; m < Lista_ID_mun.size(); m++) {
-                                BeanTR_GF_POBLACION_ATEND_MPIO c = new BeanTR_GF_POBLACION_ATEND_MPIO();
+                                BeanTMP_GF_POBLACION_ATEND_MPIO c = new BeanTMP_GF_POBLACION_ATEND_MPIO();
                                 c.SetID_PROGRAMA_SOCIAL(record.get(0));
                                 c.SetID_MUNICIPIO(Lista_ID_mun.get(m));
                                 c.SetNOMBRE_MUNICIPIO(Lista_ID_nombre_mun.get(m));
                                 c.SetTOTAL_POBLACION(record.get(m + 1));
-                                c.SetCOMENTARIOS(record.get(2509));// Ajustar el índice según tu lógica
+                                c.SetCOMENTARIOS(record.get(2512));// Ajustar el índice según tu lógica
                                 ad.add(c);
                                 CFilas++;
                             }

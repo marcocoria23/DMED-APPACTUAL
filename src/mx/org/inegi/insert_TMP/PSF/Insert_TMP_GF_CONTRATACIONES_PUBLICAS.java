@@ -2,14 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package mx.org.inegi.insert_TR.CPF;
+package mx.org.inegi.insert_TMP.PSF;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import mx.org.inegi.LeeOracleTR_PSF.QueryTR_PSF;
-import mx.org.inegi.bean.CPF.BeanTR_GF_CONTRATACIONES_PUBLICAS;
+import mx.org.inegi.bean.CPF.BeanTMP_GF_CONTRATACIONES_PUBLICAS;
 import mx.org.inegi.conexion.PSF.OracleDAOFactoryPSF;
 import oracle.jdbc.OracleTypes;
 import oracle.sql.ARRAY;
@@ -21,9 +21,9 @@ import oracle.sql.StructDescriptor;
  *
  * @author ANDREA.HERNANDEZL
  */
-public class Insert_TR_GF_CONTRATACIONES_PUBLICAS {
+public class Insert_TMP_GF_CONTRATACIONES_PUBLICAS {
 
-    public void TR_GF_CONTRATACIONES_PUBLICAS() throws Exception {
+    public void TMP_GF_CONTRATACIONES_PUBLICAS() throws Exception {
         ARRAY array_to_pass;
         ArrayList<ArrayList<String>> fila;
         CallableStatement st;
@@ -35,28 +35,24 @@ public class Insert_TR_GF_CONTRATACIONES_PUBLICAS {
         int CFilas = 0; 
 
         try {
-            ArrayList<BeanTR_GF_CONTRATACIONES_PUBLICAS> ad = new ArrayList<>();
+            ArrayList<BeanTMP_GF_CONTRATACIONES_PUBLICAS> ad = new ArrayList<>();
             QueryTR_PSF DBOData = new QueryTR_PSF();
-            fila = DBOData.TR_GF_CONTRATACIONES_PUBLICAS();
+            fila = DBOData.TMP_GF_CONTRATACIONES_PUBLICAS();
 
             for (int i = 0; i < fila.size(); i++) {
-                BeanTR_GF_CONTRATACIONES_PUBLICAS c = new BeanTR_GF_CONTRATACIONES_PUBLICAS();
+                BeanTMP_GF_CONTRATACIONES_PUBLICAS c = new BeanTMP_GF_CONTRATACIONES_PUBLICAS();
                 ArrayList<String> filaActual = fila.get(i);
                 c.SetID_CONTRATO(filaActual.get(0));
                 c.SetCODIGO_EXPEDIENTE(filaActual.get(1));
                 c.SetNUMERO_PROCEDIMIENTO(filaActual.get(2));
-                c.SetFECHA_PUBLICACION_CONVOCATORIA(filaActual.get(3));
                 c.SetENTIDAD_FEDERATIVA(filaActual.get(4));
-                c.SetID_INSTITUCION(filaActual.get(5));
-                c.SetNOMBRE_INSTITUCION(filaActual.get(6));
+                c.SetINSTITUCION(filaActual.get(5));
                 c.SetUNIDAD_COMPRADORA(filaActual.get(7));
                 c.SetCARACTER_PROCEDIMIENTO(filaActual.get(8));
                 c.SetMATERIA_PROCEDIMIENTO(filaActual.get(9));
                 c.SetTIPO_PROCEDIMIENTO(filaActual.get(10));
                 c.SetOTRO_TIPO_PROCEDIMIENTO_ESPECIFIQUE(filaActual.get(11));
                 c.SetFORMA_PARTICIPACION_PROCEDIMIENTO(filaActual.get(12));
-                c.SetFECHA_PUBLICACION_FALLO(filaActual.get(13));
-                c.SetFECHA_FIRMA_CONTRATO(filaActual.get(14));
                 c.SetTITULO_CONTRATO(filaActual.get(15));
                 c.SetMONTO_CONTRATO(filaActual.get(16));
                 c.SetMONEDA_CONTRATO(filaActual.get(17));

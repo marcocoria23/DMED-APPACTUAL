@@ -22,7 +22,7 @@ public class QueryTR_PSF {
     ArrayList<ArrayList<String>> arrayList = new ArrayList<>();
     DaoConexionPSF conexion = new DaoConexionPSF();
 
-    public ArrayList<ArrayList<String>> TR_GF_PROGRAMAS_SOCIALES() throws SQLException {
+    public ArrayList<ArrayList<String>> TMP_GF_PROGRAMAS_SOCIALES() throws SQLException {
         conexion.Conectar();
         String sql = "SELECT ID_PROGRAMA_SOCIAL,\n"
                 + "NOMBRE_PROGRAMA_SOCIAL,\n"
@@ -67,7 +67,12 @@ public class QueryTR_PSF {
                 + "CONVER_TC_GF_PS_GPO_VULNERABLE_BENEF_2024(GRUPO_VULNERABLE_BENEFICIADO_5)GRUPO_VULNERABLE_BENEFICIADO_5,\n"
                 + "CONVER_TC_GF_PS_GPO_VULNERABLE_BENEF_2024(GRUPO_VULNERABLE_BENEFICIADO_6)GRUPO_VULNERABLE_BENEFICIADO_6,\n"
                 + "CONVER_TC_GF_PS_GPO_VULNERABLE_BENEF_2024(GRUPO_VULNERABLE_BENEFICIADO_7)GRUPO_VULNERABLE_BENEFICIADO_7,\n"
-                + "CONVER_TC_GF_PS_GPO_VULNERABLE_BENEF_2024(GRUPO_VULNERABLE_BENEFICIADO_8)GRUPO_VULNERABLE_BENEFICIADO_8,\n"
+                + "CONVER_TC_GF_PS_GPO_VULNERABLE_BENEF_2024(GRUPO_VULNERABLE_BENEFICIADO_8)GRUPO_VULNERABLE_BENEFICIADO_8,\n"                
+                + "CONVER_TC_GF_PS_GPO_VULNERABLE_BENEF_2024(GRUPO_VULNERABLE_BENEFICIADO_8)GRUPO_VULNERABLE_BENEFICIADO_9,\n"                
+                + "CONVER_TC_GF_PS_GPO_VULNERABLE_BENEF_2024(GRUPO_VULNERABLE_BENEFICIADO_8)GRUPO_VULNERABLE_BENEFICIADO_10,\n"                
+                + "CONVER_TC_GF_PS_GPO_VULNERABLE_BENEF_2024(GRUPO_VULNERABLE_BENEFICIADO_8)GRUPO_VULNERABLE_BENEFICIADO_11,\n"                
+                + "CONVER_TC_GF_PS_GPO_VULNERABLE_BENEF_2024(GRUPO_VULNERABLE_BENEFICIADO_8)GRUPO_VULNERABLE_BENEFICIADO_12,\n"                
+                + "CONVER_TC_GF_PS_GPO_VULNERABLE_BENEF_2024(GRUPO_VULNERABLE_BENEFICIADO_8)GRUPO_VULNERABLE_BENEFICIADO_13,\n"
                 + "OTRO_GRUPO_VULNERABLE_BENEFICIADO_ESPECIFIQUE,\n"
                 + "COMENTARIOS\n"
                 + "FROM TMP_GF_PROG_SOCIALES_GEN";
@@ -140,7 +145,7 @@ public class QueryTR_PSF {
         return arrayList;
     }
 
-    public ArrayList<ArrayList<String>> TR_GF_POBLACION_ATEND_MPIO() throws SQLException {
+    public ArrayList<ArrayList<String>> TMP_GF_POBLACION_ATEND_MPIO() throws SQLException {
         conexion.Conectar();
         String sql = "SELECT ID_PROGRAMA_SOCIAL,\n"
                 + "ID_MUNICIPIO,\n"
@@ -176,7 +181,7 @@ public class QueryTR_PSF {
         return arrayList;
     }
 
-    public ArrayList<ArrayList<String>> TR_GF_CONTRATACIONES_PUBLICAS() throws SQLException {
+    public ArrayList<ArrayList<String>> TMP_GF_CONTRATACIONES_PUBLICAS() throws SQLException {
         conexion.Conectar();
         String sql = "SELECT \n"
                 + "ID_CONTRATO,\n"

@@ -9,9 +9,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import mx.org.inegi.Procedure.PSF.EliminaBDPSFTR;
-import mx.org.inegi.insert_TR.CPF.Insert_TR_GF_CONTRATACIONES_PUBLICAS;
-import mx.org.inegi.insert_TR.PSF.Insert_TR_GF_POBLACION_ATEND_MPIO;
-import mx.org.inegi.insert_TR.PSF.Insert_TR_GF_PROGRAMAS_SOCIALES;
+import mx.org.inegi.insert_TMP.PSF.InsertTRPSF;
+import mx.org.inegi.insert_TMP.PSF.Insert_TMP_GF_CONTRATACIONES_PUBLICAS;
+import mx.org.inegi.insert_TMP.PSF.Insert_TMP_GF_POBLACION_ATEND_MPIO;
+import mx.org.inegi.insert_TMP.PSF.Insert_TMP_GF_PROGRAMAS_SOCIALES;
 
 /**
  *
@@ -46,7 +47,7 @@ import mx.org.inegi.insert_TR.PSF.Insert_TR_GF_PROGRAMAS_SOCIALES;
         Logo = new javax.swing.JLabel();
         Barra = new javax.swing.JPanel();
         Button_errores = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        Bttn_InsertarTR = new javax.swing.JButton();
         LTexto = new javax.swing.JLabel();
         PCargando = new javax.swing.JProgressBar();
 
@@ -87,11 +88,11 @@ import mx.org.inegi.insert_TR.PSF.Insert_TR_GF_PROGRAMAS_SOCIALES;
             }
         });
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Insertar.png"))); // NOI18N
-        jButton2.setText("Insertar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        Bttn_InsertarTR.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Insertar.png"))); // NOI18N
+        Bttn_InsertarTR.setText("Insertar");
+        Bttn_InsertarTR.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                Bttn_InsertarTRActionPerformed(evt);
             }
         });
 
@@ -124,7 +125,7 @@ import mx.org.inegi.insert_TR.PSF.Insert_TR_GF_PROGRAMAS_SOCIALES;
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(PCargando, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(Bttn_InsertarTR, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(23, 23, 23))))
         );
         layout.setVerticalGroup(
@@ -147,7 +148,7 @@ import mx.org.inegi.insert_TR.PSF.Insert_TR_GF_PROGRAMAS_SOCIALES;
                         .addComponent(LTexto)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(PCargando, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Bttn_InsertarTR, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(60, 60, 60))
         );
 
@@ -172,17 +173,16 @@ import mx.org.inegi.insert_TR.PSF.Insert_TR_GF_PROGRAMAS_SOCIALES;
 
     }//GEN-LAST:event_Button_erroresActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void Bttn_InsertarTRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Bttn_InsertarTRActionPerformed
         // TODO add your handling code here:
-        Insert_TR_GF_POBLACION_ATEND_MPIO PAM = new Insert_TR_GF_POBLACION_ATEND_MPIO();
-        Insert_TR_GF_PROGRAMAS_SOCIALES PS = new Insert_TR_GF_PROGRAMAS_SOCIALES();
-        Insert_TR_GF_CONTRATACIONES_PUBLICAS CP = new Insert_TR_GF_CONTRATACIONES_PUBLICAS();
-
+      //  Insert_TMP_GF_POBLACION_ATEND_MPIO PAM = new Insert_TMP_GF_POBLACION_ATEND_MPIO();
+        InsertTRPSF PS = new InsertTRPSF();
+      //
         new Thread(() -> {
             try {
-                int respuesta = JOptionPane.showConfirmDialog(null, "¿Estas seguro de insertar a TR?", "Pregunta", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                int respuesta = JOptionPane.showConfirmDialog(null, "¿Estás seguro de insertar a TR?", "Pregunta", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                 if (respuesta == JOptionPane.YES_OPTION) {
-                    jButton2.setEnabled(false);
+                    Bttn_InsertarTR.setEnabled(false);
                     LTexto.setEnabled(false);
                     PCargando.setVisible(true);
                     EliminaBDPSFTR El=new EliminaBDPSFTR();
@@ -191,26 +191,26 @@ import mx.org.inegi.insert_TR.PSF.Insert_TR_GF_PROGRAMAS_SOCIALES;
                     PCargando.setValue(5);
                     LTexto.setText("Insertando... TR_GF_PROGRAMAS_SOCIALES");
                     PCargando.setValue(30);
-                    PS.TR_GF_PROGRAMAS_SOCIALES();
+                    PS.InsertTR_PROGRAMAS_SOCIALES();
                     LTexto.setText("Insertando... TR_GF_POBLACION_ATEND_MPIO");
                     PCargando.setValue(60);
-                    PAM.TR_GF_POBLACION_ATEND_MPIO();
+                    PS.TR_GF_POBLACION_ATEND_MPIO();
                     LTexto.setText("Insertando... TR_GF_CONTRATACIONES_PUBLICAS");
                     PCargando.setValue(99);
-                    CP.TR_GF_CONTRATACIONES_PUBLICAS();
+                    PS.TR_GF_CONTRATACIONES_PUBLICAS();
                     
                     
                     LTexto.setEnabled(false);
                     PCargando.setVisible(false);
-                    jButton2.setEnabled(true);
+                    Bttn_InsertarTR.setEnabled(true);
                     
-                    JOptionPane.showMessageDialog(null, "La informacion se ha insertado favor de revisar Ventana Errores de insert");
+                    JOptionPane.showMessageDialog(null, "La información se ha insertado favor de revisar Ventana Errores de insert");
                 }
                 } catch (Exception ex) {
                 Logger.getLogger(IntegraPSF_TMP.class.getName()).log(Level.SEVERE, null, ex);
             }
         }).start();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_Bttn_InsertarTRActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // TODO add your handling code here:
@@ -255,12 +255,12 @@ import mx.org.inegi.insert_TR.PSF.Insert_TR_GF_PROGRAMAS_SOCIALES;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Barra;
+    private javax.swing.JButton Bttn_InsertarTR;
     private javax.swing.JButton Button_errores;
     private javax.swing.JLabel LTexto;
     private javax.swing.JLabel Logo;
     private javax.swing.JProgressBar PCargando;
     private javax.swing.JLabel Titulo_1;
     private javax.swing.JLabel Titulo_2;
-    private javax.swing.JButton jButton2;
     // End of variables declaration//GEN-END:variables
 }

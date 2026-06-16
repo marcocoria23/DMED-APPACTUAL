@@ -221,10 +221,7 @@ public class Exporta_validaciones {
         return filaDatos; // siguiente fila disponible
     }
 
-    // =========================================================================
-    // HELPERS DE ESCRITURA EN HOJA
-    // =========================================================================
-
+    
     /** Crea la fila de título combinando columnas desde 0 hasta {@code lastCol}. */
     private void crearFilaTitulo(XSSFSheet hoja, int numFila, String texto,
                                   int lastCol, XSSFCellStyle estilo) {
@@ -245,9 +242,6 @@ public class Exporta_validaciones {
         cell.setCellValue(new XSSFRichTextString(valor != null ? valor : ""));
     }
 
-    // =========================================================================
-    // HELPERS DE UI
-    // =========================================================================
 
     private JProgressBar inicializarVentanaProgreso() {
         ventanaProgreso.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -301,14 +295,6 @@ public class Exporta_validaciones {
         frame.setVisible(false);
     }
 
-    // =========================================================================
-    // CLASE INTERNA: ESTILOS CENTRALIZADOS
-    // =========================================================================
-
-    /**
-     * Encapsula todos los estilos del libro en un solo lugar.
-     * Evita la dispersión y duplicidad de configuraciones de fuente/borde.
-     */
     static class Estilos {
 
         final XSSFCellStyle titulo;

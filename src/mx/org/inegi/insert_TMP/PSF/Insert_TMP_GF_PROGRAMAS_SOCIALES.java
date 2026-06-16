@@ -2,14 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package mx.org.inegi.insert_TR.PSF;
+package mx.org.inegi.insert_TMP.PSF;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import mx.org.inegi.LeeOracleTR_PSF.QueryTR_PSF;
-import mx.org.inegi.bean.PSF_TR.BeanTR_GF_PROGRAMAS_SOCIALES;
+import mx.org.inegi.bean.PSF_TR.BeanTMP_GF_PROGRAMAS_SOCIALES;
 import mx.org.inegi.conexion.PSF.OracleDAOFactoryPSF;
 import oracle.jdbc.OracleTypes;
 import oracle.sql.ARRAY;
@@ -21,9 +21,9 @@ import oracle.sql.StructDescriptor;
  *
  * @author ANDREA.HERNANDEZL
  */
-public class Insert_TR_GF_PROGRAMAS_SOCIALES {
+public class Insert_TMP_GF_PROGRAMAS_SOCIALES {
 
-    public void TR_GF_PROGRAMAS_SOCIALES() throws Exception {
+    public void TMP_GF_PROGRAMAS_SOCIALES() throws Exception {
         ARRAY array_to_pass;
         ArrayList<ArrayList<String>> fila;
         CallableStatement st;
@@ -35,12 +35,12 @@ public class Insert_TR_GF_PROGRAMAS_SOCIALES {
         int CFilas = 0;
 
         try {
-            ArrayList<BeanTR_GF_PROGRAMAS_SOCIALES> ad = new ArrayList<>();
+            ArrayList<BeanTMP_GF_PROGRAMAS_SOCIALES> ad = new ArrayList<>();
             QueryTR_PSF DBOData = new QueryTR_PSF();
-            fila = DBOData.TR_GF_PROGRAMAS_SOCIALES();
+            fila = DBOData.TMP_GF_PROGRAMAS_SOCIALES();
 
             for (int i = 0; i < fila.size(); i++) {
-                BeanTR_GF_PROGRAMAS_SOCIALES c = new BeanTR_GF_PROGRAMAS_SOCIALES();
+                BeanTMP_GF_PROGRAMAS_SOCIALES c = new BeanTMP_GF_PROGRAMAS_SOCIALES();
                 ArrayList<String> filaActual = fila.get(i);
                 c.SetID_PROGRAMA_SOCIAL(filaActual.get(0));
                 c.SetNOMBRE_PROGRAMA_SOCIAL(filaActual.get(1));
@@ -72,7 +72,7 @@ public class Insert_TR_GF_PROGRAMAS_SOCIALES {
                 c.SetOTRO_TIPO_APOYO_ENTREGADO_ESPECIFIQUE(filaActual.get(27));
                 c.SetPOBLACION_ATENDIDA_PERSONAS(filaActual.get(28));
                 c.SetPOBLACION_ATENDIDA_INSTITUCIONES(filaActual.get(29));
-                c.SetPOBLACION_ATENDIDA_PERSONAS_MORALES_(filaActual.get(30));
+                c.SetPOBLACION_ATENDIDA_PERSONAS_MORALES(filaActual.get(30));
                 c.SetPOBLACION_ATENDIDA_TERRITORIAL(filaActual.get(31));
                 c.SetPOBLACION__ATENDIDA_OTRO_TIPO(filaActual.get(32));
                 c.SetPOBLACION_ATENDIDA_NO_IDENTIFICADA(filaActual.get(33));
@@ -86,6 +86,11 @@ public class Insert_TR_GF_PROGRAMAS_SOCIALES {
                 c.SetGRUPO_VULNERABLE_BENEFICIADO_6(filaActual.get(41));
                 c.SetGRUPO_VULNERABLE_BENEFICIADO_7(filaActual.get(42));
                 c.SetGRUPO_VULNERABLE_BENEFICIADO_8(filaActual.get(43));
+                c.SetGRUPO_VULNERABLE_BENEFICIADO_9(filaActual.get(43));
+                c.SetGRUPO_VULNERABLE_BENEFICIADO_10(filaActual.get(43));
+                c.SetGRUPO_VULNERABLE_BENEFICIADO_11(filaActual.get(43));
+                c.SetGRUPO_VULNERABLE_BENEFICIADO_12(filaActual.get(43));
+                c.SetGRUPO_VULNERABLE_BENEFICIADO_13(filaActual.get(43));
                 c.SetOTRO_GRUPO_VULNERABLE_BENEFICIADO_ESPECIFIQUE(filaActual.get(44));
                 c.SetCOMENTARIOS(filaActual.get(45));
                 ad.add(c);
@@ -93,7 +98,7 @@ public class Insert_TR_GF_PROGRAMAS_SOCIALES {
             }
 
             if (CFilas > 0) {
-                sd = StructDescriptor.createDescriptor("OBJ_TR_GF_PROGRAMAS_SOCIALES", con);
+                sd = StructDescriptor.createDescriptor("OBJ_TMP_GF_PROGRAMAS_SOCIALES", con);
                 structs = new STRUCT[ad.size()];
                 System.out.println("entro 1");
                 System.out.println("tamaño " + ad.size());
@@ -101,11 +106,11 @@ public class Insert_TR_GF_PROGRAMAS_SOCIALES {
                     structs[i] = new STRUCT(sd, con, ad.get(i).toArray());
                 }
                 System.out.println("entro 2");
-                descriptor = ArrayDescriptor.createDescriptor("ARR_OBJ_TR_GF_PROGRAMAS_SOCIALES", con);
+                descriptor = ArrayDescriptor.createDescriptor("ARR_OBJ_TMP_GF_PROGRAMAS_SOCIALES", con);
                 System.out.println("entro 3");
                 array_to_pass = new ARRAY(descriptor, con, structs);
                 System.out.println("entro 4");
-                st = con.prepareCall("{? = call(PKG_INTEGRADORXLSM_TR.TR_GF_PROGRAMAS_SOCIALES(?))}");
+                st = con.prepareCall("{? = call(PKG_INTEGRADORXLSM_TMP.TMP_GF_PROGRAMAS_SOCIALES(?))}");
                 System.out.println("entro 5");
                 st.registerOutParameter(1, OracleTypes.INTEGER);
                 System.out.println("entro 6");

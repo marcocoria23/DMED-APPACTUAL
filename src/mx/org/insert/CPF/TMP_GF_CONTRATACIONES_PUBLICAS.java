@@ -17,7 +17,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
-import mx.org.inegi.bean.CPF.BeanTR_GF_CONTRATACIONES_PUBLICAS;
+import mx.org.inegi.bean.CPF.BeanTMP_GF_CONTRATACIONES_PUBLICAS;
 import mx.org.inegi.conexion.PSF.OracleDAOFactoryPSF;
 import oracle.jdbc.OracleTypes;
 import oracle.sql.ARRAY;
@@ -32,9 +32,9 @@ import org.apache.commons.csv.CSVRecord;
  *
  * @author ANTONIO.CORIA
  */
-public class TR_GF_CONTRATACIONES_PUBLICAS {
+public class TMP_GF_CONTRATACIONES_PUBLICAS {
 
-    public void TR_GF_CONTRATACIONES_PUBLICAS(String Ruta) throws Exception {
+    public void TMP_GF_CONTRATACIONES_PUBLICAS(String Ruta) throws Exception {
 
         ArrayList<String[]> Array;
         Array = new ArrayList();
@@ -65,41 +65,38 @@ public class TR_GF_CONTRATACIONES_PUBLICAS {
                     if (numeroColumnas == 30) {
                         System.out.println("+hellooou+" + numeroColumnas);
 
-                        ArrayList<BeanTR_GF_CONTRATACIONES_PUBLICAS> ad = new ArrayList<>();
+                        ArrayList<BeanTMP_GF_CONTRATACIONES_PUBLICAS> ad = new ArrayList<>();
                         for (CSVRecord record : csvParser) {
                             //System.out.println("llenado de csv");
                             TotalRegistros++;
-                            BeanTR_GF_CONTRATACIONES_PUBLICAS c = new BeanTR_GF_CONTRATACIONES_PUBLICAS();
+                            BeanTMP_GF_CONTRATACIONES_PUBLICAS c = new BeanTMP_GF_CONTRATACIONES_PUBLICAS();
                             c.SetID_CONTRATO(record.get(0));
                             c.SetCODIGO_EXPEDIENTE(record.get(1));
                             c.SetNUMERO_PROCEDIMIENTO(record.get(2));
-                            c.SetFECHA_PUBLICACION_CONVOCATORIA(record.get(3));
-                            c.SetENTIDAD_FEDERATIVA(record.get(4));
-                            c.SetID_INSTITUCION(record.get(5));
-                            c.SetNOMBRE_INSTITUCION(record.get(6));
-                            c.SetUNIDAD_COMPRADORA(record.get(7));
-                            c.SetCARACTER_PROCEDIMIENTO(record.get(8));
-                            c.SetMATERIA_PROCEDIMIENTO(record.get(9));
-                            c.SetTIPO_PROCEDIMIENTO(record.get(10));
-                            c.SetOTRO_TIPO_PROCEDIMIENTO_ESPECIFIQUE(record.get(11));
-                            c.SetFORMA_PARTICIPACION_PROCEDIMIENTO(record.get(12));
-                            c.SetFECHA_PUBLICACION_FALLO(record.get(13));
-                            c.SetFECHA_FIRMA_CONTRATO(record.get(14));
-                            c.SetTITULO_CONTRATO(record.get(15));
-                            c.SetMONTO_CONTRATO(record.get(16));
-                            c.SetMONEDA_CONTRATO(record.get(17));
-                            c.SetRAZON_SOCIAL_PROVEEDOR_CONTRATISTA_CONTRATO(record.get(18));
-                            c.SetESTATUS_CONTRATO(record.get(19));
-                            c.SetFECHA_INICIO_CONTRATO(record.get(20));
-                            c.SetFECHA_CONCLUSION_CONTRATO(record.get(21));
-                            c.SetCOND_CONVENIO_MODIFICATORIO(record.get(22));
-                            c.SetCOND_CONTRATO_MARCO(record.get(23));
-                            c.SetCOND_COMPRA_CONSOLIDADA(record.get(24));
-                            c.SetCOND_PRESENTACION_GARANTIA(record.get(25));
-                            c.SetTIPO_GARANTIA_PRESENTADA_1(record.get(26));
-                            c.SetTIPO_GARANTIA_PRESENTADA_2(record.get(27));
-                            c.SetTIPO_GARANTIA_PRESENTADA_3(record.get(28));
-                            c.SetCOMENTARIOS(record.get(29));
+                            c.SetENTIDAD_FEDERATIVA(record.get(3));
+                            c.SetINSTITUCION(record.get(4));
+                            c.SetOTRA_INSTITUCION_ESPECIFIQUE(record.get(5));
+                            c.SetUNIDAD_COMPRADORA(record.get(6));
+                            c.SetCARACTER_PROCEDIMIENTO(record.get(7));
+                            c.SetMATERIA_PROCEDIMIENTO(record.get(8));
+                            c.SetTIPO_PROCEDIMIENTO(record.get(9));
+                            c.SetOTRO_TIPO_PROCEDIMIENTO_ESPECIFIQUE(record.get(10));
+                            c.SetFORMA_PARTICIPACION_PROCEDIMIENTO(record.get(11));
+                            c.SetTITULO_CONTRATO(record.get(12));
+                            c.SetMONTO_CONTRATO(record.get(13));
+                            c.SetMONEDA_CONTRATO(record.get(14));
+                            c.SetRAZON_SOCIAL_PROVEEDOR_CONTRATISTA_CONTRATO(record.get(15));
+                            c.SetESTATUS_CONTRATO(record.get(16));
+                            c.SetFECHA_INICIO_CONTRATO(record.get(17));
+                            c.SetFECHA_CONCLUSION_CONTRATO(record.get(18));
+                            c.SetCOND_CONVENIO_MODIFICATORIO(record.get(19));
+                            c.SetCOND_CONTRATO_MARCO(record.get(20));
+                            c.SetCOND_COMPRA_CONSOLIDADA(record.get(21));
+                            c.SetCOND_PRESENTACION_GARANTIA(record.get(22));
+                            c.SetTIPO_GARANTIA_PRESENTADA_1(record.get(23));
+                            c.SetTIPO_GARANTIA_PRESENTADA_2(record.get(24));
+                            c.SetTIPO_GARANTIA_PRESENTADA_3(record.get(25));
+                            c.SetCOMENTARIOS(record.get(26));
                             ad.add(c);
                         }
                         System.out.println("entro 1");

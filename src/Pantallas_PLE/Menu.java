@@ -46,6 +46,7 @@ public class Menu extends javax.swing.JFrame {
         Menu_PLE_Valida = new javax.swing.JMenu();
         Menu_PLE_Reportes = new javax.swing.JMenu();
         javax.swing.JMenuItem Menu_Reporte_FechaTermino = new javax.swing.JMenuItem();
+        Reporte_notnull = new javax.swing.JMenuItem();
 
         setTitle("PLE");
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -116,6 +117,10 @@ public class Menu extends javax.swing.JFrame {
             }
         });
         Menu_PLE_Reportes.add(Menu_Reporte_FechaTermino);
+
+        Reporte_notnull.setText("Reporte General Not Null");
+        Reporte_notnull.setActionCommand("Reporte_notnull");
+        Menu_PLE_Reportes.add(Reporte_notnull);
 
         Menu_PLE.add(Menu_PLE_Reportes);
 
@@ -241,6 +246,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenu Menu_PLE_IntegraTR;
     private javax.swing.JMenu Menu_PLE_Reportes;
     private javax.swing.JMenu Menu_PLE_Valida;
+    private javax.swing.JMenuItem Reporte_notnull;
     private javax.swing.JMenu jMenu1;
     // End of variables declaration//GEN-END:variables
 }

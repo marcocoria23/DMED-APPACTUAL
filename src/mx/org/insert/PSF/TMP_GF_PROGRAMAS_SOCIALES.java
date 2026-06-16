@@ -17,7 +17,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
-import mx.org.inegi.bean.PSF_TR.BeanTR_GF_PROGRAMAS_SOCIALES;
+import mx.org.inegi.bean.PSF_TR.BeanTMP_GF_PROGRAMAS_SOCIALES;
 import mx.org.inegi.conexion.PSF.OracleDAOFactoryPSF;
 import oracle.jdbc.OracleTypes;
 import oracle.sql.ARRAY;
@@ -32,9 +32,9 @@ import org.apache.commons.csv.CSVRecord;
  *
  * @author ANTONIO.CORIA
  */
-public class TR_GF_PROGRAMAS_SOCIALES {
+public class TMP_GF_PROGRAMAS_SOCIALES {
 
-    public void TR_GF_PROGRAMAS_SOCIALES(String Ruta) throws Exception {
+    public void TMP_GF_PROGRAMAS_SOCIALES(String Ruta) throws Exception {
 
         ARRAY array_to_pass;
         CallableStatement st;
@@ -57,11 +57,11 @@ public class TR_GF_PROGRAMAS_SOCIALES {
                 System.out.println("El archivo parece estar en UTF-8.");
                 try ( BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(NuevaRuta), StandardCharsets.UTF_8));  CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT)) {
 
-                    ArrayList<BeanTR_GF_PROGRAMAS_SOCIALES> ad = new ArrayList<>();
+                    ArrayList<BeanTMP_GF_PROGRAMAS_SOCIALES> ad = new ArrayList<>();
                     int numeroColumnas = 0;
                     CSVRecord firstRecord = csvParser.iterator().next();
                     numeroColumnas = firstRecord.size();
-                    System.out.println("numero de columnas: " + numeroColumnas);
+                    System.out.println("número de columnas: " + numeroColumnas);
 
                     if (numeroColumnas >= 46) { // Se espera que el archivo tenga al menos 45 columnas
 
@@ -70,7 +70,7 @@ public class TR_GF_PROGRAMAS_SOCIALES {
                                 break; // Ignorar registros vacíos
                             }
 
-                            BeanTR_GF_PROGRAMAS_SOCIALES c = new BeanTR_GF_PROGRAMAS_SOCIALES();
+                            BeanTMP_GF_PROGRAMAS_SOCIALES c = new BeanTMP_GF_PROGRAMAS_SOCIALES();
                             c.SetID_PROGRAMA_SOCIAL(record.get(0));
                             c.SetNOMBRE_PROGRAMA_SOCIAL(record.get(1));
                             c.SetID_INSTITUCION_ENCARGADA_1(record.get(2));
@@ -101,7 +101,7 @@ public class TR_GF_PROGRAMAS_SOCIALES {
                             c.SetOTRO_TIPO_APOYO_ENTREGADO_ESPECIFIQUE(record.get(27));
                             c.SetPOBLACION_ATENDIDA_PERSONAS(record.get(28));
                             c.SetPOBLACION_ATENDIDA_INSTITUCIONES(record.get(29));
-                            c.SetPOBLACION_ATENDIDA_PERSONAS_MORALES_(record.get(30));
+                            c.SetPOBLACION_ATENDIDA_PERSONAS_MORALES(record.get(30));
                             c.SetPOBLACION_ATENDIDA_TERRITORIAL(record.get(31));
                             c.SetPOBLACION__ATENDIDA_OTRO_TIPO(record.get(32));
                             c.SetPOBLACION_ATENDIDA_NO_IDENTIFICADA(record.get(33));
@@ -115,8 +115,13 @@ public class TR_GF_PROGRAMAS_SOCIALES {
                             c.SetGRUPO_VULNERABLE_BENEFICIADO_6(record.get(41));
                             c.SetGRUPO_VULNERABLE_BENEFICIADO_7(record.get(42));
                             c.SetGRUPO_VULNERABLE_BENEFICIADO_8(record.get(43));
-                            c.SetOTRO_GRUPO_VULNERABLE_BENEFICIADO_ESPECIFIQUE(record.get(44));
-                            c.SetCOMENTARIOS(record.get(45));
+                            c.SetGRUPO_VULNERABLE_BENEFICIADO_9(record.get(44));
+                            c.SetGRUPO_VULNERABLE_BENEFICIADO_10(record.get(45));
+                            c.SetGRUPO_VULNERABLE_BENEFICIADO_11(record.get(46));
+                            c.SetGRUPO_VULNERABLE_BENEFICIADO_12(record.get(47));
+                            c.SetGRUPO_VULNERABLE_BENEFICIADO_13(record.get(48));
+                            c.SetOTRO_GRUPO_VULNERABLE_BENEFICIADO_ESPECIFIQUE(record.get(49));
+                            c.SetCOMENTARIOS(record.get(50));
                             ad.add(c);
                             CFilas++;
                         }

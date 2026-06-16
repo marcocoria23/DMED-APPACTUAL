@@ -15,7 +15,7 @@ import java.sql.SQLOutput;
  *
  * @author ANTONIO.CORIA
  */
-public class BeanTR_GF_POBLACION_ATEND_MPIO extends Bean implements SQLData{
+public class BeanTMP_GF_POBLACION_ATEND_MPIO extends Bean implements SQLData{
    
     private String SQLTypeName;
     private String ID_PROGRAMA_SOCIAL;
@@ -24,7 +24,7 @@ public class BeanTR_GF_POBLACION_ATEND_MPIO extends Bean implements SQLData{
     private String TOTAL_POBLACION;
     private String COMENTARIOS;
     
-    public BeanTR_GF_POBLACION_ATEND_MPIO(){
+    public BeanTMP_GF_POBLACION_ATEND_MPIO(){
     }
     
     public String GetID_PROGRAMA_SOCIAL() {

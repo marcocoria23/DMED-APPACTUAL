@@ -15,24 +15,21 @@ import java.sql.SQLOutput;
  *
  * @author ANTONIO.CORIA
  */
-public class BeanTR_GF_CONTRATACIONES_PUBLICAS extends Bean implements SQLData {
+public class BeanTMP_GF_CONTRATACIONES_PUBLICAS extends Bean implements SQLData {
 
     private String SQLTypeName;
     private String ID_CONTRATO;
     private String CODIGO_EXPEDIENTE;
     private String NUMERO_PROCEDIMIENTO;
-    private String FECHA_PUBLICACION_CONVOCATORIA;
     private String ENTIDAD_FEDERATIVA;
-    private String ID_INSTITUCION;
-    private String NOMBRE_INSTITUCION;
+    private String INSTITUCION;
+    private String OTRA_INSTITUCION_ESPECIFIQUE;
     private String UNIDAD_COMPRADORA;
     private String CARACTER_PROCEDIMIENTO;
     private String MATERIA_PROCEDIMIENTO;
     private String TIPO_PROCEDIMIENTO;
     private String OTRO_TIPO_PROCEDIMIENTO_ESPECIFIQUE;
     private String FORMA_PARTICIPACION_PROCEDIMIENTO;
-    private String FECHA_PUBLICACION_FALLO;
-    private String FECHA_FIRMA_CONTRATO;
     private String TITULO_CONTRATO;
     private String MONTO_CONTRATO;
     private String MONEDA_CONTRATO;
@@ -49,7 +46,7 @@ public class BeanTR_GF_CONTRATACIONES_PUBLICAS extends Bean implements SQLData {
     private String TIPO_GARANTIA_PRESENTADA_3;
     private String COMENTARIOS;
 
-    public BeanTR_GF_CONTRATACIONES_PUBLICAS() {
+    public BeanTMP_GF_CONTRATACIONES_PUBLICAS() {
     }
 
     public String GetID_CONTRATO() {
@@ -75,14 +72,7 @@ public class BeanTR_GF_CONTRATACIONES_PUBLICAS extends Bean implements SQLData {
     public void SetNUMERO_PROCEDIMIENTO(String NUMERO_PROCEDIMIENTO) {
         this.NUMERO_PROCEDIMIENTO = NUMERO_PROCEDIMIENTO;
     }
-
-    public String GetFECHA_PUBLICACION_CONVOCATORIA() {
-        return FECHA_PUBLICACION_CONVOCATORIA;
-    }
-
-    public void SetFECHA_PUBLICACION_CONVOCATORIA(String FECHA_PUBLICACION_CONVOCATORIA) {
-        this.FECHA_PUBLICACION_CONVOCATORIA = FECHA_PUBLICACION_CONVOCATORIA;
-    }
+   
 
     public String GetENTIDAD_FEDERATIVA() {
         return ENTIDAD_FEDERATIVA;
@@ -92,22 +82,23 @@ public class BeanTR_GF_CONTRATACIONES_PUBLICAS extends Bean implements SQLData {
         this.ENTIDAD_FEDERATIVA = ENTIDAD_FEDERATIVA;
     }
 
-    public String GetID_INSTITUCION() {
-        return ID_INSTITUCION;
+    public String GetINSTITUCION() {
+        return INSTITUCION;
     }
 
-    public void SetID_INSTITUCION(String ID_INSTITUCION) {
-        this.ID_INSTITUCION = ID_INSTITUCION;
+    public void SetINSTITUCION(String ID_INSTITUCION) {
+        this.INSTITUCION = ID_INSTITUCION;
     }
 
-    public String GetNOMBRE_INSTITUCION() {
-        return NOMBRE_INSTITUCION;
+   
+   public String GetOTRA_INSTITUCION_ESPECIFIQUE() {
+        return OTRA_INSTITUCION_ESPECIFIQUE;
     }
 
-    public void SetNOMBRE_INSTITUCION(String NOMBRE_INSTITUCION) {
-        this.NOMBRE_INSTITUCION = NOMBRE_INSTITUCION;
+    public void SetOTRA_INSTITUCION_ESPECIFIQUE(String otra_institucion_especifique) {
+        this.OTRA_INSTITUCION_ESPECIFIQUE = OTRA_INSTITUCION_ESPECIFIQUE;
     }
-
+    
     public String GetUNIDAD_COMPRADORA() {
         return UNIDAD_COMPRADORA;
     }
@@ -156,21 +147,6 @@ public class BeanTR_GF_CONTRATACIONES_PUBLICAS extends Bean implements SQLData {
         this.FORMA_PARTICIPACION_PROCEDIMIENTO = FORMA_PARTICIPACION_PROCEDIMIENTO;
     }
 
-    public String GetFECHA_PUBLICACION_FALLO() {
-        return FECHA_PUBLICACION_FALLO;
-    }
-
-    public void SetFECHA_PUBLICACION_FALLO(String FECHA_PUBLICACION_FALLO) {
-        this.FECHA_PUBLICACION_FALLO = FECHA_PUBLICACION_FALLO;
-    }
-
-    public String GetFECHA_FIRMA_CONTRATO() {
-        return FECHA_FIRMA_CONTRATO;
-    }
-
-    public void SetFECHA_FIRMA_CONTRATO(String FECHA_FIRMA_CONTRATO) {
-        this.FECHA_FIRMA_CONTRATO = FECHA_FIRMA_CONTRATO;
-    }
 
     public String GetTITULO_CONTRATO() {
         return TITULO_CONTRATO;
@@ -319,18 +295,15 @@ public class BeanTR_GF_CONTRATACIONES_PUBLICAS extends Bean implements SQLData {
             GetID_CONTRATO(),
             GetCODIGO_EXPEDIENTE(),
             GetNUMERO_PROCEDIMIENTO(),
-            GetFECHA_PUBLICACION_CONVOCATORIA(),
             GetENTIDAD_FEDERATIVA(),
-            GetID_INSTITUCION(),
-            GetNOMBRE_INSTITUCION(),
+            GetINSTITUCION(),
+            GetOTRA_INSTITUCION_ESPECIFIQUE(),
             GetUNIDAD_COMPRADORA(),
             GetCARACTER_PROCEDIMIENTO(),
             GetMATERIA_PROCEDIMIENTO(),
             GetTIPO_PROCEDIMIENTO(),
             GetOTRO_TIPO_PROCEDIMIENTO_ESPECIFIQUE(),
             GetFORMA_PARTICIPACION_PROCEDIMIENTO(),
-            GetFECHA_PUBLICACION_FALLO(),
-            GetFECHA_FIRMA_CONTRATO(),
             GetTITULO_CONTRATO(),
             GetMONTO_CONTRATO(),
             GetMONEDA_CONTRATO(),

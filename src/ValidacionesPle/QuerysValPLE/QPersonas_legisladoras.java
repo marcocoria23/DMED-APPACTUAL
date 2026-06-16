@@ -2948,11 +2948,11 @@ public ArrayList otro_cargo_mesa_directiva_especifique(String ID_entidad,String 
 
 
 
-//El CAMPO P1_3_80 (ID_COMISION_LEGISLATIVA_1) (CC),P1_3_81 (NOMBRE_COMISION_LEGISLATIVA_1) (CD),P1_3_82 (CARGO_COMISION_LEGISLATIVA_1) (CE),P1_3_82 (CANT_REUNIONES_CELEBRADAS_COMISION_LEGISLATIVA_1_ASISTIDAS) (CF)
+//El CAMPO P1_3_80 (ID_COMISION_LEGISLATIVA_1) (CC),P1_3_81 (NOMBRE_COMISION_LEGISLATIVA_1) (CD),P1_3_82 (CARGO_COMISION_LEGISLATIVA_1) (CE),P1_3_83 (CANT_REUNIONES_CELEBRADAS_COMISION_LEGISLATIVA_1_ASISTIDAS) (CF)
 public ArrayList ID_COMISION_LEGISLATIVA_1NN(String ID_entidad,String Legislatura,String Envio){
      conexion.Conectar();
       Array = new ArrayList();
-      sql="select  ID_ENTIDAD, ENTIDAD, C1_3_ID, P1_3_1,P1_3_78, P1_3_79 from TR_PLE_MEDS1_3 where (P1_3_80 IS NULL OR P1_3_81 IS NULL OR P1_3_82 IS NULL)"
+      sql="select  ID_ENTIDAD, ENTIDAD, C1_3_ID, P1_3_1,P1_3_80, P1_3_81, P1_3_82, P1_3_83 from TR_PLE_MEDS1_3 where (P1_3_80 IS NULL OR P1_3_81 IS NULL OR P1_3_82 IS NULL OR P1_3_83 IS NULL)"
               + " and (ID_ENTIDAD="+ID_entidad+" AND Legislatura="+Legislatura+" AND C1_3_ID='"+Envio+"')";
       System.out.println(sql);
       resul=conexion.consultar(sql);
