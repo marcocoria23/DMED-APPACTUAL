@@ -2953,7 +2953,7 @@ public ArrayList ID_COMISION_LEGISLATIVA_1NN(String ID_entidad,String Legislatur
      conexion.Conectar();
       Array = new ArrayList();
       sql="select  ID_ENTIDAD, ENTIDAD, C1_3_ID, P1_3_1,P1_3_80, P1_3_81, P1_3_82, P1_3_83 from TR_PLE_MEDS1_3 where (P1_3_80 IS NULL OR P1_3_81 IS NULL OR P1_3_82 IS NULL OR P1_3_83 IS NULL)"
-              + " and (ID_ENTIDAD="+ID_entidad+" AND Legislatura="+Legislatura+" AND C1_3_ID='"+Envio+"')";
+              + " and (ID_ENTIDAD="+ID_entidad+" AND Legislatura="+Legislatura+" AND C1_3_ID='"+Envio+"')"; 
       System.out.println(sql);
       resul=conexion.consultar(sql);
       try {
@@ -2975,7 +2975,7 @@ public ArrayList ID_COMISION_LEGISLATIVA_1NN(String ID_entidad,String Legislatur
 public ArrayList FNcomision(String ID_entidad,String Legislatura,String Envio,String CAMPO1, String CAMPO2){
      conexion.Conectar();
       Array = new ArrayList();
-      sql="select  t.ID_ENTIDAD, t.ENTIDAD, t.C1_3_ID, t.P1_3_1,t.P1_3_80, t.P1_3_81, d.p1_2_1, d.p1_2_3 from TR_PLE_MEDS1_3 t\n" +
+      sql="select t.ID_ENTIDAD, t.ENTIDAD, t.C1_3_ID, t.P1_3_1,t.P1_3_80, t.P1_3_81, d.p1_2_1, d.p1_2_3 from TR_PLE_MEDS1_3 t\n" +
 "left join TR_PLE_MEDS1_2 d on d.ID_ENTIDAD=t.ID_ENTIDAD and t.C1_3_ID=d.C1_2_ID and t."+CAMPO1+"=d.p1_2_1 \n" +
 "where t."+CAMPO2+"<>d.p1_2_3"
               + " and t.ID_ENTIDAD="+ID_entidad+" AND t.Legislatura="+Legislatura+" AND C1_3_ID='"+Envio+"'";
