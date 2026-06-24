@@ -96,7 +96,7 @@ public class BeanTMP_GF_CONTRATACIONES_PUBLICAS extends Bean implements SQLData 
     }
 
     public void SetOTRA_INSTITUCION_ESPECIFIQUE(String otra_institucion_especifique) {
-        this.OTRA_INSTITUCION_ESPECIFIQUE = OTRA_INSTITUCION_ESPECIFIQUE;
+    this.OTRA_INSTITUCION_ESPECIFIQUE = otra_institucion_especifique; 
     }
     
     public String GetUNIDAD_COMPRADORA() {

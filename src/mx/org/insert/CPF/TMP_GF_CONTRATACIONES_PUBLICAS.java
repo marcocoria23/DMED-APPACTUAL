@@ -16,9 +16,11 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import mx.org.inegi.bean.CPF.BeanTMP_GF_CONTRATACIONES_PUBLICAS;
 import mx.org.inegi.conexion.PSF.OracleDAOFactoryPSF;
+import mx.org.inegi.insert_TMP.PSF.Insert_TMP_GF_CONTRATACIONES_PUBLICAS;
 import oracle.jdbc.OracleTypes;
 import oracle.sql.ARRAY;
 import oracle.sql.ArrayDescriptor;
@@ -158,4 +160,8 @@ public class TMP_GF_CONTRATACIONES_PUBLICAS {
         }
     }
 
+    public void procesarDatosExcel(List<String[]> datosExcel) throws Exception {
+        Insert_TMP_GF_CONTRATACIONES_PUBLICAS insert = new Insert_TMP_GF_CONTRATACIONES_PUBLICAS();
+        insert.procesarDatosExcel(datosExcel);
+    }
 }

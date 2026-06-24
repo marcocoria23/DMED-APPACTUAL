@@ -16,9 +16,11 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import mx.org.inegi.bean.PSF_TR.BeanTMP_GF_PROGRAMAS_SOCIALES;
 import mx.org.inegi.conexion.PSF.OracleDAOFactoryPSF;
+import mx.org.inegi.insert_TMP.PSF.Insert_TMP_GF_PROGRAMAS_SOCIALES;
 import oracle.jdbc.OracleTypes;
 import oracle.sql.ARRAY;
 import oracle.sql.ArrayDescriptor;
@@ -170,4 +172,10 @@ public class TMP_GF_PROGRAMAS_SOCIALES {
             e.printStackTrace();
         }
     }
+    
+ public void procesarDatosExcel(List<String[]> datosExcel) throws Exception {
+        Insert_TMP_GF_PROGRAMAS_SOCIALES insert = new Insert_TMP_GF_PROGRAMAS_SOCIALES();
+        insert.procesarDatosExcel(datosExcel);
+    }
+    
 }

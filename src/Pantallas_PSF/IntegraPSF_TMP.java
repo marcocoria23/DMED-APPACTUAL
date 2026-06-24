@@ -5,8 +5,10 @@
  */
 package Pantallas_PSF;
 
+import Lee_Excel.ExcelDirectReader;
 import java.awt.Color;
 import java.awt.FileDialog;
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -17,7 +19,7 @@ import mx.org.insert.PSF.TMP_GF_PROGRAMAS_SOCIALES;
 
 /**
  *
- * @author ANTONIO.CORIA
+ * @author LAURA.MEDINA
  */
 public class IntegraPSF_TMP extends javax.swing.JFrame {
 
@@ -213,7 +215,7 @@ public class IntegraPSF_TMP extends javax.swing.JFrame {
         // TODO add your handling code here:
         RutaArchivo.setText("");
         FileDialog dialogoArchivo;
-        dialogoArchivo = new FileDialog(this, "ARCHIVOS RALAB", FileDialog.LOAD);
+        dialogoArchivo = new FileDialog(this, "ARCHIVOS PSF", FileDialog.LOAD);
         dialogoArchivo.setVisible(true);
         if (dialogoArchivo.getFile() != null) {
             /* Validar que se haya Seleccionado un Archivo*/
@@ -245,42 +247,94 @@ public class IntegraPSF_TMP extends javax.swing.JFrame {
 
     private void Button_insertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_insertActionPerformed
         // TODO add your handling code here:
-
-        TMP_GF_POBLACION_ATEND_MPIO GF_PO = new TMP_GF_POBLACION_ATEND_MPIO();
-        TMP_GF_PROGRAMAS_SOCIALES GF_PS = new TMP_GF_PROGRAMAS_SOCIALES();
-        TMP_GF_CONTRATACIONES_PUBLICAS GF_CON = new TMP_GF_CONTRATACIONES_PUBLICAS();
-
-        EliminaBDPSFTMP Elim = new EliminaBDPSFTMP();
-        new Thread(() -> {
-            try {
-                int respuesta = JOptionPane.showConfirmDialog(null, "¿Estás seguro de insertar a TMP?", "Pregunta", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-                if (respuesta == JOptionPane.YES_OPTION) {
-                    if (!RutaArchivo.getText().equals("")) {
-                        muestra();
-                        Elim.EliminaBD();
-                        ProgressBar_PSF.setValue(5);
-                        Ttabla.setText("TMP_GF_PROGRAMAS_SOCIALES_GEN");
-                        GF_PS.TMP_GF_PROGRAMAS_SOCIALES(directorio + "programas_sociales.csv");
-                        ProgressBar_PSF.setValue(50);
-                        Ttabla.setText("TMP_GF_POBLACION_ATEND_MPIO_GEN");
-                        GF_PO.TMP_GF_POBLACION_ATEND_MPIO(directorio + "poblacion_atendida_municipio.csv");
-                        ProgressBar_PSF.setValue(75);
-                        Ttabla.setText("TMP_GF_CONTRATACIONES_PUBLICAS_GEN");
-                        GF_CON.TMP_GF_CONTRATACIONES_PUBLICAS(directorio + "contratos.csv");
-                        ProgressBar_PSF.setValue(100);
+    TMP_GF_POBLACION_ATEND_MPIO GF_PO = new TMP_GF_POBLACION_ATEND_MPIO();
+    TMP_GF_PROGRAMAS_SOCIALES GF_PS = new TMP_GF_PROGRAMAS_SOCIALES();
+    TMP_GF_CONTRATACIONES_PUBLICAS GF_CON = new TMP_GF_CONTRATACIONES_PUBLICAS();
+    
+    EliminaBDPSFTMP Elim = new EliminaBDPSFTMP();
+    
+    new Thread(() -> {
+        try {
+            int respuesta = JOptionPane.showConfirmDialog(null, 
+                "¿Estás seguro de insertar a TMP?", "Pregunta", 
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            
+            if (respuesta == JOptionPane.YES_OPTION) {
+                if (!RutaArchivo.getText().equals("")) {
+                    muestra();
+                    
+                    String rutaDirectorio = directorio;
+                    
+                    // Buscar los archivos Excel
+                    String archivoContrataciones = ExcelFileManager.encontrarArchivoExcel(
+                        rutaDirectorio, "contrataciones");
+                    String archivoProgramas = ExcelFileManager.encontrarArchivoExcel(
+                        rutaDirectorio, "programas sociales");
+                    
+                    // Validar que ambos archivos existan
+                    if (archivoContrataciones == null) {
+                        JOptionPane.showMessageDialog(null, 
+                            "No se encontró archivo con 'Contrataciones' en el nombre");
                         oculta();
-                        JOptionPane.showMessageDialog(null, "Información insertada,favor de revisar Tabla TR_PSF_OBSERVACIONES");
-                        Button_insert.setVisible(true);
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Favor de seleccionar archivo");
+                        return;
                     }
+                    
+                    if (archivoProgramas == null) {
+                        JOptionPane.showMessageDialog(null, 
+                            "No se encontró archivo con 'Programas Sociales' en el nombre");
+                        oculta();
+                        return;
+                    }
+                    
+                    // Eliminar datos previos
+                    Elim.EliminaBD();
+                    ProgressBar_PSF.setValue(5);
+                    
+                    // Leer directamente desde Excel - PROGRAMAS SOCIALES
+                    Ttabla.setText("Leyendo: programas_sociales");
+                    java.util.List<String[]> datosPS = ExcelDirectReader.leerExcel(
+                        archivoProgramas, "programas_sociales");
+                    GF_PS.procesarDatosExcel(datosPS);
+                    ProgressBar_PSF.setValue(33);
+                    
+                    // Leer directamente desde Excel - POBLACIÓN ATENDIDA
+                    Ttabla.setText("Leyendo: poblacion_atendida_municipio");
+                    java.util.List<String[]> datosPO = ExcelDirectReader.leerExcel(
+                        archivoProgramas, "poblacion_atendida_municipio");
+                    GF_PO.procesarDatosExcel(datosPO);
+                    ProgressBar_PSF.setValue(66);
+                    
+                    // Leer directamente desde Excel - CONTRATACIONES
+                    Ttabla.setText("Leyendo: contratos");
+                    java.util.List<String[]> datosCON = ExcelDirectReader.leerExcel(
+                        archivoContrataciones, "contratos");
+                    GF_CON.procesarDatosExcel(datosCON);
+                    ProgressBar_PSF.setValue(100);
+                    
+                    oculta();
+                    JOptionPane.showMessageDialog(null, 
+                        "Información insertada correctamente.\n" +
+                        "Favor de revisar Tabla TR_PSF_OBSERVACIONES");
+                    
+                } else {
+                    JOptionPane.showMessageDialog(null, "Favor de seleccionar archivo");
                 }
-
-            } catch (Exception ex) {
-                Logger.getLogger(IntegraPSF_TMP.class.getName()).log(Level.SEVERE, null, ex);
             }
-
-        }).start();
+            
+        } catch (IOException ex) {
+            Logger.getLogger(IntegraPSF_TMP.class.getName()).log(Level.SEVERE, 
+                "Error al procesar archivos Excel", ex);
+            JOptionPane.showMessageDialog(null, 
+                "Error al procesar archivos: " + ex.getMessage());
+            oculta();
+        } catch (Exception ex) {
+            Logger.getLogger(IntegraPSF_TMP.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, 
+                "Error: " + ex.getMessage());
+            oculta();
+        }
+        
+    }).start();
     }//GEN-LAST:event_Button_insertActionPerformed
 
     private void Btn_NotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_NotaActionPerformed

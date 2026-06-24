@@ -6,6 +6,7 @@
 package Pantallas_PSF;
 
 import Pantallas_Menu.MenuProyectos;
+import java.time.Year;
 
 /**
  *
@@ -18,9 +19,14 @@ public class MenuPSF extends javax.swing.JFrame {
      */
     public MenuPSF() {
         initComponents();
+        configurarTextosDinamicos();
         this.setLocationRelativeTo(null);
     }
-
+    
+ private void configurarTextosDinamicos() {
+        String anio = String.valueOf(Year.now().getValue());
+        CrearEBD.setText("Crear EBD '" + anio + "'");
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -53,7 +59,7 @@ public class MenuPSF extends javax.swing.JFrame {
         Menu_PSF.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         Menu_integraTMP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/InsertaBD.png"))); // NOI18N
-        Menu_integraTMP.setText("Integrar  Bd TMP");
+        Menu_integraTMP.setText("Integrar  BD a TMP");
         Menu_integraTMP.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Menu_integraTMPMouseClicked(evt);
@@ -62,7 +68,7 @@ public class MenuPSF extends javax.swing.JFrame {
         Menu_PSF.add(Menu_integraTMP);
 
         Menu_integraTR.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Insertar.png"))); // NOI18N
-        Menu_integraTR.setText("Integrar Bd TR");
+        Menu_integraTR.setText("Integrar BD a TR");
         Menu_integraTR.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Menu_integraTRMouseClicked(evt);
@@ -71,7 +77,7 @@ public class MenuPSF extends javax.swing.JFrame {
         Menu_PSF.add(Menu_integraTR);
 
         Menu_Valida.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/BValidar.png"))); // NOI18N
-        Menu_Valida.setText("Valida");
+        Menu_Valida.setText("Validar info");
         Menu_Valida.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Menu_ValidaMouseClicked(evt);
