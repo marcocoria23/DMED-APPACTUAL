@@ -27,12 +27,48 @@ public class QContrataciones_Publicas {
 
     // ===== VALIDACIONES =====
 
+    public ArrayList<String[]> camposObligatoriosNull() {
+        String[] camposObligatorios = {
+            "FORMA_PARTICIPACION_PROCEDIMIENTO",
+            "TITULO_CONTRATO",
+            "MONTO_CONTRATO",
+            "MONEDA_CONTRATO",
+            "RAZON_SOCIAL_PROVEEDOR_CONTRATISTA_CONTRATO",
+            "ESTATUS_CONTRATO",
+            "FECHA_INICIO_CONTRATO",
+            "FECHA_CONCLUSION_CONTRATO",
+            "COND_CONVENIO_MODIFICATORIO",
+            "COND_CONTRATO_MARCO",
+            "COND_COMPRA_CONSOLIDADA",
+            "COND_PRESENTACION_GARANTIA",
+            "UNIDAD_COMPRADORA",
+            "CARACTER_PROCEDIMIENTO",
+            "MATERIA_PROCEDIMIENTO",
+            "TIPO_PROCEDIMIENTO",
+            "ID_CONTRATO",
+            "CODIGO_EXPEDIENTE",
+            "NUMERO_PROCEDIMIENTO",
+            "ENTIDAD_FEDERATIVA",
+            "NOMBRE_INSTITUCION"
+        };
+
+        ArrayList<String[]> resultado = new ArrayList<>();
+        for (String campo : camposObligatorios) {
+            resultado.addAll(ejecutarValidacion(
+                "select ID_CONTRATO, '" + campo + "' COMENTARIOS " +
+                "from TR_GF_CONTRATACIONES_PUBLICAS_GEN " +
+                "where " + campo + " is null"
+            ));
+        }
+        return resultado;
+    }
+
     /**
      * Valida otro_tipo_procedimiento_especifique cuando tipo_procedimiento='4'
      */
     public ArrayList<String[]> tipo_garantia_presentada_1_ND() {
         return ejecutarValidacion(
-            "select ID_CONTRATO, REPLACE(COMENTARIOS,',','') COMENTARIOS " +
+            "select ID_CONTRATO, 'TIPO_GARANTIA_PRESENTADA_1' COMENTARIOS " +
             "from TR_GF_CONTRATACIONES_PUBLICAS_GEN " +
             "where cond_presentacion_garantia <> '1' " +
             "and tipo_garantia_presentada_1 is not null"
@@ -41,7 +77,7 @@ public class QContrataciones_Publicas {
     
     public ArrayList<String[]> otro_tipo_procedimiento_especifique() {
         return ejecutarValidacion(
-            "select ID_CONTRATO, REPLACE(COMENTARIOS,',','') COMENTARIOS " +
+            "select ID_CONTRATO, 'OTRO_TIPO_PROCEDIMIENTO_ESPECIFIQUE' COMENTARIOS " +
             "from TR_GF_CONTRATACIONES_PUBLICAS_GEN " +
             "where tipo_procedimiento = '4' and otro_tipo_procedimiento_especifique is null"
         );
@@ -52,7 +88,7 @@ public class QContrataciones_Publicas {
      */
     public ArrayList<String[]> otro_tipo_procedimiento_especifiqueNDC() {
         return ejecutarValidacion(
-            "select ID_CONTRATO, REPLACE(COMENTARIOS,',','') COMENTARIOS " +
+            "select ID_CONTRATO, 'OTRO_TIPO_PROCEDIMIENTO_ESPECIFIQUE' COMENTARIOS " +
             "from TR_GF_CONTRATACIONES_PUBLICAS_GEN " +
             "where tipo_procedimiento <> '4' and otro_tipo_procedimiento_especifique is not null"
         );
@@ -63,7 +99,7 @@ public class QContrataciones_Publicas {
      */
     public ArrayList<String[]> fecha_publicacion_fallo() {
         return ejecutarValidacion(
-            "select ID_CONTRATO, REPLACE(COMENTARIOS,',','') COMENTARIOS " +
+            "select ID_CONTRATO, 'FECHA_PUBLICACION_FALLO' COMENTARIOS " +
             "from TR_GF_CONTRATACIONES_PUBLICAS_GEN " +
             "where FECHA_PUBLICACION_FALLO < FECHA_PUBLICACION_CONVOCATORIA " +
             "and comentarios is null " +
@@ -76,7 +112,7 @@ public class QContrataciones_Publicas {
      */
     public ArrayList<String[]> fecha_firma_contrato() {
         return ejecutarValidacion(
-            "select ID_CONTRATO, REPLACE(COMENTARIOS,',','') COMENTARIOS " +
+            "select ID_CONTRATO, 'FECHA_FIRMA_CONTRATO' COMENTARIOS " +
             "from TR_GF_CONTRATACIONES_PUBLICAS_GEN " +
             "where fecha_firma_contrato < FECHA_PUBLICACION_FALLO " +
             "and comentarios is null " +
@@ -90,7 +126,7 @@ public class QContrataciones_Publicas {
      */
     public ArrayList<String[]> fecha_inicio_contrato() {
         return ejecutarValidacion(
-            "select ID_CONTRATO, REPLACE(COMENTARIOS,',','') COMENTARIOS " +
+            "select ID_CONTRATO, 'FECHA_INICIO_CONTRATO' COMENTARIOS " +
             "from TR_GF_CONTRATACIONES_PUBLICAS_GEN " +
             "where fecha_inicio_contrato < fecha_firma_contrato " +
             "and comentarios is null " +
@@ -104,7 +140,7 @@ public class QContrataciones_Publicas {
      */
     public ArrayList<String[]> fecha_conclusion_contrato() {
         return ejecutarValidacion(
-            "select ID_CONTRATO, REPLACE(COMENTARIOS,',','') COMENTARIOS " +
+            "select ID_CONTRATO, 'FECHA_CONCLUSION_CONTRATO' COMENTARIOS " +
             "from TR_GF_CONTRATACIONES_PUBLICAS_GEN " +
             "where fecha_conclusion_contrato < fecha_inicio_contrato " +
             "and comentarios is null " +
@@ -118,7 +154,7 @@ public class QContrataciones_Publicas {
      */
     public ArrayList<String[]> tipo_garantia_presentada_1() {
         return ejecutarValidacion(
-            "select ID_CONTRATO, REPLACE(COMENTARIOS,',','') COMENTARIOS " +
+            "select ID_CONTRATO, 'TIPO_GARANTIA_PRESENTADA_1' COMENTARIOS " +
             "from TR_GF_CONTRATACIONES_PUBLICAS_GEN " +
             "where cond_presentacion_garantia = '1' " +
             "and tipo_garantia_presentada_1 is null"
@@ -130,7 +166,7 @@ public class QContrataciones_Publicas {
      */
     public ArrayList<String[]> tipo_garantia_presentada_REPETIDA() {
         return ejecutarValidacion(
-            "select ID_CONTRATO, REPLACE(COMENTARIOS,',','') COMENTARIOS " +
+            "select ID_CONTRATO, 'TIPO_GARANTIA_PRESENTADA_1' COMENTARIOS " +
             "from TR_GF_CONTRATACIONES_PUBLICAS_GEN " +
             "where cond_presentacion_garantia <> '1' " +
             "and tipo_garantia_presentada_1 is not null"
@@ -138,22 +174,22 @@ public class QContrataciones_Publicas {
     }
 
     // ===== MÉTODO GENÉRICO =====
-
-    /**
-     * Ejecuta una consulta y retorna los resultados como ArrayList
-     * @param sql Consulta SQL a ejecutar
-     * @return ArrayList con ID_CONTRATO y COMENTARIOS
-     */
+ 
     private ArrayList<String[]> ejecutarValidacion(String sql) {
         ArrayList<String[]> resultado = new ArrayList<>();
         
         try {
             conexion.Conectar();
-            LOGGER.info("Ejecutando: " + sql);           
-            resul = conexion.consultar(sql);          
+            LOGGER.info("Ejecutando: " + sql);
+            resul = conexion.consultar(sql);
+        if (resul != null) {
             while (resul.next()) {
-                resultado.add(new String[]{ resul.getString("ID_CONTRATO"), resul.getString("COMENTARIOS") });
-            }           
+                resultado.add(new String[]{
+                    resul.getString("ID_CONTRATO"),
+                    resul.getString("COMENTARIOS")
+                });
+            }
+        }          
         } catch (SQLException ex) {
             LOGGER.log(Level.SEVERE, "Error en validación: " + sql, ex);
         } finally {

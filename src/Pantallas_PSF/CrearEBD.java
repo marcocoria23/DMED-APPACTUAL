@@ -208,20 +208,23 @@ public class CrearEBD extends javax.swing.JFrame {
                 if (respuesta == JOptionPane.YES_OPTION) {
                     BI.setVisible(true);
                     Q.ValCreaTablas(InsertaAnio.getSelectedItem().toString());
+                int tablasTR = Q.ValCreaTablas(InsertaAnio.getSelectedItem().toString());
 
-                    if (Q.ValCreaTablas(InsertaAnio.getSelectedItem().toString()) > 0) {
-                        JOptionPane.showMessageDialog(null, "Existen tablas creadas con el año seleccionado");
-                        BI.setVisible(false);
-                    } else {
-                        String selectedItem = InsertaAnio.getSelectedItem().toString();
-                        Integer Anio = Integer.valueOf(selectedItem);
-                        PC.CreaTabDinamica(Anio);
-                        PLL.CreaLlaves(Anio);
-                        Button_creaEBD.setVisible(false);
-                        JOptionPane.showMessageDialog(null, "La información se ha creado");
-                        BI.setVisible(false);
-                        Button_creaEBD.setVisible(true);
-                    }
+                if (tablasTR > 0) {
+                    JOptionPane.showMessageDialog(null, "Existen tablas TR creadas con el año seleccionado");
+                    BI.setVisible(false);
+                } else {
+                    String selectedItem = InsertaAnio.getSelectedItem().toString();
+                    Integer Anio = Integer.valueOf(selectedItem);
+
+                    PC.CreaTabDinamica(Anio);
+                    PLL.CreaLlaves(Anio);
+
+                    Button_creaEBD.setVisible(false);
+                    JOptionPane.showMessageDialog(null, "La información se ha creado");
+                    BI.setVisible(false);
+                    Button_creaEBD.setVisible(true);
+                }
 
                 }
             } catch (Exception ex) {

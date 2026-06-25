@@ -35,11 +35,11 @@ public class Valida extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel2 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        Label_Titulo1 = new javax.swing.JLabel();
+        Label_titulo2 = new javax.swing.JLabel();
+        Logo = new javax.swing.JLabel();
+        Banner_amarillo = new javax.swing.JPanel();
+        Bttn_validar = new javax.swing.JButton();
 
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -50,34 +50,34 @@ public class Valida extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setBackground(new java.awt.Color(0, 0, 102));
-        jLabel2.setFont(new java.awt.Font("Cambria", 0, 18)); // NOI18N
-        jLabel2.setText("Programas Sociales Federal Y ");
+        Label_Titulo1.setBackground(new java.awt.Color(0, 0, 102));
+        Label_Titulo1.setFont(new java.awt.Font("Cambria", 0, 18)); // NOI18N
+        Label_Titulo1.setText("Programas Sociales Federal Y ");
 
-        jLabel6.setBackground(new java.awt.Color(0, 0, 102));
-        jLabel6.setFont(new java.awt.Font("Cambria", 0, 18)); // NOI18N
-        jLabel6.setText("Contrataciones Publicas Federal");
+        Label_titulo2.setBackground(new java.awt.Color(0, 0, 102));
+        Label_titulo2.setFont(new java.awt.Font("Cambria", 0, 18)); // NOI18N
+        Label_titulo2.setText("Contrataciones Publicas Federal");
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Logo CNG.png"))); // NOI18N
+        Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Logo CNG.png"))); // NOI18N
 
-        jPanel2.setBackground(new java.awt.Color(204, 204, 0));
+        Banner_amarillo.setBackground(new java.awt.Color(204, 204, 0));
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout Banner_amarilloLayout = new javax.swing.GroupLayout(Banner_amarillo);
+        Banner_amarillo.setLayout(Banner_amarilloLayout);
+        Banner_amarilloLayout.setHorizontalGroup(
+            Banner_amarilloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 532, Short.MAX_VALUE)
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        Banner_amarilloLayout.setVerticalGroup(
+            Banner_amarilloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 11, Short.MAX_VALUE)
         );
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/BValidar.png"))); // NOI18N
-        jButton1.setText("Validar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        Bttn_validar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/BValidar.png"))); // NOI18N
+        Bttn_validar.setText("Validar");
+        Bttn_validar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                Bttn_validarActionPerformed(evt);
             }
         });
 
@@ -88,19 +88,19 @@ public class Valida extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Banner_amarillo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(112, 112, 112)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel6))
+                            .addComponent(Label_Titulo1)
+                            .addComponent(Label_titulo2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 108, Short.MAX_VALUE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Logo, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(12, 12, 12)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Bttn_validar, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26))
         );
         layout.setVerticalGroup(
@@ -108,35 +108,35 @@ public class Valida extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
+                    .addComponent(Logo)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(12, 12, 12)
-                        .addComponent(jLabel2)
+                        .addComponent(Label_Titulo1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel6)))
+                        .addComponent(Label_titulo2)))
                 .addGap(19, 19, 19)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Banner_amarillo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(126, 126, 126)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Bttn_validar, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(19, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void Bttn_validarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Bttn_validarActionPerformed
         // TODO add your handling code here:
         Exporta_validaciones Export = new Exporta_validaciones();
         new Thread(() -> {
             try {
-                jButton1.setEnabled(false);
-                Export.ValidacionTEPJF();
-                jButton1.setEnabled(true);
+                Bttn_validar.setEnabled(false);
+                Export.ValidacionPSF();
+                Bttn_validar.setEnabled(true);
             } catch (IOException ex) {
                 Logger.getLogger(Valida.class.getName()).log(Level.SEVERE, null, ex);
             }
         }).start();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_Bttn_validarActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
@@ -187,10 +187,10 @@ public class Valida extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel Banner_amarillo;
+    private javax.swing.JButton Bttn_validar;
+    private javax.swing.JLabel Label_Titulo1;
+    private javax.swing.JLabel Label_titulo2;
+    private javax.swing.JLabel Logo;
     // End of variables declaration//GEN-END:variables
 }

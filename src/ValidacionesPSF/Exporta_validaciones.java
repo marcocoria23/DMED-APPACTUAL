@@ -11,7 +11,6 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -44,7 +43,7 @@ public class Exporta_validaciones {
     // PUNTO DE ENTRADA PRINCIPAL
     // =========================================================================
 
-    public void ValidacionTEPJF() throws IOException {
+    public void ValidacionPSF() throws IOException {
 
         JProgressBar progressBar = inicializarVentanaProgreso();
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yy");
@@ -87,6 +86,16 @@ public class Exporta_validaciones {
         // ── Declaración: proveedor de datos → mensaje de validación ──────────
         // Cada entrada: método que retorna datos, mensaje para columna "Validacion"
         Object[][] validaciones = {
+            { PS.camposObligatoriosNull(),
+              "Campo obligatorio sin información" },
+            { PS.instituciones_encargadas_saltos(),
+              "No debe dejar posiciones vacias antes de capturar una institucion encargada posterior" },
+            { PS.derecho_social_atendido_saltos(),
+              "No debe dejar posiciones vacias antes de capturar un derecho social atendido posterior" },
+            { PS.tipo_apoyo_entregado_saltos(),
+              "No debe dejar posiciones vacias antes de capturar un tipo de apoyo entregado posterior" },
+            { PS.grupo_vulnerable_beneficiado_saltos(),
+              "No debe dejar posiciones vacias antes de capturar un grupo vulnerable beneficiado posterior" },
             { PS.URL_REGLAS_LINEAMIENTOS_OPERACIONDC(),
               "Debe de capturar valor en URL_REGLAS_LINEAMIENTOS_OPERACION  ya que COND_REGLAS_LINEAMIENTOS_OPERACION es igual a Sí" },
             { PS.URL_REGLAS_LINEAMIENTOS_OPERACIONNDC(),
@@ -147,10 +156,6 @@ public class Exporta_validaciones {
               "Debe de capturar otro_tipo_procedimiento_especifique ya que tipo_procedimiento='Otro tipo (especifique)'" },
             { CP.otro_tipo_procedimiento_especifiqueNDC(),
               "No debe de capturar otro_tipo_procedimiento_especifique ya que tipo_procedimiento es diferente a 'Otro tipo (especifique)'" },
-            { CP.fecha_publicacion_fallo(),
-              "Debe ser igual o mayor a la fecha registrada en el campo fecha_publicacion_convocatoria. En caso de este criterio no le aplique, debe justificarlo en el campo \"\"Comentarios\"\"" },
-            { CP.fecha_firma_contrato(),
-              "Debe ser igual o mayor a la fecha registrada en el campo fecha_publicacion_fallo. En caso de este criterio no le aplique, debe justificarlo en el campo \"\"Comentarios\"\"." },
             { CP.fecha_inicio_contrato(),
               "Debe ser igual o mayor a la fecha registrada en el campo fecha_firma_contrato.En caso de este criterio no le aplique, debe justificarlo en el campo \"\"Comentarios\"\"." },
             { CP.fecha_conclusion_contrato(),
@@ -181,8 +186,11 @@ public class Exporta_validaciones {
         for (Object[] entrada : validaciones) {
             ArrayList<String[]> datos = (ArrayList<String[]>) entrada[0];
             String mensaje = (String) entrada[1];
+            String observacionDefault = entrada.length > 2
+                    ? (String) entrada[2]
+                    : resolverObservacionDefault(mensaje);
             if (!datos.isEmpty()) {
-                filaActual = escribirBloque(hoja, estilos, filaActual, datos, mensaje);
+                filaActual = escribirBloque(hoja, estilos, filaActual, datos, mensaje, observacionDefault);
             }
         }
     }
@@ -194,10 +202,13 @@ public class Exporta_validaciones {
      * @return índice de la siguiente fila disponible
      */
     private int escribirBloque(XSSFSheet hoja, Estilos estilos,
-                                int filaInicio, ArrayList<String[]> datos, String mensaje) {
+                                int filaInicio, ArrayList<String[]> datos, String mensaje, String observacionDefault) {
 
         // ── Encabezado del bloque ────────────────────────────────────────────
-        String[] encabezados = {"ID_PROGRAMA_SOCIAL", "Observaciones", "Validacion"};
+        String idEncabezado = "Contrataciones_Publicas".equals(hoja.getSheetName())
+                ? "ID_CONTRATO"
+                : "ID_PROGRAMA_SOCIAL";
+        String[] encabezados = {idEncabezado, "Observaciones", "Validacion"};
         XSSFRow rowEnc = hoja.createRow(filaInicio);
         for (int col = 0; col < encabezados.length; col++) {
             crearCelda(rowEnc, col, encabezados[col], estilos.encabezado);
@@ -206,11 +217,11 @@ public class Exporta_validaciones {
         // ── Filas de datos ───────────────────────────────────────────────────
         int filaDatos = filaInicio + 1;
         for (String[] registro : datos) {
-            String linea = Arrays.toString(registro)
-                    .replace("[", "").replace("]", "").replace(" 00:00:00.0", "");
-            String[] partes = linea.split(",");
-            String col0 = partes.length > 0 ? partes[0].trim() : "";
-            String col1 = partes.length > 1 ? partes[1].trim() : "";
+            String col0 = limpiarValor(registro.length > 0 ? registro[0] : "");
+            String col1 = limpiarValor(registro.length > 1 ? registro[1] : "");
+            if (col1.isEmpty()) {
+                col1 = observacionDefault;
+            }
 
             XSSFRow row = hoja.createRow(filaDatos++);
             crearCelda(row, 0, col0,    estilos.datos);
@@ -219,6 +230,41 @@ public class Exporta_validaciones {
         }
 
         return filaDatos; // siguiente fila disponible
+    }
+
+    private String limpiarValor(String valor) {
+        return valor == null ? "" : valor.replace(" 00:00:00.0", "").trim();
+    }
+
+    private String resolverObservacionDefault(String mensaje) {
+        String texto = mensaje == null ? "" : mensaje.toUpperCase();
+        String[] campos = {
+            "URL_REGLAS_LINEAMIENTOS_OPERACION",
+            "COND_REGLAS_LINEAMIENTOS_OPERACION",
+            "DERECHO_SOCIAL_ATENDIDO",
+            "TIPO_APOYO_ENTREGADO",
+            "OTRO_TIPO_APOYO_ENTREGADO_ESPECIFIQUE",
+            "POBLACION_ATENDIDA_TERRITORIAL_ESPECIFIQUE",
+            "POBLACION_ATENDIDA_TERRITORIAL",
+            "POBLACION_ATENDIDA_OTRO_TIPO_ESPECIFIQUE",
+            "POBLACION_ATENDIDA_OTRO_TIPO",
+            "GRUPO_VULNERABLE_BENEFICIADO",
+            "OTRO_GRUPO_VULNERABLE_BENEFICIADO_ESPECIFIQUE",
+            "OTRO_TIPO_PROCEDIMIENTO_ESPECIFIQUE",
+            "TIPO_PROCEDIMIENTO",
+            "FECHA_FIRMA_CONTRATO",
+            "FECHA_INICIO_CONTRATO",
+            "FECHA_CONCLUSION_CONTRATO",
+            "TIPO_GARANTIA_PRESENTADA_1",
+            "COND_PRESENTACION_GARANTIA"
+        };
+
+        for (String campo : campos) {
+            if (texto.contains(campo)) {
+                return campo;
+            }
+        }
+        return "";
     }
 
     

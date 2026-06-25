@@ -123,23 +123,28 @@ public class Querys {
     }
 
     public int ValCreaTablas(String Anio) throws SQLException {
-        conexion.Conectar();
-        int ValCreaTablas = 0;
-        sql = "SELECT count(*) as conteos from (select table_name\n"
-                + "FROM ALL_TABLES\n"
-                + "WHERE TABLE_NAME like '%_"+Anio+"')";
-        System.out.println(sql);
-        resul = conexion.consultar(sql);
-        try {
-            if (resul.next()) {
-                ValCreaTablas = resul.getInt("conteos");
-                System.out.println(ValCreaTablas);
-            }
-            conexion.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(Querys.class.getName()).log(Level.SEVERE, null, ex);
+         conexion.Conectar();
+    int ValCreaTablas = 0;
+
+    sql = "SELECT COUNT(*) AS conteos "
+            + "FROM ALL_TABLES "
+            + "WHERE OWNER = 'CNGFED_EST_2024' "
+            + "AND TABLE_NAME LIKE 'TR\\_%\\_" + Anio + "' ESCAPE '\\'";
+
+    System.out.println(sql);
+    resul = conexion.consultar(sql);
+
+    try {
+        if (resul.next()) {
+            ValCreaTablas = resul.getInt("conteos");
+            System.out.println(ValCreaTablas);
         }
-        return ValCreaTablas;
+        conexion.close();
+    } catch (SQLException ex) {
+        Logger.getLogger(Querys.class.getName()).log(Level.SEVERE, null, ex);
+    }
+
+    return ValCreaTablas;
     }
     
     public int ValTablasAnio() throws SQLException {
