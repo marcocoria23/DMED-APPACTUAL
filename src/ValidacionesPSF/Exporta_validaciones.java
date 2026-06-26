@@ -66,11 +66,20 @@ public class Exporta_validaciones {
         hojaCP.setColumnWidth(3, 12000);
         hojaCP.setColumnWidth(4, 6000);
 
+         // ── Hoja 3: Municiíos ──────────────────────────────────
+       XSSFSheet hojaMUN = libro.createSheet("Municipios");
+       hojaMUN.setColumnWidth(0, 8000);
+       hojaMUN.setColumnWidth(1, 18000);
+       hojaMUN.setColumnWidth(2, 18000);
+       
         desplegarProgramasSociales(hojaPS, estilos, progressBar);
         desplegarContratacionesPublicas(hojaCP, estilos, progressBar);
+        desplegarMunicipios(hojaMUN, estilos, progressBar);
         guardarArchivo(libro, progressBar, ventanaProgreso, dtf);
     }
-
+       
+    
+    
     // =========================================================================
     // HOJA 1 — PROGRAMAS SOCIALES
     // =========================================================================
@@ -152,10 +161,20 @@ public class Exporta_validaciones {
         new Valida(); // instancia requerida por la lógica original
 
         Object[][] validaciones = {
+            { CP.camposObligatoriosNull(),
+              "Campo obligatorio sin información" },
             { CP.otro_tipo_procedimiento_especifique(),
               "Debe de capturar otro_tipo_procedimiento_especifique ya que tipo_procedimiento='Otro tipo (especifique)'" },
             { CP.otro_tipo_procedimiento_especifiqueNDC(),
               "No debe de capturar otro_tipo_procedimiento_especifique ya que tipo_procedimiento es diferente a 'Otro tipo (especifique)'" },
+            { CP.NOTotra_institucion_especifique(),
+              "NO Debe de capturar otra_institucion_especifique ya que institucion es diferente a  a OTRA INSTITUCION (especifique)" },
+            { CP.otra_institucion_especifique(),
+              "Debe de capturar otra_institucion_especifique ya que institucion es igual a OTRA INSTITUCION (especifique)" },
+            { CP.fecha_publicacion_fallo(),
+              "Debe ser igual o mayor a la fecha registrada en el campo fecha_publicacion_convocatoria. En caso de este criterio no le aplique, debe justificarlo en el campo \"\"Comentarios\"\"." },
+            { CP.fecha_firma_contrato(),
+              "Debe ser igual o mayor a la fecha registrada en el campo fecha_publicacion_fallo. En caso de este criterio no le aplique, debe justificarlo en el campo \"\"Comentarios\"\"." },
             { CP.fecha_inicio_contrato(),
               "Debe ser igual o mayor a la fecha registrada en el campo fecha_firma_contrato.En caso de este criterio no le aplique, debe justificarlo en el campo \"\"Comentarios\"\"." },
             { CP.fecha_conclusion_contrato(),
@@ -164,12 +183,35 @@ public class Exporta_validaciones {
               "Debe de capturar tipo_garantia_presentada_1 ya que campo cond_presentacion_garantia =Sí." },
             { CP.tipo_garantia_presentada_1_ND(),
               "No debe de capturar tipo_garantia_presentada_1 ya que campo cond_presentacion_garantia =No." },
+            { CP.tipo_garantia_presentada_REPETIDA(),
+              "No se debe repetir tipo_garantia_presentada_1." },
         };
 
         escribirBloques(hoja, estilos, validaciones);
-        progressBar.setValue(100);
+        progressBar.setValue(80);
     }
 
+    // =========================================================================
+    // HOJA 3 — MUNICIPIOS
+    // =========================================================================
+    public void desplegarMunicipios(XSSFSheet hoja, Estilos estilos, JProgressBar progressBar) {
+
+    actualizarProgreso(progressBar, 80, "Municipios");
+    crearFilaTitulo(hoja, 0, "Municipios", 5, estilos.titulo);
+
+    QMunicipios municipios = new QMunicipios();
+    new Valida();
+
+    Object[][] validaciones = {
+        { municipios.poblacion_atendida_municipios(),
+          "La suma de las cantidades registradas para el programa o accion de desarrollo social debe ser igual a la suma de poblacion_atendida_personas, poblacion_atendida_instituciones, poblacion_atendida_personas_morales, poblacion_atendida_territorial, poblacion_atendida_otro_tipo y poblacion_atendida_no_identificada" },
+    };
+
+    escribirBloques(hoja, estilos, validaciones);
+    progressBar.setValue(100);
+}
+    
+    
     // =========================================================================
     // HELPER PRINCIPAL: escribe todos los bloques de una hoja
     // =========================================================================

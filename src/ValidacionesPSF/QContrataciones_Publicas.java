@@ -95,6 +95,27 @@ public class QContrataciones_Publicas {
     }
 
     /**
+     * Valida que capture otra_institucion_especifique cuando institucion='288'
+     */
+    public ArrayList<String[]> otra_institucion_especifique() {
+        return ejecutarValidacion(
+            "select ID_CONTRATO, 'OTRA_INSTITUCION_ESPECIFIQUE' COMENTARIOS " +
+            "from TR_GF_CONTRATACIONES_PUBLICAS_GEN " +
+            "where institucion = '288' " +
+            "and trim(otra_institucion_especifique) is null"
+        );
+    }
+    
+    public ArrayList<String[]> NOTotra_institucion_especifique() {
+        return ejecutarValidacion(
+            "select ID_CONTRATO, 'OTRA_INSTITUCION_ESPECIFIQUE' COMENTARIOS " +
+            "from TR_GF_CONTRATACIONES_PUBLICAS_GEN " +
+            "where institucion <> '288' " +
+            "and trim(otra_institucion_especifique) is not null"
+        );
+    }
+
+    /**
      * Valida que fecha_publicacion_fallo >= fecha_publicacion_convocatoria
      */
     public ArrayList<String[]> fecha_publicacion_fallo() {
