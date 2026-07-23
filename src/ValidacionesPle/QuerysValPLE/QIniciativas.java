@@ -849,7 +849,7 @@ public class QIniciativas {
     public ArrayList DCDictamen(String ID_entidad, String Legislatura, String Envio) {
         conexion.Conectar();
         Array = new ArrayList();
-        sql = "select  ID_ENTIDAD, ENTIDAD, C1_5_ID, P1_5_1,P1_5_8, P1_5_10 from TR_PLE_MEDS1_5 where P1_5_8=5 and  P1_5_10 NOT in(3,4)"
+        sql = "select  ID_ENTIDAD, ENTIDAD, C1_5_ID, P1_5_1,P1_5_8, P1_5_10 from TR_PLE_MEDS1_5 where P1_5_8<>5 and  P1_5_10 in(3,4)"
                 + " AND ID_ENTIDAD=" + ID_entidad + " AND Legislatura=" + Legislatura + " AND C1_5_ID='" + Envio + "'";
         System.out.println(sql);
         resul = conexion.consultar(sql);
