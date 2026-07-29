@@ -225,6 +225,7 @@ public class QIniciativas {
         Array = new ArrayList();
         sql = "SELECT ID_ENTIDAD,C1_5_ID, P1_5_1 AS ID_ACTUAL, P1_5_12, P1_5_15 AS TIPO_INICIATIVA FROM TR_PLE_MEDS1_5 \n" +
         " WHERE  (LOWER(p1_5_12) LIKE '%puntos de acuerdo%' OR LOWER(p1_5_12) LIKE '%punto de acuerdo%'  OR LOWER(p1_5_12) LIKE '%acuerdo%' OR LOWER(p1_5_12) LIKE '%acuerdos%')\n" +
+                "AND ID_ENTIDAD =" + ID_entidad + "   AND C1_5_ID IN (" + envio + ")  \n" +
         "UNION ALL     \n" +
         " SELECT ID_ENTIDAD,C1_5_ID, P1_5_1 AS ID_ACTUAL, P1_5_12, P1_5_15 AS TIPO_INICIATIVA FROM TR_PLE_MEDS1_5 \n" +
         " WHERE (LOWER(P1_5_15) LIKE '%puntos de acuerdo%' OR LOWER(P1_5_15) LIKE '%punto de acuerdo%'  OR LOWER(P1_5_15) LIKE '%acuerdo%' OR LOWER(P1_5_15) LIKE '%acuerdos%')\n" +
