@@ -1389,4 +1389,380 @@ public ArrayList ASUNTOS_HIDROCARBUROS(){
         }
     return Array;
  }
+
+
+    // NUEVA VALIDACION AGREGADA 1
+    public ArrayList Query_Conclusiones_1(){
+     conexion.Conectar();
+      Array = new ArrayList();
+      sql="SELECT CLAVE_ORGANO,NOMBRE_ORGANO_JURIS,PERIODO,SD_TOTAL_SENTENCIAS AS REPORTADO,(SD_SUB_CONTROV_TERR +SD_SUBTOTAL_ASUNTOS_RES +SD_RECON +SD_NULIDADES +SD_TENENCIA +SD_SUB_ASUNTOS_CON_MA +SD_SUCESION_DA +SD_SUBTOTAL_JN +SD_OMISIONES +SD_CONTROV_TERR +SD_REVERSION +SD_SUBTOTAL_EJECUCION +SD_RRT +SD_PRIVACION +SD_INCONFORMIDADES +SD_ASUNTOS_LEGIS +SD_OTROS_ASUNTOS) AS CALCULADO FROM TR_JA_CONCLUSIONES_GEN WHERE NVL(SD_TOTAL_SENTENCIAS,0) <>(NVL(SD_SUB_CONTROV_TERR,0) +NVL(SD_SUBTOTAL_ASUNTOS_RES,0) +NVL(SD_RECON,0) +NVL(SD_NULIDADES,0) +NVL(SD_TENENCIA,0) +NVL(SD_SUB_ASUNTOS_CON_MA,0) +NVL(SD_SUCESION_DA,0) +NVL(SD_SUBTOTAL_JN,0) +NVL(SD_OMISIONES,0) +NVL(SD_CONTROV_TERR,0) +NVL(SD_REVERSION,0) +NVL(SD_SUBTOTAL_EJECUCION,0) +NVL(SD_RRT,0) +NVL(SD_PRIVACION,0) +NVL(SD_INCONFORMIDADES,0) +NVL(SD_ASUNTOS_LEGIS,0) +NVL(SD_OTROS_ASUNTOS,0))";
+      System.out.println(sql);
+      resul=conexion.consultar(sql);
+      try {
+          while (resul.next()) {
+              Array.add(new String[]{
+                  resul.getString("CLAVE_ORGANO"),
+                  resul.getString("NOMBRE_ORGANO_JURIS"),
+                  resul.getString("PERIODO")
+                });
+          }
+      conexion.close();
+     } catch (SQLException ex) {
+            Logger.getLogger(Valida_JA.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    return Array;
+ }
+
+    // NUEVA VALIDACION AGREGADA 2
+    public ArrayList Query_Conclusiones_2(){
+     conexion.Conectar();
+      Array = new ArrayList();
+      sql="SELECT CLAVE_ORGANO,NOMBRE_ORGANO_JURIS,PERIODO,'SCE_TOTAL_SENTENCIAS' VALIDACION,SCE_TOTAL_SENTENCIAS REPORTADO,(NVL(SCE_SUBTOTAL_CON_TERR,0) +NVL(SCE_SUBTOTAL_ASUNTOS_RESTIT,0) +NVL(SCE_RECON,0) +NVL(SCE_NULIDADES,0) +NVL(SCE_TENENCIA,0) +NVL(SCE_SUB_ASUNTOS_CONT_MA,0) +NVL(SCE_SUCESION_DA,0) +NVL(SCE_SUBTOTAL_JN,0) +NVL(SCE_OMISIONES,0) +NVL(SCE_ASUNTOS_JV,0) +NVL(SCE_CONTROV_TERR,0) +NVL(SCE_REVERSION,0) +NVL(SCE_SUBTOTAL_EJECUCION,0) +NVL(SCE_RRT,0) +NVL(SCE_PRIVACION,0) +NVL(SCE_INCONFORMIDADES,0) +NVL(SCE_ASUNTOS_LEGIS,0) +NVL(SCE_OTROS_ASUNTOS,0)) CALCULADO FROM TR_JA_CONCLUSIONES_GEN WHERE NVL(SCE_TOTAL_SENTENCIAS,0) <>(NVL(SCE_SUBTOTAL_CON_TERR,0) +NVL(SCE_SUBTOTAL_ASUNTOS_RESTIT,0) +NVL(SCE_RECON,0) +NVL(SCE_NULIDADES,0) +NVL(SCE_TENENCIA,0) +NVL(SCE_SUB_ASUNTOS_CONT_MA,0) +NVL(SCE_SUCESION_DA,0) +NVL(SCE_SUBTOTAL_JN,0) +NVL(SCE_OMISIONES,0) +NVL(SCE_ASUNTOS_JV,0) +NVL(SCE_CONTROV_TERR,0) +NVL(SCE_REVERSION,0) +NVL(SCE_SUBTOTAL_EJECUCION,0) +NVL(SCE_RRT,0) +NVL(SCE_PRIVACION,0) +NVL(SCE_INCONFORMIDADES,0) +NVL(SCE_ASUNTOS_LEGIS,0) +NVL(SCE_OTROS_ASUNTOS,0))";
+      System.out.println(sql);
+      resul=conexion.consultar(sql);
+      try {
+          while (resul.next()) {
+              Array.add(new String[]{
+                  resul.getString("CLAVE_ORGANO"),
+                  resul.getString("NOMBRE_ORGANO_JURIS"),
+                  resul.getString("PERIODO")
+                });
+          }
+      conexion.close();
+     } catch (SQLException ex) {
+            Logger.getLogger(Valida_JA.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    return Array;
+ }
+
+    // NUEVA VALIDACION AGREGADA 3
+    public ArrayList Query_Conclusiones_3(){
+     conexion.Conectar();
+      Array = new ArrayList();
+      sql="SELECT CLAVE_ORGANO,NOMBRE_ORGANO_JURIS,PERIODO,'SCR_TOTAL_SENTENCIAS',SCR_TOTAL_SENTENCIAS,(NVL(SCR_SUBTOTAL_CONTROV_TERR,0) +NVL(SCR_SUBTOTAL_ASUNTOS_RESTIT,0) +NVL(SCR_RECON,0) +NVL(SCR_NULIDADES,0) +NVL(SCR_TENENCIA,0) +NVL(SCR_SUB_ASUNTOS_CONT_MA,0) +NVL(SCR_SUCESION_DA,0) +NVL(SCR_SUBTOTAL_JN,0) +NVL(SCR_OMISIONES,0) +NVL(SCR_ASUNTOS_JV,0) +NVL(SCR_CONTROV_TERR,0) +NVL(SCR_REVERSION,0) +NVL(SCR_SUBTOTAL_EJECUCION,0) +NVL(SCR_RRT,0) +NVL(SCR_PRIVACION,0) +NVL(SCR_INCONFORMIDADES,0) +NVL(SCR_ASUNTOS_LEGIS,0) +NVL(SCR_OTROS_ASUNTOS,0)) FROM TR_JA_CONCLUSIONES_GEN WHERE NVL(SCR_TOTAL_SENTENCIAS,0) <>(NVL(SCR_SUBTOTAL_CONTROV_TERR,0) +NVL(SCR_SUBTOTAL_ASUNTOS_RESTIT,0) +NVL(SCR_RECON,0) +NVL(SCR_NULIDADES,0) +NVL(SCR_TENENCIA,0) +NVL(SCR_SUB_ASUNTOS_CONT_MA,0) +NVL(SCR_SUCESION_DA,0) +NVL(SCR_SUBTOTAL_JN,0) +NVL(SCR_OMISIONES,0) +NVL(SCR_ASUNTOS_JV,0) +NVL(SCR_CONTROV_TERR,0) +NVL(SCR_REVERSION,0) +NVL(SCR_SUBTOTAL_EJECUCION,0) +NVL(SCR_RRT,0) +NVL(SCR_PRIVACION,0) +NVL(SCR_INCONFORMIDADES,0) +NVL(SCR_ASUNTOS_LEGIS,0) +NVL(SCR_OTROS_ASUNTOS,0))";
+      System.out.println(sql);
+      resul=conexion.consultar(sql);
+      try {
+          while (resul.next()) {
+              Array.add(new String[]{
+                  resul.getString("CLAVE_ORGANO"),
+                  resul.getString("NOMBRE_ORGANO_JURIS"),
+                  resul.getString("PERIODO")
+                });
+          }
+      conexion.close();
+     } catch (SQLException ex) {
+            Logger.getLogger(Valida_JA.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    return Array;
+ }
+
+    // NUEVA VALIDACION AGREGADA 4
+    public ArrayList Query_Conclusiones_4(){
+     conexion.Conectar();
+      Array = new ArrayList();
+      sql="SELECT CLAVE_ORGANO,NOMBRE_ORGANO_JURIS,PERIODO,'LH_TOTAL_LAUDOS',LH_TOTAL_LAUDOS,(NVL(LH_SUBTOTAL_CONTROV_TERR,0) +NVL(LH_SUBTOTAL_ASUNTOS_RESTIT,0) +NVL(LH_RECON,0) +NVL(LH_NULIDADES,0) +NVL(LH_TENENCIA,0) +NVL(LH_SUB_ASUNTOS_CONT_MA,0) +NVL(LH_SUCESION_DA,0) +NVL(LH_SUBTOTAL_JN,0) +NVL(LH_OMISIONES,0) +NVL(LH_CONTROV_TERR,0) +NVL(LH_REVERSION,0) +NVL(LH_SUBTOTAL_EJECUCION,0) +NVL(LH_RRT,0) +NVL(LH_PRIVACION,0) +NVL(LH_INCONFORMIDADES,0) +NVL(LH_ASUNTOS_LEGIS,0) +NVL(LH_OTROS_ASUNTOS,0)) FROM TR_JA_CONCLUSIONES_GEN WHERE NVL(LH_TOTAL_LAUDOS,0) <>(NVL(LH_SUBTOTAL_CONTROV_TERR,0) +NVL(LH_SUBTOTAL_ASUNTOS_RESTIT,0) +NVL(LH_RECON,0) +NVL(LH_NULIDADES,0) +NVL(LH_TENENCIA,0) +NVL(LH_SUB_ASUNTOS_CONT_MA,0) +NVL(LH_SUCESION_DA,0) +NVL(LH_SUBTOTAL_JN,0) +NVL(LH_OMISIONES,0) +NVL(LH_CONTROV_TERR,0) +NVL(LH_REVERSION,0) +NVL(LH_SUBTOTAL_EJECUCION,0) +NVL(LH_RRT,0) +NVL(LH_PRIVACION,0) +NVL(LH_INCONFORMIDADES,0) +NVL(LH_ASUNTOS_LEGIS,0) +NVL(LH_OTROS_ASUNTOS,0))";
+      System.out.println(sql);
+      resul=conexion.consultar(sql);
+      try {
+          while (resul.next()) {
+              Array.add(new String[]{
+                  resul.getString("CLAVE_ORGANO"),
+                  resul.getString("NOMBRE_ORGANO_JURIS"),
+                  resul.getString("PERIODO")
+                });
+          }
+      conexion.close();
+     } catch (SQLException ex) {
+            Logger.getLogger(Valida_JA.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    return Array;
+ }
+
+    // NUEVA VALIDACION AGREGADA 5
+    public ArrayList Query_Conclusiones_5(){
+     conexion.Conectar();
+      Array = new ArrayList();
+      sql="SELECT CLAVE_ORGANO,NOMBRE_ORGANO_JURIS,PERIODO,'CSS_TOTAL_CONVENIOS',CSS_TOTAL_CONVENIOS,(NVL(CSS_SUBTOTAL_CONTROV_TERR,0) +NVL(CSS_SUBTOTAL_ASUNTOS_RESTIT,0) +NVL(CSS_RECON,0) +NVL(CSS_NULIDADES,0) +NVL(CSS_TENENCIA,0) +NVL(CSS_SUB_ASUNTOS_CONT_MA,0) +NVL(CSS_SUCESION_DA,0) +NVL(CSS_SUBTOTAL_JN_,0) +NVL(CSS_OMISIONES,0) +NVL(CSS_ASUNTOS_JV,0) +NVL(CSS_CONTROV_TERR,0) +NVL(CSS_REVERSION,0) +NVL(CSS_SUBTOTAL_EJECUCION,0) +NVL(CSS_RRT,0) +NVL(CSS_PRIVACION,0) +NVL(CSS_INCONFORMIDADES,0) +NVL(CSS_ASUNTOS_LEGIS,0) +NVL(CSS_OTROS_ASUNTOS,0)) FROM TR_JA_CONCLUSIONES_GEN WHERE NVL(CSS_TOTAL_CONVENIOS,0) <>(NVL(CSS_SUBTOTAL_CONTROV_TERR,0) +NVL(CSS_SUBTOTAL_ASUNTOS_RESTIT,0) +NVL(CSS_RECON,0) +NVL(CSS_NULIDADES,0) +NVL(CSS_TENENCIA,0) +NVL(CSS_SUB_ASUNTOS_CONT_MA,0) +NVL(CSS_SUCESION_DA,0) +NVL(CSS_SUBTOTAL_JN_,0) +NVL(CSS_OMISIONES,0) +NVL(CSS_ASUNTOS_JV,0) +NVL(CSS_CONTROV_TERR,0) +NVL(CSS_REVERSION,0) +NVL(CSS_SUBTOTAL_EJECUCION,0) +NVL(CSS_RRT,0) +NVL(CSS_PRIVACION,0) +NVL(CSS_INCONFORMIDADES,0) +NVL(CSS_ASUNTOS_LEGIS,0) +NVL(CSS_OTROS_ASUNTOS,0))";
+      System.out.println(sql);
+      resul=conexion.consultar(sql);
+      try {
+          while (resul.next()) {
+              Array.add(new String[]{
+                  resul.getString("CLAVE_ORGANO"),
+                  resul.getString("NOMBRE_ORGANO_JURIS"),
+                  resul.getString("PERIODO")
+                });
+          }
+      conexion.close();
+     } catch (SQLException ex) {
+            Logger.getLogger(Valida_JA.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    return Array;
+ }
+
+    // NUEVA VALIDACION AGREGADA 6
+    public ArrayList Query_Conclusiones_6(){
+     conexion.Conectar();
+      Array = new ArrayList();
+      sql="SELECT CLAVE_ORGANO,NOMBRE_ORGANO_JURIS,PERIODO,'DES_TOTAL_DESMENTIMIENTOS',DES_TOTAL_DESMENTIMIENTOS,(NVL(DES_SUBTOTAL_CONTROV_TERR,0) +NVL(DES_SUBTOTAL_ASUNTOS_RESTIT,0) +NVL(DES_RECON,0) +NVL(DES_NULIDADES,0) +NVL(DES_TENENCIA,0) +NVL(DES_SUB_ASUNTOS_CONT_MA,0) +NVL(DES_SUCESION_DA,0) +NVL(DES_SUBTOTAL_JN,0) +NVL(DES_OMISIONES,0) +NVL(DES_ASUNTOS_JV,0) +NVL(DES_CONTROV_TERR,0) +NVL(DES_REVERSION,0) +NVL(DES_SUBTOTAL_EJECUCION,0) +NVL(DES_RRT,0) +NVL(DES_PRIVACION,0) +NVL(DES_INCONFORMIDADES,0) +NVL(DES_ASUNTOS_LEGIS,0) +NVL(DES_OTROS_ASUNTOS,0)) FROM TR_JA_CONCLUSIONES_GEN WHERE NVL(DES_TOTAL_DESMENTIMIENTOS,0) <>(NVL(DES_SUBTOTAL_CONTROV_TERR,0) +NVL(DES_SUBTOTAL_ASUNTOS_RESTIT,0) +NVL(DES_RECON,0) +NVL(DES_NULIDADES,0) +NVL(DES_TENENCIA,0) +NVL(DES_SUB_ASUNTOS_CONT_MA,0) +NVL(DES_SUCESION_DA,0) +NVL(DES_SUBTOTAL_JN,0) +NVL(DES_OMISIONES,0) +NVL(DES_ASUNTOS_JV,0) +NVL(DES_CONTROV_TERR,0) +NVL(DES_REVERSION,0) +NVL(DES_SUBTOTAL_EJECUCION,0) +NVL(DES_RRT,0) +NVL(DES_PRIVACION,0) +NVL(DES_INCONFORMIDADES,0) +NVL(DES_ASUNTOS_LEGIS,0) +NVL(DES_OTROS_ASUNTOS,0))";
+      System.out.println(sql);
+      resul=conexion.consultar(sql);
+      try {
+          while (resul.next()) {
+              Array.add(new String[]{
+                  resul.getString("CLAVE_ORGANO"),
+                  resul.getString("NOMBRE_ORGANO_JURIS"),
+                  resul.getString("PERIODO")
+                });
+          }
+      conexion.close();
+     } catch (SQLException ex) {
+            Logger.getLogger(Valida_JA.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    return Array;
+ }
+
+    // NUEVA VALIDACION AGREGADA 7
+    public ArrayList Query_Conclusiones_7(){
+     conexion.Conectar();
+      Array = new ArrayList();
+      sql="SELECT CLAVE_ORGANO,NOMBRE_ORGANO_JURIS,PERIODO,'CAD_TOTAL_CADUCIDADES',CAD_TOTAL_CADUCIDADES,(NVL(CAD_SUBTOTAL_CONTROV_TERR,0) +NVL(CAD_SUBTOTAL_ASUNTOS_RESTIT,0) +NVL(CAD_RECON,0) +NVL(CAD_NULIDADES,0) +NVL(CAD_TENENCIA,0) +NVL(CAD_SUB_ASUNTOS_CONT_MA,0) +NVL(CAD_SUCESION_DA,0) +NVL(CAD_SUBTOTAL_JN,0) +NVL(CAD_OMISIONES,0) +NVL(CAD_ASUNTOS_JV,0) +NVL(CAD_CONTROV_TERR,0) +NVL(CAD_REVERSION,0) +NVL(CAD_SUBTOTAL_EJECUCION,0) +NVL(CAD_RRT,0) +NVL(CAD_PRIVACION,0) +NVL(CAD_INCONFORMIDADES,0) +NVL(CAD_ASUNTOS_LEGIS,0) +NVL(CAD_OTROS_ASUNTOS,0)) FROM TR_JA_CONCLUSIONES_GEN WHERE NVL(CAD_TOTAL_CADUCIDADES,0) <>(NVL(CAD_SUBTOTAL_CONTROV_TERR,0) +NVL(CAD_SUBTOTAL_ASUNTOS_RESTIT,0) +NVL(CAD_RECON,0) +NVL(CAD_NULIDADES,0) +NVL(CAD_TENENCIA,0) +NVL(CAD_SUB_ASUNTOS_CONT_MA,0) +NVL(CAD_SUCESION_DA,0) +NVL(CAD_SUBTOTAL_JN,0) +NVL(CAD_OMISIONES,0) +NVL(CAD_ASUNTOS_JV,0) +NVL(CAD_CONTROV_TERR,0) +NVL(CAD_REVERSION,0) +NVL(CAD_SUBTOTAL_EJECUCION,0) +NVL(CAD_RRT,0) +NVL(CAD_PRIVACION,0) +NVL(CAD_INCONFORMIDADES,0) +NVL(CAD_ASUNTOS_LEGIS,0) +NVL(CAD_OTROS_ASUNTOS,0))";
+      System.out.println(sql);
+      resul=conexion.consultar(sql);
+      try {
+          while (resul.next()) {
+              Array.add(new String[]{
+                  resul.getString("CLAVE_ORGANO"),
+                  resul.getString("NOMBRE_ORGANO_JURIS"),
+                  resul.getString("PERIODO")
+                });
+          }
+      conexion.close();
+     } catch (SQLException ex) {
+            Logger.getLogger(Valida_JA.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    return Array;
+ }
+
+    // NUEVA VALIDACION AGREGADA 8
+    public ArrayList Query_Conclusiones_8(){
+     conexion.Conectar();
+      Array = new ArrayList();
+      sql="SELECT CLAVE_ORGANO,NOMBRE_ORGANO_JURIS,PERIODO,'OTRO_TOTAL_OTRO_TIPO',OTRO_TOTAL_OTRO_TIPO,(NVL(OTRO_SUBTOTAL_CONTROV_TERR,0) +NVL(OTRO_SUBTOTAL_ASUNTOS_RESTIT,0) +NVL(OTRO_RECON,0) +NVL(OTRO_NULIDADES,0) +NVL(OTRO_TENENCIA,0) +NVL(OTRO_SUB_ASUNTOS_CONT_MA,0) +NVL(OTRO_SUCESION_DA,0) +NVL(OTRO_SUBTOTAL_JN,0) +NVL(OTRO_OMISIONES,0) +NVL(OTRO_ASUNTOS_JV,0) +NVL(OTRO_CONTROV_TERR,0) +NVL(OTRO_REVERSION,0) +NVL(OTRO_SUBTOTAL_EJECUCION,0) +NVL(OTRO_RRT,0) +NVL(OTRO_PRIVACION,0) +NVL(OTRO_INCONFORMIDADES,0) +NVL(OTRO_ASUNTOS_LEGIS,0) +NVL(OTRO_OTROS_ASUNTOS,0)) FROM TR_JA_CONCLUSIONES_GEN WHERE NVL(OTRO_TOTAL_OTRO_TIPO,0) <>(NVL(OTRO_SUBTOTAL_CONTROV_TERR,0) +NVL(OTRO_SUBTOTAL_ASUNTOS_RESTIT,0) +NVL(OTRO_RECON,0) +NVL(OTRO_NULIDADES,0) +NVL(OTRO_TENENCIA,0) +NVL(OTRO_SUB_ASUNTOS_CONT_MA,0) +NVL(OTRO_SUCESION_DA,0) +NVL(OTRO_SUBTOTAL_JN,0) +NVL(OTRO_OMISIONES,0) +NVL(OTRO_ASUNTOS_JV,0) +NVL(OTRO_CONTROV_TERR,0) +NVL(OTRO_REVERSION,0) +NVL(OTRO_SUBTOTAL_EJECUCION,0) +NVL(OTRO_RRT,0) +NVL(OTRO_PRIVACION,0) +NVL(OTRO_INCONFORMIDADES,0) +NVL(OTRO_ASUNTOS_LEGIS,0) +NVL(OTRO_OTROS_ASUNTOS,0))";
+      System.out.println(sql);
+      resul=conexion.consultar(sql);
+      try {
+          while (resul.next()) {
+              Array.add(new String[]{
+                  resul.getString("CLAVE_ORGANO"),
+                  resul.getString("NOMBRE_ORGANO_JURIS"),
+                  resul.getString("PERIODO")
+                });
+          }
+      conexion.close();
+     } catch (SQLException ex) {
+            Logger.getLogger(Valida_JA.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    return Array;
+ }
+
+    // NUEVA VALIDACION AGREGADA 9
+    public ArrayList Query_Conclusiones_9(){
+     conexion.Conectar();
+      Array = new ArrayList();
+      sql="SELECT CLAVE_ORGANO,NOMBRE_ORGANO_JURIS,PERIODO,SENTENCIAS_DEF AS REPORTADO,SD_TOTAL_SENTENCIAS AS CALCULADO,SENTENCIAS_DEF - SD_TOTAL_SENTENCIAS AS DIFERENCIA FROM TR_JA_CONCLUSIONES_GEN WHERE NVL(SENTENCIAS_DEF,0) <> NVL(SD_TOTAL_SENTENCIAS,0)";
+      System.out.println(sql);
+      resul=conexion.consultar(sql);
+      try {
+          while (resul.next()) {
+              Array.add(new String[]{
+                  resul.getString("CLAVE_ORGANO"),
+                  resul.getString("NOMBRE_ORGANO_JURIS"),
+                  resul.getString("PERIODO")
+                });
+          }
+      conexion.close();
+     } catch (SQLException ex) {
+            Logger.getLogger(Valida_JA.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    return Array;
+ }
+
+    // NUEVA VALIDACION AGREGADA 10
+    public ArrayList Query_Conclusiones_10(){
+     conexion.Conectar();
+      Array = new ArrayList();
+      sql="SELECT CLAVE_ORGANO,NOMBRE_ORGANO_JURIS,PERIODO,SENTENCIAS_CUMPL_EJEC AS REPORTADO,SCE_TOTAL_SENTENCIAS AS CALCULADO,SENTENCIAS_CUMPL_EJEC - SCE_TOTAL_SENTENCIAS AS DIFERENCIA FROM TR_JA_CONCLUSIONES_GEN WHERE NVL(SENTENCIAS_CUMPL_EJEC,0) <> NVL(SCE_TOTAL_SENTENCIAS,0)";
+      System.out.println(sql);
+      resul=conexion.consultar(sql);
+      try {
+          while (resul.next()) {
+              Array.add(new String[]{
+                  resul.getString("CLAVE_ORGANO"),
+                  resul.getString("NOMBRE_ORGANO_JURIS"),
+                  resul.getString("PERIODO")
+                });
+          }
+      conexion.close();
+     } catch (SQLException ex) {
+            Logger.getLogger(Valida_JA.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    return Array;
+ }
+
+    // NUEVA VALIDACION AGREGADA 11
+    public ArrayList Query_Conclusiones_11(){
+     conexion.Conectar();
+      Array = new ArrayList();
+      sql="SELECT CLAVE_ORGANO,NOMBRE_ORGANO_JURIS,PERIODO,SENTENCIAS_CUMP_RR AS REPORTADO,SCR_TOTAL_SENTENCIAS AS CALCULADO,SENTENCIAS_CUMP_RR - SCR_TOTAL_SENTENCIAS AS DIFERENCIA FROM TR_JA_CONCLUSIONES_GEN WHERE NVL(SENTENCIAS_CUMP_RR,0) <> NVL(SCR_TOTAL_SENTENCIAS,0)";
+      System.out.println(sql);
+      resul=conexion.consultar(sql);
+      try {
+          while (resul.next()) {
+              Array.add(new String[]{
+                  resul.getString("CLAVE_ORGANO"),
+                  resul.getString("NOMBRE_ORGANO_JURIS"),
+                  resul.getString("PERIODO")
+                });
+          }
+      conexion.close();
+     } catch (SQLException ex) {
+            Logger.getLogger(Valida_JA.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    return Array;
+ }
+
+    // NUEVA VALIDACION AGREGADA 12
+    public ArrayList Query_Conclusiones_12(){
+     conexion.Conectar();
+      Array = new ArrayList();
+      sql="SELECT CLAVE_ORGANO,NOMBRE_ORGANO_JURIS,PERIODO,LAUDOS AS REPORTADO,LH_TOTAL_LAUDOS AS CALCULADO,LAUDOS - LH_TOTAL_LAUDOS AS DIFERENCIA FROM TR_JA_CONCLUSIONES_GEN WHERE NVL(LAUDOS,0) <> NVL(LH_TOTAL_LAUDOS,0)";
+      System.out.println(sql);
+      resul=conexion.consultar(sql);
+      try {
+          while (resul.next()) {
+              Array.add(new String[]{
+                  resul.getString("CLAVE_ORGANO"),
+                  resul.getString("NOMBRE_ORGANO_JURIS"),
+                  resul.getString("PERIODO")
+                });
+          }
+      conexion.close();
+     } catch (SQLException ex) {
+            Logger.getLogger(Valida_JA.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    return Array;
+ }
+
+    // NUEVA VALIDACION AGREGADA 13
+    public ArrayList Query_Conclusiones_13(){
+     conexion.Conectar();
+      Array = new ArrayList();
+      sql="SELECT CLAVE_ORGANO,NOMBRE_ORGANO_JURIS,PERIODO,CONVENIOS AS REPORTADO,CSS_TOTAL_CONVENIOS AS CALCULADO,CONVENIOS - CSS_TOTAL_CONVENIOS AS DIFERENCIA FROM TR_JA_CONCLUSIONES_GEN WHERE NVL(CONVENIOS,0) <> NVL(CSS_TOTAL_CONVENIOS,0)";
+      System.out.println(sql);
+      resul=conexion.consultar(sql);
+      try {
+          while (resul.next()) {
+              Array.add(new String[]{
+                  resul.getString("CLAVE_ORGANO"),
+                  resul.getString("NOMBRE_ORGANO_JURIS"),
+                  resul.getString("PERIODO")
+                });
+          }
+      conexion.close();
+     } catch (SQLException ex) {
+            Logger.getLogger(Valida_JA.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    return Array;
+ }
+
+    // NUEVA VALIDACION AGREGADA 14
+    public ArrayList Query_Conclusiones_14(){
+     conexion.Conectar();
+      Array = new ArrayList();
+      sql="SELECT CLAVE_ORGANO,NOMBRE_ORGANO_JURIS,PERIODO,DESISTIMIENTOS AS REPORTADO,DES_TOTAL_DESMENTIMIENTOS AS CALCULADO,DESISTIMIENTOS - DES_TOTAL_DESMENTIMIENTOS AS DIFERENCIA FROM TR_JA_CONCLUSIONES_GEN WHERE NVL(DESISTIMIENTOS,0) <> NVL(DES_TOTAL_DESMENTIMIENTOS,0)";
+      System.out.println(sql);
+      resul=conexion.consultar(sql);
+      try {
+          while (resul.next()) {
+              Array.add(new String[]{
+                  resul.getString("CLAVE_ORGANO"),
+                  resul.getString("NOMBRE_ORGANO_JURIS"),
+                  resul.getString("PERIODO")
+                });
+          }
+      conexion.close();
+     } catch (SQLException ex) {
+            Logger.getLogger(Valida_JA.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    return Array;
+ }
+
+    // NUEVA VALIDACION AGREGADA 15
+    public ArrayList Query_Conclusiones_15(){
+     conexion.Conectar();
+      Array = new ArrayList();
+      sql="SELECT CLAVE_ORGANO,NOMBRE_ORGANO_JURIS,PERIODO,CADUCIDADES AS REPORTADO,CAD_TOTAL_CADUCIDADES AS CALCULADO,CADUCIDADES - CAD_TOTAL_CADUCIDADES AS DIFERENCIA FROM TR_JA_CONCLUSIONES_GEN WHERE NVL(CADUCIDADES,0) <> NVL(CAD_TOTAL_CADUCIDADES,0)";
+      System.out.println(sql);
+      resul=conexion.consultar(sql);
+      try {
+          while (resul.next()) {
+              Array.add(new String[]{
+                  resul.getString("CLAVE_ORGANO"),
+                  resul.getString("NOMBRE_ORGANO_JURIS"),
+                  resul.getString("PERIODO")
+                });
+          }
+      conexion.close();
+     } catch (SQLException ex) {
+            Logger.getLogger(Valida_JA.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    return Array;
+ }
+
+    // NUEVA VALIDACION AGREGADA 16
+    public ArrayList Query_Conclusiones_16(){
+     conexion.Conectar();
+      Array = new ArrayList();
+      sql="SELECT CLAVE_ORGANO,NOMBRE_ORGANO_JURIS,PERIODO,OTRO_RESOL AS REPORTADO,OTRO_TOTAL_OTRO_TIPO AS CALCULADO,OTRO_RESOL - OTRO_TOTAL_OTRO_TIPO AS DIFERENCIA FROM TR_JA_CONCLUSIONES_GEN WHERE NVL(OTRO_RESOL,0) <> NVL(OTRO_TOTAL_OTRO_TIPO,0)";
+      System.out.println(sql);
+      resul=conexion.consultar(sql);
+      try {
+          while (resul.next()) {
+              Array.add(new String[]{
+                  resul.getString("CLAVE_ORGANO"),
+                  resul.getString("NOMBRE_ORGANO_JURIS"),
+                  resul.getString("PERIODO")
+                });
+          }
+      conexion.close();
+     } catch (SQLException ex) {
+            Logger.getLogger(Valida_JA.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    return Array;
+ }
+
+    // NUEVA VALIDACION AGREGADA 17
+    public ArrayList Query_Conclusiones_17(){
+     conexion.Conectar();
+      Array = new ArrayList();
+      sql="SELECT * FROM (SELECT NOMBRE_ORGANO_JURIS,CLAVE_ORGANO,PERIODO,TOTAL_ASUNTOS_TRAMITE,TOTAL_ASUNTOS_PEND+TOTAL_ASUNTOS_INSTRUC AS SUMA FROM TR_JA_TRAMITE_GEN) WHERE TOTAL_ASUNTOS_TRAMITE<>SUMA";
+      System.out.println(sql);
+      resul=conexion.consultar(sql);
+      try {
+          while (resul.next()) {
+              Array.add(new String[]{
+                  resul.getString("CLAVE_ORGANO"),
+                  resul.getString("NOMBRE_ORGANO_JURIS"),
+                  resul.getString("PERIODO")
+                });
+          }
+      conexion.close();
+     } catch (SQLException ex) {
+            Logger.getLogger(Valida_JA.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    return Array;
+ }
+
 }

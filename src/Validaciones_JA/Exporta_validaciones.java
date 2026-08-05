@@ -760,6 +760,82 @@ public class Exporta_validaciones {
                 "TR_JA_ASUNTOS_HIDROCARBUROS_GEN",
                 "Registro Clave_organo en tabla TR_JA_ASUNTOS_HIDROCARBUROS_GEN no existe en tabla TR_JA_CONTROL_GEN");
         progressBar.setValue(90);
+
+        // ── 3. NUEVAS VALIDACIONES DE CONSISTENCIA ──────────────────────────
+        // Los métodos Query_Conclusiones_* devuelven:
+        // [CLAVE_ORGANO, NOMBRE_ORGANO_JURIS, PERIODO]
+        //
+        // Se agrega una fila por cada registro que incumple la regla.
+
+        filaActual = escribirFilasValidacion(VC.Query_Conclusiones_1(), hojaObs, estiloDatos, filaActual,
+                "TR_JA_CONCLUSIONES_GEN", "SD_TOTAL_SENTENCIAS",
+                "El campo SD_TOTAL_SENTENCIAS debe ser igual a la suma de SD_SUB_CONTROV_TERR + SD_SUBTOTAL_ASUNTOS_RES + SD_RECON + SD_NULIDADES + SD_TENENCIA + SD_SUB_ASUNTOS_CON_MA + SD_SUCESION_DA + SD_SUBTOTAL_JN + SD_OMISIONES + SD_CONTROV_TERR + SD_REVERSION + SD_SUBTOTAL_EJECUCION + SD_RRT + SD_PRIVACION + SD_INCONFORMIDADES + SD_ASUNTOS_LEGIS + SD_OTROS_ASUNTOS.");
+
+        filaActual = escribirFilasValidacion(VC.Query_Conclusiones_2(), hojaObs, estiloDatos, filaActual,
+                "TR_JA_CONCLUSIONES_GEN", "SCE_TOTAL_SENTENCIAS",
+                "El campo SCE_TOTAL_SENTENCIAS debe ser igual a la suma de SCE_SUBTOTAL_CON_TERR + SCE_SUBTOTAL_ASUNTOS_RESTIT + SCE_RECON + SCE_NULIDADES + SCE_TENENCIA + SCE_SUB_ASUNTOS_CONT_MA + SCE_SUCESION_DA + SCE_SUBTOTAL_JN + SCE_OMISIONES + SCE_ASUNTOS_JV + SCE_CONTROV_TERR + SCE_REVERSION + SCE_SUBTOTAL_EJECUCION + SCE_RRT + SCE_PRIVACION + SCE_INCONFORMIDADES + SCE_ASUNTOS_LEGIS + SCE_OTROS_ASUNTOS.");
+
+        filaActual = escribirFilasValidacion(VC.Query_Conclusiones_3(), hojaObs, estiloDatos, filaActual,
+                "TR_JA_CONCLUSIONES_GEN", "SCR_TOTAL_SENTENCIAS",
+                "El campo SCR_TOTAL_SENTENCIAS debe ser igual a la suma de SCR_SUBTOTAL_CONTROV_TERR + SCR_SUBTOTAL_ASUNTOS_RESTIT + SCR_RECON + SCR_NULIDADES + SCR_TENENCIA + SCR_SUB_ASUNTOS_CONT_MA + SCR_SUCESION_DA + SCR_SUBTOTAL_JN + SCR_OMISIONES + SCR_ASUNTOS_JV + SCR_CONTROV_TERR + SCR_REVERSION + SCR_SUBTOTAL_EJECUCION + SCR_RRT + SCR_PRIVACION + SCR_INCONFORMIDADES + SCR_ASUNTOS_LEGIS + SCR_OTROS_ASUNTOS.");
+
+        filaActual = escribirFilasValidacion(VC.Query_Conclusiones_4(), hojaObs, estiloDatos, filaActual,
+                "TR_JA_CONCLUSIONES_GEN", "LH_TOTAL_LAUDOS",
+                "El campo LH_TOTAL_LAUDOS debe ser igual a la suma de LH_SUBTOTAL_CONTROV_TERR + LH_SUBTOTAL_ASUNTOS_RESTIT + LH_RECON + LH_NULIDADES + LH_TENENCIA + LH_SUB_ASUNTOS_CONT_MA + LH_SUCESION_DA + LH_SUBTOTAL_JN + LH_OMISIONES + LH_CONTROV_TERR + LH_REVERSION + LH_SUBTOTAL_EJECUCION + LH_RRT + LH_PRIVACION + LH_INCONFORMIDADES + LH_ASUNTOS_LEGIS + LH_OTROS_ASUNTOS.");
+
+        filaActual = escribirFilasValidacion(VC.Query_Conclusiones_5(), hojaObs, estiloDatos, filaActual,
+                "TR_JA_CONCLUSIONES_GEN", "CSS_TOTAL_CONVENIOS",
+                "El campo CSS_TOTAL_CONVENIOS debe ser igual a la suma de CSS_SUBTOTAL_CONTROV_TERR + CSS_SUBTOTAL_ASUNTOS_RESTIT + CSS_RECON + CSS_NULIDADES + CSS_TENENCIA + CSS_SUB_ASUNTOS_CONT_MA + CSS_SUCESION_DA + CSS_SUBTOTAL_JN_ + CSS_OMISIONES + CSS_ASUNTOS_JV + CSS_CONTROV_TERR + CSS_REVERSION + CSS_SUBTOTAL_EJECUCION + CSS_RRT + CSS_PRIVACION + CSS_INCONFORMIDADES + CSS_ASUNTOS_LEGIS + CSS_OTROS_ASUNTOS.");
+
+        filaActual = escribirFilasValidacion(VC.Query_Conclusiones_6(), hojaObs, estiloDatos, filaActual,
+                "TR_JA_CONCLUSIONES_GEN", "DES_TOTAL_DESMENTIMIENTOS",
+                "El campo DES_TOTAL_DESMENTIMIENTOS debe ser igual a la suma de DES_SUBTOTAL_CONTROV_TERR + DES_SUBTOTAL_ASUNTOS_RESTIT + DES_RECON + DES_NULIDADES + DES_TENENCIA + DES_SUB_ASUNTOS_CONT_MA + DES_SUCESION_DA + DES_SUBTOTAL_JN + DES_OMISIONES + DES_ASUNTOS_JV + DES_CONTROV_TERR + DES_REVERSION + DES_SUBTOTAL_EJECUCION + DES_RRT + DES_PRIVACION + DES_INCONFORMIDADES + DES_ASUNTOS_LEGIS + DES_OTROS_ASUNTOS.");
+
+        filaActual = escribirFilasValidacion(VC.Query_Conclusiones_7(), hojaObs, estiloDatos, filaActual,
+                "TR_JA_CONCLUSIONES_GEN", "CAD_TOTAL_CADUCIDADES",
+                "El campo CAD_TOTAL_CADUCIDADES debe ser igual a la suma de CAD_SUBTOTAL_CONTROV_TERR + CAD_SUBTOTAL_ASUNTOS_RESTIT + CAD_RECON + CAD_NULIDADES + CAD_TENENCIA + CAD_SUB_ASUNTOS_CONT_MA + CAD_SUCESION_DA + CAD_SUBTOTAL_JN + CAD_OMISIONES + CAD_ASUNTOS_JV + CAD_CONTROV_TERR + CAD_REVERSION + CAD_SUBTOTAL_EJECUCION + CAD_RRT + CAD_PRIVACION + CAD_INCONFORMIDADES + CAD_ASUNTOS_LEGIS + CAD_OTROS_ASUNTOS.");
+
+        filaActual = escribirFilasValidacion(VC.Query_Conclusiones_8(), hojaObs, estiloDatos, filaActual,
+                "TR_JA_CONCLUSIONES_GEN", "OTRO_TOTAL_OTRO_TIPO",
+                "El campo OTRO_TOTAL_OTRO_TIPO debe ser igual a la suma de OTRO_SUBTOTAL_CONTROV_TERR + OTRO_SUBTOTAL_ASUNTOS_RESTIT + OTRO_RECON + OTRO_NULIDADES + OTRO_TENENCIA + OTRO_SUB_ASUNTOS_CONT_MA + OTRO_SUCESION_DA + OTRO_SUBTOTAL_JN + OTRO_OMISIONES + OTRO_ASUNTOS_JV + OTRO_CONTROV_TERR + OTRO_REVERSION + OTRO_SUBTOTAL_EJECUCION + OTRO_RRT + OTRO_PRIVACION + OTRO_INCONFORMIDADES + OTRO_ASUNTOS_LEGIS + OTRO_OTROS_ASUNTOS.");
+
+        filaActual = escribirFilasValidacion(VC.Query_Conclusiones_9(), hojaObs, estiloDatos, filaActual,
+                "TR_JA_CONCLUSIONES_GEN", "SENTENCIAS_DEF",
+                "El campo SENTENCIAS_DEF debe ser igual al campo SD_TOTAL_SENTENCIAS.");
+
+        filaActual = escribirFilasValidacion(VC.Query_Conclusiones_10(), hojaObs, estiloDatos, filaActual,
+                "TR_JA_CONCLUSIONES_GEN", "SENTENCIAS_CUMPL_EJEC",
+                "El campo SENTENCIAS_CUMPL_EJEC debe ser igual al campo SCE_TOTAL_SENTENCIAS.");
+
+        filaActual = escribirFilasValidacion(VC.Query_Conclusiones_11(), hojaObs, estiloDatos, filaActual,
+                "TR_JA_CONCLUSIONES_GEN", "SENTENCIAS_CUMP_RR",
+                "El campo SENTENCIAS_CUMP_RR debe ser igual al campo SCR_TOTAL_SENTENCIAS.");
+
+        filaActual = escribirFilasValidacion(VC.Query_Conclusiones_12(), hojaObs, estiloDatos, filaActual,
+                "TR_JA_CONCLUSIONES_GEN", "LAUDOS",
+                "El campo LAUDOS debe ser igual al campo LH_TOTAL_LAUDOS.");
+
+        filaActual = escribirFilasValidacion(VC.Query_Conclusiones_13(), hojaObs, estiloDatos, filaActual,
+                "TR_JA_CONCLUSIONES_GEN", "CONVENIOS",
+                "El campo CONVENIOS debe ser igual al campo CSS_TOTAL_CONVENIOS.");
+
+        filaActual = escribirFilasValidacion(VC.Query_Conclusiones_14(), hojaObs, estiloDatos, filaActual,
+                "TR_JA_CONCLUSIONES_GEN", "DESISTIMIENTOS",
+                "El campo DESISTIMIENTOS debe ser igual al campo DES_TOTAL_DESMENTIMIENTOS.");
+
+        filaActual = escribirFilasValidacion(VC.Query_Conclusiones_15(), hojaObs, estiloDatos, filaActual,
+                "TR_JA_CONCLUSIONES_GEN", "CADUCIDADES",
+                "El campo CADUCIDADES debe ser igual al campo CAD_TOTAL_CADUCIDADES.");
+
+        filaActual = escribirFilasValidacion(VC.Query_Conclusiones_16(), hojaObs, estiloDatos, filaActual,
+                "TR_JA_CONCLUSIONES_GEN", "OTRO_RESOL",
+                "El campo OTRO_RESOL debe ser igual al campo OTRO_TOTAL_OTRO_TIPO.");
+
+        filaActual = escribirFilasValidacion(VC.Query_Conclusiones_17(), hojaObs, estiloDatos, filaActual,
+                "TR_JA_TRAMITE_GEN", "TOTAL_ASUNTOS_TRAMITE",
+                "El campo TOTAL_ASUNTOS_TRAMITE debe ser igual a TOTAL_ASUNTOS_PEND + TOTAL_ASUNTOS_INSTRUC.");
+
+        progressBar.setValue(100);
     }
     // ── Helper: escribe una fila por cada registro NULL ──────────────────────
     // datos: [NOMBRE_ORGANO_JURIS, CLAVE_ORGANO, PERIODO, CAMPO_VACIO]
@@ -804,6 +880,31 @@ public class Exporta_validaciones {
         }
         return fila;
     }
+
+    // ── Helper: escribe una fila por cada nueva validación incumplida ────────
+    // datos: [CLAVE_ORGANO, NOMBRE_ORGANO_JURIS, PERIODO]
+    private int escribirFilasValidacion(ArrayList<String[]> datos, XSSFSheet hoja,
+            XSSFCellStyle estilo, int filaInicio, String nombreTabla,
+            String campo, String observacion) {
+        int fila = filaInicio;
+        for (String[] registro : datos) {
+            String claveOrgano  = registro.length > 0 && registro[0] != null ? registro[0] : "";
+            String nombreOrgano = registro.length > 1 && registro[1] != null ? registro[1] : "";
+            String periodo      = registro.length > 2 && registro[2] != null ? registro[2] : "";
+
+            XSSFRow row = hoja.createRow(fila++);
+            row.setHeight((short) 500);
+
+            crearCelda(row, 0, nombreTabla, estilo);
+            crearCelda(row, 1, nombreOrgano, estilo);
+            crearCelda(row, 2, claveOrgano, estilo);
+            crearCelda(row, 3, periodo, estilo);
+            crearCelda(row, 4, campo, estilo);
+            crearCelda(row, 5, observacion, estilo);
+        }
+        return fila;
+    }
+
     // ── Helper: crea una celda con texto y estilo ────────────────────────────
     private void crearCelda(XSSFRow row, int col, String valor, XSSFCellStyle estilo) {
         XSSFCell cell = row.createCell(col);
