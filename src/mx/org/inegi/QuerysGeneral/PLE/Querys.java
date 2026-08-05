@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import mx.org.inegi.conexion.PLE.DaoConexion;
 
 /**
@@ -22,6 +23,93 @@ public class Querys {
     ResultSet resul; 
     String sql="",sql2="";
     ArrayList<String[]> Array;
+    
+public ArrayList Justificaciones(String ID_entidad,String Legislatura,String Envio){
+     conexion.Conectar();
+      Array = new ArrayList();
+      sql="SELECT TABLA, ID_TABLA, CAMPO, VALOR_CAMPO, OBSERVACION, JUSTIFICACION, VALOR_INSERTADO,ID_JUS\n" +
+"FROM JUSTIFICACIONES_PLE\n" +
+"WHERE ENTIDAD="+ID_entidad+" AND LEGISLATURA="+Legislatura+" AND ID_ENVIO="+Envio+" ";
+      System.out.println(sql);
+      resul=conexion.consultar(sql);
+      try {
+          while (resul.next()) {
+              Array.add(new String[]{
+                  resul.getString("TABLA"),
+                  resul.getString("ID_TABLA"),
+                  resul.getString("CAMPO"),
+                  resul.getString("VALOR_CAMPO"),
+                  resul.getString("OBSERVACION"),
+                  resul.getString("JUSTIFICACION"),
+                  resul.getString("VALOR_INSERTADO"),
+                  resul.getString("ID_JUS")
+                });
+          }
+      conexion.close();
+     } catch (SQLException ex) {
+            Logger.getLogger(Querys.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    return Array;
+ }
+
+
+ public void Inserta_Justificacion(String entidad,String Legislatura,String ID_ENVIO,String Tabla,String ID_TABLA,String CAMPO,String VALOR_CAMPO,String OBSERVACION,String Justificacion,String Valor_insertado){
+ conexion.Conectar();    
+      sql="Insert into JUSTIFICACIONES_PLE (ENTIDAD, LEGISLATURA, ID_ENVIO, TABLA, ID_TABLA, CAMPO, VALOR_CAMPO, OBSERVACION, JUSTIFICACION, VALOR_INSERTADO)values ('"+entidad+"','"+Legislatura+"','"+ID_ENVIO+"','"+Tabla+"','"+ID_TABLA+"','"+CAMPO+"','"+VALOR_CAMPO+"','"+OBSERVACION+"','"+Justificacion+"','"+Valor_insertado+"')" ;
+      System.out.println(sql);
+      try {
+      conexion.escribir(sql);  
+          JOptionPane.showMessageDialog(
+                  null,
+                  "Se insertó correctamente.",
+                  "Éxito",
+                  JOptionPane.INFORMATION_MESSAGE
+          );
+      conexion.close();
+     } catch (SQLException ex) {
+            Logger.getLogger(Querys.class.getName()).log(Level.SEVERE, null, ex);
+          JOptionPane.showInputDialog(null, "Error al insertar "+ex);
+        }    
+}
+ 
+ public void Actualiza_Justificacion(String entidad,String Legislatura,String ID_ENVIO,String Tabla,String ID_TABLA,String CAMPO,String VALOR_CAMPO,String OBSERVACION,String Justificacion,String Valor_insertado,String Id_Jus){
+ conexion.Conectar();    
+      sql="update JUSTIFICACIONES_PLE SET TABLA='"+Tabla+"',ID_TABLA='"+ID_TABLA+"',CAMPO='"+CAMPO+"',VALOR_CAMPO='"+VALOR_CAMPO+"',OBSERVACION='"+OBSERVACION+"',JUSTIFICACION='"+Justificacion+"',VALOR_INSERTADO='"+Valor_insertado+"' WHERE ID_JUS='"+Id_Jus+"'" ;
+      System.out.println(sql);
+      try {
+      conexion.escribir(sql);   
+       JOptionPane.showMessageDialog(
+                  null,
+                  "Se actualizo correctamente.",
+                  "Éxito",
+                  JOptionPane.INFORMATION_MESSAGE
+          );
+      conexion.close();
+     } catch (SQLException ex) {
+            Logger.getLogger(Querys.class.getName()).log(Level.SEVERE, null, ex);
+           JOptionPane.showInputDialog(null, "Error al actualizar "+ex);
+        }    
+}
+ 
+  public void Elimina_Justificacion(String Id_Jus){
+ conexion.Conectar();    
+      sql="DELETE FROM JUSTIFICACIONES_PLE WHERE ID_JUS='"+Id_Jus+"'";
+      System.out.println(sql);
+      try {
+      conexion.escribir(sql); 
+       JOptionPane.showMessageDialog(
+                  null,
+                  "Se elimino correctamente.",
+                  "Éxito",
+                  JOptionPane.INFORMATION_MESSAGE
+          );
+      conexion.close();
+     } catch (SQLException ex) {
+            Logger.getLogger(Querys.class.getName()).log(Level.SEVERE, null, ex);
+           JOptionPane.showInputDialog(null, "Error al eliminar "+ex);
+        }    
+}
+    
     
     public String Total_Reg_TMP(String Tabla,String entidad,String CampoEnvio,String envio,String Legislatura){
  conexion.Conectar();
