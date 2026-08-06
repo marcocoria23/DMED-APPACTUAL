@@ -6,6 +6,7 @@ package Pantallas_PLE;
 
 import java.awt.Color;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import mx.org.inegi.QuerysGeneral.PLE.Querys;
 
 /**
@@ -24,6 +25,9 @@ public class Justificaciones_Cambios extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.getContentPane().setBackground(Color.WHITE);//JFRAME COLOR POR DEFAULT BLANCO
+          SwingUtilities.invokeLater(() -> {
+        TID_TABLA.requestFocusInWindow();
+    });
     }
 
     /**
@@ -177,7 +181,7 @@ public class Justificaciones_Cambios extends javax.swing.JFrame {
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(TTABLA, javax.swing.GroupLayout.PREFERRED_SIZE, 985, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 367, Short.MAX_VALUE))))
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(42, 42, 42)
                         .addComponent(jLabel5)
@@ -188,7 +192,7 @@ public class Justificaciones_Cambios extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(Banner_verde, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGap(0, 1123, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addComponent(Label_Titulo)
@@ -322,7 +326,11 @@ public class Justificaciones_Cambios extends javax.swing.JFrame {
         jButton1.setVisible(false);
         jButton2.setVisible(true);
         jButton3.setVisible(true);
+       jLabel11.setVisible(true);
+       TID.setVisible(true);
        }else{
+        jLabel11.setVisible(false);
+         TID.setVisible(false);
         TENTIDAD.setText(Jus.DENTIDAD);
         TLEGISLATURA.setText(Jus.DLEGISLATURA);
         TENVIO.setText(Jus.DENVIO);
