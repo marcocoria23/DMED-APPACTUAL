@@ -746,7 +746,7 @@ public ArrayList IDvotaciones_pleno_abstencion_juicio_politico(String ID_entidad
 public ArrayList IDnombre_1_persona_servidora_publica_juicio_politico(String ID_entidad,String Legislatura,String Envio){
      conexion.Conectar();
       Array = new ArrayList();
-      sql="select ID_ENTIDAD, ENTIDAD, C1_7_ID, P1_7_1, P1_7_7, P1_7_17 from tr_ple_meds1_7 where P1_7_7 = 6 and P1_7_17 is null and (ID_ENTIDAD="+ID_entidad+" AND Legislatura="+Legislatura+" AND C1_7_ID='"+Envio+"')";
+      sql="select ID_ENTIDAD, ENTIDAD, C1_7_ID, P1_7_1, P1_7_7, P1_7_17 from tr_ple_meds1_7 where P1_7_7 = 6 and P1_7_18 is null and (ID_ENTIDAD="+ID_entidad+" AND Legislatura="+Legislatura+" AND C1_7_ID='"+Envio+"')";
       System.out.println(sql);
       resul=conexion.consultar(sql);
       try {
