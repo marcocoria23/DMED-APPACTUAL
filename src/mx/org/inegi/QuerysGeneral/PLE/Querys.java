@@ -24,6 +24,29 @@ public class Querys {
     String sql="",sql2="";
     ArrayList<String[]> Array;
     
+
+public ArrayList obtenerNombreIniciativa(String ID_entidad,String Legislatura,String Envio){
+     conexion.Conectar();
+      Array = new ArrayList();
+      sql="SELECT P1_5_1,P1_5_12  \n" +
+"FROM TR_PLE_MEDS1_5\n" +
+"where  ID_ENTIDAD='"+ID_entidad+"' AND LEGISLATURA_TMP='"+Legislatura+"' and C1_5_ID='"+Envio+"' ";
+      System.out.println(sql);
+      resul=conexion.consultar(sql);
+      try {
+          while (resul.next()) {
+              Array.add(new String[]{
+                  resul.getString("P1_5_1"),
+                  resul.getString("P1_5_12")
+                });
+          }
+      conexion.close();
+     } catch (SQLException ex) {
+            Logger.getLogger(Querys.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    return Array;
+ }    
+    
 public ArrayList Justificaciones(String ID_entidad,String Legislatura,String Envio){
      conexion.Conectar();
       Array = new ArrayList();

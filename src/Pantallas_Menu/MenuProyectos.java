@@ -6,6 +6,8 @@
 package Pantallas_Menu;
 
 import Pantallas_PLE.Menu;
+import java.io.File;
+import mx.org.inegi.QuerysGeneral.PLE.ValidadorIA;
 
 
 /**
@@ -45,6 +47,7 @@ public class MenuProyectos extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
 
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -141,6 +144,14 @@ public class MenuProyectos extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem1);
 
+        jMenuItem2.setText("jMenuItem2");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem2);
+
         jMenuBar1.add(jMenu1);
 
         setJMenuBar(jMenuBar1);
@@ -216,6 +227,62 @@ public class MenuProyectos extends javax.swing.JFrame {
       PCE.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+          String apiKey = System.getenv("OPENAI_API_KEY");
+
+if (apiKey == null || apiKey.isBlank()) {
+    System.out.println("ERROR: No se encontró OPENAI_API_KEY");
+} else {
+    System.out.println("OK: API Key encontrada correctamente");
+}
+     System.out.println("Java Home: " + System.getProperty("java.home"));
+     
+    
+
+File cacerts = new File(
+    System.getProperty("java.home")
+    + "\\lib\\security\\cacerts"
+);
+
+System.out.println("Ruta: " + cacerts.getAbsolutePath());
+System.out.println("Existe: " + cacerts.exists());
+System.out.println("Tamaño: " + cacerts.length());
+       try {
+
+            ValidadorIA ia = new ValidadorIA();
+
+            String resultado
+                    = ia.validarIniciativa(
+                            "1",
+                            "Proposición con carácter de punto de acuerdo, "
+                            + "a fin de exhortar a la CONDUSEF"
+                    );
+      
+            System.out.println(resultado);
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+
+        }
+
+
+System.out.println(
+    System.getProperty("java.version")
+);
+
+System.out.println(
+    System.getProperty("java.vendor")
+);
+
+System.out.println(
+    System.getProperty("java.home")
+);
+        
+
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -264,6 +331,7 @@ public class MenuProyectos extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JToggleButton jToggleButton2;
     // End of variables declaration//GEN-END:variables

@@ -382,7 +382,7 @@ public ArrayList fecha_ingreso_denuncia_juicio_politico_oficialia_partes(String 
 public ArrayList DIfecha_procedencia_denuncia_juicio_politico(String ID_entidad,String Legislatura,String Envio){
      conexion.Conectar();
       Array = new ArrayList();
-      sql="select ID_ENTIDAD, ENTIDAD, C1_7_ID, P1_7_1, P1_7_3, P1_7_7, P1_7_11 from tr_ple_meds1_7 where (P1_7_3 = 2 and P1_7_7 in (5, 6)) and P1_7_11 is null and (ID_ENTIDAD="+ID_entidad+" AND Legislatura="+Legislatura+" AND C1_7_ID='"+Envio+"')";
+      sql="select ID_ENTIDAD, ENTIDAD, C1_7_ID, P1_7_1, P1_7_3, P1_7_7, P1_7_11 from tr_ple_meds1_7 where (P1_7_3 = 1 and P1_7_7 in (5, 6)) and P1_7_11 is null and (ID_ENTIDAD="+ID_entidad+" AND Legislatura="+Legislatura+" AND C1_7_ID='"+Envio+"')";
       System.out.println(sql);
       resul=conexion.consultar(sql);
       try {
