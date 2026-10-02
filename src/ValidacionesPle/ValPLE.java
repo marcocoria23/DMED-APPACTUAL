@@ -42723,7 +42723,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                     String txtD1 = Arrays.toString(ArrayResult.get(i));
                     txtD1 = txtD1.replace("[", "").replace("]", "").replace(" 00:00:00.0", "");
                     String[] parts = txtD1.split(",");
-                    String parts1 = parts[0].trim();
+                    String parts1  = parts[0].trim();
                     XSSFRichTextString textoD1 = new XSSFRichTextString(parts1);
                     celdaD1.setCellValue(textoD1);
 
