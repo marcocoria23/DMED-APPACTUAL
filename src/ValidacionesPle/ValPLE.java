@@ -30,6 +30,7 @@ import ValidacionesPle.QuerysValPLE.QComisiones_Legislativas;
 import ValidacionesPle.QuerysValPLE.QPersonas_legisladoras;
 import ValidacionesPle.QuerysValPLE.QPersonas_legisladoras_extension;
 import ValidacionesPle.QuerysValPLE.QPersonal_Apoyo;
+import ValidacionesPle.QuerysValPLE.QPersonas_Personal_apoyo_extension;
 import ValidacionesPle.QuerysValPLE.QIniciativas;
 import ValidacionesPle.QuerysValPLE.QIniciativas_Extension;
 import ValidacionesPle.QuerysValPLE.QIniciativas_Urgente_Extension;
@@ -193,6 +194,13 @@ public class ValPLE {
         hojaPersonal_apoyo.setColumnWidth(1, 30000);
         hojaPersonal_apoyo.setColumnWidth(2, 5000);
         hojaPersonal_apoyo.setColumnWidth(3, 20000);
+        
+       XSSFSheet hojaPersonal_apoyo_extension = libro.createSheet("personal_apoyo_extension");
+        hojaPersonas_legisladoras_extension.setColumnWidth(0, 8000);
+        hojaPersonas_legisladoras_extension.setColumnWidth(1, 8000);
+        hojaPersonas_legisladoras_extension.setColumnWidth(2, 30000);
+        hojaPersonas_legisladoras_extension.setColumnWidth(3, 5000);
+        hojaPersonas_legisladoras_extension.setColumnWidth(4, 20000);
 
         XSSFSheet hojaIniciativas = libro.createSheet("iniciativas");
         hojaIniciativas.setColumnWidth(0, 8000);
@@ -253,6 +261,7 @@ public class ValPLE {
        Despliega_Personas_Legisladoras_NN(libro, hojaPersonas_legiladoras, estiloCelda0, estiloCelda1, estiloCeldabordes0, Pvalida.entidad, Pvalida.legislatura, Pvalida.envio, progressBar);   
        Despliega_Personas_legisladoras_extension(libro, hojaPersonas_legisladoras_extension, estiloCelda0, estiloCelda1, estiloCeldabordes0, Pvalida.entidad, Pvalida.legislatura, Pvalida.envio, progressBar);
        Despliega_Personal_apoyo(libro, hojaPersonal_apoyo, estiloCelda0, estiloCelda1, estiloCeldabordes0, Pvalida.entidad, Pvalida.legislatura, Pvalida.envio, progressBar);
+      Despliega_Personal_apoyo_extension(libro, hojaPersonal_apoyo_extension, estiloCelda0, estiloCelda1, estiloCeldabordes0, Pvalida.entidad, Pvalida.legislatura, Pvalida.envio, progressBar);
        Despliega_Iniciativas(libro, hojaIniciativas, estiloCelda0, estiloCelda1, estiloCeldabordes0, Pvalida.entidad, Pvalida.legislatura, Pvalida.envio, Pvalida.envio_anterior, progressBar);
        Despliega_Iniciativas_extension(libro, hojaIniciativas_extension, estiloCelda0, estiloCelda1, estiloCeldabordes0, Pvalida.entidad, Pvalida.legislatura, Pvalida.envio, progressBar);
        Despliega_Iniciativas_Urgente_Obvia(libro, hojaUrgente_obvia, estiloCelda0, estiloCelda1, estiloCeldabordes0, Pvalida.entidad, Pvalida.legislatura, Pvalida.envio, progressBar);
@@ -19937,7 +19946,7 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                 XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                 celdaD2.setCellStyle(estiloCeldabordes0);
                 celdaD2.setCellType(CellType.STRING);
-                String txtD2 = "Se indica que la iniciativa no fue presentada en el PERIODO O LEGISLATURA actual cond_presentacion_iniciativa_legislatura_actual (B) o  cond_presentacion_iniciativa_periodo(C) = \"No\"; sin embargo, en los envíos anteriores no se localizó registro de esta iniciativa con cond_presentacion_iniciativa_periodo (B)= \"Sí\", por lo que no se cuenta con antecedente de su presentación en un periodo previo.";                 
+                String txtD2 = "Se indica que la iniciativa NO fue presentada en el PERIODO O LEGISLATURA actual, al registrarse cond_presentacion_iniciativa_legislatura_actual (B) o cond_presentacion_iniciativa_periodo (C) con valor “No”; sin embargo, en los envíos anteriores no se localizó ningún registro de la iniciativa con cond_presentacion_iniciativa_periodo (B) con valor “Sí”, por lo que no se cuenta con antecedente de su presentación en un envío previo.";                 
                 XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                 celdaD2.setCellValue(textoD2);
 
@@ -42553,7 +42562,217 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
         progressBar.setValue(90);
     }
 
-    public void Despliega_Comparecencias_extension(XSSFWorkbook libro, XSSFSheet hojaComparecencias_extension, XSSFCellStyle estiloCelda0, XSSFCellStyle estiloCelda1, XSSFCellStyle estiloCeldabordes0, String entidad, String legislatura, String envio, JProgressBar progressBar) throws SQLException {
+     public void  Despliega_Personal_apoyo_extension (XSSFWorkbook libro, XSSFSheet hojaPersonal_apoyo_extension, XSSFCellStyle estiloCelda0, XSSFCellStyle estiloCelda1, XSSFCellStyle estiloCeldabordes0, String entidad, String legislatura, String envio, JProgressBar progressBar) throws SQLException {
+     int conEnc = 1, conDat = 2, coni = 1;
+        Border border = BorderFactory.createTitledBorder("Cargando...Comparecencias_extension");
+        progressBar.setBorder(border);
+        XSSFRow row00 = hojaPersonal_apoyo_extension.createRow(0); // Fila
+        XSSFCell celda00 = row00.createCell(0); // Columna
+        celda00.setCellStyle(estiloCelda0);
+        celda00.setCellType(CellType.STRING);
+        String titulo00 = "Personal Apoyo Extensión ";
+        XSSFRichTextString texto00 = new XSSFRichTextString(titulo00);
+        hojaPersonal_apoyo_extension.addMergedRegion(new CellRangeAddress(0, 0, 0, 4));
+        celda00.setCellValue(texto00);
+        row00.setHeight((short) 600);
+        QPersonas_Personal_apoyo_extension Personal_ext = new QPersonas_Personal_apoyo_extension();
+        DaoConexion conexion = new DaoConexion();
+        conexion.Conectar();
+        String sql = "Select * from  TR_PLE_MEDS1_4A where ID_ENTIDAD='" + entidad + "' and LEGISLATURA=" + legislatura + " and C1_4A_ID=" + envio + " ";
+        System.out.println(sql);
+        ResultSet resul = conexion.consultar(sql);
+        if (resul.next()) {
+
+            ArrayResult = Personal_ext.ID_PERSONA_LEGISLADORA_4A(entidad, legislatura, envio);
+            if (ArrayResult.size() > 0) {
+                XSSFRow filaEE1 = hojaPersonal_apoyo_extension.createRow(conEnc);//FILA
+                XSSFCell celdaE1 = filaEE1.createCell(0);//COLUMNA
+                celdaE1.setCellStyle(estiloCelda1);
+                celdaE1.setCellType(CellType.STRING);
+                String txtE1 = "ID_personal_extension";
+                XSSFRichTextString textoE1 = new XSSFRichTextString(txtE1);
+                celdaE1.setCellValue(textoE1);
+
+                XSSFCell celdaE2 = filaEE1.createCell(1);//COLUMNA
+                celdaE2.setCellStyle(estiloCelda1);
+                celdaE2.setCellType(CellType.STRING);
+                String txtE2 = "ID_comision_extension";
+                XSSFRichTextString textoE2 = new XSSFRichTextString(txtE2);
+                celdaE2.setCellValue(textoE2);
+
+                XSSFCell celdaE3 = filaEE1.createCell(2);//COLUMNA
+                celdaE3.setCellStyle(estiloCelda1);
+                celdaE3.setCellType(CellType.STRING);
+                String txtE3 = "OBSERVACIONES";
+                XSSFRichTextString textoE3 = new XSSFRichTextString(txtE3);
+                celdaE3.setCellValue(textoE3);
+
+                XSSFCell celdaE7 = filaEE1.createCell(3);//COLUMNA
+                celdaE7.setCellStyle(estiloCelda1);
+                celdaE7.setCellType(CellType.STRING);
+                String txtE7 = "ID_ENTIDAD";
+                XSSFRichTextString textoE7 = new XSSFRichTextString(txtE7);
+                celdaE7.setCellValue(textoE7);
+
+                XSSFCell celdaE8 = filaEE1.createCell(4);//COLUMNA
+                celdaE8.setCellStyle(estiloCelda1);
+                celdaE8.setCellType(CellType.STRING);
+                String txtE8 = "JUSTIFICACIÓN";
+                XSSFRichTextString textoE8 = new XSSFRichTextString(txtE8);
+                celdaE8.setCellValue(textoE8);
+
+                for (int i = 0; i < ArrayResult.size(); i++) {
+                    XSSFRow filaEE2 = hojaPersonal_apoyo_extension.createRow(conDat + i);
+                    XSSFCell celdaD1 = filaEE2.createCell(0);//COLUMNA
+                    celdaD1.setCellStyle(estiloCeldabordes0);
+                    celdaD1.setCellType(CellType.STRING);
+                    //String txtD1 = Arrays.toString(ArrayResult.get(i));
+                    String txtD1 = Arrays.toString(ArrayResult.get(i));
+                    txtD1 = txtD1.replace("[", "").replace("]", "").replace(" 00:00:00.0", "");
+                    String[] parts = txtD1.split(",");
+                    String parts1 = parts[0].trim();
+                    XSSFRichTextString textoD1 = new XSSFRichTextString(parts1);
+                    celdaD1.setCellValue(textoD1);
+
+                    XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
+                    celdaD2.setCellStyle(estiloCeldabordes0);
+                    celdaD2.setCellType(CellType.STRING);
+                    //String txtD1 = Arrays.toString(ArrayResult.get(i));
+                    String txtD2 = Arrays.toString(ArrayResult.get(i));
+                    txtD2 = txtD2.replace("[", "").replace("]", "").replace(" 00:00:00.0", "");
+                    parts = txtD2.split(",");
+                    String parts2 = parts[1].trim();
+                    XSSFRichTextString textoD2 = new XSSFRichTextString(parts2);
+                    celdaD2.setCellValue(textoD2);
+
+                    XSSFCell celdaD3 = filaEE2.createCell(2);//COLUMNA
+                    celdaD3.setCellStyle(estiloCeldabordes0);
+                    celdaD3.setCellType(CellType.STRING);
+                    String txtD3 = "El ID de la persona legisladora no se encontró en la pestaña de personas_legisladoras";
+                    XSSFRichTextString textoD3 = new XSSFRichTextString(txtD3);
+                    celdaD3.setCellValue(textoD3);
+
+                    XSSFCell celdaD5 = filaEE2.createCell(3);//COLUMNA
+                    celdaD5.setCellStyle(estiloCeldabordes0);
+                    celdaD5.setCellType(CellType.STRING);
+                    String txtD5 = Arrays.toString(ArrayResult.get(i));
+                    txtD5 = txtD5.replace("[", "").replace("]", "").replace(" 00:00:00.0", "");
+                    String[] parts5 = txtD5.split(",");
+                    String parts4 = parts5[0].trim();
+                    XSSFRichTextString textoD5 = new XSSFRichTextString(parts4);
+                    celdaD5.setCellValue(textoD5);
+
+                    XSSFCell celdaD4 = filaEE2.createCell(4);//COLUMNA
+                    celdaD4.setCellStyle(estiloCeldabordes0);
+                    celdaD4.setCellType(CellType.STRING);
+                    String txtD4 = "";
+                    XSSFRichTextString textoD4 = new XSSFRichTextString(txtD4);
+                    celdaD4.setCellValue(textoD4);
+
+                    coni++;
+                }
+                conEnc = conEnc + coni;
+                conDat = conDat + coni;
+                coni = 1;
+            }
+
+            ArrayResult = Personal_ext.ID_COMISION_4A(entidad, legislatura, envio);
+            if (ArrayResult.size() > 0) {
+                XSSFRow filaEE1 = hojaPersonal_apoyo_extension.createRow(conEnc);//FILA
+                XSSFCell celdaE1 = filaEE1.createCell(0);//COLUMNA
+                celdaE1.setCellStyle(estiloCelda1);
+                celdaE1.setCellType(CellType.STRING);
+                String txtE1 = "ID_personal_extension";
+                XSSFRichTextString textoE1 = new XSSFRichTextString(txtE1);
+                celdaE1.setCellValue(textoE1);
+
+                XSSFCell celdaE2 = filaEE1.createCell(1);//COLUMNA
+                celdaE2.setCellStyle(estiloCelda1);
+                celdaE2.setCellType(CellType.STRING);
+                String txtE2 = "ID_comision_extension";
+                XSSFRichTextString textoE2 = new XSSFRichTextString(txtE2);
+                celdaE2.setCellValue(textoE2);
+
+                XSSFCell celdaE3 = filaEE1.createCell(2);//COLUMNA
+                celdaE3.setCellStyle(estiloCelda1);
+                celdaE3.setCellType(CellType.STRING);
+                String txtE3 = "OBSERVACIONES";
+                XSSFRichTextString textoE3 = new XSSFRichTextString(txtE3);
+                celdaE3.setCellValue(textoE3);
+
+                XSSFCell celdaE7 = filaEE1.createCell(3);//COLUMNA
+                celdaE7.setCellStyle(estiloCelda1);
+                celdaE7.setCellType(CellType.STRING);
+                String txtE7 = "ID_ENTIDAD";
+                XSSFRichTextString textoE7 = new XSSFRichTextString(txtE7);
+                celdaE7.setCellValue(textoE7);
+
+                XSSFCell celdaE8 = filaEE1.createCell(4);//COLUMNA
+                celdaE8.setCellStyle(estiloCelda1);
+                celdaE8.setCellType(CellType.STRING);
+                String txtE8 = "JUSTIFICACION";
+                XSSFRichTextString textoE8 = new XSSFRichTextString(txtE8);
+                celdaE8.setCellValue(textoE8);
+
+                for (int i = 0; i < ArrayResult.size(); i++) {
+                    XSSFRow filaEE2 = hojaPersonal_apoyo_extension.createRow(conDat + i);
+                    XSSFCell celdaD1 = filaEE2.createCell(0);//COLUMNA
+                    celdaD1.setCellStyle(estiloCeldabordes0);
+                    celdaD1.setCellType(CellType.STRING);
+                    //String txtD1 = Arrays.toString(ArrayResult.get(i));
+                    String txtD1 = Arrays.toString(ArrayResult.get(i));
+                    txtD1 = txtD1.replace("[", "").replace("]", "").replace(" 00:00:00.0", "");
+                    String[] parts = txtD1.split(",");
+                    String parts1 = parts[0].trim();
+                    XSSFRichTextString textoD1 = new XSSFRichTextString(parts1);
+                    celdaD1.setCellValue(textoD1);
+
+                    XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
+                    celdaD2.setCellStyle(estiloCeldabordes0);
+                    celdaD2.setCellType(CellType.STRING);
+                    //String txtD1 = Arrays.toString(ArrayResult.get(i));
+                    String txtD2 = Arrays.toString(ArrayResult.get(i));
+                    txtD2 = txtD2.replace("[", "").replace("]", "").replace(" 00:00:00.0", "");
+                    parts = txtD2.split(",");
+                    String parts2 = parts[1].trim();
+                    XSSFRichTextString textoD2 = new XSSFRichTextString(parts2);
+                    celdaD2.setCellValue(textoD2);
+
+                    XSSFCell celdaD3 = filaEE2.createCell(2);//COLUMNA
+                    celdaD3.setCellStyle(estiloCeldabordes0);
+                    celdaD3.setCellType(CellType.STRING);
+                    String txtD3 = "El ID de la comisión no se encontró en la pestaña de comisiones_legislativas";
+                    XSSFRichTextString textoD3 = new XSSFRichTextString(txtD3);
+                    celdaD3.setCellValue(textoD3);
+
+                    XSSFCell celdaD5 = filaEE2.createCell(3);//COLUMNA
+                    celdaD5.setCellStyle(estiloCeldabordes0);
+                    celdaD5.setCellType(CellType.STRING);
+                    String txtD5 = Arrays.toString(ArrayResult.get(i));
+                    txtD5 = txtD5.replace("[", "").replace("]", "").replace(" 00:00:00.0", "");
+                    String[] parts5 = txtD5.split(",");
+                    String parts4 = parts5[0].trim();
+                    XSSFRichTextString textoD5 = new XSSFRichTextString(parts4);
+                    celdaD5.setCellValue(textoD5);
+
+                    XSSFCell celdaD4 = filaEE2.createCell(4);//COLUMNA
+                    celdaD4.setCellStyle(estiloCeldabordes0);
+                    celdaD4.setCellType(CellType.STRING);
+                    String txtD4 = "";
+                    XSSFRichTextString textoD4 = new XSSFRichTextString(txtD4);
+                    celdaD4.setCellValue(textoD4);                
+                    coni++;
+                }
+                conEnc = conEnc + coni;
+                conDat = conDat + coni;
+                coni = 1;
+            }
+        }
+        progressBar.setValue(100);
+
+    }
+         
+public void Despliega_Comparecencias_extension(XSSFWorkbook libro, XSSFSheet hojaComparecencias_extension, XSSFCellStyle estiloCelda0, XSSFCellStyle estiloCelda1, XSSFCellStyle estiloCeldabordes0, String entidad, String legislatura, String envio, JProgressBar progressBar) throws SQLException {
 
         int conEnc = 1, conDat = 2, coni = 1;
         Border border = BorderFactory.createTitledBorder("Cargando...Comparecencias_extension");

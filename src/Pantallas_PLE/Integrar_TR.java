@@ -20,6 +20,7 @@ import mx.org.inegi.insert_TR.PLE.TR_ple_meds1_2;
 import mx.org.inegi.insert_TR.PLE.TR_ple_meds1_3;
 import mx.org.inegi.insert_TR.PLE.TR_ple_meds1_3A;
 import mx.org.inegi.insert_TR.PLE.TR_ple_meds1_4;
+import mx.org.inegi.insert_TR.PLE.TR_ple_meds1_4A;
 import mx.org.inegi.insert_TR.PLE.TR_ple_meds1_5;
 import mx.org.inegi.insert_TR.PLE.TR_ple_meds1_5A;
 import mx.org.inegi.insert_TR.PLE.TR_ple_meds1_6;
@@ -338,6 +339,7 @@ public class Integrar_TR extends javax.swing.JFrame {
         TR_ple_meds1_3 TR3= new TR_ple_meds1_3();
         TR_ple_meds1_3A TR3A= new TR_ple_meds1_3A();
         TR_ple_meds1_4 TR4= new TR_ple_meds1_4();
+        TR_ple_meds1_4A TR4A= new TR_ple_meds1_4A();
         TR_ple_meds1_5 TR5= new TR_ple_meds1_5();
         TR_ple_meds1_5A TR5A= new TR_ple_meds1_5A();
         TR_ple_meds1_6 TR6= new TR_ple_meds1_6();
