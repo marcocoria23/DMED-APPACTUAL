@@ -1243,7 +1243,7 @@ public class Exporta_validaciones {
             coni = 1;
         }
 
-        ArrayResult = In.ID_AGEE_FEDERAL();
+/*        ArrayResult = In.ID_AGEE_FEDERAL();
         if (ArrayResult.size() > 0) {
 
             XSSFRow filaEE1 = hojaExpedientes.createRow(conEnc);//FILA
@@ -1302,9 +1302,9 @@ public class Exporta_validaciones {
             conEnc = conEnc + coni;
             conDat = conDat + coni;
             coni = 1;
-        }
+        }*/
 
-        ArrayResult = In.ID_AGEE_FEDERAL_CAP();
+       /* ArrayResult = In.ID_AGEE_FEDERAL_CAP();
         if (ArrayResult.size() > 0) {
 
             XSSFRow filaEE1 = hojaExpedientes.createRow(conEnc);//FILA
@@ -1363,9 +1363,9 @@ public class Exporta_validaciones {
             conEnc = conEnc + coni;
             conDat = conDat + coni;
             coni = 1;
-        }
+        }*/
 
-        ArrayResult = In.DES_AGEE_FEDERAL();
+        /*ArrayResult = In.DES_AGEE_FEDERAL();
         if (ArrayResult.size() > 0) {
 
             XSSFRow filaEE1 = hojaExpedientes.createRow(conEnc);//FILA
@@ -1424,9 +1424,9 @@ public class Exporta_validaciones {
             conEnc = conEnc + coni;
             conDat = conDat + coni;
             coni = 1;
-        }
+        }*/
 
-        ArrayResult = In.DES_AGEE_FEDERAL_CAP();
+      /*  ArrayResult = In.DES_AGEE_FEDERAL_CAP();
         if (ArrayResult.size() > 0) {
 
             XSSFRow filaEE1 = hojaExpedientes.createRow(conEnc);//FILA
@@ -1485,7 +1485,7 @@ public class Exporta_validaciones {
             conEnc = conEnc + coni;
             conDat = conDat + coni;
             coni = 1;
-        }
+        }*/
 
         ArrayResult = In.ID_AGEM();
         if (ArrayResult.size() > 0) {
@@ -1853,7 +1853,7 @@ public class Exporta_validaciones {
             coni = 1;
         }
 
-        ArrayResult = In.ID_AGEM_FEDERAL();
+       /* ArrayResult = In.ID_AGEM_FEDERAL();
         if (ArrayResult.size() > 0) {
 
             XSSFRow filaEE1 = hojaExpedientes.createRow(conEnc);//FILA
@@ -1912,9 +1912,9 @@ public class Exporta_validaciones {
             conEnc = conEnc + coni;
             conDat = conDat + coni;
             coni = 1;
-        }
+        }*/
 
-        ArrayResult = In.ID_AGEM_FEDERAL_CAP();
+       /* ArrayResult = In.ID_AGEM_FEDERAL_CAP();
         if (ArrayResult.size() > 0) {
 
             XSSFRow filaEE1 = hojaExpedientes.createRow(conEnc);//FILA
@@ -1973,9 +1973,9 @@ public class Exporta_validaciones {
             conEnc = conEnc + coni;
             conDat = conDat + coni;
             coni = 1;
-        }
+        }*/
 
-        ArrayResult = In.DES_AGEM_FEDERAL();
+        /*ArrayResult = In.DES_AGEM_FEDERAL();
         if (ArrayResult.size() > 0) {
 
             XSSFRow filaEE1 = hojaExpedientes.createRow(conEnc);//FILA
@@ -2034,9 +2034,9 @@ public class Exporta_validaciones {
             conEnc = conEnc + coni;
             conDat = conDat + coni;
             coni = 1;
-        }
+        }*/
 
-        ArrayResult = In.DES_AGEM_FEDERAL_CAP();
+       /* ArrayResult = In.DES_AGEM_FEDERAL_CAP();
         if (ArrayResult.size() > 0) {
 
             XSSFRow filaEE1 = hojaExpedientes.createRow(conEnc);//FILA
@@ -2095,7 +2095,7 @@ public class Exporta_validaciones {
             conEnc = conEnc + coni;
             conDat = conDat + coni;
             coni = 1;
-        }
+        }*/
 
         ArrayResult = In.DES_MEDIO_IMPUGNACION();
         if (ArrayResult.size() > 0) {

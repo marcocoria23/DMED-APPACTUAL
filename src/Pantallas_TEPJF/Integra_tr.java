@@ -106,7 +106,7 @@ public class Integra_tr extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
-        ComboBox_periodo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2024" }));
+        ComboBox_periodo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2026" }));
 
         jToggleButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Binsertar.png"))); // NOI18N
         jToggleButton1.setText("Insertar");

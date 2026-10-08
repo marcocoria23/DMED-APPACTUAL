@@ -35,7 +35,7 @@ import org.apache.commons.csv.CSVRecord;
  */
 public class temp_tepjf_expediente {
 
-    public static String impErro = "", RutaT = "",NuevaRuta="";
+    public static String impErro = "", RutaT = "", NuevaRuta = "";
     public static int TotalRegistros = 0;
     ArrayList Array;
     public static String rutaCarpetaArchivos = "";
@@ -44,7 +44,6 @@ public class temp_tepjf_expediente {
 
     public void IN_EXPEDIENTE(String Ruta) throws Exception {
 
-      
         ArrayList<String[]> Array;
         Array = new ArrayList();
         ARRAY array_to_pass;
@@ -54,30 +53,29 @@ public class temp_tepjf_expediente {
         StructDescriptor sd;
         ArrayDescriptor descriptor;
         TotalRegistros = 0;
-        
-         conUTF8.Convertir_utf8_EBaseDatos(Ruta);
-         NuevaRuta=Ruta.replace(".csv", "UTF8.csv");
-     
+
+        conUTF8.Convertir_utf8_EBaseDatos(Ruta);
+        NuevaRuta = Ruta.replace(".csv", "UTF8.csv");
+
         try (BufferedInputStream inputStream = new BufferedInputStream(new FileInputStream(NuevaRuta))) {
             byte[] bytes = new byte[3];
             int bytesRead = inputStream.read(bytes);
 
             if (bytesRead >= 3 && bytes[0] == (byte) 0xEF && bytes[1] == (byte) 0xBB && bytes[2] == (byte) 0xBF) {
                 System.out.println("El archivo parece estar en UTF-8.");
-                try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(NuevaRuta), StandardCharsets.UTF_8));
-                        CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT)) {
+                try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(NuevaRuta), StandardCharsets.UTF_8)); CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT)) {
                     int numeroColumnas = 0;
                     CSVRecord firstRecord = csvParser.iterator().next();
                     numeroColumnas = firstRecord.size();
                     System.out.println("numcol" + numeroColumnas);
-                    if (numeroColumnas == 60) {
+                    if (numeroColumnas == 80) {
                         System.out.println("+hellooou+" + numeroColumnas);
                         ArrayList<BeanTEMP_TEPJF_EXPEDIENTE> ad = new ArrayList<>();
                         for (CSVRecord record : csvParser) {
                             System.out.println("llenado de csv");
                             TotalRegistros++;
                             BeanTEMP_TEPJF_EXPEDIENTE c = new BeanTEMP_TEPJF_EXPEDIENTE();
-                            c.setID_TEPJF_EXPEDIENTE(record.get(0));
+                            c.SetID_TEPJF_EXPEDIENTE(record.get(0));
                             c.SetID_EXP_ACUMULADO(record.get(1));
                             c.SetPERIODO(record.get(2));
                             c.SetID_SALA(record.get(3));
@@ -95,55 +93,75 @@ public class temp_tepjf_expediente {
                             c.SetDES_AGEE_FUERA_CIRC(record.get(15));
                             c.SetID_AGEM_FUERA_CIRC(record.get(16));
                             c.SetDES_AGEM_FUERA_CIRC(record.get(17));
-                            c.SetID_AGEE_FEDERAL(record.get(18));
-                            c.SetDES_AGEE_FEDERAL(record.get(19));
-                            c.SetID_AGEM_FEDERAL(record.get(20));
-                            c.SetDES_AGEM_FEDERAL(record.get(21));
-                            c.SetID_MEDIO_IMPUGNACION(record.get(22));
-                            c.SetDES_MEDIO_IMPUGNACION(record.get(23));
-                            c.SetID_MATERIA(record.get(24));
-                            c.SetID_VINCULACION_PROCESO(record.get(25));
-                            c.SetTEMA1_IMPUGNACION_N1(record.get(26));
-                            c.SetTEMA1_IMPUGNACION_N2(record.get(27));
-                            c.SetTEMA1_IMPUGNACION_N3(record.get(28));
+                            c.SetID_MEDIO_IMPUGNACION(record.get(18));
+                            c.SetDES_MEDIO_IMPUGNACION(record.get(19));
+                            c.SetID_MATERIA(record.get(20));
+                            c.SetID_VINCULACION_PROCESO(record.get(21));
+                            c.SetCLAVE_TEMA1_IMPUGNACION_N1(record.get(22));
+                            c.SetTEMA1_IMPUGNACION_N1(record.get(23));
+                            c.SetCLAVE_TEMA1_IMPUGNACION_N2(record.get(24));
+                            c.SetTEMA1_IMPUGNACION_N2(record.get(25));
+                            c.SetCLAVE_TEMA1_IMPUGNACION_N3(record.get(26));
+                            c.SetTEMA1_IMPUGNACION_N3(record.get(27));
+                            c.SetCLAVE_TEMA1_IMPUGNACION_N4(record.get(28));
                             c.SetTEMA1_IMPUGNACION_N4(record.get(29));
-                            c.SetTEMA2_IMPUGNACION_N1(record.get(30));
-                            c.SetTEMA2_IMPUGNACION_N2(record.get(31));
-                            c.SetTEMA2_IMPUGNACION_N3(record.get(32));
-                            c.SetTEMA2_IMPUGNACION_N4(record.get(33));
-                            c.SetTEMA3_IMPUGNACION_N1(record.get(34));
-                            c.SetTEMA3_IMPUGNACION_N2(record.get(35));
-                            c.SetTEMA3_IMPUGNACION_N3(record.get(36));
-                            c.SetTEMA3_IMPUGNACION_N4(record.get(37));
-                            c.SetTEMA4_IMPUGNACION_N1(record.get(38));
-                            c.SetTEMA4_IMPUGNACION_N2(record.get(39));
-                            c.SetTEMA4_IMPUGNACION_N3(record.get(40));
-                            c.SetTEMA4_IMPUGNACION_N4(record.get(41));
-                            c.SetTEMA5_IMPUGNACION_N1(record.get(42));
-                            c.SetTEMA5_IMPUGNACION_N2(record.get(43));
-                            c.SetTEMA5_IMPUGNACION_N3(record.get(44));
-                            c.SetTEMA5_IMPUGNACION_N4(record.get(45));
-                            c.setTEMA6_IMPUGNACION_N1(record.get(46));
-                            c.setTEMA6_IMPUGNACION_N2(record.get(47));
-                            c.setTEMA6_IMPUGNACION_N3(record.get(48));
-                            c.setTEMA6_IMPUGNACION_N4(record.get(49));
-                            c.SetOTRO_TEMA1(record.get(50));
-                            c.SetOTRO_TEMA2(record.get(51));
-                            c.SetOTRO_TEMA3(record.get(52));
-                            c.SetOTRO_TEMA4(record.get(53));
-                            c.SetOTRO_TEMA5(record.get(54));
-                            c.setOTRO_TEMA6(record.get(55));
-                            c.SetCANT_ACTORES(record.get(56));
-                            c.SetCANT_RESPONSABLES(record.get(57));
-                            c.SetCANT_TERCEROS_INTERESADOS(record.get(58));
-                            c.SetOBSERVACIONES(record.get(59));
+                            c.SetCLAVE_TEMA2_IMPUGNACION_N1(record.get(30));
+                            c.SetTEMA2_IMPUGNACION_N1(record.get(31));
+                            c.SetCLAVE_TEMA2_IMPUGNACION_N2(record.get(32));
+                            c.SetTEMA2_IMPUGNACION_N2(record.get(33));
+                            c.SetCLAVE_TEMA2_IMPUGNACION_N3(record.get(34));
+                            c.SetTEMA2_IMPUGNACION_N3(record.get(35));
+                            c.SetCLAVE_TEMA2_IMPUGNACION_N4(record.get(36));
+                            c.SetTEMA2_IMPUGNACION_N4(record.get(37));
+                            c.SetCLAVE_TEMA3_IMPUGNACION_N1(record.get(38));
+                            c.SetTEMA3_IMPUGNACION_N1(record.get(39));
+                            c.SetCLAVE_TEMA3_IMPUGNACION_N2(record.get(40));
+                            c.SetTEMA3_IMPUGNACION_N2(record.get(41));
+                            c.SetCLAVE_TEMA3_IMPUGNACION_N3(record.get(42));
+                            c.SetTEMA3_IMPUGNACION_N3(record.get(43));
+                            c.SetCLAVE_TEMA3_IMPUGNACION_N4(record.get(44));
+                            c.SetTEMA3_IMPUGNACION_N4(record.get(45));
+                            c.SetCLAVE_TEMA4_IMPUGNACION_N1(record.get(46));
+                            c.SetTEMA4_IMPUGNACION_N1(record.get(47));
+                            c.SetCLAVE_TEMA4_IMPUGNACION_N2(record.get(48));
+                            c.SetTEMA4_IMPUGNACION_N2(record.get(49));
+                            c.SetCLAVE_TEMA4_IMPUGNACION_N3(record.get(50));
+                            c.SetTEMA4_IMPUGNACION_N3(record.get(51));
+                            c.SetCLAVE_TEMA4_IMPUGNACION_N4(record.get(52));
+                            c.SetTEMA4_IMPUGNACION_N4(record.get(53));
+                            c.SetCLAVE_TEMA5_IMPUGNACION_N1(record.get(54));
+                            c.SetTEMA5_IMPUGNACION_N1(record.get(55));
+                            c.SetCLAVE_TEMA5_IMPUGNACION_N2(record.get(56));
+                            c.SetTEMA5_IMPUGNACION_N2(record.get(57));
+                            c.SetCLAVE_TEMA5_IMPUGNACION_N3(record.get(58));
+                            c.SetTEMA5_IMPUGNACION_N3(record.get(59));
+                            c.SetCLAVE_TEMA5_IMPUGNACION_N4(record.get(60));
+                            c.SetTEMA5_IMPUGNACION_N4(record.get(61));
+                            c.SetCLAVE_TEMA6_IMPUGNACION_N1(record.get(62));
+                            c.SetTEMA6_IMPUGNACION_N1(record.get(63));
+                            c.SetCLAVE_TEMA6_IMPUGNACION_N2(record.get(64));
+                            c.SetTEMA6_IMPUGNACION_N2(record.get(65));
+                            c.SetCLAVE_TEMA6_IMPUGNACION_N3(record.get(66));
+                            c.SetTEMA6_IMPUGNACION_N3(record.get(67));
+                            c.SetCLAVE_TEMA6_IMPUGNACION_N4(record.get(68));
+                            c.SetTEMA6_IMPUGNACION_N4(record.get(69));
+                            c.SetOTRO_TEMA1(record.get(70));
+                            c.SetOTRO_TEMA2(record.get(71));
+                            c.SetOTRO_TEMA3(record.get(72));
+                            c.SetOTRO_TEMA4(record.get(73));
+                            c.SetOTRO_TEMA5(record.get(74));
+                            c.SetOTRO_TEMA6(record.get(75));
+                            c.SetCANT_ACTORES(record.get(76));
+                            c.SetCANT_RESPONSABLES(record.get(77));
+                            c.SetCANT_TERCEROS_INTERESADOS(record.get(78));
+                            c.SetOBSERVACIONES(record.get(79));
                             ad.add(c);
                         }
 
                         System.out.println("entro 1");
                         if (TotalRegistros > 0) {
                             con = OracleDAOFactoryTEPJF.creaConexion();
-                            sd = StructDescriptor.createDescriptor("OBJ_TEPJF_EXPEDIENTE", con);
+                            sd = StructDescriptor.createDescriptor("OBJ_TEMP_TEPJF_EXPEDIENTE", con);
                             structs = new STRUCT[ad.size()];
                             System.out.println("entro 2");
                             System.out.println("tamaño " + ad.size());
@@ -153,7 +171,7 @@ public class temp_tepjf_expediente {
                             }
 
                             System.out.println("entro 3");
-                            descriptor = ArrayDescriptor.createDescriptor("ARR_OBJ_TMP_TEPJF_EXPEDIENTE", con);
+                            descriptor = ArrayDescriptor.createDescriptor("ARR_OBJ_TEMP_TEPJF_EXPEDIENTE", con);
                             System.out.println("entro 4");
                             array_to_pass = new ARRAY(descriptor, con, structs);
                             System.out.println("entro 5");
@@ -165,7 +183,7 @@ public class temp_tepjf_expediente {
                             System.out.println("entro 8");
                             st.execute();
                             System.out.println("entro 9");
-                          //  JOptionPane.showMessageDialog(null, "Registros insertados TEMP_TR_TEPJF_EXPEDIENTE"
+                            //  JOptionPane.showMessageDialog(null, "Registros insertados TEMP_TR_TEPJF_EXPEDIENTE"
                             //        + " Favor de revisar ventana -*Errores de insert*- Total registros en .CSV:" + TotalRegistros);
 
                         } else {
@@ -183,7 +201,7 @@ public class temp_tepjf_expediente {
                         descriptor = null;
                         if (con != null) {
                             System.out.println("cierraaa");
-                         //   JOptionPane.showMessageDialog(null, "CONEXION CERRADA!!-EXPEDIENTES");
+                            //   JOptionPane.showMessageDialog(null, "CONEXION CERRADA!!-EXPEDIENTES");
                             con.close();
                             con = null;
                         }
@@ -192,13 +210,12 @@ public class temp_tepjf_expediente {
                     }
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "El archivo no esta en formato UTF-8"+Ruta);
+                JOptionPane.showMessageDialog(null, "El archivo no esta en formato UTF-8" + Ruta);
             }
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Fallo al leer el archivo" + e);
             e.printStackTrace();
         }
 
-  
     }
 }
