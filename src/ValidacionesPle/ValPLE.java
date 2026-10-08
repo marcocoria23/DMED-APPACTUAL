@@ -27318,7 +27318,9 @@ ArrayResult = PL_NN.PL_NOTNULL_P1_3_77(entidad, legislatura, envio);
                 XSSFCell celdaD2 = filaEE2.createCell(1);//COLUMNA
                 celdaD2.setCellStyle(estiloCeldabordes0);
                 celdaD2.setCellType(CellType.STRING);
-                String txtD2 = "Favor de verificar que este registro corresponda efectivamente a una iniciativa, ya que el nombre (L) y/o el tipo de iniciativa (N) sugieren que podría tratarse de un punto de acuerdo. Recuerde que en esta pestaña únicamente deben registrarse iniciativas.";
+                String txtD2 = "Favor de verificar que el presente registro corresponda efectivamente a una iniciativa, ya que el nombre (L -P12) y/o el tipo de iniciativa (N-P15) sugieren que podría tratarse de un punto de acuerdo.\n" +
+                "\n" +
+                "Recuerde que en esta pestaña únicamente deben registrarse iniciativas. En caso de contar con elementos que sustenten que el registro corresponde efectivamente a una iniciativa, favor de cargar la justificación correspondiente en SharePoint, a fin de que sea revisada y, en su caso, aprobada por el equipo de Conceptuales.";
                 XSSFRichTextString textoD2 = new XSSFRichTextString(txtD2);
                 celdaD2.setCellValue(textoD2);
 
