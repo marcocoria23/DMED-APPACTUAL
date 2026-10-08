@@ -225,8 +225,8 @@ public class QIniciativas {
         Array = new ArrayList();
         sql = "SELECT     ID_ENTIDAD, C1_5_ID, P1_5_1 AS ID_ACTUAL, P1_5_12, P1_5_15 AS TIPO_INICIATIVA\n" +
                 "FROM TR_PLE_MEDS1_5\n" +
-                "WHERE  LOWER(P1_5_12) LIKE '%punto de acuerdo%' OR LOWER(P1_5_15) LIKE '%acuerdo%'\n" +
-               "AND ID_ENTIDAD =" + ID_entidad + "   AND C1_5_ID IN (" + envio + ") ORDER BY P1_5_12";
+                "WHERE  (LOWER(P1_5_12) LIKE '%punto de acuerdo%' OR LOWER(P1_5_15) LIKE '%acuerdo%')\n" +
+               "AND (ID_ENTIDAD =" + ID_entidad + "   AND C1_5_ID IN (" + envio + ") )ORDER BY P1_5_12";
         System.out.println(sql);
         resul = conexion.consultar(sql);
         try {
