@@ -77,7 +77,7 @@ public class Tmp_ple_meds1_3_CSV {
                         System.out.println("llenado de csv");
                         for (CSVRecord record : csvParser) {
                             fila++;
-                            if (fila > 7) {                               
+                            if (fila > 1) {                               
                                 TotalRegistros++;
                                 BeanTMP_PLE_MEDS1_3 a = new BeanTMP_PLE_MEDS1_3();
                                 a.SetID_ENTIDAD_TMP(Entidad);

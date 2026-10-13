@@ -98,7 +98,7 @@ public class Tmp_ple_meds1_1_CSV {
                         ArrayList<BeanTMP_PLE_MEDS1_1D> ad4 = new ArrayList<>();
                         for (CSVRecord record : csvParser) {
                             fila++;
-                            if (fila == 8) {
+                            if (fila == 2) {
                                 System.out.println("TR_PLE_MEDS1_1");
                                 TotalRegistros1++;
                                 BeanTMP_PLE_MEDS1_1 a = new BeanTMP_PLE_MEDS1_1();

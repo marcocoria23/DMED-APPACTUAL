@@ -77,7 +77,7 @@ public class Tmp_ple_meds1_6_CSV {
                         System.out.println("llenado de csv");
                         for (CSVRecord record : csvParser) {
                             fila++;
-                            if (fila > 7) {
+                            if (fila > 1) {
                                 
                                 TotalRegistros++;
 

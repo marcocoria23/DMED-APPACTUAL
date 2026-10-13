@@ -222,15 +222,15 @@ private void leerCSV(String ruta) throws Exception {
             fila++;
             
             // DEBUG: Mostrar contenido de filas importantes
-            if (fila >= 6 && fila <= 10) {
+           /* if (fila >= 6 && fila <= 10) {
                 System.out.println("\n  [Fila " + fila + "] Primeras 5 columnas:");
                 for (int i = 0; i < Math.min(5, record.size()); i++) {
                     System.out.println("    Col " + i + ": '" + record.get(i) + "'");
                 }
-            }
+            }*/
 
             // ✅ FILA 9 ES LA CORRECTA (no fila 8)
-            if (fila == 9) {
+            if (fila == 3) {
                 System.out.println("\n Procesando fila 9 (datos reales)...");
                 try {
                     procesarDatosCSV(record);
@@ -244,7 +244,7 @@ private void leerCSV(String ruta) throws Exception {
         }
         
         // Verificar que se leyó la fila
-        if (fila < 9) {
+        if (fila < 3) {
             throw new Exception(" El archivo CSV no tiene suficientes filas. Se leyeron: " + fila);
         }
     }
