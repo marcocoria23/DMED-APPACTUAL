@@ -486,7 +486,7 @@ public ArrayList CAPnombre_institucion_persona_servidora(String ID_entidad,Strin
     return Array;
  }
 
-//Debe de especificar la informacion P1_9_22-V(nombre_institucion_persona_servidora_publica_comparecencia) ya que en P1_9_21-U(cargo_persona_servidora_publica_comparecencia) se selecciono alguna de "Presidente(a) municipal" (10), "Regidor(a)" (11), "Síndico(a)" (12), "Titular de alguna institución o unidad administrativa de la Administración Pública del municipio o demarcación territorial" (13) u "Otro cargo del ámbito municipal (especifique)" (15)  
+//Debe capturar (W) -Clave AGEM correspondiente al municipio en el cual desempeña el cargo la persona servidora pública compareciente y/o (X)- Municipio en el cual desempeña el cargo la persona servidora pública compareciente ya que en P1_9_21-U(cargo_persona_servidora_publica_comparecencia) se selecciono alguna de "Presidente(a) municipal" (10), "Regidor(a)" (11), "Síndico(a)" (12), "Titular de alguna institución o unidad administrativa de la Administración Pública del municipio o demarcación territorial" (13) u "Otro cargo del ámbito municipal (especifique)" (15)  
 public ArrayList CAPnombre_institucion_persona_servidora_publica(String ID_entidad,String Legislatura,String Envio){
      conexion.Conectar();
       Array = new ArrayList();
