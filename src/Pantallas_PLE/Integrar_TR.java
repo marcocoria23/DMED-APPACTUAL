@@ -23,6 +23,7 @@ import mx.org.inegi.insert_TR.PLE.TR_ple_meds1_4;
 import mx.org.inegi.insert_TR.PLE.TR_ple_meds1_4A;
 import mx.org.inegi.insert_TR.PLE.TR_ple_meds1_5;
 import mx.org.inegi.insert_TR.PLE.TR_ple_meds1_5A;
+import mx.org.inegi.insert_TR.PLE.TR_ple_meds1_5B;
 import mx.org.inegi.insert_TR.PLE.TR_ple_meds1_6;
 import mx.org.inegi.insert_TR.PLE.TR_ple_meds1_6A;
 import mx.org.inegi.insert_TR.PLE.TR_ple_meds1_7;
@@ -342,6 +343,7 @@ public class Integrar_TR extends javax.swing.JFrame {
         TR_ple_meds1_4A TR4A= new TR_ple_meds1_4A();
         TR_ple_meds1_5 TR5= new TR_ple_meds1_5();
         TR_ple_meds1_5A TR5A= new TR_ple_meds1_5A();
+        TR_ple_meds1_5B TR5B= new TR_ple_meds1_5B();
         TR_ple_meds1_6 TR6= new TR_ple_meds1_6();
         TR_ple_meds1_6A TR6A= new TR_ple_meds1_6A();
         TR_ple_meds1_7 TR7= new TR_ple_meds1_7();
@@ -398,8 +400,16 @@ public class Integrar_TR extends javax.swing.JFrame {
                             TR4.TR_ple_meds1_4(Entidad, Legislatura, Envio);
                             JOptionPane.showMessageDialog(null, "Informacion insertada,favor de revisar pantalla errores de insert");
                         }
+                        if (Procedure.equals("TR_PLE_MEDS1_4A")){
+                            TR4A.TR_ple_meds1_4A(Entidad, Legislatura, Envio);
+                            JOptionPane.showMessageDialog(null, "Informacion insertada,favor de revisar pantalla errores de insert");
+                        }
                         if (Procedure.equals("TR_PLE_MEDS1_5")){
                             TR5.TR_ple_meds1_5(Entidad, Legislatura, Envio);
+                            JOptionPane.showMessageDialog(null, "Informacion insertada,favor de revisar pantalla errores de insert");
+                        }
+                        if (Procedure.equals("TR_PLE_MEDS1_5B")){
+                            TR5B.TR_ple_meds1_5B(Entidad, Legislatura, Envio);
                             JOptionPane.showMessageDialog(null, "Informacion insertada,favor de revisar pantalla errores de insert");
                         }
                         if (Procedure.equals("TR_PLE_MEDS1_5A")){
