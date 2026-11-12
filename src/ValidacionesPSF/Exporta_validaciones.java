@@ -173,6 +173,8 @@ public class Exporta_validaciones {
               "Debe de capturar otra_institucion_especifique ya que institucion es igual a OTRA INSTITUCION (especifique)" },
             { CP.fecha_publicacion_fallo(),
               "Debe ser igual o mayor a la fecha registrada en el campo fecha_publicacion_convocatoria. En caso de este criterio no le aplique, debe justificarlo en el campo \"\"Comentarios\"\"." },
+            { CP.monto_contrato(),
+              "El monto del contrato debe ser mayor a $10,000." },
             { CP.fecha_firma_contrato(),
               "Debe ser igual o mayor a la fecha registrada en el campo fecha_publicacion_fallo. En caso de este criterio no le aplique, debe justificarlo en el campo \"\"Comentarios\"\"." },
             { CP.fecha_inicio_contrato(),

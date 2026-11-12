@@ -75,6 +75,14 @@ public class QContrataciones_Publicas {
         );
     }
     
+        
+    public ArrayList<String[]> monto_contrato() {
+        return ejecutarValidacion(
+            "SELECT ID_CONTRATO, CODIGO_EXPEDIENTE, MONTO_CONTRATO,COMENTARIOS\n" +
+            "FROM TR_GF_CONTRATACIONES_PUBLICAS_GEN\n" +
+            "WHERE TO_NUMBER(MONTO_CONTRATO) < 10000" );
+    }
+    
     public ArrayList<String[]> otro_tipo_procedimiento_especifique() {
         return ejecutarValidacion(
             "select ID_CONTRATO, 'OTRO_TIPO_PROCEDIMIENTO_ESPECIFIQUE' COMENTARIOS " +
